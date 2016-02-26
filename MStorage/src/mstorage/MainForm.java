@@ -1040,7 +1040,10 @@ public class MainForm extends javax.swing.JFrame {
 
 			// Select last selected file
 			String selected = this.getSettings().getProperty("OpenedFilesSelected");
-			if (!selected.isEmpty() && Integer.parseInt(selected) < this.getTabbedPaneMain().getTabCount()) {
+			if (!selected.isEmpty() 
+				&& Integer.parseInt(selected) > -1 
+				&& Integer.parseInt(selected) < this.getTabbedPaneMain().getTabCount()) {
+				
 				MainForm.getInstance().getTabbedPaneMain().setSelectedIndex((Integer.parseInt(selected)));
 			}
 			
