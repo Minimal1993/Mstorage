@@ -36,6 +36,12 @@ public class Settings {
 	 * Url to properties storage
 	 */
 	protected Path StorageFile = null;
+	
+	protected static String SettingsFileName = "settings";
+
+	public static void setSettingsFileName(String SettingsFileName) {
+		Settings.SettingsFileName = SettingsFileName;
+	}
 
 	public Path getStorageFile() {
 		return StorageFile;
@@ -95,7 +101,8 @@ public class Settings {
 		}
 
 		String url = System.getProperty("user.home") + File.separator + "."
-				+ this.Properties.getProperty("AppName") + File.separator + ".settings";
+				+ this.Properties.getProperty("AppName") 
+				+ File.separator + "." + Settings.SettingsFileName;
 
 		this.StorageFile = Paths.get(url);
 

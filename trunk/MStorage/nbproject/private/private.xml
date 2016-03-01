@@ -25,11 +25,8 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="Java">
-            <file>file:/C:/work/javaok1pstest/MStorage/src/mstorage/events/EventsStorageCollectionHandler.java</file>
-            <file>file:/C:/work/javaok1pstest/MStorage/src/mstorage/events/MStorageEventsHandler.java</file>
-            <file>file:/C:/work/javaok1pstest/MStorage/src/mstorage/MoveDialog.java</file>
-            <file>file:/C:/work/javaok1pstest/MStorage/src/mstorage/MainForm.java</file>
-            <file>file:/C:/work/javaok1pstest/MStorage/src/mstorage/models/MoveJTree.java</file>
+            <file>file:/C:/work/MStorage/MStorage/test/mstorage/classes/SettingsTest.java</file>
+            <file>file:/C:/work/MStorage/MStorage/src/mstorage/MainForm.java</file>
         </group>
     </open-files>
 </project-private>
