@@ -34,6 +34,9 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import javax.swing.JMenu;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.*;
+
 import org.apache.commons.lang3.StringUtils;
 
 //import java.util.ArrayList;
@@ -45,6 +48,11 @@ public class MainForm extends javax.swing.JFrame {
 
 	protected StorageCollectionJTree tree;
 	protected Settings Settings = null;
+	protected static CommandLine CommandLine;
+
+	public static CommandLine getCommandLine() {
+		return CommandLine;
+	}
 
 	/**
 	 * Properties of application
@@ -905,12 +913,39 @@ public class MainForm extends javax.swing.JFrame {
 		}
 		//</editor-fold>
 
+		// Parse comman-line
+		commandLineParser(args);
+		
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				new MainForm().setVisible(true);
 			}
 		});
+	}
+	
+	/**
+	 * Create and parse command line options
+	 */
+	private static void commandLineParser(String[] args) {
+		CommandLineParser parser = new DefaultParser();
+
+		// create the Options
+		Options options = new Options();
+		options.addOption("s", "settings", true, "set the another name of settings file.");
+
+		try {
+			// parse the command line arguments
+			CommandLine = parser.parse(options, args);
+
+			// Set name of settings file
+			if (CommandLine.hasOption("settings")) {
+				mstorage.classes.Settings.setSettingsFileName(CommandLine.getOptionValue("settings"));
+			}
+		} catch (ParseException exp) {
+			System.out.println("Unexpected exception:" + exp.getMessage());
+		}
+
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
