@@ -148,7 +148,8 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 		for (int i = 0; i < count; i++) {
 			FileJTab tab = (FileJTab) MainForm.getInstance().getTabbedPaneMain().getComponent(i);
 			if (tab.File.equals(file)) {
-				// TODO: Set this file is selected
+				// Select if has opened already
+				MainForm.getInstance().getTabbedPaneMain().setSelectedIndex(i);
 				return;
 			}
 		}
@@ -284,7 +285,24 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 	}
 
 	public void eh_close_other_tabs() {
-		System.out.println(this.StorageItem.getFileName());
+		if (!this.StorageItem.getType().equals("file")) {
+			return;
+		}
+
+		File file = (File) this.StorageItem;
+		
+		int count = MainForm.getInstance().getTabbedPaneMain().getTabCount();
+		for (int i = 0; i < count; i++) {
+			FileJTab tab = (FileJTab) MainForm.getInstance().getTabbedPaneMain().getComponent(i);
+			
+			// Dont close current document
+			if (tab.File.equals(file)) {
+				continue;
+			}
+
+			EventsStorageCollectionHandler esch = new EventsStorageCollectionHandler(tab.File);
+			esch.call("close_this_tab");
+		}
 	}
 
 	public void eh_save_file_as() {

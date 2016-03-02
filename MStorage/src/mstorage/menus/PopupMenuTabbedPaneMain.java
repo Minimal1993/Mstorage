@@ -57,7 +57,6 @@ public class PopupMenuTabbedPaneMain extends JPopupMenu {
 		m2.addActionListener(EventsHandler);
 		m2.setActionCommand("close_other_tabs");
 		m2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/tab_go.16x16.png")));
-		m2.setEnabled(false);
 		this.add(m2);
 
 		this.addSeparator();
