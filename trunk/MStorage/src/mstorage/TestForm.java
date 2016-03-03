@@ -135,6 +135,8 @@ public class TestForm extends javax.swing.JFrame {
 	public ImageCarousel ImageCarousel;
 	
 	private void initMain() {
+		this.setPreferredSize(new java.awt.Dimension(500, 400));
+		
 		java.io.File f = new java.io.File("C:\\work\\MStorage\\storage\\Image");
 		StorageCollection sc = new StorageCollection(f.getAbsolutePath().toString());
 		sc.scan();
