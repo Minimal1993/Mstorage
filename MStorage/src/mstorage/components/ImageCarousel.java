@@ -12,14 +12,19 @@
 package mstorage.components;
 
 import StorageCollection.*;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+
+import javax.swing.*;
 
 /**
  * Carousel for images
- * 
+ *
  * @author ilya.gulevskiy
  */
 public class ImageCarousel extends javax.swing.JPanel {
-	
+
 	protected File File = null;
 
 	/**
@@ -27,9 +32,9 @@ public class ImageCarousel extends javax.swing.JPanel {
 	 */
 	public ImageCarousel(File file) {
 		this.File = file;
-		
+
 		initComponents();
-		
+
 		this.initMain();
 	}
 
@@ -124,11 +129,11 @@ public class ImageCarousel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrevActionPerformed
-        // TODO add your handling code here:
+		// TODO add your handling code here:
     }//GEN-LAST:event_jButtonPrevActionPerformed
 
     private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
-        // TODO add your handling code here:
+		// TODO add your handling code here:
     }//GEN-LAST:event_jButtonNextActionPerformed
 
 
@@ -140,13 +145,32 @@ public class ImageCarousel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanelRight;
     // End of variables declaration//GEN-END:variables
 
-	
 	private void initMain() {
+		// If File without Images set a label
+		if (0 == this.File.Images.size()) {
+			this.jPanelCenter.setLayout(new java.awt.BorderLayout());
+			
+			JLabel label = new JLabel("No pictures...");
+			this.jPanelCenter.add(label, java.awt.BorderLayout.CENTER);
+			
+			this.jButtonNext.setEnabled(false);
+			this.jButtonPrev.setEnabled(false);
 
+			return;
+		}
+
+		java.awt.FlowLayout experimentLayout = new java.awt.FlowLayout();
 		
-		
-		
+		TreeMap<String, Image> images = (TreeMap<String, Image>) this.File.Images;
+		Set<Map.Entry<String, Image>> imgSet = images.entrySet();
+		for (Map.Entry<String, Image> i : imgSet) {
+			ImageItem ii = new ImageItem(i.getValue());
+			
+			this.jPanelCenter.setLayout(new java.awt.BorderLayout());
+			this.jPanelCenter.add(ii, java.awt.BorderLayout.WEST);
+			
+		}
+
 	}
-	
-	
+
 }
