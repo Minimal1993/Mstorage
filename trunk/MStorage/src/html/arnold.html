@@ -1,0 +1,14 @@
+<html  lang="en-US">
+<body>
+<h1>
+The Java Programming Language
+</h1>
+
+<p>
+No matter what the look and feel, the default icon displayed by a node is determined by whether the node is a leaf and, if not, whether it is expanded. For example, in the Windows and Motif look and feel implementations, the default icon for each leaf node is a dot; in the Java look and feel, the default leaf icon is a paper-like symbol. In all the look-and-feel implementations we have shown, branch nodes are marked with folder-like symbols. Some look and feels might have different icons for expanded branches versus collapsed branches.
+<br>
+You can easily change the default icon used for leaf, expanded branch, or collapsed branch nodes. To do so, you first create an instance of DefaultTreeCellRenderer. You could always create your own TreeCellRenderer implementation from scratch, reusing whatever components you like. Next, specify the icons to use by invoking one or more of the following methods on the renderer: setLeafIcon (for leaf nodes), setOpenIcon (for expanded branch nodes), setClosedIcon (for collapsed branch nodes). If you want the tree to display no icon for a type of node, then specify null for the icon. Once you have set up the icons, use the tree's setCellRenderer method to specify that the DefaultTreeCellRenderer paint its nodes. Here is an example, taken from TreeIconDemo.java:
+</p>
+
+</body>
+</html>

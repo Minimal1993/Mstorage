@@ -160,14 +160,16 @@ public class ImageCarousel extends javax.swing.JPanel {
 		}
 
 		java.awt.FlowLayout experimentLayout = new java.awt.FlowLayout();
+		this.jPanelCenter.setLayout(experimentLayout);
+//		this.jPanelCenter.setLayout(new java.awt.BorderLayout());
 		
 		TreeMap<String, Image> images = (TreeMap<String, Image>) this.File.Images;
 		Set<Map.Entry<String, Image>> imgSet = images.entrySet();
 		for (Map.Entry<String, Image> i : imgSet) {
 			ImageItem ii = new ImageItem(i.getValue());
 			
-			this.jPanelCenter.setLayout(new java.awt.BorderLayout());
-			this.jPanelCenter.add(ii, java.awt.BorderLayout.WEST);
+			
+			this.jPanelCenter.add(ii);
 			
 		}
 

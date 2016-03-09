@@ -49,6 +49,7 @@ public class MainForm extends javax.swing.JFrame {
 	protected StorageCollectionJTree tree;
 	protected Settings Settings = null;
 	protected static CommandLine CommandLine;
+	public boolean HowToUseDialogIsOpened = false;
 
 	public static CommandLine getCommandLine() {
 		return CommandLine;
@@ -523,10 +524,10 @@ public class MainForm extends javax.swing.JFrame {
         helpMenu.setMnemonic('h');
         helpMenu.setText("Help");
 
+        jMenuItemHowToUse.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemHowToUse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/help.16x16.png"))); // NOI18N
         jMenuItemHowToUse.setMnemonic('c');
         jMenuItemHowToUse.setText("How to use");
-        jMenuItemHowToUse.setEnabled(false);
         jMenuItemHowToUse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemHowToUseActionPerformed(evt);
@@ -766,7 +767,26 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemSettingsActionPerformed
 
     private void jMenuItemHowToUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHowToUseActionPerformed
-		// TODO add your handling code here:
+		if (true == this.HowToUseDialogIsOpened) {
+			return;
+		}
+		
+		final javax.swing.JDialog sd = new HowToUseDialog();
+		sd.pack();
+		sd.setLocationRelativeTo(this);
+		sd.setVisible(true);
+		this.HowToUseDialogIsOpened = true;
+
+		sd.addWindowListener(new WindowAdapter() {
+			public void windowClosed(WindowEvent e) {
+				HowToUseDialog w = (HowToUseDialog) e.getWindow();
+				MainForm.getInstance().HowToUseDialogIsOpened = false;
+			}
+
+			public void windowClosing(WindowEvent e) {
+//				MainForm.getInstance().HowToUseDialogIsOpened = false;
+			}
+		});
     }//GEN-LAST:event_jMenuItemHowToUseActionPerformed
 
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
@@ -1144,7 +1164,7 @@ public class MainForm extends javax.swing.JFrame {
 
 		// For time action not released
 		this.jMenuItemAddPicture.setEnabled(false);
-		this.jMenuItemMoveThisFile.setEnabled(false);
+//		this.jMenuItemMoveThisFile.setEnabled(false);
 		this.jMenuItemSearchInThisFile.setEnabled(false);
 
 	}
