@@ -21,6 +21,23 @@ import StorageCollection.*;
 public class ImageItem extends javax.swing.JPanel {
 	
 	protected Image Image = null;
+	
+	protected Integer VerticalSize = 100;
+	protected Integer GorizontalSize = 100;
+
+	public Image getImage() {
+		return Image;
+	}
+
+	public Integer getVerticalSize() {
+		return VerticalSize;
+	}
+
+	public Integer getGorizontalSize() {
+		return GorizontalSize;
+	}
+	
+	
 
 	/**
 	 * Creates new form ImageItem
