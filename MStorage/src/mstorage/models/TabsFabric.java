@@ -13,6 +13,7 @@ package mstorage.models;
 
 import StorageCollection.*;
 import mstorage.components.FileJTab;
+import mstorage.components.ImageCarousel;
 
 import java.awt.*;
 import javax.swing.tree.*;
@@ -23,6 +24,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import java.io.IOException;
 import java.util.Vector;
+import javax.swing.JPanel;
 
 /**
  * Fabric for create new tabs for Files and make these appearance.
@@ -32,7 +34,7 @@ public class TabsFabric {
 	public static FileJTab getTab(File file) {
 		final FileJTab PanelTemplate = new FileJTab(file);
 		JScrollPane ScrollPaneDocumentText = new javax.swing.JScrollPane();
-		JScrollPane ScrollPaneDocumentPictures = new javax.swing.JScrollPane();
+		JPanel JPanelDocumentPictures = new javax.swing.JPanel();
 		JTextArea TextAreaDocument = new javax.swing.JTextArea();
 		PanelTemplate.TextAreaDocument = TextAreaDocument;
 
@@ -59,18 +61,22 @@ public class TabsFabric {
 
 		javax.swing.GroupLayout PanelTemplateLayout = new javax.swing.GroupLayout(PanelTemplate);
 		PanelTemplate.setLayout(PanelTemplateLayout);
-		PanelTemplateLayout.setHorizontalGroup(
-				PanelTemplateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		PanelTemplateLayout.setHorizontalGroup(PanelTemplateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addComponent(ScrollPaneDocumentText, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
-				.addComponent(ScrollPaneDocumentPictures)
+				.addComponent(JPanelDocumentPictures)
 		);
-		PanelTemplateLayout.setVerticalGroup(
-				PanelTemplateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		PanelTemplateLayout.setVerticalGroup(PanelTemplateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(PanelTemplateLayout.createSequentialGroup()
 						.addComponent(ScrollPaneDocumentText, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(ScrollPaneDocumentPictures, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addComponent(JPanelDocumentPictures, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
 		);
+		
+		// Create ImageCarousel
+		ImageCarousel ImageCarousel = new ImageCarousel(file);
+
+		JPanelDocumentPictures.setLayout(new java.awt.BorderLayout());
+		JPanelDocumentPictures.add(ImageCarousel, java.awt.BorderLayout.NORTH);
 
 		return PanelTemplate;
 	}
