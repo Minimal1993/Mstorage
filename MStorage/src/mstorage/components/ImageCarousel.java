@@ -47,129 +47,116 @@ public class ImageCarousel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanelLeft = new javax.swing.JPanel();
-        jButtonPrev = new javax.swing.JButton();
-        jPanelRight = new javax.swing.JPanel();
-        jButtonNext = new javax.swing.JButton();
         jPanelCenter = new javax.swing.JPanel();
+        jScrollPaneCenter = new javax.swing.JScrollPane();
+        jPanelInsideJScrollPane = new javax.swing.JPanel();
 
-        jPanelLeft.setPreferredSize(new java.awt.Dimension(20, 111));
+        jScrollPaneCenter.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPaneCenter.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        jButtonPrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/resultset_previous.16x16.png"))); // NOI18N
-        jButtonPrev.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPrevActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelLeftLayout = new javax.swing.GroupLayout(jPanelLeft);
-        jPanelLeft.setLayout(jPanelLeftLayout);
-        jPanelLeftLayout.setHorizontalGroup(
-            jPanelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButtonPrev, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout jPanelInsideJScrollPaneLayout = new javax.swing.GroupLayout(jPanelInsideJScrollPane);
+        jPanelInsideJScrollPane.setLayout(jPanelInsideJScrollPaneLayout);
+        jPanelInsideJScrollPaneLayout.setHorizontalGroup(
+            jPanelInsideJScrollPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 463, Short.MAX_VALUE)
         );
-        jPanelLeftLayout.setVerticalGroup(
-            jPanelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButtonPrev, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+        jPanelInsideJScrollPaneLayout.setVerticalGroup(
+            jPanelInsideJScrollPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 109, Short.MAX_VALUE)
         );
 
-        jPanelRight.setPreferredSize(new java.awt.Dimension(20, 111));
-
-        jButtonNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/resultset_next.16x16.png"))); // NOI18N
-        jButtonNext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNextActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelRightLayout = new javax.swing.GroupLayout(jPanelRight);
-        jPanelRight.setLayout(jPanelRightLayout);
-        jPanelRightLayout.setHorizontalGroup(
-            jPanelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRightLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButtonNext, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanelRightLayout.setVerticalGroup(
-            jPanelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButtonNext, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-        );
+        jScrollPaneCenter.setViewportView(jPanelInsideJScrollPane);
 
         javax.swing.GroupLayout jPanelCenterLayout = new javax.swing.GroupLayout(jPanelCenter);
         jPanelCenter.setLayout(jPanelCenterLayout);
         jPanelCenterLayout.setHorizontalGroup(
             jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
+            .addComponent(jScrollPaneCenter, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
         );
         jPanelCenterLayout.setVerticalGroup(
             jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPaneCenter)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelCenter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelRight, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanelCenter, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanelCenter, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelLeft, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelRight, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanelCenter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrevActionPerformed
-		// TODO add your handling code here:
-    }//GEN-LAST:event_jButtonPrevActionPerformed
+	/**
+	 * Check whether is edge of right or left side of scrolling.
+	 * Need for enabled\disabled buttons
+	 */
+	private void checkIsEdgeOfScrolling(){
+		
+	}
+	
+    private void jButtonPrevActionPerformed(java.awt.event.ActionEvent evt) {                                            
+		JScrollBar horizontalScrollBar = this.jScrollPaneCenter.getHorizontalScrollBar();		
+		int max = horizontalScrollBar.getMaximum();
+		int val = horizontalScrollBar.getValue();
+		int visiblaAmount = horizontalScrollBar.getVisibleAmount();
+		
+		
+    }                                           
 
-    private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
-		// TODO add your handling code here:
-    }//GEN-LAST:event_jButtonNextActionPerformed
-
+    private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {                                            
+		JScrollBar horizontalScrollBar = this.jScrollPaneCenter.getHorizontalScrollBar();		
+		int max = horizontalScrollBar.getMaximum();
+		int val = horizontalScrollBar.getValue();
+		int visiblaAmount = horizontalScrollBar.getVisibleAmount();
+		
+		/*if max = val + visibalAmount - rigth edge is now
+		setValue(0) or val = 0 - left edge is reached
+		val + 106 - move to next picture
+		val + visibalAmount cant be > max*/
+		
+		int forSet = 0;
+		
+		horizontalScrollBar.setValue(forSet);
+		
+		
+    }              
+	
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonNext;
-    private javax.swing.JButton jButtonPrev;
     private javax.swing.JPanel jPanelCenter;
-    private javax.swing.JPanel jPanelLeft;
-    private javax.swing.JPanel jPanelRight;
+    private javax.swing.JPanel jPanelInsideJScrollPane;
+    private javax.swing.JScrollPane jScrollPaneCenter;
     // End of variables declaration//GEN-END:variables
 
 	private void initMain() {
 		// If File without Images set a label
 		if (0 == this.File.Images.size()) {
-			this.jPanelCenter.setLayout(new java.awt.BorderLayout());
+			this.jPanelInsideJScrollPane.setLayout(new java.awt.BorderLayout());
 			
 			JLabel label = new JLabel("No pictures...");
-			this.jPanelCenter.add(label, java.awt.BorderLayout.CENTER);
+			this.jPanelInsideJScrollPane.add(label, java.awt.BorderLayout.CENTER);
 			
-			this.jButtonNext.setEnabled(false);
-			this.jButtonPrev.setEnabled(false);
+//			this.jButtonNext.setEnabled(false);
+//			this.jButtonPrev.setEnabled(false);
 
 			return;
 		}
 
 		java.awt.FlowLayout experimentLayout = new java.awt.FlowLayout();
-		this.jPanelCenter.setLayout(experimentLayout);
-//		this.jPanelCenter.setLayout(new java.awt.BorderLayout());
+		this.jPanelInsideJScrollPane.setLayout(experimentLayout);
 		
 		TreeMap<String, Image> images = (TreeMap<String, Image>) this.File.Images;
 		Set<Map.Entry<String, Image>> imgSet = images.entrySet();
 		for (Map.Entry<String, Image> i : imgSet) {
 			ImageItem ii = new ImageItem(i.getValue());
 			
-			
-			this.jPanelCenter.add(ii);
+			this.jPanelInsideJScrollPane.add(ii);
 			
 		}
 

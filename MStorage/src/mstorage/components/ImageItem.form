@@ -32,11 +32,9 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabelImage">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\work\MStorage\storage\Image\doc_dkfjhn fgh.jpg"/>
-        </Property>
-      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelImageMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
