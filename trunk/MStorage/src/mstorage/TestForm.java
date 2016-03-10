@@ -25,7 +25,7 @@ public class TestForm extends javax.swing.JFrame {
 	 */
 	public TestForm() {
 		initComponents();
-		
+
 		this.initMain();
 	}
 
@@ -133,26 +133,22 @@ public class TestForm extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 	public ImageCarousel ImageCarousel;
-	
+
 	private void initMain() {
 		this.setPreferredSize(new java.awt.Dimension(500, 400));
-		
+
 		java.io.File f = new java.io.File("C:\\work\\MStorage\\storage\\Image");
 		StorageCollection sc = new StorageCollection(f.getAbsolutePath().toString());
 		sc.scan();
-		
+
 		File file = sc.FStorage.Files.get("doc");
-		
+
 		this.ImageCarousel = new ImageCarousel(file);
 
 		this.jPanelForImageCarousel.setLayout(new java.awt.BorderLayout());
-        this.jPanelForImageCarousel.add(this.ImageCarousel, java.awt.BorderLayout.NORTH);
-		
+		this.jPanelForImageCarousel.add(this.ImageCarousel, java.awt.BorderLayout.NORTH);
+
 		this.pack();
-		
-		
-		
-		
-		
+
 	}
 }
