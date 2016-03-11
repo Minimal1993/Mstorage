@@ -93,40 +93,37 @@ public class ImageCarousel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 	/**
-	 * Check whether is edge of right or left side of scrolling.
-	 * Need for enabled\disabled buttons
+	 * Check whether is edge of right or left side of scrolling. Need for
+	 * enabled\disabled buttons
 	 */
-	private void checkIsEdgeOfScrolling(){
-		
-	}
-	
-    private void jButtonPrevActionPerformed(java.awt.event.ActionEvent evt) {                                            
-		JScrollBar horizontalScrollBar = this.jScrollPaneCenter.getHorizontalScrollBar();		
-		int max = horizontalScrollBar.getMaximum();
-		int val = horizontalScrollBar.getValue();
-		int visiblaAmount = horizontalScrollBar.getVisibleAmount();
-		
-		
-    }                                           
+	private void checkIsEdgeOfScrolling() {
 
-    private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {                                            
-		JScrollBar horizontalScrollBar = this.jScrollPaneCenter.getHorizontalScrollBar();		
+	}
+
+	private void jButtonPrevActionPerformed(java.awt.event.ActionEvent evt) {
+		JScrollBar horizontalScrollBar = this.jScrollPaneCenter.getHorizontalScrollBar();
 		int max = horizontalScrollBar.getMaximum();
 		int val = horizontalScrollBar.getValue();
 		int visiblaAmount = horizontalScrollBar.getVisibleAmount();
-		
+
+	}
+
+	private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {
+		JScrollBar horizontalScrollBar = this.jScrollPaneCenter.getHorizontalScrollBar();
+		int max = horizontalScrollBar.getMaximum();
+		int val = horizontalScrollBar.getValue();
+		int visiblaAmount = horizontalScrollBar.getVisibleAmount();
+
 		/*if max = val + visibalAmount - rigth edge is now
 		setValue(0) or val = 0 - left edge is reached
 		val + 106 - move to next picture
 		val + visibalAmount cant be > max*/
-		
 		int forSet = 0;
-		
+
 		horizontalScrollBar.setValue(forSet);
-		
-		
-    }              
-	
+
+	}
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanelCenter;
@@ -137,28 +134,30 @@ public class ImageCarousel extends javax.swing.JPanel {
 	private void initMain() {
 		// If File without Images set a label
 		if (0 == this.File.Images.size()) {
+			// TODO: Im not sure it is good idea to create null Image object. And doubling code there is
 			this.jPanelInsideJScrollPane.setLayout(new java.awt.BorderLayout());
-			
-			JLabel label = new JLabel("No pictures...");
-			label.setSize(100, 100);
-			this.jPanelInsideJScrollPane.add(label, java.awt.BorderLayout.CENTER);
-			
-//			this.jButtonNext.setEnabled(false);
-//			this.jButtonPrev.setEnabled(false);
+
+			Image img = null;
+			ImageItem ii = new ImageItem(img);
+
+			java.awt.FlowLayout experimentLayout = new java.awt.FlowLayout();
+			this.jPanelInsideJScrollPane.setLayout(experimentLayout);
+
+			this.jPanelInsideJScrollPane.add(ii);
 
 			return;
 		}
 
 		java.awt.FlowLayout experimentLayout = new java.awt.FlowLayout();
 		this.jPanelInsideJScrollPane.setLayout(experimentLayout);
-		
+
 		TreeMap<String, Image> images = (TreeMap<String, Image>) this.File.Images;
 		Set<Map.Entry<String, Image>> imgSet = images.entrySet();
 		for (Map.Entry<String, Image> i : imgSet) {
 			ImageItem ii = new ImageItem(i.getValue());
-			
+
 			this.jPanelInsideJScrollPane.add(ii);
-			
+
 		}
 
 	}

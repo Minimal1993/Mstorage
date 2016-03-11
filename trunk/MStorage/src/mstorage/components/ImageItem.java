@@ -31,7 +31,7 @@ public class ImageItem extends javax.swing.JPanel {
 	public boolean PreviewIsOpened = false;
 	protected Integer VerticalSize = 100;
 	protected Integer GorizontalSize = 100;
-	protected String NotFoundPic = "/images/not_found.png";
+	public static String NotFoundPic = "/images/not_found.png";
 
 	public Image getImage() {
 		return Image;
@@ -88,8 +88,8 @@ public class ImageItem extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelImageMouseClicked
-		// Permit to only one window
-		if (true == this.PreviewIsOpened) {
+		// Permit to only one window and if Image is real
+		if (true == this.PreviewIsOpened || null == this.Image) {
 			return;
 		}
 		
@@ -121,7 +121,7 @@ public class ImageItem extends javax.swing.JPanel {
 		try {
 			picture = new java.io.File(this.Image.getPath().toAbsolutePath().toString());
 		} catch (java.lang.NullPointerException e) {
-			picture = new java.io.File(getClass().getResource("/images/mstorage.48x48.png").toString());
+			picture = new java.io.File(getClass().getResource(this.NotFoundPic).getPath());
 		}
 
 		try {
