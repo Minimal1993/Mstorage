@@ -107,7 +107,7 @@ public class PreviewJFrame extends javax.swing.JFrame {
 		try {
 			picture = new java.io.File(this.Image.getPath().toAbsolutePath().toString());
 		} catch (java.lang.NullPointerException e) {
-			picture = new java.io.File(getClass().getResource("/images/mstorage.48x48.png").toString());
+			picture = new java.io.File(getClass().getResource(ImageItem.NotFoundPic).getPath());
 		}		
 		
 		try {
