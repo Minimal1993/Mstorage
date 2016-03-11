@@ -33,50 +33,48 @@ public class TabsFabric {
 
 	public static FileJTab getTab(File file) {
 		final FileJTab PanelTemplate = new FileJTab(file);
-		JScrollPane ScrollPaneDocumentText = new javax.swing.JScrollPane();
-		JPanel JPanelDocumentPictures = new javax.swing.JPanel();
-		JTextArea TextAreaDocument = new javax.swing.JTextArea();
-		PanelTemplate.TextAreaDocument = TextAreaDocument;
+		PanelTemplate.ScrollPaneDocumentText = new javax.swing.JScrollPane();
+		PanelTemplate.JPanelDocumentPictures = new javax.swing.JPanel();
+		PanelTemplate.TextAreaDocument = new javax.swing.JTextArea();
 
 		PanelTemplate.setPreferredSize(new java.awt.Dimension(300, 300));
 
-		TextAreaDocument.setColumns(20);
-		TextAreaDocument.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-		TextAreaDocument.setLineWrap(true);
-		TextAreaDocument.setRows(5);
-        TextAreaDocument.addKeyListener(new java.awt.event.KeyAdapter() {
+		PanelTemplate.TextAreaDocument.setColumns(20);
+		PanelTemplate.TextAreaDocument.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+		PanelTemplate.TextAreaDocument.setLineWrap(true);
+		PanelTemplate.TextAreaDocument.setRows(5);
+        PanelTemplate.TextAreaDocument.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 PanelTemplate.TextAreaDocumentKeyReleased(evt);
             }
         });
 
 		try {
-			TextAreaDocument.setText(file.getContent());
+			PanelTemplate.TextAreaDocument.setText(file.getContent());
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
 
-		TextAreaDocument.setWrapStyleWord(true);
-		ScrollPaneDocumentText.setViewportView(TextAreaDocument);
+		PanelTemplate.TextAreaDocument.setWrapStyleWord(true);
+		PanelTemplate.ScrollPaneDocumentText.setViewportView(PanelTemplate.TextAreaDocument);
 
 		javax.swing.GroupLayout PanelTemplateLayout = new javax.swing.GroupLayout(PanelTemplate);
 		PanelTemplate.setLayout(PanelTemplateLayout);
 		PanelTemplateLayout.setHorizontalGroup(PanelTemplateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(ScrollPaneDocumentText, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
-				.addComponent(JPanelDocumentPictures)
+				.addComponent(PanelTemplate.ScrollPaneDocumentText, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
+				.addComponent(PanelTemplate.JPanelDocumentPictures)
 		);
 		PanelTemplateLayout.setVerticalGroup(PanelTemplateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(PanelTemplateLayout.createSequentialGroup()
-						.addComponent(ScrollPaneDocumentText, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+						.addComponent(PanelTemplate.ScrollPaneDocumentText, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(JPanelDocumentPictures, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addComponent(PanelTemplate.JPanelDocumentPictures, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
 		);
 		
 		// Create ImageCarousel
-		ImageCarousel ImageCarousel = new ImageCarousel(file);
-
-		JPanelDocumentPictures.setLayout(new java.awt.BorderLayout());
-		JPanelDocumentPictures.add(ImageCarousel, java.awt.BorderLayout.NORTH);
+		PanelTemplate.createJPanelDocumentPictures();
+		
+		PanelTemplate.checksAfterCreating();
 
 		return PanelTemplate;
 	}

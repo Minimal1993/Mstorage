@@ -12,6 +12,8 @@
 package mstorage.components;
 
 import StorageCollection.File;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import javax.swing.JTextArea;
 import mstorage.MainForm;
@@ -25,6 +27,14 @@ public class FileJTab extends javax.swing.JPanel {
 
 	public File File;
 	public JTextArea TextAreaDocument;
+	public JScrollPane ScrollPaneDocumentText;
+	public JPanel JPanelDocumentPictures;
+	
+	/**
+	 * Save last action according to visibility of image carousel
+	 */
+	public boolean VisibilityForJPanelDocumentPictures = true;
+	
 	
 	/**
 	 * For economy purposes. When file will save, his content will get md5 summa of it.
@@ -79,5 +89,34 @@ public class FileJTab extends javax.swing.JPanel {
 		);
 		
 		return true;
+	}
+	
+	/**
+	 * Hide or show JPanel with images carousel
+	 * 
+	 * @param value 
+	 *			   - true or false
+	 */
+	public void setVisibilityForJPanelDocumentPictures(boolean value) {
+		this.VisibilityForJPanelDocumentPictures = value;
+		this.JPanelDocumentPictures.setVisible(this.VisibilityForJPanelDocumentPictures);
+	}
+	
+	/**
+	 * Checks after panel was created
+	 */
+	public void checksAfterCreating(){
+		
+		// Hide images carousel when File dont has any files
+		if (0 == this.File.Images.size()) {
+			this.setVisibilityForJPanelDocumentPictures(false);
+		}
+	}
+	
+	public void createJPanelDocumentPictures(){
+		ImageCarousel ImageCarousel = new ImageCarousel(this.File);
+
+		this.JPanelDocumentPictures.setLayout(new java.awt.BorderLayout());
+		this.JPanelDocumentPictures.add(ImageCarousel, java.awt.BorderLayout.NORTH);
 	}
 }

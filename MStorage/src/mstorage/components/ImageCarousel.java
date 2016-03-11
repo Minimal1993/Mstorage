@@ -135,15 +135,22 @@ public class ImageCarousel extends javax.swing.JPanel {
 		// If File without Images set a label
 		if (0 == this.File.Images.size()) {
 			// TODO: Im not sure it is good idea to create null Image object. And doubling code there is
-			this.jPanelInsideJScrollPane.setLayout(new java.awt.BorderLayout());
+//			this.jPanelInsideJScrollPane.setLayout(new java.awt.BorderLayout());
+//
+//			Image img = null;
+//			ImageItem ii = new ImageItem(img);
+//
+//			java.awt.FlowLayout experimentLayout = new java.awt.FlowLayout();
+//			this.jPanelInsideJScrollPane.setLayout(experimentLayout);
+//
+//			this.jPanelInsideJScrollPane.add(ii);
 
-			Image img = null;
-			ImageItem ii = new ImageItem(img);
 
-			java.awt.FlowLayout experimentLayout = new java.awt.FlowLayout();
-			this.jPanelInsideJScrollPane.setLayout(experimentLayout);
 
-			this.jPanelInsideJScrollPane.add(ii);
+//			this.jPanelInsideJScrollPane.setLayout(new java.awt.BorderLayout());
+//			
+//			JLabel label = new JLabel("No pictures...");
+//			this.jPanelInsideJScrollPane.add(label, java.awt.BorderLayout.CENTER);
 
 			return;
 		}
