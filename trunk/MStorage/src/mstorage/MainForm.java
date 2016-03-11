@@ -158,6 +158,7 @@ public class MainForm extends javax.swing.JFrame {
         jButtonSaveFile = new javax.swing.JButton();
         jButtonSaveFileAs = new javax.swing.JButton();
         jButtonSaveAllFiles = new javax.swing.JButton();
+        jToggleButtonVisibilityImageCarousel = new javax.swing.JToggleButton();
         jPanel2 = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
@@ -359,13 +360,26 @@ public class MainForm extends javax.swing.JFrame {
         });
         ToolBarMain.add(jButtonSaveAllFiles);
 
+        jToggleButtonVisibilityImageCarousel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/picture.24x24.png"))); // NOI18N
+        jToggleButtonVisibilityImageCarousel.setSelected(true);
+        jToggleButtonVisibilityImageCarousel.setToolTipText("Show or hide panel with images carousel");
+        jToggleButtonVisibilityImageCarousel.setFocusable(false);
+        jToggleButtonVisibilityImageCarousel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jToggleButtonVisibilityImageCarousel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToggleButtonVisibilityImageCarousel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButtonVisibilityImageCarouselActionPerformed(evt);
+            }
+        });
+        ToolBarMain.add(jToggleButtonVisibilityImageCarousel);
+
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 677, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -571,9 +585,7 @@ public class MainForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(SplitPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE)
             .addComponent(ToolBarMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -770,7 +782,7 @@ public class MainForm extends javax.swing.JFrame {
 		if (true == this.HowToUseDialogIsOpened) {
 			return;
 		}
-		
+
 		final javax.swing.JDialog sd = new HowToUseDialog();
 		sd.pack();
 		sd.setLocationRelativeTo(this);
@@ -818,7 +830,7 @@ public class MainForm extends javax.swing.JFrame {
 		EventsStorageCollectionHandler esch = new EventsStorageCollectionHandler(file);
 
 		esch.call("close_this_tab");
-		
+
     }//GEN-LAST:event_jMenuCloseActiveTabMouseClicked
 
     private void jButtonSaveFileAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveFileAsActionPerformed
@@ -850,22 +862,43 @@ public class MainForm extends javax.swing.JFrame {
 		// Saving in Settings current selected file in opened files
 		Integer selected = this.getTabbedPaneMain().getSelectedIndex();
 		this.getSettings().setProperty("OpenedFilesSelected", selected.toString());
-		
+
 		// Save current size main window
 		Dimension windowSize = this.getContentPane().getSize();
-		this.getSettings().setProperty("MainWindowWidth", Integer.toString(windowSize.width)); 
-		this.getSettings().setProperty("MainWindowHeight", Integer.toString(windowSize.height)); 
-		
+		this.getSettings().setProperty("MainWindowWidth", Integer.toString(windowSize.width));
+		this.getSettings().setProperty("MainWindowHeight", Integer.toString(windowSize.height));
+
 
     }//GEN-LAST:event_formWindowClosing
 
 	/**
 	 * Event when tab is switching
-	 * @param evt 
+	 *
+	 * @param evt
 	 */
     private void TabbedPaneMainStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_TabbedPaneMainStateChanged
 		this.checkButtonCloseCurrentDocument();
     }//GEN-LAST:event_TabbedPaneMainStateChanged
+
+	/**
+	 * Show or hide panel with images carousel
+	 *
+	 * @param evt
+	 */
+    private void jToggleButtonVisibilityImageCarouselActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonVisibilityImageCarouselActionPerformed
+		if (0 == this.getTabbedPaneMain().getTabCount()) {
+			this.checkButtonCloseCurrentDocument();
+			return;
+		}
+
+		FileJTab tab = (FileJTab) this.getTabbedPaneMain().getSelectedComponent();
+
+		tab.setVisibilityForJPanelDocumentPictures(
+				this.jToggleButtonVisibilityImageCarousel.isSelected()
+		);
+
+
+    }//GEN-LAST:event_jToggleButtonVisibilityImageCarouselActionPerformed
 
 	/**
 	 * When delete a file this method will close it tab if document has opened
@@ -934,7 +967,7 @@ public class MainForm extends javax.swing.JFrame {
 
 		// Parse comman-line
 		commandLineParser(args);
-		
+
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -942,7 +975,7 @@ public class MainForm extends javax.swing.JFrame {
 			}
 		});
 	}
-	
+
 	/**
 	 * Create and parse command line options
 	 */
@@ -1009,6 +1042,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparatorFileMenu;
+    private javax.swing.JToggleButton jToggleButtonVisibilityImageCarousel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu viewMenu;
     // End of variables declaration//GEN-END:variables
@@ -1021,11 +1055,11 @@ public class MainForm extends javax.swing.JFrame {
 	public javax.swing.JTabbedPane getTabbedPaneMain() {
 		return this.TabbedPaneMain;
 	}
-	
+
 	/**
 	 * For access to cross-button for closing active tab
-	 * 
-	 * @return 
+	 *
+	 * @return
 	 */
 	public javax.swing.JMenu getJMenuCloseActiveTab() {
 		return this.jMenuCloseActiveTab;
@@ -1050,9 +1084,24 @@ public class MainForm extends javax.swing.JFrame {
 
 		// Show file menubar
 		this.showFileMenuAndToolBar(true);
-		
+
 		// Add popup menu listener to text editor
 		this.initPopupMenuTextEditorMouseListener();
+
+		// Additional checkings
+		FileJTab tab = (FileJTab) this.getTabbedPaneMain().getSelectedComponent();
+		File file = (File) tab.File;
+
+		// Check whether has current file images or not
+		if (0 == file.Images.size()) {
+			this.jToggleButtonVisibilityImageCarousel.setSelected(false);
+			this.jToggleButtonVisibilityImageCarousel.setEnabled(false);
+		} else {
+			// According to last action in this tab, select or not 
+			this.jToggleButtonVisibilityImageCarousel.setSelected(tab.VisibilityForJPanelDocumentPictures);
+			this.jToggleButtonVisibilityImageCarousel.setEnabled(true);
+		}
+
 	}
 
 	/**
@@ -1094,43 +1143,43 @@ public class MainForm extends javax.swing.JFrame {
 
 			// Select last selected file
 			String selected = this.getSettings().getProperty("OpenedFilesSelected");
-			if (!selected.isEmpty() 
-				&& Integer.parseInt(selected) > -1 
-				&& Integer.parseInt(selected) < this.getTabbedPaneMain().getTabCount()) {
-				
+			if (!selected.isEmpty()
+					&& Integer.parseInt(selected) > -1
+					&& Integer.parseInt(selected) < this.getTabbedPaneMain().getTabCount()) {
+
 				MainForm.getInstance().getTabbedPaneMain().setSelectedIndex((Integer.parseInt(selected)));
 			}
-			
-			this.checkButtonCloseCurrentDocument(); 
+
+			this.checkButtonCloseCurrentDocument();
 		}
-		
+
 		// Set title of Main window according to settings
 		this.setTitle(Settings.getProperty("AppName") + " v." + Settings.getProperty("Version"));
-		
+
 		// Set preferred size of main window
 		// TODO: There is uncertainty because 16 and 59 tested only in Win
 		this.setPreferredSize(
-			new Dimension(
-				Integer.parseInt(this.getSettings().getProperty("MainWindowWidth")) + 16, 
-				Integer.parseInt(this.getSettings().getProperty("MainWindowHeight")) + 59
-			)
+				new Dimension(
+						Integer.parseInt(this.getSettings().getProperty("MainWindowWidth")) + 16,
+						Integer.parseInt(this.getSettings().getProperty("MainWindowHeight")) + 59
+				)
 		);
-		
+
 		this.pack();
-		
 
 		// Set mouse listener for popup menu in ScrollPane of storage collection
 //		this.ScrollPaneStorageTree.addMouseListener(mstorage.menus.PopupMenuScrollPaneStorageTree.initMouseListener());
 	}
-	
+
 	/**
-	 * Set mouse listener for popup menu into text editor when some tabs is selected
+	 * Set mouse listener for popup menu into text editor when some tabs is
+	 * selected
 	 */
 	public void initPopupMenuTextEditorMouseListener() {
 		if (0 == this.getTabbedPaneMain().getTabCount()) {
 			return;
 		}
-		
+
 		FileJTab tab = (FileJTab) MainForm.getInstance().getTabbedPaneMain().getSelectedComponent();
 		tab.TextAreaDocument.addMouseListener(mstorage.menus.PopupMenuTextEditor.initMouseListener());
 	}
@@ -1151,6 +1200,7 @@ public class MainForm extends javax.swing.JFrame {
 		this.jButtonSaveFile.setVisible(show);
 		this.jButtonSearchInFile.setVisible(show);
 		this.jButtonSaveFileAs.setVisible(show);
+		this.jToggleButtonVisibilityImageCarousel.setVisible(show);
 
 		// Menu File
 		this.jMenuItemAddPicture.setEnabled(show);

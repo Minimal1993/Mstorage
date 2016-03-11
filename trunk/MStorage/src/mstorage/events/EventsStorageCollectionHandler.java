@@ -205,6 +205,10 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 	public void eh_add_image() {
 		System.out.println(this.StorageItem.getFileName());
 	}
+	
+	public void eh_delete_image() {
+		System.out.println(this.StorageItem.getFileName());
+	}
 
 	public void eh_save_file() {
 		// TODO: Not beautiful decision - next couple lines is performed too in MainForm handlers
