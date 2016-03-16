@@ -22,6 +22,7 @@ import java.awt.event.MouseListener;
 import StorageCollection.*;
 import mstorage.MainForm;
 import mstorage.PreviewJFrame;
+import mstorage.menus.PopupMenuImageItem;
 
 /**
  * Item of Image for inserting to ImageCarousel
@@ -31,10 +32,10 @@ import mstorage.PreviewJFrame;
 public class ImageItem extends javax.swing.JPanel {
 
 	protected Image Image = null;
-	public boolean PreviewIsOpened = false;
 	protected Integer VerticalSize = 100;
 	protected Integer GorizontalSize = 100;
 	public static String NotFoundPic = "/images/not_found.png";
+	public PreviewJFrame PreviewJFrame = null;
 
 	public Image getImage() {
 		return Image;
@@ -109,53 +110,55 @@ public class ImageItem extends javax.swing.JPanel {
 		} catch (java.io.IOException e) {
 			return;
 		}
-		
+
 		this.addMouseListener(this.getMouseListener());
 	}
-	
+
 	protected MouseListener getMouseListener() {
 		return new MouseAdapter() {
 			public void mouseReleased(MouseEvent e) {
 				ImageItem item = (ImageItem) e.getSource();
 				int x = e.getX();
 				int y = e.getY();
-				
+
 				// If it was right click
 				if (e.isPopupTrigger()) {
-					// TODO: Dont remember close PreviewJFrame if it is opened now
-					
-//				PopupMenuStorageCollection popup = new PopupMenuStorageCollection(obj);
-//				popup.show(tree, x, y);
-					
-					
+					// Close PreviewJFrame window
+					if (null != item.PreviewJFrame) {
+						item.PreviewJFrame.setVisible(false);
+						item.PreviewJFrame.dispose();
+						item.PreviewJFrame = null;
+					}
+
+					PopupMenuImageItem popup = new PopupMenuImageItem(item.Image);
+					popup.show(item, x, y);
+
 					return;
 				}
-				
+
 				// Left mouse button, open preview window
 				// Permit to only one window and if Image is real
-				if (true == item.PreviewIsOpened || null == item.Image) {
+				if (null != item.PreviewJFrame || null == item.Image) {
 					return;
 				}
 
-				final javax.swing.JFrame sd = new PreviewJFrame(item, item.Image);
-				sd.pack();
-				sd.setLocationRelativeTo(item);
-				sd.setVisible(true);
-				item.PreviewIsOpened = true;
+				item.PreviewJFrame = new PreviewJFrame(item, item.Image);
+				item.PreviewJFrame.pack();
+				item.PreviewJFrame.setLocationRelativeTo(item);
+				item.PreviewJFrame.setVisible(true);
 
-				sd.addWindowListener(new WindowAdapter() {
+				item.PreviewJFrame.addWindowListener(new WindowAdapter() {
 					public void windowClosed(WindowEvent e) {
 						PreviewJFrame w = (PreviewJFrame) e.getWindow();
-						w.ImageItem.PreviewIsOpened = false;
+						w.ImageItem.PreviewJFrame = null;
 					}
 
 					public void windowClosing(WindowEvent e) {
-		//				MainForm.getInstance().HowToUseDialogIsOpened = false;
+						//				MainForm.getInstance().HowToUseDialogIsOpened = false;
 					}
 				});
 			} // END mouseReleased
 		};
 	}
-	
-	
+
 }

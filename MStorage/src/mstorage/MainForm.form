@@ -86,7 +86,6 @@
                   <Image iconType="3" name="/images/picture_add.16x16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Add picture to this file"/>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddImageActionPerformed"/>
@@ -454,7 +453,6 @@
               <Image iconType="3" name="/images/picture_add.24x24.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Add picture to this file"/>
-            <Property name="enabled" type="boolean" value="false"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>

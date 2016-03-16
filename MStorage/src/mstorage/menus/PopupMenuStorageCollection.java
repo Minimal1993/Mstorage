@@ -112,7 +112,6 @@ public class PopupMenuStorageCollection extends JPopupMenu  {
 		m4.addActionListener(EventsHandler);
 		m4.setActionCommand("add_image");
 		m4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/picture_add.16x16.png")));
-		m4.setEnabled(false);
 		this.add(m4);
 		
 		JMenuItem m5 = new JMenuItem("Rename this file");
