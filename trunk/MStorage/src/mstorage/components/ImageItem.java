@@ -11,10 +11,13 @@
  */
 package mstorage.components;
 
+import net.coobird.thumbnailator.Thumbnails;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import net.coobird.thumbnailator.Thumbnails;
 import java.awt.image.BufferedImage;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import StorageCollection.*;
 import mstorage.MainForm;
@@ -69,12 +72,6 @@ public class ImageItem extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(100, 100));
 
-        jLabelImage.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelImageMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,30 +83,6 @@ public class ImageItem extends javax.swing.JPanel {
             .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jLabelImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelImageMouseClicked
-		// Permit to only one window and if Image is real
-		if (true == this.PreviewIsOpened || null == this.Image) {
-			return;
-		}
-		
-		final javax.swing.JFrame sd = new PreviewJFrame(this, this.Image);
-		sd.pack();
-		sd.setLocationRelativeTo(this);
-		sd.setVisible(true);
-		this.PreviewIsOpened = true;
-
-		sd.addWindowListener(new WindowAdapter() {
-			public void windowClosed(WindowEvent e) {
-				PreviewJFrame w = (PreviewJFrame) e.getWindow();
-				w.ImageItem.PreviewIsOpened = false;
-			}
-
-			public void windowClosing(WindowEvent e) {
-//				MainForm.getInstance().HowToUseDialogIsOpened = false;
-			}
-		});
-    }//GEN-LAST:event_jLabelImageMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -136,9 +109,53 @@ public class ImageItem extends javax.swing.JPanel {
 		} catch (java.io.IOException e) {
 			return;
 		}
+		
+		this.addMouseListener(this.getMouseListener());
 	}
 	
-	
+	protected MouseListener getMouseListener() {
+		return new MouseAdapter() {
+			public void mouseReleased(MouseEvent e) {
+				ImageItem item = (ImageItem) e.getSource();
+				int x = e.getX();
+				int y = e.getY();
+				
+				// If it was right click
+				if (e.isPopupTrigger()) {
+					// TODO: Dont remember close PreviewJFrame if it is opened now
+					
+//				PopupMenuStorageCollection popup = new PopupMenuStorageCollection(obj);
+//				popup.show(tree, x, y);
+					
+					
+					return;
+				}
+				
+				// Left mouse button, open preview window
+				// Permit to only one window and if Image is real
+				if (true == item.PreviewIsOpened || null == item.Image) {
+					return;
+				}
+
+				final javax.swing.JFrame sd = new PreviewJFrame(item, item.Image);
+				sd.pack();
+				sd.setLocationRelativeTo(item);
+				sd.setVisible(true);
+				item.PreviewIsOpened = true;
+
+				sd.addWindowListener(new WindowAdapter() {
+					public void windowClosed(WindowEvent e) {
+						PreviewJFrame w = (PreviewJFrame) e.getWindow();
+						w.ImageItem.PreviewIsOpened = false;
+					}
+
+					public void windowClosing(WindowEvent e) {
+		//				MainForm.getInstance().HowToUseDialogIsOpened = false;
+					}
+				});
+			} // END mouseReleased
+		};
+	}
 	
 	
 }
