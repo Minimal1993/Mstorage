@@ -113,7 +113,12 @@ public class FileJTab extends javax.swing.JPanel {
 		}
 	}
 	
+	/**
+	 * Clean and create panel with pictures.
+	 * Can use for creating and refreshing.
+	 */
 	public void createJPanelDocumentPictures(){
+		this.JPanelDocumentPictures.removeAll();
 		ImageCarousel ImageCarousel = new ImageCarousel(this.File);
 
 		this.JPanelDocumentPictures.setLayout(new java.awt.BorderLayout());

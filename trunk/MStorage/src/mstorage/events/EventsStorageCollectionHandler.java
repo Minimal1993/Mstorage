@@ -16,6 +16,7 @@ import mstorage.*;
 import mstorage.models.TabsFabric;
 import mstorage.components.FileJTab;
 import mstorage.utils.Hash;
+import mstorage.models.MoveJTree;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -26,7 +27,8 @@ import javax.swing.JOptionPane;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import javax.swing.tree.TreePath;
-import mstorage.models.MoveJTree;
+import org.apache.commons.lang3.StringUtils;
+
 
 /**
  * General handler for actions to events about storage collections: File, Folder
@@ -203,11 +205,61 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 	}
 
 	public void eh_add_image() {
-		System.out.println(this.StorageItem.getFileName());
+		final javax.swing.JFileChooser fc = new javax.swing.JFileChooser();
+
+		//In response to a button click:
+		int returnVal = fc.showDialog(MainForm.getInstance(), "Add picture to this file");
+
+		if (returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
+			java.io.File file = fc.getSelectedFile();
+			if (!file.exists()) {
+				return;
+			}
+
+			this.eh_save_file();
+
+			Path path = Paths.get(file.getAbsolutePath());
+			
+			if (!StorageCollection.isImage(path)) {
+				JOptionPane.showMessageDialog(
+					MainForm.getInstance(), 
+					"Picture can be only next formats: jpg, jpeg, gif, png"
+				);
+				
+				return;
+			}
+
+			try {
+				Image img = Image.create((File)this.StorageItem, file);
+			} catch (IOException e) {
+				System.out.println(e.getMessage());
+			}
+			
+			// Refresh images carousel
+			FileJTab tab = (FileJTab) MainForm.getInstance().getTabbedPaneMain().getSelectedComponent();
+			tab.createJPanelDocumentPictures();
+			tab.checksAfterCreating();
+		}
 	}
 	
 	public void eh_delete_image() {
-		System.out.println(this.StorageItem.getFileName());
+		Image image = (Image) this.StorageItem;
+		
+		int dialogResult = JOptionPane.showConfirmDialog(
+			MainForm.getInstance(), 
+			"Do you confirm to delete " + image.getOrigName() + "?", 
+			"Confirm delete", 
+			JOptionPane.YES_NO_OPTION
+		);
+
+		if (dialogResult == JOptionPane.YES_OPTION) {
+			image.remove();
+			
+			// Refresh images carousel
+			FileJTab tab = (FileJTab) MainForm.getInstance().getTabbedPaneMain().getSelectedComponent();
+			tab.createJPanelDocumentPictures();
+			tab.checksAfterCreating();
+		}
 	}
 
 	public void eh_save_file() {

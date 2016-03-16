@@ -289,7 +289,6 @@ public class MainForm extends javax.swing.JFrame {
 
         jButtonAddImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/picture_add.24x24.png"))); // NOI18N
         jButtonAddImage.setToolTipText("Add picture to this file");
-        jButtonAddImage.setEnabled(false);
         jButtonAddImage.setFocusable(false);
         jButtonAddImage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonAddImage.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -430,7 +429,6 @@ public class MainForm extends javax.swing.JFrame {
 
         jMenuItemAddPicture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/picture_add.16x16.png"))); // NOI18N
         jMenuItemAddPicture.setText("Add picture to this file");
-        jMenuItemAddPicture.setEnabled(false);
         jMenuItemAddPicture.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddImageActionPerformed(evt);
@@ -693,7 +691,11 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonRenameFileActionPerformed
 
     private void jButtonAddImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddImageActionPerformed
-		// TODO add your handling code here:
+		FileJTab tab = (FileJTab) this.getTabbedPaneMain().getSelectedComponent();
+		File file = (File) tab.File;
+		
+		EventsStorageCollectionHandler esch = new EventsStorageCollectionHandler(file);
+		esch.call("add_image");
     }//GEN-LAST:event_jButtonAddImageActionPerformed
 
     private void jButtonMoveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMoveFileActionPerformed
@@ -1213,8 +1215,6 @@ public class MainForm extends javax.swing.JFrame {
 		this.jMenuItemSearchInThisFile.setEnabled(show);
 
 		// For time action not released
-		this.jMenuItemAddPicture.setEnabled(false);
-//		this.jMenuItemMoveThisFile.setEnabled(false);
 		this.jMenuItemSearchInThisFile.setEnabled(false);
 
 	}

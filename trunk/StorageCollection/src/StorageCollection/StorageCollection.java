@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.*;
 import java.lang.Object.*;
+import org.apache.commons.lang3.StringUtils;
 
 public final class StorageCollection {
 
@@ -65,20 +66,9 @@ public final class StorageCollection {
 					folder.setFather(fn);
 					fn.Folders.put(folder.getFileName(), getFileNames(folder, path));
 				} else {
-					String extension = "";
-					String filename = path.getFileName().toString();
-
-					// Get extention of file
-					int i = filename.lastIndexOf('.');
-					if (i > 0) {
-						extension = filename.substring(i + 1);
-					}
 
 					// If picture
-					if (extension.equals("jpg")
-							|| extension.equals("jpeg")
-							|| extension.equals("gif")
-							|| extension.equals("png")) {
+					if (StorageCollection.isImage(path)) {
 
 						// TODO: There must use correct method Image.create()
 						Image file = new Image();
@@ -143,7 +133,36 @@ public final class StorageCollection {
 	public void move(StorageItem item, StorageItem toitem) {
 
 	}
-	
 
+	/**
+	 * Check whether Image is or not. Image defined when file has extension from
+	 * some predefined values
+	 *
+	 * @param path - Path to file
+	 * @return
+	 */
+	public static boolean isImage(Path path) {
+		boolean ret = false;
+
+		String extension = "";
+		String filename = path.getFileName().toString();
+
+		// Get extention of file
+		int i = filename.lastIndexOf('.');
+		if (i > 0) {
+			extension = StringUtils.lowerCase(filename.substring(i + 1));
+		}
+
+		// If picture
+		if (extension.equals("jpg")
+				|| extension.equals("jpeg")
+				|| extension.equals("gif")
+				|| extension.equals("png")) {
+
+			ret = true;
+		}
+
+		return ret;
+	}
 
 }
