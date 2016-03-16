@@ -15,6 +15,7 @@ import java.io.*;
 import java.util.*;
 import java.nio.file.*;
 import java.io.IOException;
+import mstorage.MainForm;
 
 /**
  * This class is needed for saving settings of application. All settings will
@@ -96,7 +97,7 @@ public class Settings {
 			}
 		} catch (java.lang.SecurityException e) {
 			// TODO: Have to to handler for exceptions and critical errors
-			System.out.println("Can't read system user properties 'user.home'");
+			MainForm.showError("Can't read system user properties 'user.home'");
 			return;
 		}
 
@@ -177,11 +178,11 @@ public class Settings {
 			try {
 				file.createNewFile();
 			} catch (IOException ee) {
-				System.out.println(ee.getMessage());
+				MainForm.showError(ee.getMessage());
 			}
 
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			MainForm.showError(e.getMessage());
 		}
 	}
 
@@ -197,7 +198,7 @@ public class Settings {
 		} catch (FileNotFoundException e) {
 
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			MainForm.showError(e.getMessage());
 		}
 	}
 

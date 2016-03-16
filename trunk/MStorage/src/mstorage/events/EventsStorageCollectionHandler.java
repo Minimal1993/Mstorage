@@ -53,7 +53,7 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 			this.StorageItem = folder;
 
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			MainForm.showError(e.getMessage());
 		}
 	}
 
@@ -72,7 +72,7 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 			this.eh_open_file();
 
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			MainForm.showError(e.getMessage());
 		}
 
 	}
@@ -111,7 +111,7 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 			file.move(folderTo);
 		}
 		catch(IOException e) {
-			System.out.println(e.getMessage());
+			MainForm.showError(e.getMessage());
 		}
 	}
 
@@ -131,7 +131,7 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 			try {
 				folder.rename(s);
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				MainForm.showError(e.getMessage());
 			}
 
 			return;
@@ -139,7 +139,7 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 	}
 
 	public void eh_search_in_folder() {
-		System.out.println(this.StorageItem.getFileName());
+		MainForm.showError(this.StorageItem.getFileName());
 	}
 
 	public void eh_open_file() {
@@ -200,7 +200,7 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 			file.move(folderTo);
 		}
 		catch(IOException e) {
-			System.out.println(e.getMessage());
+			MainForm.showError(e.getMessage());
 		}
 	}
 
@@ -232,7 +232,7 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 			try {
 				Image img = Image.create((File)this.StorageItem, file);
 			} catch (IOException e) {
-				System.out.println(e.getMessage());
+				MainForm.showError(e.getMessage());
 			}
 			
 			// Refresh images carousel
@@ -273,7 +273,7 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 		try {
 			file.save(content);
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			MainForm.showError(e.getMessage());
 		}
 
 		// Remove icon 'changed' from title tab
@@ -296,7 +296,7 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 			try {
 				file.rename(s);
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				MainForm.showError(e.getMessage());
 			}
 
 			// Change tab title if file is opened
@@ -313,7 +313,7 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 	}
 
 	public void eh_search_in_file() {
-		System.out.println(this.StorageItem.getFileName());
+		MainForm.showError(this.StorageItem.getFileName());
 	}
 
 	public void eh_close_this_tab() {
@@ -380,7 +380,7 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 			try {
 				((File) this.StorageItem).copy(path);
 			} catch (IOException e) {
-				System.out.println(e.getMessage());
+				MainForm.showError(e.getMessage());
 			}
 
 		}
@@ -388,7 +388,7 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 	}
 
 	public void eh_view_file_in_directory() {
-		System.out.println(this.StorageItem.getFileName());
+		MainForm.showError(this.StorageItem.getFileName());
 	}
 
 }
