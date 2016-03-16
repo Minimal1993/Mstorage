@@ -90,10 +90,10 @@ public class StorageCollectionJTree extends JTree {
 
 				if (selRow != -1 && path != null) {
 					if (e.getClickCount() == 1) {
-						System.out.println("Single click");
+						// Single click
 
 					} else if (e.getClickCount() == 2) {
-						System.out.println("Double click");
+						// Double click
 
 						StorageItem obj = (StorageItem) path.getLastPathComponent();
 

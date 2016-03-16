@@ -763,7 +763,7 @@ public class MainForm extends javax.swing.JFrame {
 			try {
 				tab.File.save(content);
 			} catch (IOException e) {
-				System.out.println(e.getMessage());
+				MainForm.showError(e.getMessage());
 			}
 
 			// Remove icon 'changed' from title tab
@@ -1224,6 +1224,28 @@ public class MainForm extends javax.swing.JFrame {
 	 */
 	public void windowSettingClosed() {
 		System.out.println("windowSetting");
+	}
+	
+	//==========================================================================
+	// Workers for errors handling
+	public static void showError(String text){
+		MainForm._showError(text);
+	}
+	
+	public static void showError(Exception e){
+		MainForm._showError(e.getMessage());
+	}
+	
+	protected static void _showError(String text){
+		JOptionPane.showMessageDialog(
+			MainForm.getInstance(), 
+			text,
+			"Error",
+			0,
+			new javax.swing.ImageIcon(MainForm.getInstance().getClass().getResource("/images/exclamation.32x32.png"))
+		);
+		
+		System.out.println(text);
 	}
 
 }

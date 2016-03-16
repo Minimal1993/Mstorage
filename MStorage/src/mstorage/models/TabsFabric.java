@@ -25,6 +25,7 @@ import javax.swing.JTextArea;
 import java.io.IOException;
 import java.util.Vector;
 import javax.swing.JPanel;
+import mstorage.MainForm;
 
 /**
  * Fabric for create new tabs for Files and make these appearance.
@@ -52,7 +53,7 @@ public class TabsFabric {
 		try {
 			PanelTemplate.TextAreaDocument.setText(file.getContent());
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			MainForm.showError(e.getMessage());
 		}
 
 		PanelTemplate.TextAreaDocument.setWrapStyleWord(true);

@@ -73,7 +73,7 @@ public class FileJTab extends javax.swing.JPanel {
 				this.savedContentMD5 = Hash.md5(content);
 			}
 			catch (Exception e) {
-				System.out.println(e.getMessage());
+				MainForm.showError(e.getMessage());
 			}
 		}
 

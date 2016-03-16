@@ -51,7 +51,7 @@ public abstract class MStorageEventsHandler {
 			Object ret = m.invoke(this, mainArgs);
 			
 		} catch (Exception e) {
-			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName() + ": " + e.getMessage());
+			MainForm.showError(Thread.currentThread().getStackTrace()[1].getMethodName() + ": " + e.getMessage());
 		}
 
 		// Update tree
