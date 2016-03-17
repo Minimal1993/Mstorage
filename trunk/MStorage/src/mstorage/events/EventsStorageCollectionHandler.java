@@ -358,6 +358,10 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 
 			EventsStorageCollectionHandler esch = new EventsStorageCollectionHandler(tab.File);
 			esch.call("close_this_tab");
+			
+			// Recalc tabs after closing and reset iterator
+			count = MainForm.getInstance().getTabbedPaneMain().getTabCount();
+			i = -1; // next iteration will increment i and it will be as 0
 		}
 	}
 
