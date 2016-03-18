@@ -41,6 +41,14 @@ public class EventsPopupMenuStorageCollection implements ActionListener {
 
 		EventsStorageCollectionHandler esch = new EventsStorageCollectionHandler(this.StorageItem);
 		esch.call(command);
+		
+		if (command.equals("delete_file")) {
+			// TODO: There must be refreshing of tree. But now it dont work correctly
+			((javax.swing.tree.DefaultTreeModel)MainForm.getInstance().getTree().getModel()).nodeChanged(
+				(javax.swing.tree.TreeNode)this.StorageItem.getFather()
+			);
+		}
+		
 	}
 
 	public void itemStateChanged(ItemEvent e) {
