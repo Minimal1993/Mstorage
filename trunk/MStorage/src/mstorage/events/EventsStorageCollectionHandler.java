@@ -29,7 +29,6 @@ import java.nio.file.Paths;
 import javax.swing.tree.TreePath;
 import org.apache.commons.lang3.StringUtils;
 
-
 /**
  * General handler for actions to events about storage collections: File, Folder
  * and Image.
@@ -50,11 +49,16 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 		try {
 			// Create new file
 			Folder folder = Folder.create(father, Folder.getNewName(father));
-			this.StorageItem = folder;
+
+			EventsStorageCollectionHandler esch = new EventsStorageCollectionHandler(folder);
+
+			// Ask new name
+			esch.eh_rename_folder();
 
 		} catch (IOException e) {
 			MainForm.showError(e.getMessage());
 		}
+
 	}
 
 	public void eh_create_file() {
@@ -66,10 +70,13 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 		try {
 			// Create new file
 			File file = File.create(folder, File.getNewName(folder));
-			this.StorageItem = file;
+			EventsStorageCollectionHandler esch = new EventsStorageCollectionHandler(file);
 
 			// Open new file
-			this.eh_open_file();
+			esch.eh_open_file();
+
+			// Ask new name
+			esch.eh_rename_file();
 
 		} catch (IOException e) {
 			MainForm.showError(e.getMessage());
@@ -83,12 +90,12 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 		}
 
 		Folder folder = (Folder) this.StorageItem;
-		
+
 		int dialogResult = JOptionPane.showConfirmDialog(
-			MainForm.getInstance(), 
-			"Do you confirm to delete " + folder.getFileName() + "?\nAll files into it will be deleted too.", 
-			"Confirm delete", 
-			JOptionPane.YES_NO_OPTION
+				MainForm.getInstance(),
+				"Do you confirm to delete " + folder.getFileName() + "?\nAll files into it will be deleted too.",
+				"Confirm delete",
+				JOptionPane.YES_NO_OPTION
 		);
 
 		if (dialogResult == JOptionPane.YES_OPTION) {
@@ -96,31 +103,29 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 
 			// Check in opened tabs whether files exists yet
 			MainForm.getInstance().checkOpenedTabsFileExists();
-		
+
 		}
 	}
 
 	public void eh_move_folder() {
 		Folder file = (Folder) this.StorageItem;
-		
+
 		MoveDialog sd = new MoveDialog(MainForm.getInstance(), true);
 		sd.pack();
 		sd.setLocationRelativeTo(MainForm.getInstance());
 		sd.setVisible(true);
-		
+
 		// there is place when MoveDialog is living
-		
 		Folder folderTo = sd.getFolderTo();
 		sd.dispose();
-		
+
 		if (null == folderTo) {
 			return;
 		}
 
 		try {
 			file.move(folderTo);
-		}
-		catch(IOException e) {
+		} catch (IOException e) {
 			MainForm.showError(e.getMessage());
 		}
 	}
@@ -182,34 +187,47 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 
 		File file = (File) this.StorageItem;
 
-		// Check if File is opened in tab
-		MainForm.getInstance().checkOpenedFileWhenFileDelete(file);
+		int dialogResult = JOptionPane.showConfirmDialog(
+				MainForm.getInstance(),
+				"Do you confirm to delete " + file.getFileName() + "?\nAll images into it will be deleted too.",
+				"Confirm delete",
+				JOptionPane.YES_NO_OPTION
+		);
 
-		// TODO: Is there is mistake somtime occured: deleted file continue live in root Folder object. Investigate it.
-		file.remove();
+		if (dialogResult == JOptionPane.YES_OPTION) {
+
+			// Check if File is opened in tab
+			MainForm.getInstance().checkOpenedFileWhenFileDelete(file);
+
+			file.remove();
+			
+			// Need to refresh tree because sometime tree is not updated, and tabs too
+//			MainForm.getInstance().initTree();
+
+			MainForm.getInstance().checkOpenedTabsFileExists();
+			MainForm.getInstance().checkButtonCloseCurrentDocument();
+		}
 	}
 
 	public void eh_move_file() {
 		File file = (File) this.StorageItem;
-		
+
 		MoveDialog sd = new MoveDialog(MainForm.getInstance(), true);
 		sd.pack();
 		sd.setLocationRelativeTo(MainForm.getInstance());
 		sd.setVisible(true);
-		
+
 		// there is place when MoveDialog is living
-		
 		Folder folderTo = sd.getFolderTo();
 		sd.dispose();
-		
+
 		if (null == folderTo) {
 			return;
 		}
 
 		try {
 			file.move(folderTo);
-		}
-		catch(IOException e) {
+		} catch (IOException e) {
 			MainForm.showError(e.getMessage());
 		}
 	}
@@ -229,42 +247,42 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 			this.eh_save_file();
 
 			Path path = Paths.get(file.getAbsolutePath());
-			
+
 			if (!StorageCollection.isImage(path)) {
 				JOptionPane.showMessageDialog(
-					MainForm.getInstance(), 
-					"Picture can be only next formats: jpg, jpeg, gif, png"
+						MainForm.getInstance(),
+						"Picture can be only next formats: jpg, jpeg, gif, png"
 				);
-				
+
 				return;
 			}
 
 			try {
-				Image img = Image.create((File)this.StorageItem, file);
+				Image img = Image.create((File) this.StorageItem, file);
 			} catch (IOException e) {
 				MainForm.showError(e.getMessage());
 			}
-			
+
 			// Refresh images carousel
 			FileJTab tab = (FileJTab) MainForm.getInstance().getTabbedPaneMain().getSelectedComponent();
 			tab.createJPanelDocumentPictures();
 			tab.checksAfterCreating();
 		}
 	}
-	
+
 	public void eh_delete_image() {
 		Image image = (Image) this.StorageItem;
-		
+
 		int dialogResult = JOptionPane.showConfirmDialog(
-			MainForm.getInstance(), 
-			"Do you confirm to delete " + image.getOrigName() + "?", 
-			"Confirm delete", 
-			JOptionPane.YES_NO_OPTION
+				MainForm.getInstance(),
+				"Do you confirm to delete " + image.getOrigName() + "?",
+				"Confirm delete",
+				JOptionPane.YES_NO_OPTION
 		);
 
 		if (dialogResult == JOptionPane.YES_OPTION) {
 			image.remove();
-			
+
 			// Refresh images carousel
 			FileJTab tab = (FileJTab) MainForm.getInstance().getTabbedPaneMain().getSelectedComponent();
 			tab.createJPanelDocumentPictures();
@@ -303,21 +321,22 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 				file.getFileName());
 
 		if ((s != null) && (s.length() > 0)) {
-			try {
-				file.rename(s);
-			} catch (Exception e) {
-				MainForm.showError(e.getMessage());
-			}
 
 			// Change tab title if file is opened
 			int count = MainForm.getInstance().getTabbedPaneMain().getTabCount();
 			for (int i = 0; i < count; i++) {
 				FileJTab tab = (FileJTab) MainForm.getInstance().getTabbedPaneMain().getComponent(i);
-				if (!tab.File.equals(file)) {
+				if (!tab.File.getPath().equals(file.getPath())) {
 					continue;
 				}
 
-				MainForm.getInstance().getTabbedPaneMain().setTitleAt(i, file.getFileName());
+				MainForm.getInstance().getTabbedPaneMain().setTitleAt(i, s);
+			}
+
+			try {
+				file.rename(s);
+			} catch (Exception e) {
+				MainForm.showError(e.getMessage());
 			}
 		}
 	}
@@ -356,11 +375,11 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 		}
 
 		File file = (File) this.StorageItem;
-		
+
 		int count = MainForm.getInstance().getTabbedPaneMain().getTabCount();
 		for (int i = 0; i < count; i++) {
 			FileJTab tab = (FileJTab) MainForm.getInstance().getTabbedPaneMain().getComponent(i);
-			
+
 			// Dont close current document
 			if (tab.File.equals(file)) {
 				continue;
@@ -368,7 +387,7 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 
 			EventsStorageCollectionHandler esch = new EventsStorageCollectionHandler(tab.File);
 			esch.call("close_this_tab");
-			
+
 			// Recalc tabs after closing and reset iterator
 			count = MainForm.getInstance().getTabbedPaneMain().getTabCount();
 			i = -1; // next iteration will increment i and it will be as 0

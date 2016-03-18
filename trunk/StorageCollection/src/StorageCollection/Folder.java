@@ -89,6 +89,10 @@ public class Folder extends StorageItem {
 	public void rename(String newname) throws Exception {
 		String oldname = this.getFileName();
 		
+		if (newname.equals(oldname)){
+			return;
+		}
+		
 		java.io.File iofile = new java.io.File(this.getPath().getParent().toAbsolutePath().toString() + "/" + newname);
 		if (iofile.exists()) {
 			throw new Exception("Folder '" + this.getFileName() + "' already exists");

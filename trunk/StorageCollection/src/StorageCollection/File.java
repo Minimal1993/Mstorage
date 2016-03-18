@@ -111,6 +111,10 @@ public class File extends StorageItem {
 
 	@Override
 	public void rename(String newname) throws Exception  {
+		if (newname.equals(this.getFileName())){
+			return;
+		}
+		
 		java.io.File iofile = new java.io.File(this.getPath().getParent().toAbsolutePath().toString() + "/" + newname);
 		if (iofile.exists()) {
 			throw new Exception("File '" + this.getFileName() + "' already exists");
