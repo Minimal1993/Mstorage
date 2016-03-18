@@ -63,7 +63,10 @@ public class PreviewJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jLabelPicture.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelPicture.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelPicture.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabelPicture.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabelPicture.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -132,7 +135,7 @@ public class PreviewJFrame extends javax.swing.JFrame {
 					.asBufferedImage();
 
 			// TODO: There increment to Dimension tested only in Win7
-			Dimension winSize = new Dimension(thumbnail.getWidth() + 15, thumbnail.getHeight() + 35);
+			Dimension winSize = new Dimension(thumbnail.getWidth() + 5, thumbnail.getHeight() + 25);
 			this.setPreferredSize(winSize);
 			
 			this.jLabelPicture.setIcon(new javax.swing.ImageIcon(thumbnail));
