@@ -24,7 +24,9 @@ import java.awt.event.ItemEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.tree.TreePath;
 import mstorage.components.FileJTab;
+import mstorage.events.EventsStorageCollectionHandler;
 
 /**
  * Create a context menu for tabs titles, call by right mouse button click
@@ -104,9 +106,9 @@ public class PopupMenuTabbedPaneMain extends JPopupMenu {
 		m7.setActionCommand("delete_file");
 		m7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/page_white_delete.16x16.png")));
 		this.add(m7);
-		
+
 		this.addSeparator();
-		
+
 		JMenuItem m8 = new JMenuItem("View file in directory");
 		m8.addActionListener(EventsHandler);
 		m8.setActionCommand("view_file_in_directory");
@@ -125,13 +127,31 @@ public class PopupMenuTabbedPaneMain extends JPopupMenu {
 
 				final int index = tabbedPane.getUI().tabForCoordinate(tabbedPane, e.getX(), e.getY());
 				int selectedIndex = tabbedPane.getSelectedIndex();
-				
+
 				// Show popup only of click was on tab title and on current selected tabs
 				if (index != -1 && selectedIndex == index) {
 					FileJTab tab = (FileJTab) tabbedPane.getComponent(index);
-					
+
 					PopupMenuTabbedPaneMain popup = new PopupMenuTabbedPaneMain(tab.File);
 					popup.show(tabbedPane, x, y);
+
+				}
+			}
+
+			public void mousePressed(MouseEvent e) {
+				javax.swing.JTabbedPane tabbedPane = (javax.swing.JTabbedPane) e.getSource();
+
+				final int index = tabbedPane.getUI().tabForCoordinate(tabbedPane, e.getX(), e.getY());
+				int selectedIndex = tabbedPane.getSelectedIndex();
+
+				// Work if click was on tab title and on current selected tabs
+				if (index != -1 && selectedIndex == index) {
+					FileJTab tab = (FileJTab) tabbedPane.getComponent(index);
+
+					if (2 == e.getClickCount()) {
+						EventsStorageCollectionHandler esch = new EventsStorageCollectionHandler(tab.File);
+						esch.call("rename_file");
+					}
 
 				}
 			}
