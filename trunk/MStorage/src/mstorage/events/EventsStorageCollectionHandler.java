@@ -83,11 +83,21 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 		}
 
 		Folder folder = (Folder) this.StorageItem;
+		
+		int dialogResult = JOptionPane.showConfirmDialog(
+			MainForm.getInstance(), 
+			"Do you confirm to delete " + folder.getFileName() + "?\nAll files into it will be deleted too.", 
+			"Confirm delete", 
+			JOptionPane.YES_NO_OPTION
+		);
 
-		folder.remove();
+		if (dialogResult == JOptionPane.YES_OPTION) {
+			folder.remove();
 
-		// Check in opened tabs whether files exists yet
-		MainForm.getInstance().checkOpenedTabsFileExists();
+			// Check in opened tabs whether files exists yet
+			MainForm.getInstance().checkOpenedTabsFileExists();
+		
+		}
 	}
 
 	public void eh_move_folder() {
