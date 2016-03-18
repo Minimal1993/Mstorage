@@ -122,7 +122,7 @@ public class MainForm extends javax.swing.JFrame {
 		tree = new StorageCollectionJTree(sc.FStorage, true);
 		tree.setRootVisible(false);
 		tree.setShowsRootHandles(true);
-		tree.setToggleClickCount(1);
+		tree.setToggleClickCount(2);
 //		tree.setEditable(true);
 		tree.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 

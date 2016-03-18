@@ -98,6 +98,11 @@ public class StorageCollectionJTree extends JTree {
 
 						StorageItem obj = (StorageItem) path.getLastPathComponent();
 
+						// Only for File
+						if (!obj.getType().equals("file")) {
+							return;
+						}
+						
 						// Double click on file will open it
 						EventsStorageCollectionHandler esch = new EventsStorageCollectionHandler(obj);
 						esch.call("open_file");
