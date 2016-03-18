@@ -15,7 +15,7 @@ package mstorage.models;
 import StorageCollection.*;
 import mstorage.MainForm;
 import mstorage.classes.*;
-import mstorage.models.StorageCollectionJTree;
+import mstorage.components.StorageCollectionJTree;
 
 import javax.swing.Icon;
 import javax.swing.JTree;

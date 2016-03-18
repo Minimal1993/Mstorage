@@ -11,6 +11,7 @@
  */
 package mstorage;
 
+import mstorage.components.StorageCollectionJTree;
 import StorageCollection.*;
 import mstorage.models.*;
 import mstorage.components.FileJTab;
