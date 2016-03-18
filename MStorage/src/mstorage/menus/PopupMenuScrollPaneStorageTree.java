@@ -25,7 +25,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import mstorage.MainForm;
-import mstorage.models.StorageCollectionJTree;
+import mstorage.components.StorageCollectionJTree;
 
 /**
  * Create a popup menu in scrollPaneStorageTree. This give a approach for create

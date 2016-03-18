@@ -96,7 +96,6 @@ public class Settings {
 				security.checkPropertyAccess("user.home");
 			}
 		} catch (java.lang.SecurityException e) {
-			// TODO: Have to to handler for exceptions and critical errors
 			MainForm.showError("Can't read system user properties 'user.home'");
 			return;
 		}

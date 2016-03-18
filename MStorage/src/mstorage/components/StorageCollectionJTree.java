@@ -9,7 +9,7 @@
  * @email: naveter@gmail.com
  * @date: 2016
  */
-package mstorage.models;
+package mstorage.components;
 
 import StorageCollection.*;
 import mstorage.menus.PopupMenuStorageCollection;
@@ -27,10 +27,11 @@ import java.awt.event.*;
 import java.util.TreeMap;
 import javax.swing.JPopupMenu;
 import javax.swing.JMenuItem;
+import mstorage.models.StorageCollectionModel;
 
 
 /**
- * TODO: this is not model but component. Move to mstorage.components folder
+ * Component JTree performed function for tree's storage
  */
 public class StorageCollectionJTree extends JTree {
 

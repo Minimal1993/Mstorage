@@ -27,7 +27,11 @@ public final class StorageCollection {
 		try {
 			Dirname = Paths.get(dirname);
 
-			// TODO: Make sure directory is exists
+			java.io.File f = new java.io.File(dirname);
+
+			if(!f.exists()){
+				throw new Exception(dirname + " is not exists");
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.exit(1);
