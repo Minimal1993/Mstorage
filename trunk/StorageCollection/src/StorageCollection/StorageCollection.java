@@ -62,7 +62,7 @@ public final class StorageCollection {
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
 			for (Path path : stream) {
 				if (path.toFile().isDirectory()) {
-					// TODO: There must use correct method Folder.create()
+					
 					Folder folder = new Folder();
 					folder.setFileName(path.getFileName().toString());
 					folder.setPath(path);
@@ -73,8 +73,7 @@ public final class StorageCollection {
 
 					// If picture
 					if (StorageCollection.isImage(path)) {
-
-						// TODO: There must use correct method Image.create()
+						
 						Image file = new Image();
 						file.setFileName(path.getFileName().toString());
 						file.setPath(path);
@@ -82,7 +81,7 @@ public final class StorageCollection {
 						fn.Images.put(file.getFileName(), file);
 
 					} else {
-						// TODO: There must use correct method File.create()
+						
 						File file = new File();
 						file.setFileName(path.getFileName().toString());
 						file.setPath(path);
