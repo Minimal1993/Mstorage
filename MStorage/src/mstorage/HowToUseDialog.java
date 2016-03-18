@@ -143,10 +143,13 @@ public class HowToUseDialog extends javax.swing.JDialog implements TreeSelection
 		DefaultMutableTreeNode category = null;
 		DefaultMutableTreeNode book = null;
 
-		book = new DefaultMutableTreeNode(new BookInfo("The Rest of the JDK", "bloch.html"));
+		book = new DefaultMutableTreeNode(new BookInfo("Getting start", "getting_start.html"));
 		top.add(book);
 
-		book = new DefaultMutableTreeNode(new BookInfo("A Guide to Constructing GUIs", "arnold.html"));
+		book = new DefaultMutableTreeNode(new BookInfo("Additional features", "additional_features.html"));
+		top.add(book);
+		
+		book = new DefaultMutableTreeNode(new BookInfo("Run many application", "many_app.html"));
 		top.add(book);
 	}
 
@@ -168,7 +171,6 @@ public class HowToUseDialog extends javax.swing.JDialog implements TreeSelection
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("How to use");
-        setModal(false);
         setName("HowToUseDialog"); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -190,12 +192,12 @@ public class HowToUseDialog extends javax.swing.JDialog implements TreeSelection
             .addGroup(jPanelTopLayout.createSequentialGroup()
                 .addComponent(jScrollPaneLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPaneRight, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE))
+                .addComponent(jScrollPaneRight, javax.swing.GroupLayout.DEFAULT_SIZE, 816, Short.MAX_VALUE))
         );
         jPanelTopLayout.setVerticalGroup(
             jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPaneLeft)
-            .addComponent(jScrollPaneRight, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+            .addComponent(jScrollPaneRight, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
         );
 
         jButtonClose.setText("Close");
@@ -226,9 +228,7 @@ public class HowToUseDialog extends javax.swing.JDialog implements TreeSelection
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelTop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanelTop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelBottom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
