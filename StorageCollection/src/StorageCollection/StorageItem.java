@@ -60,8 +60,6 @@ public abstract class StorageItem implements Cloneable {
 	}
 
 	public void setPath(Path path) {
-
-		// TODO: Check file exists
 		this.path = path;
 	}
 

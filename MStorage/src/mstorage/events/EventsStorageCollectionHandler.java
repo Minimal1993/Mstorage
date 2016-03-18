@@ -149,7 +149,7 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 		int count = MainForm.getInstance().getTabbedPaneMain().getTabCount();
 		for (int i = 0; i < count; i++) {
 			FileJTab tab = (FileJTab) MainForm.getInstance().getTabbedPaneMain().getComponent(i);
-			if (tab.File.equals(file)) {
+			if (tab.File.getPath().equals(file.getPath())) {
 				// Select if has opened already
 				MainForm.getInstance().getTabbedPaneMain().setSelectedIndex(i);
 				return;
