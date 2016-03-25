@@ -111,7 +111,7 @@ public class StorageCollectionJTree extends JTree {
 			}
 
 			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
+				if (3 == e.getButton()) {
 					myPopupEvent(e);
 				}
 			}

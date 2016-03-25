@@ -121,8 +121,9 @@ public class ImageItem extends javax.swing.JPanel {
 				int x = e.getX();
 				int y = e.getY();
 
-				// If it was right click
-				if (e.isPopupTrigger()) {
+				// If it was right click. 
+				// Use getButton because isPopupTrigger() diffrently work in Linux and Windows 
+				if (3 == e.getButton()) {
 					// Close PreviewJFrame window
 					if (null != item.PreviewJFrame) {
 						item.PreviewJFrame.setVisible(false);
@@ -158,6 +159,14 @@ public class ImageItem extends javax.swing.JPanel {
 					}
 				});
 			} // END mouseReleased
+			
+			public void mousePressed(MouseEvent e){
+				int ii = 0;
+				
+				if (e.isPopupTrigger()){
+					int r = 8;
+				}
+			}
 		};
 	}
 
