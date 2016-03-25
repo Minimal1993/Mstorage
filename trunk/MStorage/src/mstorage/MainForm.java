@@ -1135,7 +1135,13 @@ public class MainForm extends javax.swing.JFrame {
 
 			for (String url : list) {
 				Path path = Paths.get(url);
-				File file = this.getTree().getTreeModel().getFolder().findFile(path);
+				File file = null;
+				try {
+					file = this.getTree().getTreeModel().getFolder().findFile(path);
+				}
+				catch(NullPointerException e) {
+					continue;
+				}
 				if (null == file) {
 					continue;
 				}
