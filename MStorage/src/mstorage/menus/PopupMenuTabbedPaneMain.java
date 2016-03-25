@@ -157,7 +157,7 @@ public class PopupMenuTabbedPaneMain extends JPopupMenu {
 			}
 
 			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
+				if (3 == e.getButton()) {
 					myPopupEvent(e);
 				}
 			}

@@ -82,7 +82,7 @@ public class MoveJTree extends StorageCollectionJTree {
 			}
 
 			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
+				if (3 == e.getButton()) {
 					myPopupEvent(e);
 				}
 			}
