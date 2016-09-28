@@ -32,6 +32,11 @@ public class Settings {
 	 * Collection of properties
 	 */
 	protected Properties Properties = new Properties();
+	
+	/**
+	 * General settings, not save and not extract
+	 */
+	protected HashMap<String, String> GeneralSettings = new HashMap();
 
 	/**
 	 * Url to properties storage
@@ -62,13 +67,13 @@ public class Settings {
 	 * property, it have to do there.
 	 */
 	protected void initGeneral() {
-		// General
-		this.Properties.setProperty("Version", "1.1.1");
-		this.Properties.setProperty("Author", "Gulevskiy Ilya");
-		this.Properties.setProperty("Year", "2016");
-		this.Properties.setProperty("Email", "mstorage.project@gmail.com");
-		this.Properties.setProperty("AppName", "MStorage");
-		this.Properties.setProperty("License", "GNU General Public License");
+		// General settings
+		this.GeneralSettings.put("Version", "1.1.1");
+		this.GeneralSettings.put("Author", "Gulevskiy Ilya");
+		this.GeneralSettings.put("Year", "2016");
+		this.GeneralSettings.put("Email", "mstorage.project@gmail.com");
+		this.GeneralSettings.put("AppName", "MStorage");
+		this.GeneralSettings.put("License", "GNU General Public License");
 		
 		// Default
 		this.Properties.setProperty("Icons", "Delta");
@@ -118,11 +123,17 @@ public class Settings {
 	}
 
 	public String getProperty(String key) {
+		// Check is GeneralSettings
+		if (this.GeneralSettings.containsKey(key)) {
+			return this.GeneralSettings.get(key);
+		}
+		
 		return this.Properties.getProperty(key, Settings.DefaultValue);
 	}
 
 	public void setProperty(String key, String val) {
-		if (this.Properties.getProperty(key) == val) {
+		// Check whether the same value or it is GeneralSettings
+		if (this.Properties.getProperty(key) == val || this.GeneralSettings.containsKey(key)) {
 			return;
 		}
 
