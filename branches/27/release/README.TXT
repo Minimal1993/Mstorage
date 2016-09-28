@@ -1,0 +1,24 @@
+/*
+ * MStorage - storage for notes.
+ * 
+ * Permission is granted to copy, distribute and/or
+ * modify  this  document under  the  terms  of the
+ * GNU General Public License
+ * 
+ * @author: ilya.gulevskiy
+ * @email: naveter@gmail.com
+ * @date: 2016
+ */
+ MStorage - storage for notes, it suggests opportunity to save and catalog notes, articles and tips in local drive by directories tree. If you like save you notes in simple text files but you are upset to walk through directories tree every time when you need to find something - this util will help you.
+
+To install, download MStorage.*.zip, unpack and run "java -jar MStorage.jar". Read more in INSTALL.TXT.
+
+For testing and review purposes,archive contains test storage.
+
+Tested into Windows 7 and Ubuntu 14.
+
+    Storage tree is copy of your local drive directory
+    You can access to storage without MStorage by simple text reader
+    You can add picture to your notes
+    Crossplatform, can be launch in Win, UNIX and MacOS systems
+    You can launch a couple apps, dividing settings by set a diffrent names of settings files
