@@ -61,6 +61,11 @@ public final class StorageCollection {
 	public Folder getFileNames(Folder fn, Path dir) {
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
 			for (Path path : stream) {
+				
+				// Ignore files and directories with first "."
+				String first = path.getFileName().toString().substring(0,1);
+				if (first.equals(".")) continue;
+				
 				if (path.toFile().isDirectory()) {
 					
 					Folder folder = new Folder();
