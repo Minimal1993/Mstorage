@@ -6,7 +6,7 @@
  * GNU General Public License
  * 
  * @author: ilya.gulevskiy
- * @email: naveter@gmail.com
+ * @email: mstorage.project@gmail.com
  * @date: 2016
  */
 package mstorage.classes;
@@ -63,10 +63,10 @@ public class Settings {
 	 */
 	protected void initGeneral() {
 		// General
-		this.Properties.setProperty("Version", "1.0.1");
+		this.Properties.setProperty("Version", "1.1.1");
 		this.Properties.setProperty("Author", "Gulevskiy Ilya");
 		this.Properties.setProperty("Year", "2016");
-		this.Properties.setProperty("Email", "naveter@gmail.com");
+		this.Properties.setProperty("Email", "mstorage.project@gmail.com");
 		this.Properties.setProperty("AppName", "MStorage");
 		this.Properties.setProperty("License", "GNU General Public License");
 		

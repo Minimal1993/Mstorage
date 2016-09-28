@@ -8,7 +8,7 @@ ${licensePrefix}modify  this  document under  the  terms  of the
 ${licensePrefix}GNU General Public License
 ${licensePrefix}
 ${licensePrefix}@author: ilya.gulevskiy
-${licensePrefix}@email: naveter@gmail.com
+${licensePrefix}@email: mstorage.project@gmail.com
 ${licensePrefix}@date: 2016
 <#if licenseLast??>
 ${licenseLast}
