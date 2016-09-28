@@ -6,7 +6,7 @@
  * GNU General Public License
  * 
  * @author: ilya.gulevskiy
- * @email: naveter@gmail.com
+ * @email: mstorage.project@gmail.com
  * @date: 2016
  */
 package mstorage.classes;

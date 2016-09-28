@@ -6,7 +6,7 @@
  * GNU General Public License
  * 
  * @author: ilya.gulevskiy
- * @email: naveter@gmail.com
+ * @email: mstorage.project@gmail.com
  * @date: 2016
  */
 package mstorage;
@@ -46,7 +46,7 @@ public class About extends javax.swing.JDialog {
 		Settings settings = Settings.getInstance();
 		
         jLabelDescription.setText("<html>\n<b>" + settings.getProperty("AppName") 
-			+ "</b> - storage for notes to suggest opportunity<br>to save and catalog notes, " 
+			+ "</b> - storage for notes, it suggests opportunity<br>to save and catalog notes, " 
 			+ "articles and tips in <br>local drive by directories tree.</html>");
 
         jLabelCopyright.setText("<html>\nPermission is granted to copy, distribute and/or<br>" 
@@ -109,12 +109,12 @@ public class About extends javax.swing.JDialog {
             }
         });
 
-        jLabelDescription.setText("<html>\n<b>MStorage</b> - storage for notes to suggest opportunity<br>  \nto save and catalog notes, articles and tips in <br> \nlocal drive by directories tree.\n</html>");
+        jLabelDescription.setText("<html> <b>MStorage</b> - storage for notes, it suggests opportunity<br>to save and catalog notes, articles and tips in<br>local drive by directories tree. </html>");
         jLabelDescription.setToolTipText("");
 
         jLabelCopyright.setText("<html>\nPermission is granted to copy, distribute and/or<br>\nmodify  this  document under  the  terms  of the<br>\nGNU Free Documentation License\n</html>");
 
-        jLabelAuthor.setText("© Gulevskiy Ilya, naveter@gmail.com, 2016");
+        jLabelAuthor.setText("© Gulevskiy Ilya, mstorage.project@gmail.com, 2016");
 
         jLabelIcons.setText("Icons produced by Fatcow, fatcow.com");
 
@@ -174,7 +174,7 @@ public class About extends javax.swing.JDialog {
             .addGroup(jPanelLeftLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelPicture)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
