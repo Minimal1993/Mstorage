@@ -99,4 +99,16 @@ public class SettingsTest {
 		assertTrue(f.exists());
 	}
 	
+	/**
+	 * Is General settings work correct
+	 */
+	@Test
+	public void testGetGeneralSettings() {
+		assertEquals("MStorage", this.Settings.getProperty("AppName"));
+		
+		// another value mustnt be set
+		this.Settings.setProperty("AppName", "Batman forever");
+		assertEquals("MStorage", this.Settings.getProperty("AppName"));
+	}
+	
 }
