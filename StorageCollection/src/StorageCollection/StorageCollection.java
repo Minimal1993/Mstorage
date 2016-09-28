@@ -61,6 +61,11 @@ public final class StorageCollection {
 	public Folder getFileNames(Folder fn, Path dir) {
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
 			for (Path path : stream) {
+				
+				// Ignore files and directories with first "."
+				String first = path.getFileName().toString().substring(0,1);
+				if (first.equals(".")) continue;
+				
 				if (path.toFile().isDirectory()) {
 					
 					Folder folder = new Folder();
@@ -80,7 +85,9 @@ public final class StorageCollection {
 						file.setType("image");
 						fn.Images.put(file.getFileName(), file);
 
-					} else {
+					} 
+					// if *.txt file
+					else if (StorageCollection.isTxtFile(path)) {
 						
 						File file = new File();
 						file.setFileName(path.getFileName().toString());
@@ -89,6 +96,9 @@ public final class StorageCollection {
 						file.setFather(fn);
 						fn.Files.put(file.getFileName(), file);
 					}
+					
+					// All other extensions ignore
+					
 				}
 
 			} // END for
@@ -164,6 +174,30 @@ public final class StorageCollection {
 
 			ret = true;
 		}
+
+		return ret;
+	}
+	
+	/**
+	 * Check whether file has TXT extension
+	 * 
+	 * @param path
+	 * @return 
+	 */
+	public static boolean isTxtFile(Path path) {
+		boolean ret = false;
+
+		String extension = "";
+		String filename = path.getFileName().toString();
+
+		// Get extention of file
+		int i = filename.lastIndexOf('.');
+		if (i > 0) {
+			extension = StringUtils.lowerCase(filename.substring(i + 1));
+		}
+
+		// If txt
+		if (extension.equals("txt")) ret = true;
 
 		return ret;
 	}
