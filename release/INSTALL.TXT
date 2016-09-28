@@ -40,5 +40,5 @@ For comfort you can create label on Desktop with command:
 
 javaw -jar "C:\Program Files\MStorage\MStorage.jar"
 
-And change icon by "Change icon". Get icon from root of this atchive. Now you could run MStorage from convinient icon from Desktop.
+And change icon by "Change icon". Get icon from root of this archive. Now you could run MStorage from convinient icon from Desktop.
 
