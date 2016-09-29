@@ -21,6 +21,7 @@ import java.nio.file.Paths;
 import static java.nio.file.StandardCopyOption.*;
 import java.util.Map;
 import java.util.Set;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -94,7 +95,7 @@ public class Folder extends StorageItem {
 		}
 		
 		java.io.File iofile = new java.io.File(this.getPath().getParent().toAbsolutePath().toString() + "/" + newname);
-		if (iofile.exists()) {
+		if (iofile.exists() && !StringUtils.lowerCase(newname).equals(StringUtils.lowerCase(this.getFileName()))) {
 			throw new Exception("Folder '" + this.getFileName() + "' already exists");
 		}
 		
