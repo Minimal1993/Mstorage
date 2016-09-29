@@ -940,6 +940,17 @@ public class MainForm extends javax.swing.JFrame {
 			}
 		}
 	}
+	
+	public void closeAllOpenedTabs() {
+		int count = this.getTabbedPaneMain().getTabCount();
+		for (int i = 0; i < count; i++) {
+			FileJTab tab = (FileJTab) this.getTabbedPaneMain().getComponent(i);
+
+			// Remove and decrease i because object count was changed
+			this.getTabbedPaneMain().remove(i--);
+			count = this.getTabbedPaneMain().getTabCount();
+		}
+	}
 
 	/**
 	 * @param args the command line arguments

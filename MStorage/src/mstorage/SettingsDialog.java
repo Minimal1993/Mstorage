@@ -231,15 +231,22 @@ public class SettingsDialog extends javax.swing.JDialog {
         if (returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
             java.io.File file = fc.getSelectedFile();
 			
-			if (file.exists() && file.isDirectory()) {
+			if (file.exists() 
+				&& file.isDirectory() 
+				&& !file.getAbsolutePath().toString().equals( Settings.getInstance().getProperty("StorageDirectory") )) {
+				
 				Settings.getInstance().setProperty("StorageDirectory", file.getAbsolutePath().toString());
 				
 				this.jTextFieldStorageDirectory.setText(Settings.getInstance().getProperty("StorageDirectory"));
 				
 				// TODO: May be need apply change by special command of button or do it when settings window will closed
 				MainForm.getInstance().initTree();
-				MainForm.getInstance().checkOpenedTabsFileExists();
-				MainForm.getInstance().checkButtonCloseCurrentDocument();
+				
+				// Close all opened tabs
+				MainForm.getInstance().closeAllOpenedTabs();
+				
+//				MainForm.getInstance().checkOpenedTabsFileExists();
+//				MainForm.getInstance().checkButtonCloseCurrentDocument();
 			}
         } 
     }//GEN-LAST:event_jButtonBrowseActionPerformed
