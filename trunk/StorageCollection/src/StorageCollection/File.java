@@ -23,6 +23,8 @@ import java.nio.file.Paths;
 import static java.nio.file.StandardCopyOption.*;
 import java.util.Map;
 import java.util.Set;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 /**
  *
@@ -38,8 +40,12 @@ public class File extends StorageItem {
 			throw new IOException("Cant create a file with empty name");
 		}
 
-		java.io.File newFile = new java.io.File(parent.path.toAbsolutePath().toString() + "/" + name);
-		newFile.createNewFile();
+//		java.io.File newFile = new java.io.File(parent.path.toAbsolutePath().toString() + "/" + name);
+//		newFile.createNewFile();
+
+		Path newFile = Paths.get(parent.path.toAbsolutePath().toString() + "/" + name);
+		ArrayList<String> lines =  new ArrayList<>();
+		Files.write(newFile, lines, StandardCharsets.UTF_8);
 
 		File file = new File();
 		file.setFileName(name);
