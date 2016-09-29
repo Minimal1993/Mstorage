@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Set;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -122,7 +123,7 @@ public class File extends StorageItem {
 		}
 		
 		java.io.File iofile = new java.io.File(this.getPath().getParent().toAbsolutePath().toString() + "/" + newname);
-		if (iofile.exists()) {
+		if (iofile.exists() && !StringUtils.lowerCase(newname).equals(StringUtils.lowerCase(this.getFileName()))) {
 			throw new Exception("File '" + this.getFileName() + "' already exists");
 		}
 		
