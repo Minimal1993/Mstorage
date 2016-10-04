@@ -10,12 +10,12 @@
             </bookmark>
             <bookmark id="27">
                 <name/>
-                <line>1097</line>
+                <line>1108</line>
                 <key/>
             </bookmark>
             <bookmark id="23">
                 <name/>
-                <line>1130</line>
+                <line>1141</line>
                 <key/>
             </bookmark>
         </file>
@@ -26,6 +26,9 @@
             <file>file:/E:/dev/java/MStorage/MStorage/src/mstorage/classes/Settings.java</file>
         </group>
         <group name="Java">
+            <file>file:/C:/work/MStorage/MStorage/src/mstorage/events/EventsStorageCollectionHandler.java</file>
+            <file>file:/C:/work/MStorage/MStorage/src/mstorage/MainForm.java</file>
+            <file>file:/C:/work/MStorage/MStorage/src/mstorage/SettingsDialog.java</file>
             <file>file:/C:/work/MStorage/MStorage/src/mstorage/classes/Settings.java</file>
         </group>
     </open-files>

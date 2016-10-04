@@ -7,7 +7,9 @@
         </group>
         <group name="Java">
             <file>file:/C:/work/MStorage/StorageCollection/src/StorageCollection/StorageCollection.java</file>
+            <file>file:/C:/work/MStorage/StorageCollection/src/StorageCollection/Folder.java</file>
             <file>file:/C:/work/MStorage/StorageCollection/src/StorageCollection/StorageItem.java</file>
+            <file>file:/C:/work/MStorage/StorageCollection/src/StorageCollection/File.java</file>
         </group>
     </open-files>
 </project-private>
