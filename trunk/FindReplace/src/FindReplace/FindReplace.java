@@ -16,9 +16,12 @@ import FindReplace.Types.FindInput;
 import FindReplace.Types.FindResult;
 import FindReplace.Types.FindResultItem;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -56,7 +59,11 @@ public class FindReplace {
 		
 		// Check regExp will compile
 		try {
-			this.Pattern = Pattern.compile(this.FindInput.getFind());
+			// If case insensitive
+			int flags = Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE;
+			if (this.FindInput.getAccordingToCase()) flags = 0;
+			
+			this.Pattern = Pattern.compile(this.FindInput.getFind(), flags);
 		}
 		catch (PatternSyntaxException e){
 			throw new RuntimeException("Cant compile RegExp string: " + this.FindInput.getFind());
@@ -125,7 +132,7 @@ public class FindReplace {
             while (( line = bf.readLine()) != null) {
 				linecount++;
 				Matcher m = this.Pattern.matcher(line);  
-				if(!m.matches()) continue; 
+				if(!m.find()) continue; 
 				
 				FindResultItem fri = new FindResultItem(
 					findResult.getFileName(), 
@@ -141,18 +148,46 @@ public class FindReplace {
 
 		}
 		catch(FileNotFoundException e) {
-			
+			return null;
 		}
 		catch(IOException e) {
-			
+			return null;
 		}
 		
 		if (0 == findResult.getCollection().size()) return null;
 		return findResult;
 	}
 	
-	public void replace(FindResultItem item) {
-	
+	/**
+	 * Try to replace string in file.
+	 * Find out all coincidence and replace it.
+	 * Now this method can replace many times but still return 1
+	 * 
+	 * @param item
+	 * @return 
+	 */
+	public int replace(FindResultItem item) {
+		java.io.File iofile = new java.io.File(item.getFileName().toAbsolutePath().toString());
+		if (!iofile.exists()){
+			return 0;
+		}
+		
+		try {
+			String contentOrig = new String(Files.readAllBytes(item.getFileName()));
+			String contentCh = contentOrig.replaceAll(item.getResult(), item.getReplace());
+
+			if (contentOrig.equals(contentCh)) return 0;
+			
+			FileWriter fw = new FileWriter(iofile.getAbsoluteFile());
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(contentCh);
+			bw.close();
+			
+			return 1;
+		}
+		catch(IOException e){
+			return 0;
+		}
 	}
 	
 	
