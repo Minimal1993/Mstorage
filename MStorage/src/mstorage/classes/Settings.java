@@ -89,6 +89,8 @@ public class Settings {
 		this.Properties.setProperty("MainWindowWidth", "700"); 
 		this.Properties.setProperty("MainWindowHeight", "600"); 
 		
+		this.Properties.setProperty("MainWindowLocation", "0,0"); 
+		
 	}
 
 	protected Settings() {
@@ -106,7 +108,7 @@ public class Settings {
 		}
 
 		String url = System.getProperty("user.home") + File.separator + "."
-				+ this.Properties.getProperty("AppName") 
+				+ this.getProperty("AppName") 
 				+ File.separator + "." + Settings.SettingsFileName;
 
 		this.StorageFile = Paths.get(url);
@@ -156,11 +158,11 @@ public class Settings {
 		Set<Map.Entry<String, String>> propSet = properties.entrySet();
 		for (Map.Entry<String, String> p : propSet) {
 			// The same value, do nothing
-			if (this.Properties.getProperty(p.getKey()) == p.getValue()) {
+			if (this.getProperty(p.getKey()) == p.getValue()) {
 				continue;
 			}
 
-			this.Properties.setProperty(p.getKey(), p.getValue());
+			this.setProperty(p.getKey(), p.getValue());
 			wasChanged = true;
 		}
 

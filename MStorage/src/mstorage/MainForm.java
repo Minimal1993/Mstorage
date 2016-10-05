@@ -871,6 +871,9 @@ public class MainForm extends javax.swing.JFrame {
 		this.getSettings().setProperty("MainWindowWidth", Integer.toString(windowSize.width));
 		this.getSettings().setProperty("MainWindowHeight", Integer.toString(windowSize.height));
 
+		// Save corrent window position
+		Point point = this.getLocation();
+		this.getSettings().setProperty("MainWindowLocation", (int)point.getX() + "," + (int)point.getY());
 
     }//GEN-LAST:event_formWindowClosing
 
@@ -1184,6 +1187,19 @@ public class MainForm extends javax.swing.JFrame {
 						Integer.parseInt(this.getSettings().getProperty("MainWindowHeight")) + 59
 				)
 		);
+		
+		// Main Window location
+		String[] MainWindowLocation = this.getSettings().getProperty("MainWindowLocation").split(",");
+		if (2 == MainWindowLocation.length) {
+			int x = Integer.parseInt(MainWindowLocation[0]);
+			int y = Integer.parseInt(MainWindowLocation[1]);
+			Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+			//if (x <= (int)screenSize.height && y <= (int)screenSize.width && x >= 0 && y >= 0 ) {
+			
+			// TODO: Have to do checking of max screen size include two or three monitors
+			this.setLocation(x, y);
+			
+		}
 
 		this.pack();
 
