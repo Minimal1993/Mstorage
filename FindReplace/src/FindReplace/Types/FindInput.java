@@ -58,7 +58,7 @@ public class FindInput {
 		this.Replace = Replace;
 	}
 
-	public boolean isAccordingToCase() {
+	public boolean getAccordingToCase() {
 		return AccordingToCase;
 	}
 

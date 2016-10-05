@@ -12,6 +12,8 @@ import FindReplace.Utils.TestUtils;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -90,9 +92,41 @@ public class FindReplaceTest {
 		assertEquals("государственная", result1.get(0).getCollection().get(0).getResult());
 		assertEquals("государством", result1.get(0).getCollection().get(1).getResult());
 	}
+	
+	/**
+	 * Find in directory according to case
+	 */
+	@Test
+	public void testFind4() {
+		FindInput input1 = new FindInput(Paths.get(TestUtils.Root), "бУржуа");
+		input1.setAccordingToCase(true);
+		FindReplace find1 = new FindReplace(input1);
+		
+		ArrayList<FindResult> result1 = find1.find();
+		assertEquals(5, result1.size());
+		assertEquals(1, result1.get(0).getCollection().size());
+		assertEquals(2, result1.get(0).getCollection().get(0).getLineNumber());
+		assertEquals(9, result1.get(0).getCollection().get(0).getCharNumber());
+		assertEquals("бУржуа", result1.get(0).getCollection().get(0).getResult());
+	}
 
 	@Test
 	public void testReplace() {
+		assertTrue(true);
+	}
+	
+	@Test
+	public void testTest(){
+		String line = "отмены подавляющего Франция большинства Франция денежных налогов и перехода к натуральным отношениям";
+		int flags = Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE;
+		Pattern patt = Pattern.compile("^отмен", flags);
+		Matcher m = patt.matcher(line);  
+
+		if(m.find()) {
+			System.out.println((m.start() + 1) + " " + m.group());
+		}
+
+		System.out.println("Hello World");
 		assertTrue(true);
 	}
 	
