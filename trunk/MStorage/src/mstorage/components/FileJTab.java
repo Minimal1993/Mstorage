@@ -12,6 +12,10 @@
 package mstorage.components;
 
 import StorageCollection.File;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.io.IOException;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -23,7 +27,7 @@ import mstorage.utils.Hash;
  * This is wrapper for JPanel component with data about current File,
  * representing in panel
  */
-public class FileJTab extends javax.swing.JPanel {
+public class FileJTab extends javax.swing.JPanel implements FocusListener {
 
 	public File File;
 	public JTextArea TextAreaDocument;
@@ -40,6 +44,11 @@ public class FileJTab extends javax.swing.JPanel {
 	 * For economy purposes. When file will save, his content will get md5 summa of it.
 	 */
 	public String savedContentMD5 = "";
+	
+	/**
+	 * To understand whether file on the disc was changed or not
+	 */
+	public long lastModified = 0;
 	
 	public static String IsChangedIcon = "/images/bullet_red.9x10.png";
 
@@ -66,11 +75,14 @@ public class FileJTab extends javax.swing.JPanel {
 		String text = this.TextAreaDocument.getText();
 		int index = MainForm.getInstance().getTabbedPaneMain().getSelectedIndex();
 		
-		// If md5 not calculated yet, calculate and save it
-		if (this.savedContentMD5.isEmpty()) {
+		// If md5 or lastChanged not calculated yet, calculate and save it
+		if (this.savedContentMD5.isEmpty() || 0 == this.lastModified) {
 			try {
 				String content = this.File.getContent();
 				this.savedContentMD5 = Hash.md5(content);
+				
+				java.io.File iofile = new java.io.File(this.File.getPath().toAbsolutePath().toString());
+				this.lastModified = iofile.lastModified();
 			}
 			catch (Exception e) {
 				MainForm.showError(e.getMessage());
@@ -124,4 +136,50 @@ public class FileJTab extends javax.swing.JPanel {
 		this.JPanelDocumentPictures.setLayout(new java.awt.BorderLayout());
 		this.JPanelDocumentPictures.add(ImageCarousel, java.awt.BorderLayout.NORTH);
 	}
+	
+	/**
+	 * OnFocus on the TextArea
+	 * @param e 
+	 */
+	@Override
+	public void focusGained(FocusEvent e) {
+		boolean isChanged = this.checkTextIsChanged();
+		
+		// Have to check whether file on disk has changed
+		java.io.File iofile = new java.io.File(this.File.getPath().toAbsolutePath().toString());
+		if (this.lastModified == iofile.lastModified()) return;
+
+		String text = this.File.getPath().toAbsolutePath().toString() 
+			+ "\nThis file has been modified by another program. Do you want to reload it?";
+		if (isChanged) text = text + "\nYou will lost all current changes.";
+
+		int dialogResult = JOptionPane.showConfirmDialog(
+				MainForm.getInstance(),
+				text,
+				"File was changed",
+				JOptionPane.YES_NO_OPTION
+		);
+
+		String content = null;
+		try{
+			content = this.File.getContent();
+			this.savedContentMD5 = Hash.md5(content);
+			this.lastModified = iofile.lastModified();
+		}
+		catch(IOException ex){
+			MainForm.showError(ex);
+		}
+		
+		// Load new content to textArea
+		if (dialogResult == JOptionPane.YES_OPTION) {
+			this.TextAreaDocument.setText(content);
+		}
+		
+		this.checkTextIsChanged();		
+    }
+
+	@Override
+    public void focusLost(FocusEvent e) {
+		
+    }
 }

@@ -37,6 +37,7 @@ public class TabsFabric {
 		PanelTemplate.ScrollPaneDocumentText = new javax.swing.JScrollPane();
 		PanelTemplate.JPanelDocumentPictures = new javax.swing.JPanel();
 		PanelTemplate.TextAreaDocument = new javax.swing.JTextArea();
+		PanelTemplate.TextAreaDocument.addFocusListener(PanelTemplate);
 
 		PanelTemplate.setPreferredSize(new java.awt.Dimension(300, 300));
 

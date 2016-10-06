@@ -3155,7 +3155,7 @@ This is adapter for Properties.
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">468</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">320</XPD:ATTR>
-<XPD:ATTR name="Width" type="integer">161</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">168</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">95</XPD:ATTR>
 <XPD:REF name="Model">ktOcUKcLL0C5YTBiOHNVKAAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="Afi6ZdvzbEOsNVXgvFqgNwAA">
@@ -3210,7 +3210,7 @@ This is adapter for Properties.
 <XPD:OBJ name="OwnedViews[6]" type="UMLDependencyView" guid="tiVgTtpipUeddNwIJoA3RwAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">479,320;266,176</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">481,320;267,176</XPD:ATTR>
 <XPD:REF name="Model">2sQbRC1oqUK8fTJVesPddAAA</XPD:REF>
 <XPD:REF name="Head">Ln6kvFm7Wkqpfq1NoIKwPQAA</XPD:REF>
 <XPD:REF name="Tail">EVYo3CY8x0CO8FMS4Ay5HwAA</XPD:REF>
@@ -3236,7 +3236,7 @@ This is adapter for Properties.
 <XPD:OBJ name="OwnedViews[7]" type="UMLDependencyView" guid="SAy38lmAbE2ab/51Fa0YkAAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">536,320;508,215</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">538,320;509,215</XPD:ATTR>
 <XPD:REF name="Model">O/x3vIQz5EmaD6UZCgaIkwAA</XPD:REF>
 <XPD:REF name="Head">6vl0s6iFHU6GxJ9eSAwOIQAA</XPD:REF>
 <XPD:REF name="Tail">EVYo3CY8x0CO8FMS4Ay5HwAA</XPD:REF>
@@ -3411,10 +3411,10 @@ This is adapter for Properties.
 <XPD:ATTR name="Name" type="string">find</XPD:ATTR>
 <XPD:REF name="Owner">ktOcUKcLL0C5YTBiOHNVKAAA</XPD:REF>
 <XPD:ATTR name="#Parameters" type="integer">1</XPD:ATTR>
-<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="ZKWBFIDIPE+BBmlb/DBZnAAA">
+<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="NUAuX09uPE2TAzCt03w0ugAA">
 <XPD:ATTR name="DirectionKind" type="UMLParameterDirectionKind">pdkReturn</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">ArrayList&lt;FindResult&gt;()</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">rzWuWFC/dUK/tiYUjyjetQAA</XPD:REF>
-<XPD:REF name="Type_">NgVwZP7axk2/VIXMJ0COMQAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="Operations[2]" type="UMLOperation" guid="fPsgj5iXoka58zGIV6P08gAA">
