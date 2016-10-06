@@ -1,21 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="27">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="32">
+        <file>
+            <url>src/mstorage/events/EventsStorageCollectionHandler.java</url>
+            <bookmark id="32">
+                <name/>
+                <line>292</line>
+                <key/>
+            </bookmark>
+        </file>
         <file>
             <url>src/mstorage/MainForm.java</url>
-            <bookmark id="26">
+            <bookmark id="31">
                 <name/>
-                <line>887</line>
+                <line>668</line>
                 <key/>
             </bookmark>
-            <bookmark id="27">
+            <bookmark id="28">
                 <name/>
-                <line>1108</line>
+                <line>865</line>
                 <key/>
             </bookmark>
-            <bookmark id="23">
+            <bookmark id="30">
                 <name/>
-                <line>1141</line>
+                <line>1145</line>
+                <key/>
+            </bookmark>
+            <bookmark id="29">
+                <name/>
+                <line>1190</line>
                 <key/>
             </bookmark>
         </file>
@@ -28,8 +41,7 @@
         <group name="Java">
             <file>file:/C:/work/MStorage/MStorage/src/mstorage/events/EventsStorageCollectionHandler.java</file>
             <file>file:/C:/work/MStorage/MStorage/src/mstorage/MainForm.java</file>
-            <file>file:/C:/work/MStorage/MStorage/src/mstorage/SettingsDialog.java</file>
-            <file>file:/C:/work/MStorage/MStorage/src/mstorage/classes/Settings.java</file>
+            <file>file:/C:/work/MStorage/MStorage/src/mstorage/models/TabsFabric.java</file>
         </group>
     </open-files>
 </project-private>
