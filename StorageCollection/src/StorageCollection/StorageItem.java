@@ -27,6 +27,7 @@ public abstract class StorageItem implements Cloneable {
 	protected Path path;
 	protected String type;
 	protected StorageItem Father;
+	protected long lastModified;
 	
 	public StorageItem getFather() {
 		return Father;
@@ -69,6 +70,14 @@ public abstract class StorageItem implements Cloneable {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public long getLastModified() {
+		return lastModified;
+	}
+
+	public void setLastModified(long lastModified) {
+		this.lastModified = lastModified;
 	}
 
 	@Override

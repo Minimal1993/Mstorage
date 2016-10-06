@@ -252,7 +252,6 @@ public class MainForm extends javax.swing.JFrame {
 
         jButtonRefreshTree.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update.24x24.png"))); // NOI18N
         jButtonRefreshTree.setToolTipText("Refresh all tree");
-        jButtonRefreshTree.setFocusable(false);
         jButtonRefreshTree.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonRefreshTree.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonRefreshTree.addActionListener(new java.awt.event.ActionListener() {
