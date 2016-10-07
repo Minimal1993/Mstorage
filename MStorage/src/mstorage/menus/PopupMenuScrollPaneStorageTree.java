@@ -64,6 +64,13 @@ public class PopupMenuScrollPaneStorageTree extends JPopupMenu {
 		m2.setActionCommand("create_file");
 		m2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/page_white_add.16x16.png")));
 		this.add(m2);
+		
+		JMenuItem m6 = new JMenuItem("Search in this folder");
+		m6.addActionListener(EventsHandler);
+		m6.setActionCommand("search_in_folder");
+		m6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/magnifier.16x16.png")));
+		m6.setEnabled(false);
+		this.add(m6);
 
 	}
 	
