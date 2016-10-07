@@ -12,6 +12,8 @@
 package mstorage;
 
 import java.awt.Toolkit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import mstorage.classes.Settings;
 
@@ -50,6 +52,8 @@ public class SettingsDialog extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jTextFieldStorageDirectory = new javax.swing.JTextField();
         jButtonBrowse = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jTextFieldExcludeExtension = new javax.swing.JTextField();
         jPanelAppearance = new javax.swing.JPanel();
         jPanelAppearanceIn = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -102,17 +106,25 @@ public class SettingsDialog extends javax.swing.JDialog {
             }
         });
 
+        jLabel3.setText("Exclude extension, comma separated:");
+
+        jTextFieldExcludeExtension.setText(Settings.getInstance().getProperty("ExcludeExtension"));
+
         javax.swing.GroupLayout jPanelCommonLayout = new javax.swing.GroupLayout(jPanelCommon);
         jPanelCommon.setLayout(jPanelCommonLayout);
         jPanelCommonLayout.setHorizontalGroup(
             jPanelCommonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCommonLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelCommonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextFieldStorageDirectory, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButtonBrowse)
+                .addGroup(jPanelCommonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanelCommonLayout.createSequentialGroup()
+                        .addGroup(jPanelCommonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jTextFieldStorageDirectory, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonBrowse))
+                    .addComponent(jLabel3)
+                    .addComponent(jTextFieldExcludeExtension))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanelCommonIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(95, 95, 95))
@@ -128,6 +140,10 @@ public class SettingsDialog extends javax.swing.JDialog {
                         .addGroup(jPanelCommonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextFieldStorageDirectory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonBrowse))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldExcludeExtension, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanelCommonIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -219,7 +235,21 @@ public class SettingsDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosed
 
     private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
-        this.setVisible(false);
+        
+		// Exclude extensions
+		if (Settings.getInstance().getProperty("ExcludeExtension") != this.jTextFieldExcludeExtension.getText()){
+			String val = this.jTextFieldExcludeExtension.getText().trim();
+			int flags = Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE;			
+			Pattern pattern = Pattern.compile("^[0-9a-z, ]*$", flags);
+			Matcher m = pattern.matcher(val);  
+			if(!m.matches()) {
+				MainForm.showError("Exclude extensions must contain letters, digits, commas and spaces");
+				return;
+			}
+			Settings.getInstance().setProperty("ExcludeExtension", this.jTextFieldExcludeExtension.getText());
+		}
+		
+		this.setVisible(false);
 		this.dispose();
     }//GEN-LAST:event_jButtonOKActionPerformed
 
@@ -309,12 +339,14 @@ public class SettingsDialog extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> jComboBoxStyleOfStorageTree;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelAppearance;
     private javax.swing.JPanel jPanelAppearanceIn;
     private javax.swing.JPanel jPanelCommon;
     private javax.swing.JPanel jPanelCommonIn;
     private javax.swing.JTabbedPane jTabbedPaneAppearance;
+    private javax.swing.JTextField jTextFieldExcludeExtension;
     private javax.swing.JTextField jTextFieldStorageDirectory;
     // End of variables declaration//GEN-END:variables
 
