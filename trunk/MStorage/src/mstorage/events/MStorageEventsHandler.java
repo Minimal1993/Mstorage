@@ -12,7 +12,7 @@
 
 package mstorage.events;
 
-import StorageCollection.StorageItem;
+import mstorage.storagecollection.StorageItem;
 import java.lang.reflect.Method;
 import mstorage.MainForm;
 

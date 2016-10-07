@@ -11,11 +11,11 @@
  */
 package mstorage.events;
 
+import mstorage.storagecollection.StorageItem;
 import java.io.IOException;
 import org.apache.commons.lang3.StringUtils;
 import java.awt.event.KeyEvent;
 
-import StorageCollection.*;
 import mstorage.MainForm;
 import mstorage.components.FileJTab;
 import mstorage.utils.Hash;

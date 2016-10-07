@@ -11,7 +11,7 @@
  */
 package mstorage.menus;
 
-import StorageCollection.*;
+import mstorage.storagecollection.StorageItem;
 import mstorage.events.EventsPopupMenuStorageCollection;
 
 import javax.swing.JPopupMenu;

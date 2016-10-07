@@ -11,7 +11,7 @@
  */
 package mstorage;
 
-import StorageCollection.*;
+import mstorage.storagecollection.Image;
 import java.awt.Toolkit;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;

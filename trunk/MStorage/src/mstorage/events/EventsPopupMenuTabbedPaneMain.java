@@ -11,7 +11,7 @@
  */
 package mstorage.events;
 
-import StorageCollection.*;
+import mstorage.storagecollection.StorageItem;
 import mstorage.models.*;
 import mstorage.*;
 import mstorage.menus.*;

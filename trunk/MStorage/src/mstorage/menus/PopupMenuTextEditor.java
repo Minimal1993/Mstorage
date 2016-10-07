@@ -11,6 +11,7 @@
  */
 package mstorage.menus;
 
+import mstorage.storagecollection.StorageItem;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -20,7 +21,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.text.DefaultEditorKit.*;
 import java.awt.event.KeyEvent;
 
-import StorageCollection.*;
 import javax.swing.text.DefaultEditorKit;
 import mstorage.MainForm;
 import mstorage.components.FileJTab;
