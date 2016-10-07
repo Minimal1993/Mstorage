@@ -78,6 +78,7 @@ public class Settings {
 		// Default
 		this.Properties.setProperty("Icons", "Delta");
 		this.Properties.setProperty("StorageDirectory", Settings.getDefaultValue());
+		this.Properties.setProperty("ExcludeExtension", "pdf,fb2,exe");
 		this.Properties.setProperty("ViewMenuToolbar", "true");
 		this.Properties.setProperty("ViewStorageTreePanel", "true");
 		this.Properties.setProperty("OpenedFiles", ""); // ; as delimiter

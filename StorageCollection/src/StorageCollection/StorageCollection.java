@@ -18,6 +18,7 @@ import java.nio.file.attribute.*;
 import java.lang.Object.*;
 import org.apache.commons.lang3.StringUtils;
 
+
 public final class StorageCollection {
 
 	Path Dirname; // root directory
@@ -160,6 +161,32 @@ public final class StorageCollection {
 		if (i > 0) {
 			extension = StringUtils.lowerCase(filename.substring(i + 1));
 		}
+
+		// If picture
+		if (extension.equals("jpg")
+				|| extension.equals("jpeg")
+				|| extension.equals("gif")
+				|| extension.equals("png")) {
+
+			ret = true;
+		}
+
+		return ret;
+	}
+	
+	public static boolean isFile(Path path) {
+		boolean ret = false;
+
+		String extension = "";
+		String filename = path.getFileName().toString();
+
+		// Get extention of file
+		int i = filename.lastIndexOf('.');
+		if (i > 0) {
+			extension = StringUtils.lowerCase(filename.substring(i + 1));
+		}
+		
+//		String excludeExtensions = Settings.getInstance().getProperty("ExcludeExtension");
 
 		// If picture
 		if (extension.equals("jpg")
