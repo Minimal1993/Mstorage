@@ -11,7 +11,7 @@
  */
 package mstorage.models;
 
-import StorageCollection.*;
+import mstorage.storagecollection.File;
 import mstorage.components.FileJTab;
 import mstorage.components.ImageCarousel;
 

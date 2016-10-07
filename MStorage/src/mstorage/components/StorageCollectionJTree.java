@@ -11,7 +11,8 @@
  */
 package mstorage.components;
 
-import StorageCollection.*;
+import mstorage.storagecollection.StorageItem;
+import mstorage.storagecollection.Folder;
 import mstorage.menus.PopupMenuStorageCollection;
 import mstorage.menus.PopupMenuScrollPaneStorageTree;
 import mstorage.events.EventsStorageCollectionHandler;

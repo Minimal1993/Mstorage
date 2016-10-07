@@ -11,7 +11,8 @@
  */
 package mstorage.components;
 
-import StorageCollection.*;
+import mstorage.storagecollection.File;
+import mstorage.storagecollection.Image;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;

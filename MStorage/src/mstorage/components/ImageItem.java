@@ -11,6 +11,7 @@
  */
 package mstorage.components;
 
+import mstorage.storagecollection.Image;
 import net.coobird.thumbnailator.Thumbnails;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -19,7 +20,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import StorageCollection.*;
 import mstorage.MainForm;
 import mstorage.PreviewJFrame;
 import mstorage.menus.PopupMenuImageItem;

@@ -11,7 +11,11 @@
  */
 package mstorage.events;
 
-import StorageCollection.*;
+import mstorage.storagecollection.StorageCollection;
+import mstorage.storagecollection.StorageItem;
+import mstorage.storagecollection.File;
+import mstorage.storagecollection.Folder;
+import mstorage.storagecollection.Image;
 import mstorage.*;
 import mstorage.models.TabsFabric;
 import mstorage.components.FileJTab;

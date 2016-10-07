@@ -11,6 +11,9 @@
  */
 package mstorage.models;
 
+import mstorage.storagecollection.StorageItem;
+import mstorage.storagecollection.File;
+import mstorage.storagecollection.Folder;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
@@ -18,7 +21,6 @@ import javax.swing.tree.TreePath;
 import java.util.*;
 import javax.swing.tree.DefaultTreeModel;
 
-import StorageCollection.*;
 
 /**
  *

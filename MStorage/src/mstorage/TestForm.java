@@ -11,7 +11,8 @@
  */
 package mstorage;
 
-import StorageCollection.*;
+import mstorage.storagecollection.StorageCollection;
+import mstorage.storagecollection.File;
 import mstorage.components.*;
 
 /**

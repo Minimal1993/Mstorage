@@ -11,7 +11,7 @@
  */
 package mstorage;
 
-import StorageCollection.Folder;
+import mstorage.storagecollection.Folder;
 import mstorage.models.MoveJTree;
 
 import java.awt.Toolkit;

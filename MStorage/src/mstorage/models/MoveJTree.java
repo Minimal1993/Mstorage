@@ -12,7 +12,8 @@
 
 package mstorage.models;
 
-import StorageCollection.*;
+import mstorage.storagecollection.StorageItem;
+import mstorage.storagecollection.Folder;
 import mstorage.MainForm;
 import mstorage.classes.*;
 import mstorage.components.StorageCollectionJTree;

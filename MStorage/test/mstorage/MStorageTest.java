@@ -11,9 +11,9 @@
  */
 package mstorage;
 
+import mstorage.storagecollection.File;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import StorageCollection.*;
 
 /**
  *

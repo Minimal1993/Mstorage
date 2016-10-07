@@ -11,7 +11,7 @@
  */
 package mstorage.components;
 
-import StorageCollection.File;
+import mstorage.storagecollection.File;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.IOException;
