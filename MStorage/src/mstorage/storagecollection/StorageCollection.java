@@ -11,6 +11,7 @@
  */
 package mstorage.storagecollection;
 
+import mstorage.classes.Settings;
 import java.util.*;
 import java.io.IOException;
 import java.nio.file.*;
@@ -64,8 +65,7 @@ public final class StorageCollection {
 			for (Path path : stream) {
 				
 				// Ignore files and directories with first "."
-				String first = path.getFileName().toString().substring(0,1);
-				if (first.equals(".")) continue;
+				if (!StorageCollection.isCorrectFile(path)) continue;
 				
 				if (path.toFile().isDirectory()) {
 					
@@ -86,7 +86,9 @@ public final class StorageCollection {
 						file.setType("image");
 						fn.Images.put(file.getFileName(), file);
 
-					} else {
+					} 
+					// if correct file
+					else if (StorageCollection.isFile(path)) {
 						
 						File file = new File();
 						file.setFileName(path.getFileName().toString());
@@ -174,8 +176,14 @@ public final class StorageCollection {
 		return ret;
 	}
 	
+	/**
+	 * Check file is not in excluded list
+	 * 
+	 * @param path
+	 * @return 
+	 */
 	public static boolean isFile(Path path) {
-		boolean ret = false;
+		boolean ret = true;
 
 		String extension = "";
 		String filename = path.getFileName().toString();
@@ -186,18 +194,28 @@ public final class StorageCollection {
 			extension = StringUtils.lowerCase(filename.substring(i + 1));
 		}
 		
-//		String excludeExtensions = Settings.getInstance().getProperty("ExcludeExtension");
-
-		// If picture
-		if (extension.equals("jpg")
-				|| extension.equals("jpeg")
-				|| extension.equals("gif")
-				|| extension.equals("png")) {
-
-			ret = true;
+		String[] extensions = Settings.getInstance().getProperty("ExcludeExtension").split(",");
+		
+		if (0 == extensions.length || extension.isEmpty()) return true;
+		
+		for (int ii = 0; ii < extensions.length; ii++) {
+			if (extension.equals(extensions[ ii ])) ret = false;
 		}
 
 		return ret;
+	}
+	
+	/**
+	 * Ignore files and directories with first "."
+	 * 
+	 * @param path
+	 * @return 
+	 */
+	public static boolean isCorrectFile(Path path) {
+		String first = path.getFileName().toString().substring(0,1);
+		if (first.equals(".")) return false;
+		
+		return true;
 	}
 
 }
