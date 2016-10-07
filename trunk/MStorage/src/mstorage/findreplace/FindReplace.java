@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;  
 import java.util.regex.Pattern;  
 import java.util.regex.PatternSyntaxException;
+import mstorage.storagecollection.StorageCollection;
 
 /**
  * Main class looking for pattern and replace if it necessary
@@ -103,6 +104,10 @@ public class FindReplace {
 		if (files == null) return result;
 		
 		for (java.io.File currentFile : files) {
+			
+			// Ignore files and directories with first "."
+			if (!StorageCollection.isCorrectFile(currentFile.toPath())) continue;
+			
 			if (currentFile.isDirectory()) {
 				this.findInDir(currentFile, result);
 				continue;
@@ -125,6 +130,9 @@ public class FindReplace {
 		int linecount = 0;
         String line;
 		FindResult findResult = new FindResult(file.toPath(), new ArrayList<FindResultItem>());
+		
+		// Exclude some type of files according to settings
+		if(!StorageCollection.isFile(file.toPath())) return null;
 
 		try {
 			BufferedReader bf = new BufferedReader(new FileReader(file));
