@@ -54,6 +54,8 @@ public class SettingsDialog extends javax.swing.JDialog {
         jButtonBrowse = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jTextFieldExcludeExtension = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldCommand2ViewExplorer = new javax.swing.JTextField();
         jPanelAppearance = new javax.swing.JPanel();
         jPanelAppearanceIn = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -110,6 +112,10 @@ public class SettingsDialog extends javax.swing.JDialog {
 
         jTextFieldExcludeExtension.setText(Settings.getInstance().getProperty("ExcludeExtension"));
 
+        jLabel4.setText("Command to view directory in file's explorer:");
+
+        jTextFieldCommand2ViewExplorer.setText("explorer %s");
+
         javax.swing.GroupLayout jPanelCommonLayout = new javax.swing.GroupLayout(jPanelCommon);
         jPanelCommon.setLayout(jPanelCommonLayout);
         jPanelCommonLayout.setHorizontalGroup(
@@ -124,7 +130,9 @@ public class SettingsDialog extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(jButtonBrowse))
                     .addComponent(jLabel3)
-                    .addComponent(jTextFieldExcludeExtension))
+                    .addComponent(jTextFieldExcludeExtension)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextFieldCommand2ViewExplorer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanelCommonIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(95, 95, 95))
@@ -144,6 +152,10 @@ public class SettingsDialog extends javax.swing.JDialog {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldExcludeExtension, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldCommand2ViewExplorer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanelCommonIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -248,6 +260,11 @@ public class SettingsDialog extends javax.swing.JDialog {
 			}
 			Settings.getInstance().setProperty("ExcludeExtension", this.jTextFieldExcludeExtension.getText());
 		}
+        
+        // Command to view directory in file's explorer
+		if (Settings.getInstance().getProperty("Command2ViewExplorer") != this.jTextFieldCommand2ViewExplorer.getText()){
+            Settings.getInstance().setProperty("Command2ViewExplorer", this.jTextFieldCommand2ViewExplorer.getText().trim());
+        }
 		
 		this.setVisible(false);
 		this.dispose();
@@ -340,12 +357,14 @@ public class SettingsDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelAppearance;
     private javax.swing.JPanel jPanelAppearanceIn;
     private javax.swing.JPanel jPanelCommon;
     private javax.swing.JPanel jPanelCommonIn;
     private javax.swing.JTabbedPane jTabbedPaneAppearance;
+    private javax.swing.JTextField jTextFieldCommand2ViewExplorer;
     private javax.swing.JTextField jTextFieldExcludeExtension;
     private javax.swing.JTextField jTextFieldStorageDirectory;
     // End of variables declaration//GEN-END:variables

@@ -77,12 +77,21 @@ public class PopupMenuStorageCollection extends JPopupMenu  {
 		m5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/folder_vertical_rename.16x16.png")));
 		this.add(m5);
 		
+        this.addSeparator();
+        
 		JMenuItem m6 = new JMenuItem("Search in this folder");
 		m6.addActionListener(EventsHandler);
 		m6.setActionCommand("search_in_folder");
 		m6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/magnifier.16x16.png")));
 		m6.setEnabled(false);
 		this.add(m6);
+
+		JMenuItem m7 = new JMenuItem("View in file's explorer");
+		m7.addActionListener(EventsHandler);
+		m7.setActionCommand("view_file_in_directory");
+		m7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/folder_go.16x16.png")));
+		m7.setEnabled(true);
+		this.add(m7);
 		
 	}
 
