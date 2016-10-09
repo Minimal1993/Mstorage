@@ -31,6 +31,7 @@ import javax.swing.JOptionPane;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import javax.swing.tree.TreePath;
+import mstorage.classes.Settings;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -424,8 +425,24 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 
 	}
 
+    /**
+     * Show directory contain a file in system file's explorer
+     */
 	public void eh_view_file_in_directory() {
-		MainForm.showError(this.StorageItem.getFileName());
+        String command = Settings.getInstance().getProperty("Command2ViewExplorer");
+        String url = this.StorageItem.getPath().toAbsolutePath().toString();
+        if (this.StorageItem.getType().equals("file")) {
+            url = this.StorageItem.getPath().getParent().toAbsolutePath().toString();
+        }
+        command = command.replace("%s", url);
+        
+        try {
+            final Runtime rt = Runtime.getRuntime();
+            rt.exec(command);
+        }
+        catch(IOException e){
+            MainForm.showError(e.getMessage());
+        }
 	}
 
 }

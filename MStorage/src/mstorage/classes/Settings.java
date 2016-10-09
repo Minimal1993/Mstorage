@@ -76,12 +76,10 @@ public class Settings {
 		this.GeneralSettings.put("License", "GNU General Public License");
 		
 		// Default
-		this.Properties.setProperty("Icons", "Delta");
-		this.Properties.setProperty("StorageDirectory", Settings.getDefaultValue());
-		this.Properties.setProperty("ExcludeExtension", "pdf,fb2,exe");
 		this.Properties.setProperty("ViewMenuToolbar", "true");
 		this.Properties.setProperty("ViewStorageTreePanel", "true");
 		this.Properties.setProperty("OpenedFiles", ""); // ; as delimiter
+        this.Properties.setProperty("MainWindowLocation", "0,0"); 
 		
 		// Selected file in last opened files
 		this.Properties.setProperty("OpenedFilesSelected", ""); 
@@ -89,8 +87,12 @@ public class Settings {
 		// Width and height main window
 		this.Properties.setProperty("MainWindowWidth", "700"); 
 		this.Properties.setProperty("MainWindowHeight", "600"); 
-		
-		this.Properties.setProperty("MainWindowLocation", "0,0"); 
+        
+        // Adjust settings
+        this.Properties.setProperty("ExcludeExtension", "pdf,fb2,exe");
+		this.Properties.setProperty("Icons", "Delta");
+		this.Properties.setProperty("StorageDirectory", Settings.getDefaultValue());
+        this.Properties.setProperty("Command2ViewExplorer", "explorer %s");
 		
 	}
 

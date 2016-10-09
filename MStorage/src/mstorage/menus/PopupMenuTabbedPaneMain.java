@@ -113,7 +113,7 @@ public class PopupMenuTabbedPaneMain extends JPopupMenu {
 		m8.addActionListener(EventsHandler);
 		m8.setActionCommand("view_file_in_directory");
 		m8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/folder_go.16x16.png")));
-		m8.setEnabled(false);
+		m8.setEnabled(true);
 		this.add(m8);
 
 	}
