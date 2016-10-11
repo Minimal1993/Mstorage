@@ -81,8 +81,11 @@ public class Settings {
 		this.Properties.setProperty("OpenedFiles", ""); // ; as delimiter
         this.Properties.setProperty("MainWindowLocation", "0,0"); 
 		
-		// Selected file in last opened files
+		// Selected files in last opened files
 		this.Properties.setProperty("OpenedFilesSelected", ""); 
+		
+		// Opeted files with flag read-only
+		this.Properties.setProperty("OpenedFilesReadOnly", ""); 
 		
 		// Width and height main window
 		this.Properties.setProperty("MainWindowWidth", "700"); 

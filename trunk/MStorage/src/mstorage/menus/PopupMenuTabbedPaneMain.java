@@ -24,7 +24,9 @@ import java.awt.event.ItemEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.tree.TreePath;
+import mstorage.MainForm;
 import mstorage.components.FileJTab;
 import mstorage.events.EventsStorageCollectionHandler;
 
@@ -49,6 +51,8 @@ public class PopupMenuTabbedPaneMain extends JPopupMenu {
 	}
 
 	private void initMenu() {
+		mstorage.storagecollection.File file = (mstorage.storagecollection.File) this.StorageItem;
+		
 		JMenuItem m1 = new JMenuItem("Close this tab");
 		m1.addActionListener(EventsHandler);
 		m1.setActionCommand("close_this_tab");
@@ -62,6 +66,23 @@ public class PopupMenuTabbedPaneMain extends JPopupMenu {
 		this.add(m2);
 
 		this.addSeparator();
+		
+		JCheckBoxMenuItem m21 = new JCheckBoxMenuItem("Set read-only file");
+		m21.setSelected(file.getIsReadOnly());
+        m21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCheckBoxMenuItem checkBox = (JCheckBoxMenuItem)evt.getSource();
+				
+				// Attr "checked" dont sets automatically
+				boolean selected = checkBox.isSelected();
+				
+				FileJTab tab = (FileJTab) MainForm.getInstance().getTabbedPaneMain().getSelectedComponent();
+				tab.File.setIsReadOnly(selected);
+				tab.checkReadOnly();
+				
+            }
+        });
+		this.add(m21);
 
 		JMenuItem m22 = new JMenuItem("Save this file");
 		m22.addActionListener(EventsHandler);

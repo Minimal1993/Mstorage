@@ -191,6 +191,7 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 		}
 
 		File file = (File) this.StorageItem;
+		if (file.getIsReadOnly()) return;
 
 		int dialogResult = JOptionPane.showConfirmDialog(
 				MainForm.getInstance(),
@@ -238,6 +239,9 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 	}
 
 	public void eh_add_image() {
+		File mfile = (File) this.StorageItem;
+		if (mfile.getIsReadOnly()) return;
+		
 		final javax.swing.JFileChooser fc = new javax.swing.JFileChooser();
 
 		//In response to a button click:
@@ -277,6 +281,9 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 
 	public void eh_delete_image() {
 		Image image = (Image) this.StorageItem;
+		
+		File mfile = (File) this.StorageItem.getFather();
+		if (mfile.getIsReadOnly()) return;
 
 		int dialogResult = JOptionPane.showConfirmDialog(
 				MainForm.getInstance(),
@@ -301,13 +308,18 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 		int index = MainForm.getInstance().getTabbedPaneMain().indexOfComponent(tab);
 		String content = tab.TextAreaDocument.getText();
 		tab.savedContentMD5 = Hash.md5(content);
+		
 		File file = (File) this.StorageItem;
+		if (file.getIsReadOnly()) return;
 
 		try {
 			file.save(content);
 		} catch (IOException e) {
 			MainForm.showError(e.getMessage());
 		}
+		
+		java.io.File iofile = new java.io.File(this.StorageItem.getPath().toAbsolutePath().toString());
+		tab.lastModified = iofile.lastModified();
 
 		// Remove icon 'changed' from title tab
 		MainForm.getInstance().getTabbedPaneMain().setIconAt(index, null);
@@ -315,6 +327,7 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 
 	public void eh_rename_file() {
 		File file = (File) this.StorageItem;
+		if (file.getIsReadOnly()) return;
 
 		String s = (String) JOptionPane.showInputDialog(
 				MainForm.getInstance(),
