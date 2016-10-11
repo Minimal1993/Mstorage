@@ -64,21 +64,31 @@ public class EventsTextEditorHandler extends MStorageEventsHandler {
 	}
 
 	public void eh_uppercase() {
+		int currentPosition = this.TextAreaDocument.getCaretPosition();
+		
 		this.TextAreaDocument.setText(
 			this.TextAreaDocument.getText().replace(
 				this.TextAreaDocument.getSelectedText(),
 				StringUtils.upperCase(this.TextAreaDocument.getSelectedText())
 			)
 		);
+		
+		this.TextAreaDocument.moveCaretPosition(currentPosition);
+		this.TextAreaDocument.select(0, 0);
 	}
 
 	public void eh_lowercase() {
+		int currentPosition = this.TextAreaDocument.getCaretPosition();
+		
 		this.TextAreaDocument.setText(
 			this.TextAreaDocument.getText().replace(
 				this.TextAreaDocument.getSelectedText(),
 				StringUtils.lowerCase(this.TextAreaDocument.getSelectedText())
 			)
 		);
+		
+		this.TextAreaDocument.moveCaretPosition(currentPosition);
+		this.TextAreaDocument.select(0, 0);
 	}
 
 }

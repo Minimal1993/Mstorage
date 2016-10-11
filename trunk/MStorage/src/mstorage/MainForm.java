@@ -861,6 +861,22 @@ public class MainForm extends javax.swing.JFrame {
 		for (int i = 0; i < count; i++) {
 			FileJTab tab = (FileJTab) this.getTabbedPaneMain().getComponent(i);
 			
+			// If document was changed and not saved
+			if (tab.checkTextIsChanged() && !tab.File.getIsReadOnly()) {
+				int dialogResult = JOptionPane.showConfirmDialog(
+					MainForm.getInstance(), 
+					tab.File.getPath().toAbsolutePath().toString()
+					+ "\nSave document before closing?", 
+					"Warning", 
+					JOptionPane.YES_NO_OPTION
+				);
+
+				if (dialogResult == JOptionPane.YES_OPTION) {
+					EventsStorageCollectionHandler esch = new EventsStorageCollectionHandler(tab.File);
+					esch.call("save_file");
+				}
+			}
+			
 			// If readonly flag exists
 			if (tab.File.getIsReadOnly()) listReadOnly.add(tab.File.getPath().toAbsolutePath().toString());
 
