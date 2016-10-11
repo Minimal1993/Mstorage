@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import javax.swing.JMenuItem;
 import mstorage.menus.PopupMenuTextEditor;
+import mstorage.storagecollection.File;
 
 /**
  *
@@ -32,6 +33,10 @@ public class EventsTextEditor implements ActionListener {
 		PopupMenuTextEditor pmsc = (PopupMenuTextEditor) MenuItem.getParent();
 		this.StorageItem = pmsc.StorageItem;
 
+		// Forbide all operations with text editor when read-only flag is set
+		File file = (File) this.StorageItem;
+		if (file.getIsReadOnly()) return;
+		
 		EventsTextEditorHandler esch = new EventsTextEditorHandler(this.StorageItem);
 		esch.call(command);
 	}

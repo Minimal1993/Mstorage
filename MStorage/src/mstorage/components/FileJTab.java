@@ -51,6 +51,7 @@ public class FileJTab extends javax.swing.JPanel implements FocusListener {
 	public long lastModified = 0;
 	
 	public static String IsChangedIcon = "/images/bullet_red.9x10.png";
+	public static String IsReadOnlyIcon = "/images/bullet_black.9x10.png";
 
 	public FileJTab(File file) {
 		this.File = file;
@@ -89,7 +90,13 @@ public class FileJTab extends javax.swing.JPanel implements FocusListener {
 			}
 		}
 
-		if (Hash.md5(text).equals(this.savedContentMD5)){
+		// If enabled regime read-only
+		if (this.checkReadOnly()) {
+			
+			return false;
+		}
+		// If content the same and was not changed
+		else if (Hash.md5(text).equals(this.savedContentMD5)){
 			// Remove icon 'changed' from title tab
 			MainForm.getInstance().getTabbedPaneMain().setIconAt(index, null);
 			return false;
@@ -182,4 +189,41 @@ public class FileJTab extends javax.swing.JPanel implements FocusListener {
     public void focusLost(FocusEvent e) {
 		
     }
+	
+	/**
+	 * Enable-disable attribute ReadOnly
+	 */
+	public boolean checkReadOnly(){
+		int count = MainForm.getInstance().getTabbedPaneMain().getTabCount();
+		int index = 0;
+		for (int i = 0; i < count; i++) {
+			FileJTab tab = (FileJTab) MainForm.getInstance().getTabbedPaneMain().getComponent(i);
+			if (!tab.File.equals(this.File)) {
+				continue;
+			}
+			
+			index = i;
+			break;
+		}
+		
+		// Is read-only
+		if (this.File.getIsReadOnly()){
+			// Set icon 'readonly' to title tab
+			MainForm.getInstance().getTabbedPaneMain().setIconAt(
+				index, new javax.swing.ImageIcon(getClass().getResource(FileJTab.IsReadOnlyIcon))
+			);
+			this.TextAreaDocument.setEditable(false);
+			
+			return true;
+		}
+		
+		// Usual condition		
+		MainForm.getInstance().getTabbedPaneMain().setIconAt(index, null);
+		this.TextAreaDocument.setEditable(true);
+		
+		return false;
+	}
+	
+	
+	
 }

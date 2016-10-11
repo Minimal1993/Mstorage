@@ -34,7 +34,20 @@ public class File extends StorageItem {
 
 	public TreeMap<String, Image> Images = new TreeMap<>();
 	
+	/**
+	 * Field for readonly file content 
+	 */
+	protected boolean IsReadOnly = false;
+	
 	protected static String defaultNewName = "newFile";
+	
+	public boolean getIsReadOnly() {
+		return IsReadOnly;
+	}
+
+	public void setIsReadOnly(boolean IsReadOnly) {
+		this.IsReadOnly = IsReadOnly;
+	}
 
 	public static File create(Folder parent, String name) throws IOException {
 		if (name.isEmpty()) {

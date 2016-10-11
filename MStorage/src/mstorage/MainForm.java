@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JMenu;
 
 import org.apache.commons.cli.CommandLine;
@@ -852,15 +853,25 @@ public class MainForm extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
 		// Saving in Settings current opened files
 		ArrayList<String> list = new ArrayList<>();
+		
+		// Current opened files with flag read-only
+		ArrayList<String> listReadOnly = new ArrayList<>();
+		
 		int count = this.getTabbedPaneMain().getTabCount();
 		for (int i = 0; i < count; i++) {
 			FileJTab tab = (FileJTab) this.getTabbedPaneMain().getComponent(i);
+			
+			// If readonly flag exists
+			if (tab.File.getIsReadOnly()) listReadOnly.add(tab.File.getPath().toAbsolutePath().toString());
 
 			list.add(tab.File.getPath().toAbsolutePath().toString());
 		}
 
 		String str = StringUtils.join(list, ";");
 		this.getSettings().setProperty("OpenedFiles", str);
+		
+		str = StringUtils.join(listReadOnly, ";");
+		this.getSettings().setProperty("OpenedFilesReadOnly", str);
 
 		// Saving in Settings current selected file in opened files
 		Integer selected = this.getTabbedPaneMain().getSelectedIndex();
@@ -1143,6 +1154,14 @@ public class MainForm extends javax.swing.JFrame {
 			this.jCheckBoxMenuItemViewStorageTreePanelActionPerformed(new java.awt.event.ActionEvent(new Object(), 0, ""));
 		}
 
+		// Opened files with readonly flag
+		java.util.List<String> listReadOnly = null;
+		if (!this.getSettings().getProperty("OpenedFilesReadOnly").isEmpty()) {
+			listReadOnly = Arrays.asList(
+				StringUtils.split(this.getSettings().getProperty("OpenedFilesReadOnly"), ";")
+			);
+		}
+		
 		// Open opened files in last session
 		if (!this.getSettings().getProperty("OpenedFiles").isEmpty()) {
 			String[] list = StringUtils.split(this.getSettings().getProperty("OpenedFiles"), ";");
@@ -1162,6 +1181,12 @@ public class MainForm extends javax.swing.JFrame {
 
 				FileJTab newtab = TabsFabric.getTab(file);
 				MainForm.getInstance().getTabbedPaneMain().addTab(newtab.File.getFileName(), newtab);
+				
+				// If there is readonly flag
+				if (null != listReadOnly && listReadOnly.contains(path.toAbsolutePath().toString())) {
+					newtab.File.setIsReadOnly(true);
+					newtab.checkReadOnly();
+				}
 			}
 
 			// Select last selected file
