@@ -903,15 +903,48 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemExitActionPerformed
 
     private void jButtonChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChangePasswordActionPerformed
-        // TODO add your handling code here:
+		if (0 == this.getTabbedPaneMain().getTabCount()) {
+			this.checkButtonCloseCurrentDocument();
+			return;
+		}
+
+		FileJTab tab = (FileJTab) this.getTabbedPaneMain().getSelectedComponent();
+		File file = (File) tab.File;
+		
+		if (!CryptComp.isCryptedFile(file.getPath())) return;
+
+		EventsStorageCollectionHandler esch = new EventsStorageCollectionHandler(file);
+		esch.call("change_file_password");      
     }//GEN-LAST:event_jButtonChangePasswordActionPerformed
 
     private void jButtonDecryptFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDecryptFileActionPerformed
-        // TODO add your handling code here:
+		if (0 == this.getTabbedPaneMain().getTabCount()) {
+			this.checkButtonCloseCurrentDocument();
+			return;
+		}
+
+		FileJTab tab = (FileJTab) this.getTabbedPaneMain().getSelectedComponent();
+		File file = (File) tab.File;
+		
+		if (!CryptComp.isCryptedFile(file.getPath())) return;
+
+		EventsStorageCollectionHandler esch = new EventsStorageCollectionHandler(file);
+		esch.call("decrypt_file");    
     }//GEN-LAST:event_jButtonDecryptFileActionPerformed
 
     private void jButtonCryptFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCryptFileActionPerformed
-        // TODO add your handling code here:
+		if (0 == this.getTabbedPaneMain().getTabCount()) {
+			this.checkButtonCloseCurrentDocument();
+			return;
+		}
+
+		FileJTab tab = (FileJTab) this.getTabbedPaneMain().getSelectedComponent();
+		File file = (File) tab.File;
+		
+		if (CryptComp.isCryptedFile(file.getPath())) return;
+
+		EventsStorageCollectionHandler esch = new EventsStorageCollectionHandler(file);
+		esch.call("crypt_file");        
     }//GEN-LAST:event_jButtonCryptFileActionPerformed
 
 	/**
