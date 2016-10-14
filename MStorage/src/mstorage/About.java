@@ -53,8 +53,10 @@ public class About extends javax.swing.JDialog {
 			+ "modify  this  document under  the  terms  of the<br>" 
 			+ settings.getProperty("License") + "</html>");
 
-        jLabelAuthor.setText("© " + settings.getProperty("Author") + ", " 
-			+ settings.getProperty("Email") + ", " + settings.getProperty("Year"));
+        jLabelAuthor.setText(settings.getProperty("Year") + " © " + settings.getProperty("Author") + ", " 
+			+ settings.getProperty("Email"));
+		
+		jLabelVersion.setText("v." + settings.getProperty("Version") );
 		
 		jLabelIcons.setText("<html>Icons produced by Fatcow, <a href='http://www.fatcow.com'>fatcow.com</a></html>");
 		
@@ -95,6 +97,7 @@ public class About extends javax.swing.JDialog {
         jLabelIcons = new javax.swing.JLabel();
         jPanelLeft = new javax.swing.JPanel();
         jLabelPicture = new javax.swing.JLabel();
+        jLabelVersion = new javax.swing.JLabel();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -160,13 +163,18 @@ public class About extends javax.swing.JDialog {
 
         jLabelPicture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mstorage.48x48.png"))); // NOI18N
 
+        jLabelVersion.setText("v.1.1.1");
+        jLabelVersion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jPanelLeftLayout = new javax.swing.GroupLayout(jPanelLeft);
         jPanelLeft.setLayout(jPanelLeftLayout);
         jPanelLeftLayout.setHorizontalGroup(
             jPanelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelLeftLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelPicture)
+                .addGroup(jPanelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabelVersion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelPicture, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelLeftLayout.setVerticalGroup(
@@ -174,6 +182,8 @@ public class About extends javax.swing.JDialog {
             .addGroup(jPanelLeftLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelPicture)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelVersion)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -274,6 +284,7 @@ public class About extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelDescription;
     private javax.swing.JLabel jLabelIcons;
     private javax.swing.JLabel jLabelPicture;
+    private javax.swing.JLabel jLabelVersion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelLeft;
     private javax.swing.JPanel jPanelRight;
