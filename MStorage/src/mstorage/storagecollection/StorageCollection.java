@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.*;
 import java.lang.Object.*;
+import mstorage.components.CryptComp;
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -87,8 +88,8 @@ public final class StorageCollection {
 						fn.Images.put(file.getFileName(), file);
 
 					} 
-					// if correct file
-					else if (StorageCollection.isFile(path)) {
+					// if correct file or it is crypt file
+					else if (StorageCollection.isFile(path) || CryptComp.isCryptedFile(path)) {
 						
 						File file = new File();
 						file.setFileName(path.getFileName().toString());
