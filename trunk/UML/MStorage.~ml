@@ -2102,7 +2102,7 @@
 </XPD:OBJ>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:ATTR name="#OwnedElements" type="integer">52</XPD:ATTR>
+<XPD:ATTR name="#OwnedElements" type="integer">51</XPD:ATTR>
 <XPD:OBJ name="OwnedElements[0]" type="UMLUseCase" guid="i5Z9P4nDaESX2aUBxJW16QAA">
 <XPD:ATTR name="Name" type="string">URL of directory</XPD:ATTR>
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
@@ -2465,17 +2465,13 @@
 <XPD:ATTR name="#ClientDependencies" type="integer">1</XPD:ATTR>
 <XPD:REF name="ClientDependencies[0]">kjhg0xAqYEmwmza9zRB28wAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[26]" type="UMLUseCase" guid="vf2nWUXVjUanQH2iaRnujAAA">
-<XPD:ATTR name="Name" type="string">Lim, Heejin</XPD:ATTR>
-<XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
-</XPD:OBJ>
-<XPD:OBJ name="OwnedElements[27]" type="UMLPackage" guid="u7Y7uqUULUa/nHYqO/GS3gAA">
+<XPD:OBJ name="OwnedElements[26]" type="UMLPackage" guid="u7Y7uqUULUa/nHYqO/GS3gAA">
 <XPD:ATTR name="Name" type="string">Opened document</XPD:ATTR>
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">1</XPD:ATTR>
 <XPD:REF name="Views[0]">yRIa69k01UaikObOTS6yXQAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[28]" type="UMLUseCase" guid="SoCQH38WP0mIDXV65Y31UAAA">
+<XPD:OBJ name="OwnedElements[27]" type="UMLUseCase" guid="SoCQH38WP0mIDXV65Y31UAAA">
 <XPD:ATTR name="Name" type="string">Crypt file</XPD:ATTR>
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
@@ -2486,7 +2482,7 @@
 <XPD:ATTR name="#ClientDependencies" type="integer">1</XPD:ATTR>
 <XPD:REF name="ClientDependencies[0]">PxEkdrfnbEKiZt9Fuj+UNQAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[29]" type="UMLUseCase" guid="64IpYbt9mkarft0tA66GXwAA">
+<XPD:OBJ name="OwnedElements[28]" type="UMLUseCase" guid="64IpYbt9mkarft0tA66GXwAA">
 <XPD:ATTR name="Name" type="string">Crypt document</XPD:ATTR>
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">8</XPD:ATTR>
@@ -2505,7 +2501,7 @@
 <XPD:REF name="SupplierDependencies[0]">sal6njSrxU2LCwgK/JevRgAA</XPD:REF>
 <XPD:REF name="SupplierDependencies[1]">rKmS0RyeaEG71lblsjhQ5AAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[30]" type="UMLUseCase" guid="Xyniv8v/jkmDaZtLKueLAgAA">
+<XPD:OBJ name="OwnedElements[29]" type="UMLUseCase" guid="Xyniv8v/jkmDaZtLKueLAgAA">
 <XPD:ATTR name="Name" type="string">Write to file</XPD:ATTR>
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">16</XPD:ATTR>
@@ -2531,7 +2527,7 @@
 <XPD:REF name="SupplierDependencies[2]">MyPbdoTmbkqUcwUyVieEVAAA</XPD:REF>
 <XPD:REF name="SupplierDependencies[3]">daHcux1FUEis1s8uKq31FQAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[31]" type="UMLUseCase" guid="lpSAWPlpzkOO9LEvzJ94dQAA">
+<XPD:OBJ name="OwnedElements[30]" type="UMLUseCase" guid="lpSAWPlpzkOO9LEvzJ94dQAA">
 <XPD:ATTR name="Name" type="string">Ask new password, twice</XPD:ATTR>
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">8</XPD:ATTR>
@@ -2550,7 +2546,7 @@
 <XPD:REF name="SupplierDependencies[0]">wFJAOIEtBEi+Xc+Y3OaFmQAA</XPD:REF>
 <XPD:REF name="SupplierDependencies[1]">mrnHIZTJtUOic+J5XHWZfAAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[32]" type="UMLUseCase" guid="363VrJB+90eg/rc36SQAtAAA">
+<XPD:OBJ name="OwnedElements[31]" type="UMLUseCase" guid="363VrJB+90eg/rc36SQAtAAA">
 <XPD:ATTR name="Name" type="string">Save password in File</XPD:ATTR>
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">12</XPD:ATTR>
@@ -2575,7 +2571,7 @@
 <XPD:REF name="SupplierDependencies[1]">Jss+/I4DMEuh/kLI9ygI3wAA</XPD:REF>
 <XPD:REF name="SupplierDependencies[2]">atK1lZmy+ESfbfXKUIPLzQAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[33]" type="UMLUseCase" guid="XvNIN4EOl0iuaT8L+DF3eQAA">
+<XPD:OBJ name="OwnedElements[32]" type="UMLUseCase" guid="XvNIN4EOl0iuaT8L+DF3eQAA">
 <XPD:ATTR name="Name" type="string">Get password from File</XPD:ATTR>
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
@@ -2589,7 +2585,7 @@
 <XPD:REF name="SupplierDependencies[0]">euMlcRm94EuYDmWachmTgAAA</XPD:REF>
 <XPD:REF name="SupplierDependencies[1]">I85AHYqsr0mEah9daQ9f4wAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[34]" type="UMLDependency" guid="euMlcRm94EuYDmWachmTgAAA">
+<XPD:OBJ name="OwnedElements[33]" type="UMLDependency" guid="euMlcRm94EuYDmWachmTgAAA">
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:REF name="Client">b7NP9nMRSkaP62eVdkSZaQAA</XPD:REF>
 <XPD:REF name="Supplier">XvNIN4EOl0iuaT8L+DF3eQAA</XPD:REF>
@@ -2599,7 +2595,7 @@
 <XPD:REF name="Views[2]">6WHpEwExIEWpcXHAMvsx5wAA</XPD:REF>
 <XPD:REF name="Views[3]">vT+k2UEKx0uQdLwuac9C0wAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[35]" type="UMLDependency" guid="wFJAOIEtBEi+Xc+Y3OaFmQAA">
+<XPD:OBJ name="OwnedElements[34]" type="UMLDependency" guid="wFJAOIEtBEi+Xc+Y3OaFmQAA">
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:REF name="Client">989t2mYw5Em9cLRq69E1OQAA</XPD:REF>
 <XPD:REF name="Supplier">lpSAWPlpzkOO9LEvzJ94dQAA</XPD:REF>
@@ -2609,7 +2605,7 @@
 <XPD:REF name="Views[2]">Sfh29EFdEEyZVhDu8wkswgAA</XPD:REF>
 <XPD:REF name="Views[3]">tJ68a34AKkquQoxT8qgtLAAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[36]" type="UMLDependency" guid="beKgcGrfwke98ytRqgEVjAAA">
+<XPD:OBJ name="OwnedElements[35]" type="UMLDependency" guid="beKgcGrfwke98ytRqgEVjAAA">
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:REF name="Client">nhw2qVFIKEGWvf1s3YFXqAAA</XPD:REF>
 <XPD:REF name="Supplier">Xyniv8v/jkmDaZtLKueLAgAA</XPD:REF>
@@ -2619,7 +2615,7 @@
 <XPD:REF name="Views[2]">RXrSapPjDkiud2vlPUxiLQAA</XPD:REF>
 <XPD:REF name="Views[3]">8AacpssBW0qsQ8JsilQtTAAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[37]" type="UMLDependency" guid="sal6njSrxU2LCwgK/JevRgAA">
+<XPD:OBJ name="OwnedElements[36]" type="UMLDependency" guid="sal6njSrxU2LCwgK/JevRgAA">
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:REF name="Client">XvNIN4EOl0iuaT8L+DF3eQAA</XPD:REF>
 <XPD:REF name="Supplier">64IpYbt9mkarft0tA66GXwAA</XPD:REF>
@@ -2629,7 +2625,7 @@
 <XPD:REF name="Views[2]">k/coGK671Ee1E7qosLTbJgAA</XPD:REF>
 <XPD:REF name="Views[3]">oBZUF/Dn7UOp0Qo/ig1rbgAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[38]" type="UMLDependency" guid="HAcOc1g3PUWHE84JgpHXPAAA">
+<XPD:OBJ name="OwnedElements[37]" type="UMLDependency" guid="HAcOc1g3PUWHE84JgpHXPAAA">
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:REF name="Client">64IpYbt9mkarft0tA66GXwAA</XPD:REF>
 <XPD:REF name="Supplier">Xyniv8v/jkmDaZtLKueLAgAA</XPD:REF>
@@ -2639,7 +2635,7 @@
 <XPD:REF name="Views[2]">jB8JdM9nmkyifI9ar18g0wAA</XPD:REF>
 <XPD:REF name="Views[3]">GuAz+srs5UqKmOF9uF0TmwAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[39]" type="UMLDependency" guid="RD1VzCtn3kKqMQTUVcl5ggAA">
+<XPD:OBJ name="OwnedElements[38]" type="UMLDependency" guid="RD1VzCtn3kKqMQTUVcl5ggAA">
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:REF name="Client">lpSAWPlpzkOO9LEvzJ94dQAA</XPD:REF>
 <XPD:REF name="Supplier">363VrJB+90eg/rc36SQAtAAA</XPD:REF>
@@ -2649,7 +2645,7 @@
 <XPD:REF name="Views[2]">BAotv+wsCUKPKkBQrVFiRQAA</XPD:REF>
 <XPD:REF name="Views[3]">7Sai75EUNUaaG3COGzNQwQAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[40]" type="UMLDependency" guid="MyPbdoTmbkqUcwUyVieEVAAA">
+<XPD:OBJ name="OwnedElements[39]" type="UMLDependency" guid="MyPbdoTmbkqUcwUyVieEVAAA">
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:REF name="Client">363VrJB+90eg/rc36SQAtAAA</XPD:REF>
 <XPD:REF name="Supplier">Xyniv8v/jkmDaZtLKueLAgAA</XPD:REF>
@@ -2659,7 +2655,7 @@
 <XPD:REF name="Views[2]">GKzdYTuMg0ywTJZymltjUgAA</XPD:REF>
 <XPD:REF name="Views[3]">FPoMcRwlNkas9GlWeycNMQAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[41]" type="UMLUseCase" guid="V9LHZheFMEmGNzvj+Dx9cAAA">
+<XPD:OBJ name="OwnedElements[40]" type="UMLUseCase" guid="V9LHZheFMEmGNzvj+Dx9cAAA">
 <XPD:ATTR name="Name" type="string">Ask password</XPD:ATTR>
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
@@ -2672,7 +2668,7 @@
 <XPD:ATTR name="#SupplierDependencies" type="integer">1</XPD:ATTR>
 <XPD:REF name="SupplierDependencies[0]">kjhg0xAqYEmwmza9zRB28wAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[42]" type="UMLUseCase" guid="zlugyxFnEUCmhZQhXToNwgAA">
+<XPD:OBJ name="OwnedElements[41]" type="UMLUseCase" guid="zlugyxFnEUCmhZQhXToNwgAA">
 <XPD:ATTR name="Name" type="string">Open document</XPD:ATTR>
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">8</XPD:ATTR>
@@ -2690,7 +2686,7 @@
 <XPD:REF name="SupplierDependencies[0]">BSmvauaYBE+0PS4pvnQYKQAA</XPD:REF>
 <XPD:REF name="SupplierDependencies[1]">PxEkdrfnbEKiZt9Fuj+UNQAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[43]" type="UMLDependency" guid="kjhg0xAqYEmwmza9zRB28wAA">
+<XPD:OBJ name="OwnedElements[42]" type="UMLDependency" guid="kjhg0xAqYEmwmza9zRB28wAA">
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:REF name="Client">Wu2hYYPCXEaPYX5SXSaw3gAA</XPD:REF>
 <XPD:REF name="Supplier">V9LHZheFMEmGNzvj+Dx9cAAA</XPD:REF>
@@ -2700,7 +2696,7 @@
 <XPD:REF name="Views[2]">AkLr2e9WaU+I3l3R5hG6HwAA</XPD:REF>
 <XPD:REF name="Views[3]">xnjM2GYqokmjgDZWH+96CgAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[44]" type="UMLDependency" guid="Jss+/I4DMEuh/kLI9ygI3wAA">
+<XPD:OBJ name="OwnedElements[43]" type="UMLDependency" guid="Jss+/I4DMEuh/kLI9ygI3wAA">
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:REF name="Client">V9LHZheFMEmGNzvj+Dx9cAAA</XPD:REF>
 <XPD:REF name="Supplier">363VrJB+90eg/rc36SQAtAAA</XPD:REF>
@@ -2710,7 +2706,7 @@
 <XPD:REF name="Views[2]">amYhfgJ+9UqZmN5XYSuTMAAA</XPD:REF>
 <XPD:REF name="Views[3]">YnGUT+pFFkylbNJiAqVvSgAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[45]" type="UMLDependency" guid="BSmvauaYBE+0PS4pvnQYKQAA">
+<XPD:OBJ name="OwnedElements[44]" type="UMLDependency" guid="BSmvauaYBE+0PS4pvnQYKQAA">
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:REF name="Client">363VrJB+90eg/rc36SQAtAAA</XPD:REF>
 <XPD:REF name="Supplier">zlugyxFnEUCmhZQhXToNwgAA</XPD:REF>
@@ -2720,7 +2716,7 @@
 <XPD:REF name="Views[2]">mk0b/2/K9UeWkucNKTdT+QAA</XPD:REF>
 <XPD:REF name="Views[3]">BCyyeKGe00mGJAoefK355QAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[46]" type="UMLDependency" guid="PxEkdrfnbEKiZt9Fuj+UNQAA">
+<XPD:OBJ name="OwnedElements[45]" type="UMLDependency" guid="PxEkdrfnbEKiZt9Fuj+UNQAA">
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:REF name="Client">SoCQH38WP0mIDXV65Y31UAAA</XPD:REF>
 <XPD:REF name="Supplier">zlugyxFnEUCmhZQhXToNwgAA</XPD:REF>
@@ -2730,7 +2726,7 @@
 <XPD:REF name="Views[2]">wAHoFyImTE+f3CTHJw5j8wAA</XPD:REF>
 <XPD:REF name="Views[3]">oz9t8HjkNUKJHkiMR+Qb9wAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[47]" type="UMLDependency" guid="mrnHIZTJtUOic+J5XHWZfAAA">
+<XPD:OBJ name="OwnedElements[46]" type="UMLDependency" guid="mrnHIZTJtUOic+J5XHWZfAAA">
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:REF name="Client">zlugyxFnEUCmhZQhXToNwgAA</XPD:REF>
 <XPD:REF name="Supplier">lpSAWPlpzkOO9LEvzJ94dQAA</XPD:REF>
@@ -2740,7 +2736,7 @@
 <XPD:REF name="Views[2]">AzTPSHafI0SukA5HFxvcHAAA</XPD:REF>
 <XPD:REF name="Views[3]">5i9aAobja0unY2B9q8jcXwAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[48]" type="UMLDependency" guid="atK1lZmy+ESfbfXKUIPLzQAA">
+<XPD:OBJ name="OwnedElements[47]" type="UMLDependency" guid="atK1lZmy+ESfbfXKUIPLzQAA">
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:REF name="Client">lpSAWPlpzkOO9LEvzJ94dQAA</XPD:REF>
 <XPD:REF name="Supplier">363VrJB+90eg/rc36SQAtAAA</XPD:REF>
@@ -2750,7 +2746,7 @@
 <XPD:REF name="Views[2]">2sxz7fTJAE+vjQqUXM9ljQAA</XPD:REF>
 <XPD:REF name="Views[3]">1YAaGJiTskKgzjSURHA5EQAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[49]" type="UMLDependency" guid="rKmS0RyeaEG71lblsjhQ5AAA">
+<XPD:OBJ name="OwnedElements[48]" type="UMLDependency" guid="rKmS0RyeaEG71lblsjhQ5AAA">
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:REF name="Client">363VrJB+90eg/rc36SQAtAAA</XPD:REF>
 <XPD:REF name="Supplier">64IpYbt9mkarft0tA66GXwAA</XPD:REF>
@@ -2760,7 +2756,7 @@
 <XPD:REF name="Views[2]">6sT8Hyu9Nkaix58dQZCQPgAA</XPD:REF>
 <XPD:REF name="Views[3]">u1E36AkHVkCZ7Wz9WOYHggAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[50]" type="UMLDependency" guid="daHcux1FUEis1s8uKq31FQAA">
+<XPD:OBJ name="OwnedElements[49]" type="UMLDependency" guid="daHcux1FUEis1s8uKq31FQAA">
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:REF name="Client">64IpYbt9mkarft0tA66GXwAA</XPD:REF>
 <XPD:REF name="Supplier">Xyniv8v/jkmDaZtLKueLAgAA</XPD:REF>
@@ -2770,7 +2766,7 @@
 <XPD:REF name="Views[2]">9ohcnGlnYkK59RzCOrfjTgAA</XPD:REF>
 <XPD:REF name="Views[3]">hWaQykxU5k+7QiLn34EItAAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="OwnedElements[51]" type="UMLDependency" guid="I85AHYqsr0mEah9daQ9f4wAA">
+<XPD:OBJ name="OwnedElements[50]" type="UMLDependency" guid="I85AHYqsr0mEah9daQ9f4wAA">
 <XPD:REF name="Namespace">nqgIOeUxQU6RjDvOGwGrAAAA</XPD:REF>
 <XPD:REF name="Client">lWKyKCgXW06f/NZC3SNtGAAA</XPD:REF>
 <XPD:REF name="Supplier">XvNIN4EOl0iuaT8L+DF3eQAA</XPD:REF>

@@ -2886,7 +2886,7 @@
 <XPD:ATTR name="Left" type="integer">612</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">492</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">248</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">212</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">251</XPD:ATTR>
 <XPD:REF name="Model">kOCmGFJEUkWdPBcNQYHDuwAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="Na24oiA+uUq7Rclpqxy4mQAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="1xfjsIAXvkqrCAuRze+DQgAA">
@@ -2966,7 +2966,7 @@
 <XPD:OBJ name="OwnedViews[6]" type="UMLGeneralizationView" guid="GCJ9lj/DEEy4moa8N4Gf5QAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">739,492;746,327</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">740,492;746,327</XPD:ATTR>
 <XPD:REF name="Model">1xpFYHr2q0SU271JWuuf3AAA</XPD:REF>
 <XPD:REF name="Head">PnNcXSsbhkmIovP2c7wNHwAA</XPD:REF>
 <XPD:REF name="Tail">2gh7rBBOWk+Wl3217PZVYAAA</XPD:REF>
@@ -3564,7 +3564,7 @@
 <XPD:REF name="ClientDependencies[0]">1WpTIi5JwU++drgQMwIy9wAA</XPD:REF>
 <XPD:ATTR name="#Generalizations" type="integer">1</XPD:ATTR>
 <XPD:REF name="Generalizations[0]">1xpFYHr2q0SU271JWuuf3AAA</XPD:REF>
-<XPD:ATTR name="#Operations" type="integer">10</XPD:ATTR>
+<XPD:ATTR name="#Operations" type="integer">12</XPD:ATTR>
 <XPD:OBJ name="Operations[0]" type="UMLOperation" guid="1uj5ApB170ahAW5AKchvOgAA">
 <XPD:ATTR name="Name" type="string">static File create</XPD:ATTR>
 <XPD:REF name="Owner">kOCmGFJEUkWdPBcNQYHDuwAA</XPD:REF>
@@ -3658,11 +3658,31 @@
 <XPD:REF name="BehavioralFeature">y5KfsxtGgkKvIu03gP0IEwAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
+<XPD:OBJ name="Operations[10]" type="UMLOperation" guid="+O23wkB7lEKqQLwAWDPDUAAA">
+<XPD:ATTR name="Name" type="string">getPassword</XPD:ATTR>
+<XPD:REF name="Owner">kOCmGFJEUkWdPBcNQYHDuwAA</XPD:REF>
+<XPD:ATTR name="#Parameters" type="integer">1</XPD:ATTR>
+<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="LY4Nj062Gk6eYkJTMgpKRgAA">
+<XPD:ATTR name="DirectionKind" type="UMLParameterDirectionKind">pdkReturn</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">String</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">+O23wkB7lEKqQLwAWDPDUAAA</XPD:REF>
+</XPD:OBJ>
+</XPD:OBJ>
+<XPD:OBJ name="Operations[11]" type="UMLOperation" guid="mJA1vwvYKUChgSP5x12wlAAA">
+<XPD:ATTR name="Name" type="string">setPassword</XPD:ATTR>
+<XPD:REF name="Owner">kOCmGFJEUkWdPBcNQYHDuwAA</XPD:REF>
+<XPD:ATTR name="#Parameters" type="integer">1</XPD:ATTR>
+<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="PG0bKmtKDkC5Domw9HGU2gAA">
+<XPD:ATTR name="Name" type="string">pass</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">String</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">mJA1vwvYKUChgSP5x12wlAAA</XPD:REF>
+</XPD:OBJ>
+</XPD:OBJ>
 <XPD:ATTR name="#TypedParameters" type="integer">3</XPD:ATTR>
 <XPD:REF name="TypedParameters[0]">472wBB8XlEKAUrArUAabKQAA</XPD:REF>
 <XPD:REF name="TypedParameters[1]">kNSdAhDjZUOJsb0CWSYpwAAA</XPD:REF>
 <XPD:REF name="TypedParameters[2]">nFawO7airE2DDS00FfziKAAA</XPD:REF>
-<XPD:ATTR name="#Attributes" type="integer">3</XPD:ATTR>
+<XPD:ATTR name="#Attributes" type="integer">4</XPD:ATTR>
 <XPD:OBJ name="Attributes[0]" type="UMLAttribute" guid="ST/DGQRyeUug9DKbAGHErQAA">
 <XPD:ATTR name="Name" type="string">images</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">TreeMap&lt;String,Image&gt;</XPD:ATTR>
@@ -3677,6 +3697,12 @@
 <XPD:OBJ name="Attributes[2]" type="UMLAttribute" guid="yEgUxL+w0ECnlQtwVWhxJAAA">
 <XPD:ATTR name="Name" type="string">IsReadOnly</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">boolean</XPD:ATTR>
+<XPD:REF name="Owner">kOCmGFJEUkWdPBcNQYHDuwAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Attributes[3]" type="UMLAttribute" guid="VI5M/c0iVkeb3SZ9gDK4DAAA">
+<XPD:ATTR name="Name" type="string">Password</XPD:ATTR>
+<XPD:ATTR name="Visibility" type="UMLVisibilityKind">vkProtected</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">String</XPD:ATTR>
 <XPD:REF name="Owner">kOCmGFJEUkWdPBcNQYHDuwAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>

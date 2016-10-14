@@ -173,11 +173,12 @@ public class MainForm extends javax.swing.JFrame {
         jMenuItemRenameThisFile = new javax.swing.JMenuItem();
         jMenuItemSearchInThisFile = new javax.swing.JMenuItem();
         jMenuItemDeleteFile = new javax.swing.JMenuItem();
-        jMenuItemExit = new javax.swing.JMenuItem();
+        jMenuItemExit2 = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         jMenuItemRefreshAllTree = new javax.swing.JMenuItem();
         jMenuItemSearchInRootFolder = new javax.swing.JMenuItem();
         jMenuItemSettings = new javax.swing.JMenuItem();
+        jMenuItemExit = new javax.swing.JMenuItem();
         viewMenu = new javax.swing.JMenu();
         jCheckBoxMenuItemViewMenuToolbar = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuItemViewStorageTreePanel = new javax.swing.JCheckBoxMenuItem();
@@ -326,7 +327,7 @@ public class MainForm extends javax.swing.JFrame {
         ToolBarMain.add(jButtonDeleteFile);
 
         jButtonSaveFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/disk.24x24.png"))); // NOI18N
-        jButtonSaveFile.setToolTipText("Save changes in this file");
+        jButtonSaveFile.setToolTipText("Save changes in this file Ctrl + S");
         jButtonSaveFile.setFocusable(false);
         jButtonSaveFile.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonSaveFile.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -466,19 +467,19 @@ public class MainForm extends javax.swing.JFrame {
         });
         fileMenu.add(jMenuItemDeleteFile);
 
-        jMenuItemExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cross.16x16.png"))); // NOI18N
-        jMenuItemExit.setMnemonic('x');
-        jMenuItemExit.setText("Exit");
-        jMenuItemExit.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemExit2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cross.16x16.png"))); // NOI18N
+        jMenuItemExit2.setMnemonic('x');
+        jMenuItemExit2.setText("Exit");
+        jMenuItemExit2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemExitActionPerformed(evt);
+                jMenuItemExit2ActionPerformed(evt);
             }
         });
-        fileMenu.add(jMenuItemExit);
+        fileMenu.add(jMenuItemExit2);
 
         menuBar.add(fileMenu);
 
-        editMenu.setText("Edit");
+        editMenu.setText("Main");
 
         jMenuItemRefreshAllTree.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update.16x16.png"))); // NOI18N
         jMenuItemRefreshAllTree.setText("Refresh all tree");
@@ -507,6 +508,15 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
         editMenu.add(jMenuItemSettings);
+
+        jMenuItemExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cross.16x16.png"))); // NOI18N
+        jMenuItemExit.setText("Exit");
+        jMenuItemExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemExitActionPerformed(evt);
+            }
+        });
+        editMenu.add(jMenuItemExit);
 
         menuBar.add(editMenu);
 
@@ -599,10 +609,6 @@ public class MainForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
-		System.exit(0);
-    }//GEN-LAST:event_jMenuItemExitActionPerformed
 
 	/**
 	 * Show-hide list of storage tree
@@ -933,6 +939,14 @@ public class MainForm extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jToggleButtonVisibilityImageCarouselActionPerformed
 
+    private void jMenuItemExit2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExit2ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItemExit2ActionPerformed
+
+    private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItemExitActionPerformed
+
 	/**
 	 * When delete a file this method will close it tab if document has opened
 	 *
@@ -1071,6 +1085,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemAddPicture;
     private javax.swing.JMenuItem jMenuItemDeleteFile;
     private javax.swing.JMenuItem jMenuItemExit;
+    private javax.swing.JMenuItem jMenuItemExit2;
     private javax.swing.JMenuItem jMenuItemHowToUse;
     private javax.swing.JMenuItem jMenuItemMoveThisFile;
     private javax.swing.JMenuItem jMenuItemRefreshAllTree;

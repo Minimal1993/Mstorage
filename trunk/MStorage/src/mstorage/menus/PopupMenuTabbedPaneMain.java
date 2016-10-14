@@ -27,6 +27,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.tree.TreePath;
 import mstorage.MainForm;
+import mstorage.components.CryptComp;
 import mstorage.components.FileJTab;
 import mstorage.events.EventsStorageCollectionHandler;
 
@@ -136,6 +137,31 @@ public class PopupMenuTabbedPaneMain extends JPopupMenu {
 		m8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/folder_go.16x16.png")));
 		m8.setEnabled(true);
 		this.add(m8);
+		
+		// If is crypted document
+		if (CryptComp.isCryptedFile(file.getPath())) {
+			JMenuItem m9 = new JMenuItem("Change password");
+			m9.addActionListener(EventsHandler);
+			m9.setActionCommand("change_file_password");
+			m9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lock_edit.16x16.png")));
+			m9.setEnabled(true);
+			this.add(m9);
+			
+			JMenuItem m10 = new JMenuItem("Decrypt file");
+			m10.addActionListener(EventsHandler);
+			m10.setActionCommand("decrypt_file");
+			m10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lock_delete.16x16.png")));
+			m10.setEnabled(true);
+			this.add(m10);
+		}
+		else {
+			JMenuItem m11 = new JMenuItem("Crypt file");
+			m11.addActionListener(EventsHandler);
+			m11.setActionCommand("crypt_file");
+			m11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lock_add.16x16.png")));
+			m11.setEnabled(true);
+			this.add(m11);
+		}
 
 	}
 

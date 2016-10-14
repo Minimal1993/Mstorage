@@ -457,5 +457,17 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
             MainForm.showError(e.getMessage());
         }
 	}
+	
+	public void eh_change_file_password() {
+
+	}
+	
+	public void eh_decrypt_file() {
+
+	}
+	
+	public void eh_crypt_file() {
+
+	}
 
 }
