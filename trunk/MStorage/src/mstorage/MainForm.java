@@ -395,86 +395,41 @@ public class MainForm extends javax.swing.JFrame {
         jMenuItemSaveFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/disk.16x16.png"))); // NOI18N
         jMenuItemSaveFile.setMnemonic('s');
         jMenuItemSaveFile.setText("Save this file");
-        jMenuItemSaveFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSaveFileActionPerformed(evt);
-            }
-        });
         fileMenu.add(jMenuItemSaveFile);
 
         jMenuItemSaveAllFiles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/disk_multiple.16x16.png"))); // NOI18N
         jMenuItemSaveAllFiles.setMnemonic('a');
         jMenuItemSaveAllFiles.setText("Save all opened files");
-        jMenuItemSaveAllFiles.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSaveAllFilesActionPerformed(evt);
-            }
-        });
         fileMenu.add(jMenuItemSaveAllFiles);
 
         jMenuItemSaveThisFileAs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_as.16x16.png"))); // NOI18N
         jMenuItemSaveThisFileAs.setText("Save this file as...");
-        jMenuItemSaveThisFileAs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSaveFileAsActionPerformed(evt);
-            }
-        });
         fileMenu.add(jMenuItemSaveThisFileAs);
 
         jMenuItemMoveThisFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/document_move.16x16.png"))); // NOI18N
         jMenuItemMoveThisFile.setText("Move this file");
-        jMenuItemMoveThisFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonMoveFileActionPerformed(evt);
-            }
-        });
         fileMenu.add(jMenuItemMoveThisFile);
 
         jMenuItemAddPicture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/picture_add.16x16.png"))); // NOI18N
         jMenuItemAddPicture.setText("Add picture to this file");
-        jMenuItemAddPicture.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAddImageActionPerformed(evt);
-            }
-        });
         fileMenu.add(jMenuItemAddPicture);
 
         jMenuItemRenameThisFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/textfield.16x16.png"))); // NOI18N
         jMenuItemRenameThisFile.setText("Rename this file");
-        jMenuItemRenameThisFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRenameFileActionPerformed(evt);
-            }
-        });
         fileMenu.add(jMenuItemRenameThisFile);
 
         jMenuItemSearchInThisFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/page_white_magnify.16x16.png"))); // NOI18N
         jMenuItemSearchInThisFile.setText("Search in this file");
         jMenuItemSearchInThisFile.setEnabled(false);
-        jMenuItemSearchInThisFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSearchInFileActionPerformed(evt);
-            }
-        });
         fileMenu.add(jMenuItemSearchInThisFile);
 
         jMenuItemDeleteFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/page_white_delete.16x16.png"))); // NOI18N
         jMenuItemDeleteFile.setText("Delete a file");
-        jMenuItemDeleteFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeleteFileActionPerformed(evt);
-            }
-        });
         fileMenu.add(jMenuItemDeleteFile);
 
         jMenuItemExit2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cross.16x16.png"))); // NOI18N
         jMenuItemExit2.setMnemonic('x');
         jMenuItemExit2.setText("Exit");
-        jMenuItemExit2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemExit2ActionPerformed(evt);
-            }
-        });
         fileMenu.add(jMenuItemExit2);
 
         menuBar.add(fileMenu);
@@ -938,10 +893,6 @@ public class MainForm extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jToggleButtonVisibilityImageCarouselActionPerformed
-
-    private void jMenuItemExit2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExit2ActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_jMenuItemExit2ActionPerformed
 
     private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
         System.exit(0);
