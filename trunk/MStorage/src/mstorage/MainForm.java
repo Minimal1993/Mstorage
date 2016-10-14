@@ -21,8 +21,11 @@ import mstorage.SettingsDialog;
 import mstorage.classes.Settings;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.JTabbedPane;
 import javax.swing.BorderFactory;
@@ -35,7 +38,12 @@ import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.Action;
+import javax.swing.InputMap;
 import javax.swing.JMenu;
+import javax.swing.KeyStroke;
+import javax.swing.text.DefaultEditorKit;
+import mstorage.components.CryptComp;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.*;
@@ -162,19 +170,13 @@ public class MainForm extends javax.swing.JFrame {
         jButtonSaveFileAs = new javax.swing.JButton();
         jButtonSaveAllFiles = new javax.swing.JButton();
         jToggleButtonVisibilityImageCarousel = new javax.swing.JToggleButton();
+        jButtonChangePassword = new javax.swing.JButton();
+        jButtonDecryptFile = new javax.swing.JButton();
+        jButtonCryptFile = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
-        jMenuItemSaveFile = new javax.swing.JMenuItem();
-        jMenuItemSaveAllFiles = new javax.swing.JMenuItem();
-        jMenuItemSaveThisFileAs = new javax.swing.JMenuItem();
-        jMenuItemMoveThisFile = new javax.swing.JMenuItem();
-        jMenuItemAddPicture = new javax.swing.JMenuItem();
-        jMenuItemRenameThisFile = new javax.swing.JMenuItem();
-        jMenuItemSearchInThisFile = new javax.swing.JMenuItem();
-        jMenuItemDeleteFile = new javax.swing.JMenuItem();
-        jMenuItemExit2 = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
+        jMenuItemSaveFile = new javax.swing.JMenuItem();
         jMenuItemRefreshAllTree = new javax.swing.JMenuItem();
         jMenuItemSearchInRootFolder = new javax.swing.JMenuItem();
         jMenuItemSettings = new javax.swing.JMenuItem();
@@ -326,6 +328,7 @@ public class MainForm extends javax.swing.JFrame {
         });
         ToolBarMain.add(jButtonDeleteFile);
 
+        jButtonSaveFile.setAction(jButtonSaveFile.getAction());
         jButtonSaveFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/disk.24x24.png"))); // NOI18N
         jButtonSaveFile.setToolTipText("Save changes in this file Ctrl + S");
         jButtonSaveFile.setFocusable(false);
@@ -375,6 +378,42 @@ public class MainForm extends javax.swing.JFrame {
         });
         ToolBarMain.add(jToggleButtonVisibilityImageCarousel);
 
+        jButtonChangePassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lock_edit.24x24.png"))); // NOI18N
+        jButtonChangePassword.setToolTipText("Change password for access to this file");
+        jButtonChangePassword.setFocusable(false);
+        jButtonChangePassword.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonChangePassword.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonChangePassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonChangePasswordActionPerformed(evt);
+            }
+        });
+        ToolBarMain.add(jButtonChangePassword);
+
+        jButtonDecryptFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lock_delete.24x24.png"))); // NOI18N
+        jButtonDecryptFile.setToolTipText("Decrypt file and reset encryption in future");
+        jButtonDecryptFile.setFocusable(false);
+        jButtonDecryptFile.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonDecryptFile.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonDecryptFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDecryptFileActionPerformed(evt);
+            }
+        });
+        ToolBarMain.add(jButtonDecryptFile);
+
+        jButtonCryptFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lock_add.24x24.png"))); // NOI18N
+        jButtonCryptFile.setToolTipText("Crypt file and set password to access");
+        jButtonCryptFile.setFocusable(false);
+        jButtonCryptFile.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonCryptFile.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonCryptFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCryptFileActionPerformed(evt);
+            }
+        });
+        ToolBarMain.add(jButtonCryptFile);
+
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -388,53 +427,18 @@ public class MainForm extends javax.swing.JFrame {
             .addGap(0, 11, Short.MAX_VALUE)
         );
 
-        fileMenu.setMnemonic('f');
-        fileMenu.setText("File");
+        editMenu.setText("Main");
 
         jMenuItemSaveFile.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemSaveFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/disk.16x16.png"))); // NOI18N
-        jMenuItemSaveFile.setMnemonic('s');
-        jMenuItemSaveFile.setText("Save this file");
-        fileMenu.add(jMenuItemSaveFile);
-
-        jMenuItemSaveAllFiles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/disk_multiple.16x16.png"))); // NOI18N
-        jMenuItemSaveAllFiles.setMnemonic('a');
-        jMenuItemSaveAllFiles.setText("Save all opened files");
-        fileMenu.add(jMenuItemSaveAllFiles);
-
-        jMenuItemSaveThisFileAs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_as.16x16.png"))); // NOI18N
-        jMenuItemSaveThisFileAs.setText("Save this file as...");
-        fileMenu.add(jMenuItemSaveThisFileAs);
-
-        jMenuItemMoveThisFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/document_move.16x16.png"))); // NOI18N
-        jMenuItemMoveThisFile.setText("Move this file");
-        fileMenu.add(jMenuItemMoveThisFile);
-
-        jMenuItemAddPicture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/picture_add.16x16.png"))); // NOI18N
-        jMenuItemAddPicture.setText("Add picture to this file");
-        fileMenu.add(jMenuItemAddPicture);
-
-        jMenuItemRenameThisFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/textfield.16x16.png"))); // NOI18N
-        jMenuItemRenameThisFile.setText("Rename this file");
-        fileMenu.add(jMenuItemRenameThisFile);
-
-        jMenuItemSearchInThisFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/page_white_magnify.16x16.png"))); // NOI18N
-        jMenuItemSearchInThisFile.setText("Search in this file");
-        jMenuItemSearchInThisFile.setEnabled(false);
-        fileMenu.add(jMenuItemSearchInThisFile);
-
-        jMenuItemDeleteFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/page_white_delete.16x16.png"))); // NOI18N
-        jMenuItemDeleteFile.setText("Delete a file");
-        fileMenu.add(jMenuItemDeleteFile);
-
-        jMenuItemExit2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cross.16x16.png"))); // NOI18N
-        jMenuItemExit2.setMnemonic('x');
-        jMenuItemExit2.setText("Exit");
-        fileMenu.add(jMenuItemExit2);
-
-        menuBar.add(fileMenu);
-
-        editMenu.setText("Main");
+        jMenuItemSaveFile.setText("Save file");
+        jMenuItemSaveFile.setToolTipText("Save current open file");
+        jMenuItemSaveFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSaveFileActionPerformed(evt);
+            }
+        });
+        editMenu.add(jMenuItemSaveFile);
 
         jMenuItemRefreshAllTree.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update.16x16.png"))); // NOI18N
         jMenuItemRefreshAllTree.setText("Refresh all tree");
@@ -898,6 +902,18 @@ public class MainForm extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jMenuItemExitActionPerformed
 
+    private void jButtonChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChangePasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonChangePasswordActionPerformed
+
+    private void jButtonDecryptFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDecryptFileActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonDecryptFileActionPerformed
+
+    private void jButtonCryptFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCryptFileActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonCryptFileActionPerformed
+
 	/**
 	 * When delete a file this method will close it tab if document has opened
 	 *
@@ -1017,9 +1033,11 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTabbedPane TabbedPaneMain;
     private javax.swing.JToolBar ToolBarMain;
     private javax.swing.JMenu editMenu;
-    private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JButton jButtonAddImage;
+    private javax.swing.JButton jButtonChangePassword;
+    private javax.swing.JButton jButtonCryptFile;
+    private javax.swing.JButton jButtonDecryptFile;
     private javax.swing.JButton jButtonDeleteFile;
     private javax.swing.JButton jButtonMoveFile;
     private javax.swing.JButton jButtonRefreshTree;
@@ -1033,19 +1051,11 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemViewStorageTreePanel;
     private javax.swing.JMenu jMenuCloseActiveTab;
     private javax.swing.JMenuItem jMenuItemAbout;
-    private javax.swing.JMenuItem jMenuItemAddPicture;
-    private javax.swing.JMenuItem jMenuItemDeleteFile;
     private javax.swing.JMenuItem jMenuItemExit;
-    private javax.swing.JMenuItem jMenuItemExit2;
     private javax.swing.JMenuItem jMenuItemHowToUse;
-    private javax.swing.JMenuItem jMenuItemMoveThisFile;
     private javax.swing.JMenuItem jMenuItemRefreshAllTree;
-    private javax.swing.JMenuItem jMenuItemRenameThisFile;
-    private javax.swing.JMenuItem jMenuItemSaveAllFiles;
     private javax.swing.JMenuItem jMenuItemSaveFile;
-    private javax.swing.JMenuItem jMenuItemSaveThisFileAs;
     private javax.swing.JMenuItem jMenuItemSearchInRootFolder;
-    private javax.swing.JMenuItem jMenuItemSearchInThisFile;
     private javax.swing.JMenuItem jMenuItemSettings;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -1110,6 +1120,15 @@ public class MainForm extends javax.swing.JFrame {
 			// According to last action in this tab, select or not 
 			this.jToggleButtonVisibilityImageCarousel.setSelected(tab.VisibilityForJPanelDocumentPictures);
 			this.jToggleButtonVisibilityImageCarousel.setEnabled(true);
+		}
+		
+		// Button for crypt in menubar
+		if (CryptComp.isCryptedFile(file.getPath())) {
+			this.jButtonCryptFile.setVisible(false);
+		}
+		else {
+			this.jButtonChangePassword.setVisible(false);
+			this.jButtonDecryptFile.setVisible(false);
 		}
 
 	}
@@ -1207,7 +1226,7 @@ public class MainForm extends javax.swing.JFrame {
 			this.setLocation(x, y);
 			
 		}
-
+		
 		this.pack();
 
 		// Set mouse listener for popup menu in ScrollPane of storage collection
@@ -1244,19 +1263,22 @@ public class MainForm extends javax.swing.JFrame {
 		this.jButtonSearchInFile.setVisible(show);
 		this.jButtonSaveFileAs.setVisible(show);
 		this.jToggleButtonVisibilityImageCarousel.setVisible(show);
+		this.jButtonChangePassword.setVisible(show);
+		this.jButtonDecryptFile.setVisible(show);
+		this.jButtonCryptFile.setVisible(show);
 
 		// Menu File
-		this.jMenuItemAddPicture.setEnabled(show);
-		this.jMenuItemDeleteFile.setEnabled(show);
-		this.jMenuItemMoveThisFile.setEnabled(show);
-		this.jMenuItemRenameThisFile.setEnabled(show);
-		this.jMenuItemSaveAllFiles.setEnabled(show);
-		this.jMenuItemSaveFile.setEnabled(show);
-		this.jMenuItemSaveThisFileAs.setEnabled(show);
-		this.jMenuItemSearchInThisFile.setEnabled(show);
+//		this.jMenuItemAddPicture.setEnabled(show);
+//		this.jMenuItemDeleteFile.setEnabled(show);
+//		this.jMenuItemMoveThisFile.setEnabled(show);
+//		this.jMenuItemRenameThisFile.setEnabled(show);
+//		this.jMenuItemSaveAllFiles.setEnabled(show);
+//		this.jMenuItemSaveFile.setEnabled(show);
+//		this.jMenuItemSaveThisFileAs.setEnabled(show);
+//		this.jMenuItemSearchInThisFile.setEnabled(show);
 
 		// For time action not released
-		this.jMenuItemSearchInThisFile.setEnabled(false);
+//		this.jMenuItemSearchInThisFile.setEnabled(false);
 
 	}
 

@@ -41,6 +41,19 @@ public class File extends StorageItem {
 	
 	protected static String defaultNewName = "newFile";
 	
+	/**
+	 * Passphrase for crypted file 
+	 */
+	protected String Password = null;
+
+	public String getPassword() {
+		return Password;
+	}
+
+	public void setPassword(String Password) {
+		this.Password = Password;
+	}
+	
 	public boolean getIsReadOnly() {
 		return IsReadOnly;
 	}
