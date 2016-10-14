@@ -467,7 +467,22 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 	}
 	
 	public void eh_crypt_file() {
+		File file = (File) this.StorageItem;
 
+		CryptPasswordDialog sd = new CryptPasswordDialog(MainForm.getInstance(), true, file);
+		sd.pack();
+		sd.setLocationRelativeTo(MainForm.getInstance());
+		sd.setVisible(true);
+
+		// there is place when MoveDialog is living
+		String newPassword = sd.getNewPassword();
+		sd.dispose();
+
+		if (null == newPassword) {
+			return;
+		}
+		
+		System.out.println("new password: " + newPassword);
 	}
 
 }
