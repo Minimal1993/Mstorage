@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;  
 import java.util.regex.Pattern;  
 import java.util.regex.PatternSyntaxException;
+import mstorage.components.CryptComp;
 import mstorage.storagecollection.StorageCollection;
 
 /**
@@ -105,8 +106,14 @@ public class FindReplace {
 		
 		for (java.io.File currentFile : files) {
 			
-			// Ignore files and directories with first "."
-			if (!StorageCollection.isCorrectFile(currentFile.toPath())) continue;
+			// Checking
+			if (!StorageCollection.isCorrectFile(currentFile.toPath())
+                || !!StorageCollection.isFile(currentFile.toPath())
+                || StorageCollection.isImage(currentFile.toPath())
+                || CryptComp.isCryptedFile(currentFile.toPath())
+            ) {
+                continue;
+            }
 			
 			if (currentFile.isDirectory()) {
 				this.findInDir(currentFile, result);

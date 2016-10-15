@@ -841,6 +841,9 @@ public class MainForm extends javax.swing.JFrame {
 					esch.call("save_file");
 				}
 			}
+            
+            // Dont save in OpenedFiles crypted file
+            if (CryptComp.isCryptedFile(tab.File.getPath())) continue;
 			
 			// If readonly flag exists
 			if (tab.File.getIsReadOnly()) listReadOnly.add(tab.File.getPath().toAbsolutePath().toString());
@@ -1213,6 +1216,9 @@ public class MainForm extends javax.swing.JFrame {
 					continue;
 				}
 
+                // Dont open crypted file
+                if (CryptComp.isCryptedFile(file.getPath())) continue;
+                
 				FileJTab newtab = TabsFabric.getTab(file);
 				MainForm.getInstance().getTabbedPaneMain().addTab(newtab.File.getFileName(), newtab);
 				

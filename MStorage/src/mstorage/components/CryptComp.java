@@ -21,6 +21,8 @@ import org.apache.commons.lang3.StringUtils;
  * Work with GUI objects
  */
 public class CryptComp {
+    
+    public static String Extension = "cpt";
 
 	
 	
@@ -42,7 +44,7 @@ public class CryptComp {
 			extension = StringUtils.lowerCase(filename.substring(i + 1));
 		}
 		
-		if (!extension.isEmpty() && extension.equals("crypt")) {
+		if (!extension.isEmpty() && extension.equals(CryptComp.Extension)) {
 			ret = true;
 		}
 		
