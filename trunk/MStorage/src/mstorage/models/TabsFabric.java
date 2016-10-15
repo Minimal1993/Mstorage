@@ -24,8 +24,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import java.io.IOException;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import mstorage.MainForm;
+import mstorage.classes.AESEncrypter;
+import mstorage.components.CryptComp;
 
 /**
  * Fabric for create new tabs for Files and make these appearance.
@@ -52,10 +55,42 @@ public class TabsFabric {
         });
 
 		try {
-			PanelTemplate.TextAreaDocument.setText(file.getContent());
+            
+            // Check if file is crypted
+            if (CryptComp.isCryptedFile(file.getPath())){
+                
+                String s = (String) JOptionPane.showInputDialog(
+                        MainForm.getInstance(),
+                        "Pleace, enter a password:",
+                        "Crypted file",
+                        JOptionPane.PLAIN_MESSAGE,
+                        new javax.swing.ImageIcon(
+                            MainForm.getInstance().getClass().getResource("/images/lock.16x16.png")
+                        ),
+                        null,
+                        null);
+
+                if ((s != null) && (s.length() > 0)) {
+                    file.setPassword(s);
+                    try {
+                        AESEncrypter encrypter = new AESEncrypter(file.getPassword());
+                        String code = file.getContent();
+                        String content = encrypter.decrypt( code );
+                        PanelTemplate.TextAreaDocument.setText( content );
+                    }
+                    catch (Exception e) {
+                        MainForm.showError(e.getMessage());
+                        return null;
+                    }
+                }
+            }
+            else {
+                PanelTemplate.TextAreaDocument.setText(file.getContent());
+            }
 		} catch (IOException e) {
 			MainForm.showError(e.getMessage());
 		}
+        
 
 		PanelTemplate.TextAreaDocument.setWrapStyleWord(true);
 		PanelTemplate.ScrollPaneDocumentText.setViewportView(PanelTemplate.TextAreaDocument);

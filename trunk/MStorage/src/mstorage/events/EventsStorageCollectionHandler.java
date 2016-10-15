@@ -27,11 +27,14 @@ import java.lang.reflect.Method;
 import java.lang.Exception;
 import java.lang.NoSuchMethodException;
 import java.io.IOException;
+import java.nio.file.Files;
 import javax.swing.JOptionPane;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import javax.swing.tree.TreePath;
+import mstorage.classes.AESEncrypter;
 import mstorage.classes.Settings;
+import mstorage.components.CryptComp;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -177,11 +180,13 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 		}
 
 		FileJTab newtab = TabsFabric.getTab(file);
-		MainForm.getInstance().getTabbedPaneMain().addTab(newtab.File.getFileName(), newtab);
+        if (null != newtab) {
+            MainForm.getInstance().getTabbedPaneMain().addTab(newtab.File.getFileName(), newtab);
 
-		// Set focus
-		count = MainForm.getInstance().getTabbedPaneMain().getTabCount();
-		MainForm.getInstance().getTabbedPaneMain().setSelectedIndex(count - 1);
+            // Set focus
+            count = MainForm.getInstance().getTabbedPaneMain().getTabCount();
+            MainForm.getInstance().getTabbedPaneMain().setSelectedIndex(count - 1);
+        }
 
 	}
 
@@ -311,12 +316,42 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 		
 		File file = (File) this.StorageItem;
 		if (file.getIsReadOnly()) return;
+        
+        // Check is crypted file
+        if (CryptComp.isCryptedFile(file.getPath()) && !file.getPassword().isEmpty()) {
+            try {
+                AESEncrypter encrypter = new AESEncrypter(file.getPassword());
+                content = encrypter.encrypt(content);
+                String content2 = encrypter.decrypt(content);
+                int r = 0;
+            }
+            catch (Exception e) {
+                MainForm.showError(e.getMessage());
+            }
+        }
 
 		try {
 			file.save(content);
+            
+            String fromFile = new String(Files.readAllBytes(this.StorageItem.getPath()));
+            
+            if(fromFile.equals(content)) {
+                AESEncrypter encrypter2 = new AESEncrypter(file.getPassword());
+                String contentFromFile = encrypter2.decrypt(fromFile);
+                
+                byte[] cc = Files.readAllBytes(this.StorageItem.getPath());
+                byte[] contentFromFile2 = encrypter2.decrypt(cc);
+                String str = new String(contentFromFile2);
+                
+                int r = 9;
+            }
+            
 		} catch (IOException e) {
 			MainForm.showError(e.getMessage());
 		}
+        catch(Exception e) {
+            
+        }
 		
 		java.io.File iofile = new java.io.File(this.StorageItem.getPath().toAbsolutePath().toString());
 		tab.lastModified = iofile.lastModified();
@@ -339,7 +374,12 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 				file.getFileName());
 
 		if ((s != null) && (s.length() > 0)) {
-
+			try {
+				file.rename(s);
+			} catch (Exception e) {
+				MainForm.showError(e.getMessage());
+			}
+            
 			// Change tab title if file is opened
 			int count = MainForm.getInstance().getTabbedPaneMain().getTabCount();
 			for (int i = 0; i < count; i++) {
@@ -349,12 +389,6 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 				}
 
 				MainForm.getInstance().getTabbedPaneMain().setTitleAt(i, s);
-			}
-
-			try {
-				file.rename(s);
-			} catch (Exception e) {
-				MainForm.showError(e.getMessage());
 			}
 		}
 	}
@@ -468,21 +502,42 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 	
 	public void eh_crypt_file() {
 		File file = (File) this.StorageItem;
+        
+        if (file.getIsReadOnly()) return;
 
 		CryptPasswordDialog sd = new CryptPasswordDialog(MainForm.getInstance(), true, file);
 		sd.pack();
 		sd.setLocationRelativeTo(MainForm.getInstance());
 		sd.setVisible(true);
 
-		// there is place when MoveDialog is living
+		// When dialog isclosed
 		String newPassword = sd.getNewPassword();
 		sd.dispose();
 
-		if (null == newPassword) {
-			return;
-		}
-		
-		System.out.println("new password: " + newPassword);
+		if (null == newPassword) return;
+        
+        // Rename
+        try {
+            file.rename(file.getFileName() + "." + CryptComp.Extension);
+        } catch (Exception e) {
+            MainForm.showError(e.getMessage());
+        }
+
+        // Change tab title if file is opened
+        int count = MainForm.getInstance().getTabbedPaneMain().getTabCount();
+        for (int i = 0; i < count; i++) {
+            FileJTab tab = (FileJTab) MainForm.getInstance().getTabbedPaneMain().getComponent(i);
+            if (!tab.File.getPath().equals(file.getPath())) {
+                continue;
+            }
+
+            MainForm.getInstance().getTabbedPaneMain().setTitleAt(i, file.getFileName());
+        }
+        
+		file.setPassword(newPassword);
+        
+        this.call("save_file");
+
 	}
 
 }

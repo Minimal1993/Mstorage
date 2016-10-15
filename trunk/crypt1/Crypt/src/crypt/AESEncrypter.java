@@ -10,7 +10,7 @@
  * @date: 2016
  */
 
-package mstorage.classes;
+package crypt;
 
 import java.security.spec.KeySpec;
 import javax.crypto.Cipher;
@@ -49,7 +49,7 @@ public class AESEncrypter {
     private Cipher ecipher;
     private Cipher dcipher;
     
-    public AESEncrypter(String passPhrase) throws Exception {
+    AESEncrypter(String passPhrase) throws Exception {
         SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         KeySpec spec = new PBEKeySpec(passPhrase.toCharArray(), SALT, ITERATION_COUNT, KEY_LENGTH);
         SecretKey tmp = factory.generateSecret(spec);
