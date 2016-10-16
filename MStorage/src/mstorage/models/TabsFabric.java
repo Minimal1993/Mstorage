@@ -59,6 +59,7 @@ public class TabsFabric {
             // Check if file is crypted
             if (CryptComp.isCryptedFile(file.getPath())){
                 
+                // TODO: Have to use password input
                 String s = (String) JOptionPane.showInputDialog(
                         MainForm.getInstance(),
                         "Pleace, enter a password:",

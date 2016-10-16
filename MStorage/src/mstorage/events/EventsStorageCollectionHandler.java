@@ -322,8 +322,6 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
             try {
                 AESEncrypter encrypter = new AESEncrypter(file.getPassword());
                 content = encrypter.encrypt(content);
-                String content2 = encrypter.decrypt(content);
-                int r = 0;
             }
             catch (Exception e) {
                 MainForm.showError(e.getMessage());
@@ -332,19 +330,6 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 
 		try {
 			file.save(content);
-            
-            String fromFile = new String(Files.readAllBytes(this.StorageItem.getPath()));
-            
-            if(fromFile.equals(content)) {
-                AESEncrypter encrypter2 = new AESEncrypter(file.getPassword());
-                String contentFromFile = encrypter2.decrypt(fromFile);
-                
-                byte[] cc = Files.readAllBytes(this.StorageItem.getPath());
-                byte[] contentFromFile2 = encrypter2.decrypt(cc);
-                String str = new String(contentFromFile2);
-                
-                int r = 9;
-            }
             
 		} catch (IOException e) {
 			MainForm.showError(e.getMessage());
