@@ -325,6 +325,7 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
             }
             catch (Exception e) {
                 MainForm.showError(e.getMessage());
+                return;
             }
         }
 
@@ -333,9 +334,11 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
             
 		} catch (IOException e) {
 			MainForm.showError(e.getMessage());
+            return;
 		}
         catch(Exception e) {
-            
+            MainForm.showError(e.getMessage());
+            return;
         }
 		
 		java.io.File iofile = new java.io.File(this.StorageItem.getPath().toAbsolutePath().toString());

@@ -17,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import mstorage.classes.AESEncrypter;
+//import mstorage.classes.AdvancedEncryptionStandard;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -31,38 +32,14 @@ import static org.junit.Assert.*;
 public class CryptCompTest {
     
     public static String Text = "Как известно, в своем развитии SQL устремился в разные стороны.";
-    public static String Password = "Password";
+    public static String Password = "MZygpewJsCpRrfOr";
     public static String FileName = "filename";
     
     public CryptCompTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
-    /**
-     * Test of isCryptedFile method, of class CryptComp.
-     */
     @Test
-    public void testIsCryptedFile() {
-        assertTrue(true);
-    }
-    
-    @Test
-    public void testCryptWrong() {
+    public void testCrypt1() {
         try {
             AESEncrypter encrypter = new AESEncrypter(CryptCompTest.Password);
             String content = encrypter.encrypt(CryptCompTest.Text);
@@ -85,11 +62,31 @@ public class CryptCompTest {
             AESEncrypter encrypter2 = new AESEncrypter(CryptCompTest.Password);
             String contentFFDec = encrypter2.decrypt( contentFF );
             
-            assertTrue( !contentFFDec.equals(CryptCompTest.Text) );
+            assertTrue( contentFFDec.equals(CryptCompTest.Text) );
             
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
+            assertTrue(false);
+        }
+      
+    }
+    
+    @Test
+    public void testCrypt2() {
+        try {
+            // Read from file
+            String contentFF = new String(Files.readAllBytes(Paths.get(CryptCompTest.FileName)));
+                        
+            AESEncrypter encrypter2 = new AESEncrypter(CryptCompTest.Password);
+            String contentFFDec = encrypter2.decrypt( contentFF );
+            
+            assertTrue( contentFFDec.equals(CryptCompTest.Text) );
+            
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            assertTrue(false);
         }
       
     }
@@ -129,8 +126,43 @@ public class CryptCompTest {
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
+            assertTrue(false);
         }
       
     }
+    
+//    @Test
+//    public void testCryptAdvancedEncryptionStandard1() {
+//        try {
+//            AdvancedEncryptionStandard encrypter = new AdvancedEncryptionStandard(CryptCompTest.Password);
+//            String content = encrypter.encrypt(CryptCompTest.Text);
+//            String content2 = encrypter.decrypt(content);
+//
+//            assertTrue( content2.equals(CryptCompTest.Text) );
+//            
+//            // write to file
+//            java.io.File iofile = new java.io.File(CryptCompTest.FileName);
+//            FileWriter fw = new FileWriter(iofile.getAbsoluteFile());
+//            BufferedWriter bw = new BufferedWriter(fw);
+//            bw.write(content);
+//            bw.close();
+//            
+//            // Read from file
+//            String contentFF = new String(Files.readAllBytes(Paths.get(CryptCompTest.FileName)));
+//            
+//            assertTrue( content.equals(contentFF) );
+//            
+//            AdvancedEncryptionStandard encrypter2 = new AdvancedEncryptionStandard(CryptCompTest.Password);
+//            String contentFFDec = encrypter2.decrypt( contentFF );
+//            
+//            assertTrue( contentFFDec.equals(CryptCompTest.Text) );
+//            
+//        }
+//        catch (Exception e) {
+//            System.out.println(e.getMessage());
+//            assertTrue(false);
+//        }
+//      
+//    }
     
 }

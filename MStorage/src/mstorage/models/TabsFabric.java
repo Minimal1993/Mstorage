@@ -62,7 +62,7 @@ public class TabsFabric {
                 // TODO: Have to use password input
                 String s = (String) JOptionPane.showInputDialog(
                         MainForm.getInstance(),
-                        "Pleace, enter a password:",
+                        "Please, enter a password:",
                         "Crypted file",
                         JOptionPane.PLAIN_MESSAGE,
                         new javax.swing.ImageIcon(
