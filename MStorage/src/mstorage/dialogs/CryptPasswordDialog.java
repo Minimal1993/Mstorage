@@ -26,8 +26,8 @@ import mstorage.storagecollection.Folder;
  */
 public class CryptPasswordDialog extends javax.swing.JDialog {
 	
-	protected File File = null;
-	protected String NewPassword = null;
+	protected File File;
+	protected String NewPassword;
 
 	public String getNewPassword() {
 		return NewPassword;
@@ -75,6 +75,7 @@ public class CryptPasswordDialog extends javax.swing.JDialog {
         setTitle("Crypt file. Set a password.");
         setMinimumSize(new java.awt.Dimension(330, 256));
         setModal(true);
+        setName("dialog122"); // NOI18N
         setResizable(false);
         setSize(new java.awt.Dimension(330, 256));
 
