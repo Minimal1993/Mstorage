@@ -496,7 +496,7 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
         
         if (file.getIsReadOnly()) return;
 
-		PasswordCreateDialog sd = new PasswordCreateDialog((javax.swing.JFrame)MainForm.getInstance(), true, file);
+		PasswordCreateDialog sd = new PasswordCreateDialog(MainForm.getInstance(), true, file);
 		sd.pack();
 		sd.setLocationRelativeTo(MainForm.getInstance());
 		sd.setVisible(true);
