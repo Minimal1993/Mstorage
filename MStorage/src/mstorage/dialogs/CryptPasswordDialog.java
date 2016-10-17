@@ -9,58 +9,40 @@
  * @email: mstorage.project@gmail.com
  * @date: 2016
  */
-package mstorage.dialogs.password;
+package mstorage.dialogs;
 
 import java.awt.Toolkit;
 import javax.swing.BorderFactory;
-import mstorage.MainForm;
+import static mstorage.About.RET_CANCEL;
 import mstorage.components.CryptComp;
 import mstorage.models.MoveJTree;
 import mstorage.storagecollection.File;
 import mstorage.storagecollection.Folder;
 
 /**
- * Common dialog for work with password dialogs.
+ * Common dialog to set passphrase for crypting new file or change password.
  * 
  * @author ilya.gulevskiy
  */
-public class PasswordDialog extends javax.swing.JDialog {
-	private int MaxFilenameLength = 37;
-	private boolean IsCancel = false;
+public class CryptPasswordDialog extends javax.swing.JDialog {
 	
 	protected File File = null;
-	protected String Password = null;
-	protected String BigIcon = "";
-	protected String SmallIcon = "";
-	protected String Title = "";
+	protected String NewPassword = null;
 
-	public String getPassword() {
-		return Password;
-	}
-
-	/**
-	 * Whether button 'Cancel' was perbormed
-	 * 
-	 * @return 
-	 */
-	public boolean getIsCancel() {
-		return IsCancel;
+	public String getNewPassword() {
+		return NewPassword;
 	}
 
 	/**
 	 * Creates new form CryptPasswordDialog
 	 */
-	public PasswordDialog(javax.swing.JFrame parent, boolean modal, File file) {
+	public CryptPasswordDialog(java.awt.Frame parent, boolean modal, File file) {
 		super(parent, modal);
 		
-		this.File = file;		
+		this.File = file;
+		
 		initComponents();
-		
-//		if (!this.checksBeforeWork()){
-//			this.jButtonCancelActionPerformed(null);
-//			MainForm.showError("This file is not correct");
-//		}
-		
+				
 		this.initMain();
 	}
 
@@ -76,7 +58,6 @@ public class PasswordDialog extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabelBigIcon = new javax.swing.JLabel();
         jLabelInvitation = new javax.swing.JLabel();
-        jLabelFileName = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabelPassword = new javax.swing.JLabel();
         jPasswordFieldPass1 = new javax.swing.JPasswordField();
@@ -101,8 +82,6 @@ public class PasswordDialog extends javax.swing.JDialog {
 
         jLabelInvitation.setText("Please, confirm current password and enter a new:");
 
-        jLabelFileName.setText("somefilename");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -110,23 +89,20 @@ public class PasswordDialog extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelBigIcon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelInvitation, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
-                    .addComponent(jLabelFileName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelInvitation, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelBigIcon)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabelFileName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabelInvitation)))
+                .addContainerGap()
+                .addComponent(jLabelBigIcon)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelInvitation)
+                .addGap(19, 19, 19))
         );
 
         jLabelPassword.setText("Password:");
@@ -261,8 +237,8 @@ public class PasswordDialog extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -272,42 +248,33 @@ public class PasswordDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
-        // Ask children whether all checkings is OK
-		if (!this.isOKActionPerformed(evt)) return;
+        String newPass = new String(this.jPasswordFieldPass1.getPassword());
+				
+		if (!this.isPasswordsEquals()) {
+			this.jLabelErrorText.setVisible(true);
+			return;
+		}
 		
-		String newPass = new String(this.jPasswordFieldPass1.getPassword());
-		this.Password = newPass;
+		if (CryptComp.isCryptedFile(this.File.getPath())) {
+			String oldPass = new String(this.jPasswordFieldOldPassword.getPassword());
+			if (oldPass.isEmpty() || !oldPass.equals(this.File.getPassword()) ) {
+				this.jLabelErrorText.setVisible(true);
+				this.jLabelErrorText.setText("Old password is not correct");
+				return;
+			}
+		}
+		
+		this.NewPassword = newPass;
 		this.setVisible(false);
 		this.dispose();
     }//GEN-LAST:event_jButtonOKActionPerformed
 
-	/**
-	 * Method for childrens 
-	 * 
-	 * @param evt 
-	 */
-	protected boolean isOKActionPerformed(java.awt.event.ActionEvent evt){
-		return true;
-	}
-	
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
-		this.Password = null;
-		this.IsCancel = true;
+		this.NewPassword = null;
 		this.setVisible(false);
 		this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
-	/**
-	 * Essencial checks for childrens
-	 * 
-	 * @return 
-	 */
-	protected boolean checksBeforeWork(){
-		if (!CryptComp.isCryptedFile(this.File.getPath())) return false;
-		
-		return true;
-	}	
-	
     private void jPasswordFieldPass2InputMethodTextChanged(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordFieldPass2InputMethodTextChanged
 		this.jLabelEquals.setVisible(false);
 		this.jLabelErrorText.setVisible(false);
@@ -318,22 +285,21 @@ public class PasswordDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jPasswordFieldPass2InputMethodTextChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JButton jButtonCancel;
-    protected javax.swing.JButton jButtonOK;
-    protected javax.swing.JLabel jLabelBigIcon;
-    protected javax.swing.JLabel jLabelConfirm;
-    protected javax.swing.JLabel jLabelEquals;
-    protected javax.swing.JLabel jLabelErrorText;
-    protected javax.swing.JLabel jLabelFileName;
-    protected javax.swing.JLabel jLabelInvitation;
-    protected javax.swing.JLabel jLabelOldPassword;
-    protected javax.swing.JLabel jLabelPassword;
+    private javax.swing.JButton jButtonCancel;
+    private javax.swing.JButton jButtonOK;
+    private javax.swing.JLabel jLabelBigIcon;
+    private javax.swing.JLabel jLabelConfirm;
+    private javax.swing.JLabel jLabelEquals;
+    private javax.swing.JLabel jLabelErrorText;
+    private javax.swing.JLabel jLabelInvitation;
+    private javax.swing.JLabel jLabelOldPassword;
+    private javax.swing.JLabel jLabelPassword;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    protected javax.swing.JPasswordField jPasswordFieldOldPassword;
-    protected javax.swing.JPasswordField jPasswordFieldPass1;
-    protected javax.swing.JPasswordField jPasswordFieldPass2;
+    private javax.swing.JPasswordField jPasswordFieldOldPassword;
+    private javax.swing.JPasswordField jPasswordFieldPass1;
+    private javax.swing.JPasswordField jPasswordFieldPass2;
     // End of variables declaration//GEN-END:variables
 
 	protected boolean isPasswordsEquals() {
@@ -356,22 +322,32 @@ public class PasswordDialog extends javax.swing.JDialog {
 		return true;
 	}
 	
-	/**
-	 * Common initialization
-	 */
-	protected void initMain() {
-//		this.setTitle(this.Title);
-//		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.SmallIcon)));
-//		this.jLabelBigIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource(this.BigIcon)));
+	private void initMain() {
+		
+		// Change password form
+		if (CryptComp.isCryptedFile(this.File.getPath())) {
+			setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/lock_edit.24x24.png")));
+			this.jLabelBigIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lock_edit.32x32.png"))); 
+			this.setTitle("Change password.");
+			this.jLabelInvitation.setText("Please, confirm current password and enter a new:");
+			this.jLabelOldPassword.setVisible(true);
+			this.jPasswordFieldOldPassword.setVisible(true);
+			this.jLabelPassword.setText("New password:");
+			this.jButtonOK.setText("Change password");
+		}
+		// Crypt new file form
+		else {
+			setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/lock_add.24x24.png")));
+			this.jLabelBigIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lock_add.32x32.png")));
+			this.setTitle("Crypt file. Set password.");
+			this.jLabelInvitation.setText("Please, enter passphrase for crypting:");
+			this.jLabelOldPassword.setVisible(false);
+			this.jPasswordFieldOldPassword.setVisible(false);
+			this.jButtonOK.setText("Crypt file");
+		}
+		
 		this.jLabelEquals.setVisible(false);
 		this.jLabelErrorText.setVisible(false);
-		
-		// Set name of file
-		String filename = this.File.getPath().toAbsolutePath().toString();
-		if (filename.length() > this.MaxFilenameLength) {
-			filename = "..." + filename.substring(filename.length() - this.MaxFilenameLength - 1);
-		}
-		this.jLabelFileName.setText(filename);
 		
 	}
 

@@ -11,7 +11,7 @@
  */
 package mstorage.events;
 
-import mstorage.dialogs.password.PasswordDialog;
+import mstorage.dialogs.CryptPasswordDialog;
 import mstorage.dialogs.MoveDialog;
 import mstorage.storagecollection.StorageCollection;
 import mstorage.storagecollection.StorageItem;
@@ -37,7 +37,6 @@ import javax.swing.tree.TreePath;
 import mstorage.classes.AESEncrypter;
 import mstorage.classes.Settings;
 import mstorage.components.CryptComp;
-import mstorage.dialogs.password.PasswordCreateDialog;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -496,17 +495,16 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
         
         if (file.getIsReadOnly()) return;
 
-		PasswordCreateDialog sd = new PasswordCreateDialog((javax.swing.JFrame)MainForm.getInstance(), true, file);
+		CryptPasswordDialog sd = new CryptPasswordDialog(MainForm.getInstance(), true, file);
 		sd.pack();
 		sd.setLocationRelativeTo(MainForm.getInstance());
 		sd.setVisible(true);
 
 		// When dialog isclosed
-		String newPassword = sd.getPassword();
-		boolean isCancel = sd.getIsCancel();
+		String newPassword = sd.getNewPassword();
 		sd.dispose();
 
-		if (null == newPassword || isCancel) return;
+		if (null == newPassword) return;
         
         // Rename
         try {
