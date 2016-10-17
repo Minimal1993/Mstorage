@@ -13,7 +13,6 @@ package mstorage.dialogs.password;
 
 import java.awt.Toolkit;
 import javax.swing.BorderFactory;
-import static mstorage.About.RET_CANCEL;
 import mstorage.MainForm;
 import mstorage.components.CryptComp;
 import mstorage.models.MoveJTree;
@@ -25,7 +24,7 @@ import mstorage.storagecollection.Folder;
  * 
  * @author ilya.gulevskiy
  */
-public abstract class PasswordDialog extends javax.swing.JDialog {
+public class PasswordDialog extends javax.swing.JDialog {
 	private int MaxFilenameLength = 37;
 	private boolean IsCancel = false;
 	
@@ -39,6 +38,11 @@ public abstract class PasswordDialog extends javax.swing.JDialog {
 		return Password;
 	}
 
+	/**
+	 * Whether button 'Cancel' was perbormed
+	 * 
+	 * @return 
+	 */
 	public boolean getIsCancel() {
 		return IsCancel;
 	}
@@ -46,16 +50,16 @@ public abstract class PasswordDialog extends javax.swing.JDialog {
 	/**
 	 * Creates new form CryptPasswordDialog
 	 */
-	public PasswordDialog(java.awt.Frame parent, boolean modal, File file) {
+	public PasswordDialog(javax.swing.JFrame parent, boolean modal, File file) {
 		super(parent, modal);
 		
 		this.File = file;		
 		initComponents();
 		
-		if (!this.checksBeforeWork()){
-			this.jButtonCancelActionPerformed(null);
-			MainForm.showError("This file is not correct");
-		}
+//		if (!this.checksBeforeWork()){
+//			this.jButtonCancelActionPerformed(null);
+//			MainForm.showError("This file is not correct");
+//		}
 		
 		this.initMain();
 	}
@@ -299,6 +303,8 @@ public abstract class PasswordDialog extends javax.swing.JDialog {
 	 * @return 
 	 */
 	protected boolean checksBeforeWork(){
+		if (!CryptComp.isCryptedFile(this.File.getPath())) return false;
+		
 		return true;
 	}	
 	
@@ -354,9 +360,9 @@ public abstract class PasswordDialog extends javax.swing.JDialog {
 	 * Common initialization
 	 */
 	protected void initMain() {
-		this.setTitle(this.Title);
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.SmallIcon)));
-		this.jLabelBigIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource(this.BigIcon)));
+//		this.setTitle(this.Title);
+//		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.SmallIcon)));
+//		this.jLabelBigIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource(this.BigIcon)));
 		this.jLabelEquals.setVisible(false);
 		this.jLabelErrorText.setVisible(false);
 		

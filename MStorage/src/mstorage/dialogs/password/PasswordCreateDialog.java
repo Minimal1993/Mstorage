@@ -12,9 +12,9 @@
 
 package mstorage.dialogs.password;
 
-import java.awt.Toolkit;
 import mstorage.components.CryptComp;
 import mstorage.storagecollection.File;
+import mstorage.MainForm;
 
 /**
  * Dialog for create a new password
@@ -24,9 +24,21 @@ public class PasswordCreateDialog extends PasswordDialog {
 	protected String SmallIcon = "/images/lock_add.24x24.png";
 	protected String Title = "Encrypt file. Set password.";
 
-	public PasswordCreateDialog(java.awt.Frame parent, boolean modal, File file){
+	public PasswordCreateDialog(javax.swing.JFrame parent, boolean modal, File file){
 		super(parent, modal, file);
 	}
+	
+	/**
+	 * Override parent's method because there is not need crypt file
+	 * 
+	 * @return 
+	 */
+	@Override
+	protected boolean checksBeforeWork(){
+		if (CryptComp.isCryptedFile(this.File.getPath())) return false;
+		
+		return true;
+	}	
 	
 	@Override
 	protected boolean isOKActionPerformed(java.awt.event.ActionEvent evt){
