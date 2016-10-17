@@ -24,7 +24,7 @@ import mstorage.storagecollection.Folder;
  * 
  * @author ilya.gulevskiy
  */
-public class PasswordDialog extends javax.swing.JDialog {
+public abstract class PasswordDialog extends javax.swing.JDialog {
 	private int MaxFilenameLength = 37;
 	private boolean IsCancel = false;
 	
@@ -56,10 +56,10 @@ public class PasswordDialog extends javax.swing.JDialog {
 		this.File = file;		
 		initComponents();
 		
-//		if (!this.checksBeforeWork()){
-//			this.jButtonCancelActionPerformed(null);
-//			MainForm.showError("This file is not correct");
-//		}
+		if (!this.checksBeforeWork()){
+			this.jButtonCancelActionPerformed(null);
+			MainForm.showError("This file is not correct");
+		}
 		
 		this.initMain();
 	}
@@ -361,7 +361,7 @@ public class PasswordDialog extends javax.swing.JDialog {
 	 */
 	protected void initMain() {
 //		this.setTitle(this.Title);
-//		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.SmallIcon)));
+//		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/lock_add.24x24.png")));
 //		this.jLabelBigIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource(this.BigIcon)));
 		this.jLabelEquals.setVisible(false);
 		this.jLabelErrorText.setVisible(false);

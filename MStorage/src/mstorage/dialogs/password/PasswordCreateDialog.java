@@ -12,6 +12,7 @@
 
 package mstorage.dialogs.password;
 
+import java.awt.Toolkit;
 import mstorage.components.CryptComp;
 import mstorage.storagecollection.File;
 import mstorage.MainForm;
@@ -26,6 +27,12 @@ public class PasswordCreateDialog extends PasswordDialog {
 
 	public PasswordCreateDialog(javax.swing.JFrame parent, boolean modal, File file){
 		super(parent, modal, file);
+		
+		this.setTitle(this.Title);
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.SmallIcon)));
+		this.jLabelBigIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource(this.BigIcon)));
+		
+		int r = 9;
 	}
 	
 	/**
@@ -50,9 +57,11 @@ public class PasswordCreateDialog extends PasswordDialog {
 		return true;
 	}
 	
-	@Override
+//	@Override
 	protected void initMain(){
 		super.initMain();
+		
+
 		
 		this.jLabelInvitation.setText("Please, enter passphrase for encryption:");
 		this.jLabelOldPassword.setVisible(false);
