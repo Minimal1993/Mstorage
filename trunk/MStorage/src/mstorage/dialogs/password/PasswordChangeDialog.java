@@ -23,16 +23,9 @@ public class PasswordChangeDialog extends PasswordDialog {
 	protected String SmallIcon = "/images/lock_edit.24x24.png";
 	protected String Title = "Encrypted file. Change password.";
 
-	public PasswordChangeDialog(java.awt.Frame parent, boolean modal, File file){
+	public PasswordChangeDialog(javax.swing.JFrame parent, boolean modal, File file){
 		super(parent, modal, file);
 	}
-	
-	@Override
-	protected boolean checksBeforeWork(){
-		if (!CryptComp.isCryptedFile(this.File.getPath())) return false;
-		
-		return true;
-	}	
 	
 	@Override
 	protected boolean isOKActionPerformed(java.awt.event.ActionEvent evt){

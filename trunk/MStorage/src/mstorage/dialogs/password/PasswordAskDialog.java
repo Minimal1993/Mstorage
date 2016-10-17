@@ -22,7 +22,7 @@ public class PasswordAskDialog extends PasswordDialog {
 	protected String SmallIcon = "/images/lock.24x24.png";
 	protected String Title = "Encrypted file. Enter a password.";
 	
-	public PasswordAskDialog(java.awt.Frame parent, boolean modal, File file){
+	public PasswordAskDialog(javax.swing.JFrame parent, boolean modal, File file){
 		super(parent, modal, file);
 	}
 	

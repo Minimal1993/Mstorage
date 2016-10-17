@@ -22,7 +22,7 @@ public class PasswordResetDialog extends PasswordDialog {
 	protected String SmallIcon = "/images/lock_delete.24x24.png";
 	protected String Title = "Reset encryption. Confirm a password.";
 	
-	public PasswordResetDialog(java.awt.Frame parent, boolean modal, File file){
+	public PasswordResetDialog(javax.swing.JFrame parent, boolean modal, File file){
 		super(parent, modal, file);
 	}
 	
