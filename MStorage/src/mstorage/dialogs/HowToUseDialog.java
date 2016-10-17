@@ -9,7 +9,7 @@
  * @email: mstorage.project@gmail.com
  * @date: 2016
  */
-package mstorage;
+package mstorage.dialogs;
 
 import javax.swing.UIManager;
 import javax.swing.JTree;

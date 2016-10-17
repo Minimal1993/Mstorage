@@ -9,7 +9,7 @@
  * @email: mstorage.project@gmail.com
  * @date: 2016
  */
-package mstorage;
+package mstorage.dialogs;
 
 import mstorage.storagecollection.Folder;
 import mstorage.models.MoveJTree;
@@ -18,6 +18,7 @@ import java.awt.Toolkit;
 import javax.swing.BorderFactory;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
+import mstorage.MainForm;
 
 
 /**

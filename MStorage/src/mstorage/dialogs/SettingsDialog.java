@@ -9,11 +9,12 @@
  * @email: mstorage.project@gmail.com
  * @date: 2016
  */
-package mstorage;
+package mstorage.dialogs;
 
 import java.awt.Toolkit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import mstorage.MainForm;
 
 import mstorage.classes.Settings;
 

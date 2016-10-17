@@ -11,6 +11,8 @@
  */
 package mstorage.events;
 
+import mstorage.dialogs.CryptPasswordDialog;
+import mstorage.dialogs.MoveDialog;
 import mstorage.storagecollection.StorageCollection;
 import mstorage.storagecollection.StorageItem;
 import mstorage.storagecollection.File;
