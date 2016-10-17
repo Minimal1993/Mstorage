@@ -11,13 +11,14 @@
  */
 package mstorage;
 
+import mstorage.dialogs.HowToUseDialog;
 import mstorage.storagecollection.StorageCollection;
 import mstorage.storagecollection.File;
 import mstorage.components.StorageCollectionJTree;
 import mstorage.models.*;
 import mstorage.components.FileJTab;
 import mstorage.events.EventsStorageCollectionHandler;
-import mstorage.SettingsDialog;
+import mstorage.dialogs.SettingsDialog;
 import mstorage.classes.Settings;
 
 import java.awt.*;

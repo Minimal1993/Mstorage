@@ -9,7 +9,7 @@
  * @email: mstorage.project@gmail.com
  * @date: 2016
  */
-package mstorage;
+package mstorage.dialogs;
 
 import java.awt.Toolkit;
 import javax.swing.BorderFactory;
@@ -73,7 +73,6 @@ public class CryptPasswordDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Crypt file. Set a password.");
-        setMaximumSize(new java.awt.Dimension(330, 256));
         setMinimumSize(new java.awt.Dimension(330, 256));
         setModal(true);
         setResizable(false);
