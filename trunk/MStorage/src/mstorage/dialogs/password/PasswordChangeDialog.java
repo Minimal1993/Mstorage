@@ -19,9 +19,6 @@ import mstorage.storagecollection.File;
  * Form for change password
  */
 public class PasswordChangeDialog extends PasswordDialog {
-	protected String BigIcon = "/images/lock_edit.32x32.png";
-	protected String SmallIcon = "/images/lock_edit.24x24.png";
-	protected String Title = "Encrypted file. Change password.";
 
 	public PasswordChangeDialog(javax.swing.JFrame parent, boolean modal, File file){
 		super(parent, modal, file);
@@ -46,13 +43,17 @@ public class PasswordChangeDialog extends PasswordDialog {
 	
 	@Override
 	protected void initMain(){
-		super.initMain();
+        this.BigIcon = "/images/lock_edit.32x32.png";
+        this.SmallIcon = "/images/lock_edit.24x24.png";
+        this.Title = "Encrypted file. Change password.";
 		
 		this.jLabelInvitation.setText("Please, confirm current password and enter a new:");
 		this.jLabelOldPassword.setVisible(true);
 		this.jPasswordFieldOldPassword.setVisible(true);
 		this.jLabelPassword.setText("New password:");
 		this.jButtonOK.setText("Change password");
+        
+        super.initMain();
 	}
 	
 }

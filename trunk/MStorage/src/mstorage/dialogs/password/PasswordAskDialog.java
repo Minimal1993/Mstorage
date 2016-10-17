@@ -18,9 +18,6 @@ import mstorage.storagecollection.File;
  * Dialog for ask password to decrypt a file
  */
 public class PasswordAskDialog extends PasswordDialog {
-	protected String BigIcon = "/images/lock.32x32.png";
-	protected String SmallIcon = "/images/lock.24x24.png";
-	protected String Title = "Encrypted file. Enter a password.";
 	
 	public PasswordAskDialog(javax.swing.JFrame parent, boolean modal, File file){
 		super(parent, modal, file);
@@ -28,7 +25,9 @@ public class PasswordAskDialog extends PasswordDialog {
 	
 	@Override
 	protected void initMain(){
-		super.initMain();
+        this.BigIcon = "/images/lock.32x32.png";
+        this.SmallIcon = "/images/lock.24x24.png";
+        this.Title = "Encrypted file. Enter a password.";
 		
 		this.jLabelInvitation.setText("Please, enter passphrase for decryption:");
 		this.jLabelOldPassword.setVisible(false);
@@ -36,6 +35,8 @@ public class PasswordAskDialog extends PasswordDialog {
 		this.jLabelConfirm.setVisible(false);
 		this.jPasswordFieldPass2.setVisible(false);
 		this.jButtonOK.setText("Decrypt file");
+        
+        super.initMain();
 	}
 	
 }

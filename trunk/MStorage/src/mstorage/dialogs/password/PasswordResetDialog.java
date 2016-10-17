@@ -18,9 +18,6 @@ import mstorage.storagecollection.File;
  * Dialog for reset password
  */
 public class PasswordResetDialog extends PasswordDialog {
-	protected String BigIcon = "/images/lock_delete.32x32.png";
-	protected String SmallIcon = "/images/lock_delete.24x24.png";
-	protected String Title = "Reset encryption. Confirm a password.";
 	
 	public PasswordResetDialog(javax.swing.JFrame parent, boolean modal, File file){
 		super(parent, modal, file);
@@ -28,7 +25,9 @@ public class PasswordResetDialog extends PasswordDialog {
 	
 	@Override
 	protected void initMain(){
-		super.initMain();
+        this.BigIcon = "/images/lock_delete.32x32.png";
+        this.SmallIcon = "/images/lock_delete.24x24.png";
+        this.Title = "Reset encryption. Confirm a password.";
 		
 		this.jLabelInvitation.setText("Please, enter passphrase for reset:");
 		this.jLabelOldPassword.setVisible(false);
@@ -36,6 +35,8 @@ public class PasswordResetDialog extends PasswordDialog {
 		this.jLabelConfirm.setVisible(false);
 		this.jPasswordFieldPass2.setVisible(false);
 		this.jButtonOK.setText("Reset encryption");
+        
+        super.initMain();
 	}
 	
 }

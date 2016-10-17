@@ -360,9 +360,9 @@ public abstract class PasswordDialog extends javax.swing.JDialog {
 	 * Common initialization
 	 */
 	protected void initMain() {
-//		this.setTitle(this.Title);
-//		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/lock_add.24x24.png")));
-//		this.jLabelBigIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource(this.BigIcon)));
+		this.setTitle(this.Title);
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.SmallIcon)));
+		this.jLabelBigIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource(this.BigIcon)));
 		this.jLabelEquals.setVisible(false);
 		this.jLabelErrorText.setVisible(false);
 		
