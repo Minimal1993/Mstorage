@@ -495,7 +495,7 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
         
         if (file.getIsReadOnly()) return;
 
-		CryptPasswordDialog sd = new CryptPasswordDialog(MainForm.getInstance(), true, file);
+		CryptPasswordDialog sd = new CryptPasswordDialog((java.awt.Frame)MainForm.getInstance(), true, file);
 		sd.pack();
 		sd.setLocationRelativeTo(MainForm.getInstance());
 		sd.setVisible(true);
