@@ -21,18 +21,9 @@ import mstorage.MainForm;
  * Dialog for create a new password
  */
 public class PasswordCreateDialog extends PasswordDialog {
-	protected String BigIcon = "/images/lock_add.32x32.png";
-	protected String SmallIcon = "/images/lock_add.24x24.png";
-	protected String Title = "Encrypt file. Set password.";
 
 	public PasswordCreateDialog(javax.swing.JFrame parent, boolean modal, File file){
 		super(parent, modal, file);
-		
-		this.setTitle(this.Title);
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.SmallIcon)));
-		this.jLabelBigIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource(this.BigIcon)));
-		
-		int r = 9;
 	}
 	
 	/**
@@ -59,14 +50,16 @@ public class PasswordCreateDialog extends PasswordDialog {
 	
 //	@Override
 	protected void initMain(){
-		super.initMain();
-		
-
-		
+        this.BigIcon = "/images/lock_add.32x32.png";
+        this.SmallIcon = "/images/lock_add.24x24.png";
+        this.Title = "Encrypt file. Set password.";
+        
 		this.jLabelInvitation.setText("Please, enter passphrase for encryption:");
 		this.jLabelOldPassword.setVisible(false);
 		this.jPasswordFieldOldPassword.setVisible(false);
 		this.jButtonOK.setText("Encrypt file");
+        
+		super.initMain();
 	}
 	
 }
