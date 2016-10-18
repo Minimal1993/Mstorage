@@ -48,7 +48,7 @@ public class PasswordCreateDialog extends PasswordDialog {
 		return true;
 	}
 	
-//	@Override
+	@Override
 	protected void initMain(){
         this.BigIcon = "/images/lock_add.32x32.png";
         this.SmallIcon = "/images/lock_add.24x24.png";
