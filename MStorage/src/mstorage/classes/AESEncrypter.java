@@ -19,9 +19,13 @@ import org.apache.commons.codec.binary.Base64;
 public class AESEncrypter
 {
     private String encryptionKey;
+	private String fillerKey = "aIg67hrTbvScvgTr";
 
     public AESEncrypter(String encryptionKey)
     {
+		// Key have to be exact 16 symbols
+		encryptionKey = (encryptionKey + fillerKey).substring(0, 16);
+		
         this.encryptionKey = encryptionKey;
     }
 

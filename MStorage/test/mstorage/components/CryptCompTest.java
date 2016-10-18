@@ -31,8 +31,8 @@ import static org.junit.Assert.*;
  */
 public class CryptCompTest {
     
-    public static String Text = "Как известно, в своем развитии SQL устремился в разные стороны.";
-    public static String Password = "MZygpewJsCpRrfOr";
+    public static String Text = "Как известно, в своем развитии SQL устремился в разные стороны. Как";
+    public static String Password = "12345";
     public static String FileName = "filename";
     
     public CryptCompTest() {
