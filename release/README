@@ -17,8 +17,13 @@ For testing and review purposes,archive contains test storage.
 
 Tested into Windows 7 and Ubuntu 14.
 
-    Storage tree is copy of your local drive directory
-    You can access to storage without MStorage by simple text reader
-    You can add picture to your notes
-    Crossplatform, can be launch in Win, UNIX and MacOS systems
-    You can launch a couple apps, dividing settings by set a diffrent names of settings files
+Storage tree is copy of your local drive directory
+You can access to storage without MStorage by simple text reader
+You can add picture to your notes
+Crossplatform, can be launch in Win, UNIX and MacOS systems
+You can launch a couple apps, dividing settings by set a diffrent names of settings files
+	
+RELEASES
+
+MStorage.1.0.1.zip - current stable version
+MStorage.1.1.1.alpha.zip - new alpha version
