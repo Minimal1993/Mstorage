@@ -37,7 +37,9 @@ import javax.swing.tree.TreePath;
 import mstorage.classes.AESEncrypter;
 import mstorage.classes.Settings;
 import mstorage.components.CryptComp;
+import mstorage.dialogs.password.PasswordChangeDialog;
 import mstorage.dialogs.password.PasswordCreateDialog;
+import mstorage.dialogs.password.PasswordResetDialog;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -408,6 +410,9 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 			}
 		}
 
+		// Reset password
+		file.setPassword(null);
+		
 		// Check if File is opened in tab
 		MainForm.getInstance().checkOpenedFileWhenFileDelete(file);
 	}
@@ -484,11 +489,60 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 	}
 	
 	public void eh_change_file_password() {
+		File file = (File) this.StorageItem;
+        
+        if (file.getIsReadOnly() || !CryptComp.isCryptedFile(file.getPath()) || file.getPassword().isEmpty()) {
+			return;
+		}
+		
+		PasswordChangeDialog sd = new PasswordChangeDialog(MainForm.getInstance(), true, file);
+		sd.pack();
+		sd.setLocationRelativeTo(MainForm.getInstance());
+		sd.setVisible(true);
 
+		// When dialog isclosed
+		String newPassword = sd.getPassword();
+		boolean isCancel = sd.getIsCancel();
+		sd.dispose();
+
+		if (null == newPassword || isCancel) return;
+		
+		file.setPassword(newPassword);
+		
+		this.call("save_file");
 	}
 	
 	public void eh_decrypt_file() {
+		File file = (File) this.StorageItem;
+		FileJTab tab = (FileJTab) MainForm.getInstance().getTabbedPaneMain().getSelectedComponent();
+        
+        if (file.getIsReadOnly() || !CryptComp.isCryptedFile(file.getPath()) || file.getPassword().isEmpty()) {
+			return;
+		}
 
+		PasswordResetDialog sd = new PasswordResetDialog(MainForm.getInstance(), true, file);
+		sd.pack();
+		sd.setLocationRelativeTo(MainForm.getInstance());
+		sd.setVisible(true);
+
+		// When dialog isclosed
+		String newPassword = sd.getPassword();
+		boolean isCancel = sd.getIsCancel();
+		sd.dispose();
+
+		if (null == newPassword || isCancel) return;
+
+		try {
+			String newname = file.getFileName().substring(0, file.getFileName().length() - (CryptComp.Extension.length() + 1));
+			file.rename(newname);
+			file.setPassword(null);
+            
+		} catch (Exception e) {
+			MainForm.showError(e.getMessage());
+            return;
+		}
+		
+		this.call("save_file");
 	}
 	
 	public void eh_crypt_file() {

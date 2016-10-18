@@ -626,7 +626,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBoxMenuItemViewStorageTreePanelActionPerformed
 
     private void jButtonSearchAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchAllActionPerformed
-		// TODO add your handling code here:
+		
     }//GEN-LAST:event_jButtonSearchAllActionPerformed
 
 	/**
@@ -642,7 +642,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonRefreshTreeActionPerformed
 
     private void jButtonSearchInFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchInFileActionPerformed
-		// TODO add your handling code here:
+		
     }//GEN-LAST:event_jButtonSearchInFileActionPerformed
 
     private void jButtonRenameFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRenameFileActionPerformed
