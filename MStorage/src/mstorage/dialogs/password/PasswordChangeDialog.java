@@ -50,7 +50,7 @@ public class PasswordChangeDialog extends PasswordDialog {
 		this.jLabelInvitation.setText("Please, confirm current password and enter a new:");
 		this.jLabelOldPassword.setVisible(true);
 		this.jPasswordFieldOldPassword.setVisible(true);
-		this.jLabelPassword.setText("New password:");
+		this.jLabelPassword.setText("Password:");
 		this.jButtonOK.setText("Change password");
         
         super.initMain();

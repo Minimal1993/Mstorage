@@ -29,6 +29,7 @@ import javax.swing.JPanel;
 import mstorage.MainForm;
 import mstorage.classes.AESEncrypter;
 import mstorage.components.CryptComp;
+import mstorage.dialogs.password.PasswordAskDialog;
 
 /**
  * Fabric for create new tabs for Files and make these appearance.
@@ -59,40 +60,32 @@ public class TabsFabric {
             // Check if file is crypted
             if (CryptComp.isCryptedFile(file.getPath())){
                 
-                // TODO: Have to use password input
-                String s = (String) JOptionPane.showInputDialog(
-                        MainForm.getInstance(),
-                        "Please, enter a password:",
-                        "Crypted file",
-                        JOptionPane.PLAIN_MESSAGE,
-                        new javax.swing.ImageIcon(
-                            MainForm.getInstance().getClass().getResource("/images/lock.16x16.png")
-                        ),
-                        null,
-                        null);
+				PasswordAskDialog sd = new PasswordAskDialog(MainForm.getInstance(), true, file);
+				sd.pack();
+				sd.setLocationRelativeTo(MainForm.getInstance());
+				sd.setVisible(true);
 
-                if ((s != null) && (s.length() > 0)) {
-                    file.setPassword(s);
-                    try {
-                        AESEncrypter encrypter = new AESEncrypter(file.getPassword());
-                        String code = file.getContent();
-                        String content = encrypter.decrypt( code );
-                        PanelTemplate.TextAreaDocument.setText( content );
-                    }
-                    catch (Exception e) {
-                        MainForm.showError(e.getMessage());
-                        return null;
-                    }
-                }
+				// When dialog isclosed
+				String newPassword = sd.getPassword();
+				boolean isCancel = sd.getIsCancel();
+				sd.dispose();
+
+				if (null == newPassword || isCancel) return null;
+
+				file.setPassword(newPassword);
+				AESEncrypter encrypter = new AESEncrypter(file.getPassword());
+				String code = file.getContent();
+				String content = encrypter.decrypt( code );
+				PanelTemplate.TextAreaDocument.setText( content );
             }
             else {
                 PanelTemplate.TextAreaDocument.setText(file.getContent());
             }
-		} catch (IOException e) {
+		} catch (Exception e) {
 			MainForm.showError(e.getMessage());
+			return null;
 		}
         
-
 		PanelTemplate.TextAreaDocument.setWrapStyleWord(true);
 		PanelTemplate.ScrollPaneDocumentText.setViewportView(PanelTemplate.TextAreaDocument);
 

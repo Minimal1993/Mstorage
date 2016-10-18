@@ -287,7 +287,6 @@ public class SettingsDialog extends javax.swing.JDialog {
 				
 				this.jTextFieldStorageDirectory.setText(Settings.getInstance().getProperty("StorageDirectory"));
 				
-				// TODO: May be need apply change by special command of button or do it when settings window will closed
 				MainForm.getInstance().initTree();
 				
 				// Close all opened tabs

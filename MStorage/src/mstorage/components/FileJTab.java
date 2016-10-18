@@ -21,6 +21,7 @@ import javax.swing.JScrollPane;
 
 import javax.swing.JTextArea;
 import mstorage.MainForm;
+import mstorage.classes.AESEncrypter;
 import mstorage.utils.Hash;
 
 /**
@@ -79,7 +80,15 @@ public class FileJTab extends javax.swing.JPanel implements FocusListener {
 		// If md5 or lastChanged not calculated yet, calculate and save it
 		if (this.savedContentMD5.isEmpty() || 0 == this.lastModified) {
 			try {
+				
 				String content = this.File.getContent();
+				
+				// If file is encryption
+				if (CryptComp.isCryptedFile(this.File.getPath()) && !this.File.getPassword().isEmpty()) {
+					AESEncrypter encrypter = new AESEncrypter(this.File.getPassword());
+					content = encrypter.decrypt(content);
+				}
+				
 				this.savedContentMD5 = Hash.md5(content);
 				
 				java.io.File iofile = new java.io.File(this.File.getPath().toAbsolutePath().toString());
@@ -170,10 +179,17 @@ public class FileJTab extends javax.swing.JPanel implements FocusListener {
 		String content = null;
 		try{
 			content = this.File.getContent();
+			
+			// If file is encryption
+			if (CryptComp.isCryptedFile(this.File.getPath()) && !this.File.getPassword().isEmpty()) {
+				AESEncrypter encrypter = new AESEncrypter(this.File.getPassword());
+				content = encrypter.decrypt(content);
+			}
+			
 			this.savedContentMD5 = Hash.md5(content);
 			this.lastModified = iofile.lastModified();
 		}
-		catch(IOException ex){
+		catch(Exception ex){
 			MainForm.showError(ex);
 		}
 		
