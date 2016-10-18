@@ -23,20 +23,9 @@ import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 /**
- * It offers Java AES 256-bit Encryption/Decryption class
+ * It offers Java AES 256-bit Encryption
  * http://stackoverflow.com/questions/992019/java-256-bit-aes-password-based-encryption
- * Took from http://pastebin.com/YiwbCAW8
  * 
- * USAGE:
- *      String message = "MESSAGE";
- *      String password = "PASSWORD";
- *
- *      AESEncrypter encrypter = new AESEncrypter(password);
- *      String encrypted = encrypter.encrypt(message);
- *      String decrypted = encrypter.decrypt(encrypted);
- *
- *      System.out.println("Encrypt(\"" + message + "\", \"" + password + "\") = \"" + encrypted + "\"");
- *      System.out.println("Decrypt(\"" + encrypted + "\", \"" + password + "\") = \"" + decrypted + "\"");
  */
 public class AESEncrypter2 {
 
@@ -48,24 +37,23 @@ public class AESEncrypter2 {
     private static final int KEY_LENGTH = 256;
     private Cipher ecipher;
     private Cipher dcipher;
+	private String fillerKey = "aIg67hrTbvScvgTr";
     
     public AESEncrypter2(String passPhrase) throws Exception {
         SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         KeySpec spec = new PBEKeySpec(passPhrase.toCharArray(), SALT, ITERATION_COUNT, KEY_LENGTH);
         SecretKey tmp = factory.generateSecret(spec);
         SecretKey secret = new SecretKeySpec(tmp.getEncoded(), "AES");
-
+		
+		// Prepare initVector
+		String encryptionKey = (passPhrase + this.fillerKey).substring(0, 16);
+		IvParameterSpec iv = new IvParameterSpec(encryptionKey.getBytes("UTF-8"));
+		
         ecipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-//        ecipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
-        ecipher.init(Cipher.ENCRYPT_MODE, secret);
+        ecipher.init(Cipher.ENCRYPT_MODE, secret, iv);
         
         dcipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-//        dcipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
-        byte[] iv = ecipher.getParameters().getParameterSpec(IvParameterSpec.class).getIV();
-        dcipher.init(Cipher.DECRYPT_MODE, secret, new IvParameterSpec(iv));
-
-//        IvParameterSpec ivParameterSpec = new IvParameterSpec(ecipher.getIV());
-//        dcipher.init(Cipher.DECRYPT_MODE, secret, ivParameterSpec);
+        dcipher.init(Cipher.DECRYPT_MODE, secret, iv);
     }
 
     public String encrypt(String encrypt) throws Exception {

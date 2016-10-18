@@ -12,14 +12,21 @@
 package mstorage.classes;
 
 import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 
+/**
+ * Simple AES 128-bit encryption
+ * http://stackoverflow.com/questions/15554296/simple-java-aes-encrypt-decrypt-example
+ * 
+ */
 public class AESEncrypter
 {
     private String encryptionKey;
 	private String fillerKey = "aIg67hrTbvScvgTr";
+	private String initVector = "RandomInitVector";
 
     public AESEncrypter(String encryptionKey)
     {
@@ -48,12 +55,13 @@ public class AESEncrypter
     private Cipher getCipher(int cipherMode)
             throws Exception
     {
-        String encryptionAlgorithm = "AES";
         SecretKeySpec keySpecification = new SecretKeySpec(
-                encryptionKey.getBytes("UTF-8"), encryptionAlgorithm);
-        Cipher cipher = Cipher.getInstance(encryptionAlgorithm);
-        cipher.init(cipherMode, keySpecification);
+                encryptionKey.getBytes("UTF-8"), "AES");
+		IvParameterSpec iv = new IvParameterSpec(initVector.getBytes("UTF-8"));
+        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
+        cipher.init(cipherMode, keySpecification, iv);
 
         return cipher;
     }
+	
 }
