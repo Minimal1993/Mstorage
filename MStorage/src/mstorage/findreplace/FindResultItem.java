@@ -10,7 +10,7 @@
  * @date: 2016
  */
 
-package mstorage.findreplace.types;
+package mstorage.findreplace;
 
 import java.nio.file.Path;
 

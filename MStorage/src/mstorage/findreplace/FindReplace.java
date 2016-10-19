@@ -12,9 +12,6 @@
 
 package mstorage.findreplace;
 
-import mstorage.findreplace.types.FindInput;
-import mstorage.findreplace.types.FindResult;
-import mstorage.findreplace.types.FindResultItem;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -112,8 +109,6 @@ public class FindReplace {
                 || StorageCollection.isImage(currentFile.toPath())
                 || CryptComp.isCryptedFile(currentFile.toPath())
             ) {
-                int e = 6;
-                
                 continue;
             }
 			
