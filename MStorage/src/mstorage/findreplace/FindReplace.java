@@ -132,6 +132,7 @@ public class FindReplace {
 	 */
 	protected FindResult findInFile(java.io.File file){
 		int linecount = 0;
+        int globalCharCount = 0;
         String line;
 		FindResult findResult = new FindResult(file.toPath(), new ArrayList<FindResultItem>());
 		
@@ -143,17 +144,26 @@ public class FindReplace {
 
             while (( line = bf.readLine()) != null) {
 				linecount++;
-				Matcher m = this.Pattern.matcher(line);  
-				if(!m.find()) continue; 
+                
+                // TODO: Can search only one time per line
+				Matcher m = this.Pattern.matcher(line); 
+				if(!m.find()) {
+                    globalCharCount += line.length() + 1;
+                    continue;
+                } 
 				
 				FindResultItem fri = new FindResultItem(
 					findResult.getFileName(), 
 					linecount, 
-					m.start() + 1, 
+					m.start(), 
 					m.group(), 
-					this.FindInput.getReplace());
+					this.FindInput.getReplace(),
+                    globalCharCount + m.start()
+                );
 		
 				findResult.getCollection().add(fri);
+                
+                globalCharCount += line.length() + 1;
             }
 
 			bf.close();
