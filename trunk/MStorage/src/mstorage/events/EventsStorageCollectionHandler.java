@@ -392,6 +392,8 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
         if (tab.jPanelSearchInFile.isVisible()){
             tab.jPanelSearchInFile.setVisible(false);
             MainForm.getInstance().getjButtonSearchInFile().setSelected(false);
+            tab.Highlighter.removeAllHighlights();
+            tab.jTextFieldSearchInFile.setText("");
         }
         else {
             tab.jPanelSearchInFile.setVisible(true);

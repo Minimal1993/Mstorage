@@ -23,14 +23,29 @@ public class FindResultItem {
 	protected int CharNumber;
 	protected String Result;
 	protected String Replace;
+    protected int GlobalCharNumber;
 	
-	public FindResultItem(Path FileName, int LineNumber, int CharNumber, String Result, String Replace){
+	public FindResultItem(
+            Path FileName, 
+            int LineNumber, 
+            int CharNumber, 
+            String Result, 
+            String Replace, 
+            int GlobalCharNumber
+        ){
+        
 		this.FileName = FileName;
 		this.LineNumber = LineNumber;
 		this.CharNumber = CharNumber;
 		this.Result = Result;
 		this.Replace = Replace;
+        this.GlobalCharNumber = GlobalCharNumber;
+        
 	}
+
+    public int getGlobalCharNumber() {
+        return GlobalCharNumber;
+    }
 
 	public int getLineNumber(){
 		return this.LineNumber;

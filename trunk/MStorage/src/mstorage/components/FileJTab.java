@@ -23,8 +23,10 @@ import javax.swing.JScrollPane;
 
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.text.Highlighter;
 import mstorage.MainForm;
 import mstorage.classes.AESEncrypter;
+import mstorage.findreplace.FindInput;
 import mstorage.utils.Hash;
 
 /**
@@ -37,6 +39,7 @@ public class FileJTab extends javax.swing.JPanel implements FocusListener {
 	public JTextArea TextAreaDocument;
 	public JScrollPane ScrollPaneDocumentText;
 	public JPanel JPanelDocumentPictures;
+    public Highlighter Highlighter;
     
     // Elements for search in file
     public JButton jButtonCloseSearchInFilePanel;
@@ -250,6 +253,11 @@ public class FileJTab extends javax.swing.JPanel implements FocusListener {
 		return false;
 	}
 	
-	
+    /**
+     * Handler for button search in file
+     */    
+//	public void jButtonSearchInFilePerformed(FindInput findInput){
+//        
+//    }
 	
 }

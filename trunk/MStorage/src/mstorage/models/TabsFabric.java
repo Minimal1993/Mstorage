@@ -23,13 +23,24 @@ import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
+import javax.swing.text.Highlighter.HighlightPainter;
 import mstorage.MainForm;
 import mstorage.classes.AESEncrypter;
 import mstorage.components.CryptComp;
 import mstorage.dialogs.password.PasswordAskDialog;
+import mstorage.events.EventsStorageCollectionHandler;
+import mstorage.findreplace.FindInput;
+import mstorage.findreplace.FindReplace;
+import mstorage.findreplace.FindResult;
+import mstorage.findreplace.FindResultItem;
 
 /**
  * Fabric for create new tabs for Files and make these appearance.
@@ -42,6 +53,7 @@ public class TabsFabric {
 		PanelTemplate.JPanelDocumentPictures = new javax.swing.JPanel();
 		PanelTemplate.TextAreaDocument = new javax.swing.JTextArea();
 		PanelTemplate.TextAreaDocument.addFocusListener(PanelTemplate);
+        PanelTemplate.Highlighter = PanelTemplate.TextAreaDocument.getHighlighter();
         
         // Elements search in file
         PanelTemplate.jPanelSearchInFile = new javax.swing.JPanel();
@@ -97,7 +109,7 @@ public class TabsFabric {
 		PanelTemplate.ScrollPaneDocumentText.setViewportView(PanelTemplate.TextAreaDocument);
         
         
-        // Elements search in file
+        // BEGIN: Elements search in file
         PanelTemplate.jPanelSearchInFile.setPreferredSize(new java.awt.Dimension(0, 30));
 
         PanelTemplate.jButtonCloseSearchInFilePanel.setIcon(
@@ -108,15 +120,47 @@ public class TabsFabric {
         PanelTemplate.jButtonCloseSearchInFilePanel.setContentAreaFilled(false);
         PanelTemplate.jButtonCloseSearchInFilePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PanelTemplate.jPanelSearchInFile.setVisible(false);
-                MainForm.getInstance().getjButtonSearchInFile().setSelected(false);
+                EventsStorageCollectionHandler esch = new EventsStorageCollectionHandler(PanelTemplate.File);
+                esch.call("search_in_file");
             }
         });
 
         PanelTemplate.jButtonSearchInFile.setText("Find");
         PanelTemplate.jButtonSearchInFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                System.out.println("jButtonSearchInFile");
+                PanelTemplate.Highlighter.removeAllHighlights();
+                String search = PanelTemplate.jTextFieldSearchInFile.getText().trim();
+                if (search.isEmpty()) return;
+                
+                FindInput fi = new FindInput(PanelTemplate.File.getPath(), search);
+                
+                if (PanelTemplate.jCheckBoxFindInFileUseCase.isSelected()){
+                    fi.setAccordingToCase(true);
+                }
+                
+                FindReplace fr = new FindReplace(fi);
+                ArrayList<FindResult> findResult = fr.find();
+                
+                if (0 == findResult.size()) return;
+                
+                for(FindResult res : findResult){
+                    ArrayList<FindResultItem> friCollection = res.getCollection();
+                    if (friCollection.isEmpty()) continue;
+                    
+                    for (FindResultItem fri : friCollection ) {
+                    
+                        HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(Color.pink);
+                        int p0 = fri.getGlobalCharNumber();
+                        int p1 = p0 + fri.getResult().length();
+                        
+                        try {
+                            PanelTemplate.Highlighter.addHighlight(p0, p1, painter );
+                        }
+                        catch ( BadLocationException e){
+                            MainForm.showError(e.getMessage());
+                        }
+                    }
+                }
             }
         });
 
@@ -145,7 +189,7 @@ public class TabsFabric {
                 .addComponent(PanelTemplate.jCheckBoxFindInFileUseCase))
         );
         PanelTemplate.jPanelSearchInFile.setVisible(false);
-
+        // END: Elements search in file
         
 		javax.swing.GroupLayout PanelTemplateLayout = new javax.swing.GroupLayout(PanelTemplate);
 		PanelTemplate.setLayout(PanelTemplateLayout);
