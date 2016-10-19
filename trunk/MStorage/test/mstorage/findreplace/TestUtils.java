@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package mstorage.findreplace.utils;
+package mstorage.findreplace;
 
 import mstorage.utils.FileUtils;
 

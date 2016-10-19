@@ -5,8 +5,6 @@
  */
 package mstorage.findreplace;
 
-import mstorage.findreplace.types.*;
-import mstorage.findreplace.utils.TestUtils;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
