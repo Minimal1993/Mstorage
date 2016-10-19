@@ -81,7 +81,7 @@ public class FindReplace {
 		java.io.File file = new java.io.File(this.FindInput.getFileName().toAbsolutePath().toString());
 		
 		if (file.isDirectory()){
-			this.findInDir(file, result);
+            this.findInDir(file, result);
 		}
 		else {
 			FindResult fr = this.findInFile(file);
@@ -102,16 +102,18 @@ public class FindReplace {
 		
 		java.io.File[] files = file.listFiles();
 
-		if (files == null) return result;
+		if (null == files) return result;
 		
 		for (java.io.File currentFile : files) {
 			
 			// Checking
 			if (!StorageCollection.isCorrectFile(currentFile.toPath())
-                || !!StorageCollection.isFile(currentFile.toPath())
+                || !StorageCollection.isFile(currentFile.toPath())
                 || StorageCollection.isImage(currentFile.toPath())
                 || CryptComp.isCryptedFile(currentFile.toPath())
             ) {
+                int e = 6;
+                
                 continue;
             }
 			
