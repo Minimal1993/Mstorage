@@ -42,9 +42,11 @@ import java.util.Arrays;
 import javax.swing.Action;
 import javax.swing.InputMap;
 import javax.swing.JMenu;
+import javax.swing.JToggleButton;
 import javax.swing.KeyStroke;
 import javax.swing.text.DefaultEditorKit;
 import mstorage.components.CryptComp;
+import mstorage.storagecollection.Folder;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.*;
@@ -162,7 +164,6 @@ public class MainForm extends javax.swing.JFrame {
         jButtonSearchAll = new javax.swing.JButton();
         jButtonRefreshTree = new javax.swing.JButton();
         jSeparatorFileMenu = new javax.swing.JToolBar.Separator();
-        jButtonSearchInFile = new javax.swing.JButton();
         jButtonRenameFile = new javax.swing.JButton();
         jButtonAddImage = new javax.swing.JButton();
         jButtonMoveFile = new javax.swing.JButton();
@@ -174,6 +175,7 @@ public class MainForm extends javax.swing.JFrame {
         jButtonChangePassword = new javax.swing.JButton();
         jButtonDecryptFile = new javax.swing.JButton();
         jButtonCryptFile = new javax.swing.JButton();
+        jButtonSearchInFile = new javax.swing.JToggleButton();
         jPanel2 = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
         editMenu = new javax.swing.JMenu();
@@ -245,7 +247,6 @@ public class MainForm extends javax.swing.JFrame {
 
         jButtonSearchAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/magnifier.24x24.png"))); // NOI18N
         jButtonSearchAll.setToolTipText("Search in root folder");
-        jButtonSearchAll.setEnabled(false);
         jButtonSearchAll.setFocusable(false);
         jButtonSearchAll.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonSearchAll.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -258,6 +259,7 @@ public class MainForm extends javax.swing.JFrame {
 
         jButtonRefreshTree.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update.24x24.png"))); // NOI18N
         jButtonRefreshTree.setToolTipText("Refresh all tree");
+        jButtonRefreshTree.setFocusable(false);
         jButtonRefreshTree.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonRefreshTree.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonRefreshTree.addActionListener(new java.awt.event.ActionListener() {
@@ -267,19 +269,6 @@ public class MainForm extends javax.swing.JFrame {
         });
         ToolBarMain.add(jButtonRefreshTree);
         ToolBarMain.add(jSeparatorFileMenu);
-
-        jButtonSearchInFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/page_white_magnify.24x24.png"))); // NOI18N
-        jButtonSearchInFile.setToolTipText("Search in this file");
-        jButtonSearchInFile.setEnabled(false);
-        jButtonSearchInFile.setFocusable(false);
-        jButtonSearchInFile.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonSearchInFile.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonSearchInFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSearchInFileActionPerformed(evt);
-            }
-        });
-        ToolBarMain.add(jButtonSearchInFile);
 
         jButtonRenameFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/textfield.24x24.png"))); // NOI18N
         jButtonRenameFile.setToolTipText("Rename this file");
@@ -415,6 +404,18 @@ public class MainForm extends javax.swing.JFrame {
         });
         ToolBarMain.add(jButtonCryptFile);
 
+        jButtonSearchInFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/page_white_magnify.24x24.png"))); // NOI18N
+        jButtonSearchInFile.setToolTipText("Find in this file");
+        jButtonSearchInFile.setFocusable(false);
+        jButtonSearchInFile.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonSearchInFile.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonSearchInFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSearchInFileActionPerformed(evt);
+            }
+        });
+        ToolBarMain.add(jButtonSearchInFile);
+
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -441,6 +442,7 @@ public class MainForm extends javax.swing.JFrame {
         });
         editMenu.add(jMenuItemSaveFile);
 
+        jMenuItemRefreshAllTree.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemRefreshAllTree.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update.16x16.png"))); // NOI18N
         jMenuItemRefreshAllTree.setText("Refresh all tree");
         jMenuItemRefreshAllTree.addActionListener(new java.awt.event.ActionListener() {
@@ -450,9 +452,9 @@ public class MainForm extends javax.swing.JFrame {
         });
         editMenu.add(jMenuItemRefreshAllTree);
 
+        jMenuItemSearchInRootFolder.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemSearchInRootFolder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/magnifier.16x16.png"))); // NOI18N
         jMenuItemSearchInRootFolder.setText("Search in root folder");
-        jMenuItemSearchInRootFolder.setEnabled(false);
         jMenuItemSearchInRootFolder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSearchAllActionPerformed(evt);
@@ -626,7 +628,9 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBoxMenuItemViewStorageTreePanelActionPerformed
 
     private void jButtonSearchAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchAllActionPerformed
-		
+		Folder folder = this.tree.getTreeModel().getFolder();
+		EventsStorageCollectionHandler esch = new EventsStorageCollectionHandler(folder);
+		esch.call("search_in_folder");
     }//GEN-LAST:event_jButtonSearchAllActionPerformed
 
 	/**
@@ -640,10 +644,6 @@ public class MainForm extends javax.swing.JFrame {
 		this.checkOpenedTabsFileExists();
 		this.checkButtonCloseCurrentDocument();
     }//GEN-LAST:event_jButtonRefreshTreeActionPerformed
-
-    private void jButtonSearchInFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchInFileActionPerformed
-		
-    }//GEN-LAST:event_jButtonSearchInFileActionPerformed
 
     private void jButtonRenameFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRenameFileActionPerformed
 		if (0 == this.getTabbedPaneMain().getTabCount()) {
@@ -951,6 +951,19 @@ public class MainForm extends javax.swing.JFrame {
 		esch.call("crypt_file");        
     }//GEN-LAST:event_jButtonCryptFileActionPerformed
 
+    private void jButtonSearchInFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchInFileActionPerformed
+		if (0 == this.getTabbedPaneMain().getTabCount()) {
+			this.checkButtonCloseCurrentDocument();
+			return;
+		}
+
+		FileJTab tab = (FileJTab) this.getTabbedPaneMain().getSelectedComponent();
+		File file = (File) tab.File;
+
+		EventsStorageCollectionHandler esch = new EventsStorageCollectionHandler(file);
+		esch.call("search_in_file");
+    }//GEN-LAST:event_jButtonSearchInFileActionPerformed
+
 	/**
 	 * When delete a file this method will close it tab if document has opened
 	 *
@@ -1083,7 +1096,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSaveFile;
     private javax.swing.JButton jButtonSaveFileAs;
     private javax.swing.JButton jButtonSearchAll;
-    private javax.swing.JButton jButtonSearchInFile;
+    private javax.swing.JToggleButton jButtonSearchInFile;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemViewMenuToolbar;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemViewStorageTreePanel;
     private javax.swing.JMenu jMenuCloseActiveTab;
@@ -1162,10 +1175,12 @@ public class MainForm extends javax.swing.JFrame {
 		// Button for crypt in menubar
 		if (CryptComp.isCryptedFile(file.getPath())) {
 			this.jButtonCryptFile.setVisible(false);
+            this.jButtonSearchInFile.setEnabled(false); 
 		}
 		else {
 			this.jButtonChangePassword.setVisible(false);
 			this.jButtonDecryptFile.setVisible(false);
+            this.jButtonSearchInFile.setEnabled(true);
 		}
 
 	}
@@ -1285,6 +1300,10 @@ public class MainForm extends javax.swing.JFrame {
 		FileJTab tab = (FileJTab) MainForm.getInstance().getTabbedPaneMain().getSelectedComponent();
 		tab.TextAreaDocument.addMouseListener(mstorage.menus.PopupMenuTextEditor.initMouseListener());
 	}
+    
+    public JToggleButton getjButtonSearchInFile(){
+        return this.jButtonSearchInFile;
+    }
 
 	/**
 	 * Show or hide Tool bar with commands consider File

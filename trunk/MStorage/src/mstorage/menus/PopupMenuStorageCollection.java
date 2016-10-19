@@ -83,7 +83,7 @@ public class PopupMenuStorageCollection extends JPopupMenu  {
 		m6.addActionListener(EventsHandler);
 		m6.setActionCommand("search_in_folder");
 		m6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/magnifier.16x16.png")));
-		m6.setEnabled(false);
+		m6.setEnabled(true);
 		this.add(m6);
 
 		JMenuItem m7 = new JMenuItem("View in file's explorer");
@@ -129,12 +129,7 @@ public class PopupMenuStorageCollection extends JPopupMenu  {
 		m5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/textfield.16x16.png")));
 		this.add(m5);
 		
-		JMenuItem m6 = new JMenuItem("Search in this file");
-		m6.addActionListener(EventsHandler);
-		m6.setActionCommand("search_in_file");
-		m6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/page_white_magnify.16x16.png")));
-		m6.setEnabled(false);
-		this.add(m6);
+
 	}
 
 	public void show(JTree jtree, int x, int y) {

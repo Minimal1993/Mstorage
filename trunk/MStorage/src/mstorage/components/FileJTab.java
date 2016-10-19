@@ -15,11 +15,14 @@ import mstorage.storagecollection.File;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.IOException;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import mstorage.MainForm;
 import mstorage.classes.AESEncrypter;
 import mstorage.utils.Hash;
@@ -34,6 +37,13 @@ public class FileJTab extends javax.swing.JPanel implements FocusListener {
 	public JTextArea TextAreaDocument;
 	public JScrollPane ScrollPaneDocumentText;
 	public JPanel JPanelDocumentPictures;
+    
+    // Elements for search in file
+    public JButton jButtonCloseSearchInFilePanel;
+    public JButton jButtonSearchInFile;
+    public JCheckBox jCheckBoxFindInFileUseCase;
+    public JPanel jPanelSearchInFile;
+    public JTextField jTextFieldSearchInFile;
 	
 	/**
 	 * Save last action according to visibility of image carousel

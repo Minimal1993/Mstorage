@@ -387,7 +387,17 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 	}
 
 	public void eh_search_in_file() {
-		MainForm.showError(this.StorageItem.getFileName());
+		FileJTab tab = (FileJTab) MainForm.getInstance().getTabbedPaneMain().getSelectedComponent();
+        
+        if (tab.jPanelSearchInFile.isVisible()){
+            tab.jPanelSearchInFile.setVisible(false);
+            MainForm.getInstance().getjButtonSearchInFile().setSelected(false);
+        }
+        else {
+            tab.jPanelSearchInFile.setVisible(true);
+            MainForm.getInstance().getjButtonSearchInFile().setSelected(true);
+            tab.jTextFieldSearchInFile.requestFocus();
+        }
 	}
 
 	public void eh_close_this_tab() {

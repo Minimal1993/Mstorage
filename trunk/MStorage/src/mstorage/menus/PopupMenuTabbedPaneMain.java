@@ -120,7 +120,6 @@ public class PopupMenuTabbedPaneMain extends JPopupMenu {
 		m6.addActionListener(EventsHandler);
 		m6.setActionCommand("search_in_file");
 		m6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/page_white_magnify.16x16.png")));
-		m6.setEnabled(false);
 		this.add(m6);
 
 		JMenuItem m7 = new JMenuItem("Delete a file");
@@ -153,6 +152,9 @@ public class PopupMenuTabbedPaneMain extends JPopupMenu {
 			m10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lock_delete.16x16.png")));
 			m10.setEnabled(true);
 			this.add(m10);
+            
+            // Disable search in file
+            m6.setEnabled(false);
 		}
 		else {
 			JMenuItem m11 = new JMenuItem("Crypt file");

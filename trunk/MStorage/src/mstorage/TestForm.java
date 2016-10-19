@@ -42,28 +42,79 @@ public class TestForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPaneTest = new javax.swing.JTextPane();
+        jPanelSearchInFile = new javax.swing.JPanel();
+        jButtonCloseSearchInFilePanel = new javax.swing.JButton();
+        jTextFieldSearchInFile = new javax.swing.JTextField();
+        jButtonSearchInFile = new javax.swing.JButton();
+        jCheckBoxFindInFileUseCase = new javax.swing.JCheckBox();
         jPanelForImageCarousel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jScrollPane1.setViewportView(jTextPaneTest);
 
+        jPanelSearchInFile.setPreferredSize(new java.awt.Dimension(0, 30));
+
+        jButtonCloseSearchInFilePanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cross.16x16.png"))); // NOI18N
+        jButtonCloseSearchInFilePanel.setContentAreaFilled(false);
+        jButtonCloseSearchInFilePanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCloseSearchInFilePanelActionPerformed(evt);
+            }
+        });
+
+        jButtonSearchInFile.setText("Find");
+        jButtonSearchInFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSearchInFileActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxFindInFileUseCase.setText("Use case");
+
+        javax.swing.GroupLayout jPanelSearchInFileLayout = new javax.swing.GroupLayout(jPanelSearchInFile);
+        jPanelSearchInFile.setLayout(jPanelSearchInFileLayout);
+        jPanelSearchInFileLayout.setHorizontalGroup(
+            jPanelSearchInFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSearchInFileLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jTextFieldSearchInFile, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonSearchInFile)
+                .addGap(18, 18, 18)
+                .addComponent(jCheckBoxFindInFileUseCase)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
+                .addComponent(jButtonCloseSearchInFilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanelSearchInFileLayout.setVerticalGroup(
+            jPanelSearchInFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButtonCloseSearchInFilePanel)
+            .addGroup(jPanelSearchInFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jTextFieldSearchInFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonSearchInFile)
+                .addComponent(jCheckBoxFindInFileUseCase))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
+            .addComponent(jPanelSearchInFile, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanelSearchInFile, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelForImageCarouselLayout = new javax.swing.GroupLayout(jPanelForImageCarousel);
         jPanelForImageCarousel.setLayout(jPanelForImageCarouselLayout);
         jPanelForImageCarouselLayout.setHorizontalGroup(
             jPanelForImageCarouselLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 467, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanelForImageCarouselLayout.setVerticalGroup(
             jPanelForImageCarouselLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,6 +141,14 @@ public class TestForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonCloseSearchInFilePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseSearchInFilePanelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonCloseSearchInFilePanelActionPerformed
+
+    private void jButtonSearchInFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchInFileActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonSearchInFileActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -127,9 +186,14 @@ public class TestForm extends javax.swing.JFrame {
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCloseSearchInFilePanel;
+    private javax.swing.JButton jButtonSearchInFile;
+    private javax.swing.JCheckBox jCheckBoxFindInFileUseCase;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelForImageCarousel;
+    private javax.swing.JPanel jPanelSearchInFile;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextFieldSearchInFile;
     private javax.swing.JTextPane jTextPaneTest;
     // End of variables declaration//GEN-END:variables
 
