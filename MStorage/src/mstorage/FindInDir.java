@@ -14,6 +14,7 @@ package mstorage;
 import java.awt.Toolkit;
 import javax.swing.filechooser.FileView;
 import mstorage.classes.Settings;
+import mstorage.dialogs.BrowseFindInDirDialog;
 import mstorage.storagecollection.Folder;
 
 /**
@@ -180,55 +181,28 @@ public class FindInDir extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_formWindowClosing
 
     private void jButtonBrowseFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBrowseFolderActionPerformed
-        final java.io.File dirToLock = new java.io.File(Settings.getInstance().getProperty("StorageDirectory"));
-		final javax.swing.JFileChooser fc = new javax.swing.JFileChooser(dirToLock);
-		fc.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
-		fc.setFileView(new FileView() {
-			@Override
-			public Boolean isTraversable(java.io.File f) {
-				Folder rootFolder = (Folder) MainForm.getInstance().getTree().getTreeModel().getRoot();
-				Folder existsFolder = null;
+		BrowseFindInDirDialog sd = new BrowseFindInDirDialog(this, true);
+		sd.pack();
+		sd.setLocationRelativeTo(this);
+		sd.setVisible(true);
+
+		// there is place when TreeChooseDialog is living
+		Folder folderTo = sd.getFolderTo();
+		sd.dispose();
+
+		if (null == folderTo) return;
 				
-				try{
-					existsFolder = rootFolder.findFolder(f.toPath());
-				}
-				catch(Exception e){}
-				
-				if (null == existsFolder) return false;
-				
-				return true;
-			}
-		});
-		int returnVal = fc.showOpenDialog(this);
+		this.Folder = folderTo;
+		this.jTextFieldFolder.setText(folderTo.getPath().toAbsolutePath().toString());
 		
-        if (returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
-            java.io.File file = fc.getSelectedFile();
-			
-			if (file.exists() 
-				&& file.isDirectory()) {
-				
-				this.jTextFieldFolder.setText(file.toPath().toAbsolutePath().toString());
-				
-				Folder newFolder = this.Folder.getRootFolder().findFolder(file.toPath());
-				if (null == newFolder) return;
-				
-				this.Folder = newFolder;
-				
-				// Close all opened tabs
-//				MainForm.getInstance().closeAllOpenedTabs();
-				
-//				MainForm.getInstance().checkOpenedTabsFileExists();
-//				MainForm.getInstance().checkButtonCloseCurrentDocument();
-			}
-        } 
     }//GEN-LAST:event_jButtonBrowseFolderActionPerformed
 
     private void jButtonSearchInDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchInDirActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButtonSearchInDirActionPerformed
 
 	private void initMain(){

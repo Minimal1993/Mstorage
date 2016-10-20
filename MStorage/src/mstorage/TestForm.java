@@ -143,11 +143,11 @@ public class TestForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCloseSearchInFilePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseSearchInFilePanelActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButtonCloseSearchInFilePanelActionPerformed
 
     private void jButtonSearchInFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchInFileActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButtonSearchInFileActionPerformed
 
 	/**
