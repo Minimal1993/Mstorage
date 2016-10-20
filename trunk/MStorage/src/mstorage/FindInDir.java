@@ -11,10 +11,19 @@
  */
 package mstorage;
 
+import java.awt.Color;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import javax.swing.filechooser.FileView;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
 import mstorage.classes.Settings;
 import mstorage.dialogs.BrowseFindInDirDialog;
+import mstorage.findreplace.FindInput;
+import mstorage.findreplace.FindReplace;
+import mstorage.findreplace.FindResult;
+import mstorage.findreplace.FindResultItem;
 import mstorage.storagecollection.Folder;
 
 /**
@@ -68,6 +77,7 @@ public class FindInDir extends javax.swing.JFrame {
         jButtonBrowseFolder = new javax.swing.JButton();
         jCheckBoxMatchCase = new javax.swing.JCheckBox();
         jButtonSearchInDir = new javax.swing.JButton();
+        jButtonClose = new javax.swing.JButton();
         jPanelResults = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -101,6 +111,13 @@ public class FindInDir extends javax.swing.JFrame {
             }
         });
 
+        jButtonClose.setText("Close");
+        jButtonClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCloseActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelSettingsLayout = new javax.swing.GroupLayout(jPanelSettings);
         jPanelSettings.setLayout(jPanelSettingsLayout);
         jPanelSettingsLayout.setHorizontalGroup(
@@ -109,24 +126,23 @@ public class FindInDir extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelSettingsLayout.createSequentialGroup()
+                        .addComponent(jButtonClose)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonSearchInDir))
+                    .addGroup(jPanelSettingsLayout.createSequentialGroup()
                         .addComponent(jLabelFolder)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextFieldFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonBrowseFolder)
-                        .addContainerGap())
+                        .addComponent(jButtonBrowseFolder))
                     .addGroup(jPanelSettingsLayout.createSequentialGroup()
                         .addComponent(jLabelPattern)
                         .addGap(18, 18, 18)
                         .addGroup(jPanelSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelSettingsLayout.createSequentialGroup()
-                                .addComponent(jCheckBoxMatchCase)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonSearchInDir)
-                                .addContainerGap())
-                            .addGroup(jPanelSettingsLayout.createSequentialGroup()
-                                .addComponent(jTextFieldText, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))))
+                            .addComponent(jCheckBoxMatchCase)
+                            .addComponent(jTextFieldText, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanelSettingsLayout.setVerticalGroup(
             jPanelSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,15 +156,13 @@ public class FindInDir extends javax.swing.JFrame {
                 .addGroup(jPanelSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelPattern)
                     .addComponent(jTextFieldText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanelSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelSettingsLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jCheckBoxMatchCase)
-                        .addContainerGap(30, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSettingsLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonSearchInDir)
-                        .addContainerGap())))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBoxMatchCase)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addGroup(jPanelSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSearchInDir)
+                    .addComponent(jButtonClose))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanelResultsLayout = new javax.swing.GroupLayout(jPanelResults);
@@ -202,8 +216,38 @@ public class FindInDir extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonBrowseFolderActionPerformed
 
     private void jButtonSearchInDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchInDirActionPerformed
+        String findText = this.jTextFieldText.getText().trim();
+        if (findText.isEmpty()) return;
         
+        FindInput fi = new FindInput(this.Folder.getPath(), findText);
+
+        if (this.jCheckBoxMatchCase.isSelected()){
+            fi.setAccordingToCase(true);
+        }
+        
+        FindReplace fr = new FindReplace(fi);
+        ArrayList<FindResult> findResult = fr.find();
+
+        if (0 == findResult.size()) return;
+        
+        for(FindResult res : findResult){
+            ArrayList<FindResultItem> friCollection = res.getCollection();
+            if (friCollection.isEmpty()) continue;
+
+            for (FindResultItem fri : friCollection ) {
+                System.out.println(
+                    fri.getFileName().toAbsolutePath().toString() 
+                    + " line:" + Integer.toString(fri.getLineNumber())
+                );
+            }
+        }
+    
     }//GEN-LAST:event_jButtonSearchInDirActionPerformed
+
+    private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
+		this.setVisible(false);
+		this.dispose();
+    }//GEN-LAST:event_jButtonCloseActionPerformed
 
 	private void initMain(){
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/magnifier.24x24.png")));
@@ -212,6 +256,7 @@ public class FindInDir extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBrowseFolder;
+    private javax.swing.JButton jButtonClose;
     private javax.swing.JButton jButtonSearchInDir;
     private javax.swing.JCheckBox jCheckBoxMatchCase;
     private javax.swing.JLabel jLabelFolder;
