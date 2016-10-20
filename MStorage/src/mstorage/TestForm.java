@@ -40,85 +40,153 @@ public class TestForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPaneTest = new javax.swing.JTextPane();
-        jPanelSearchInFile = new javax.swing.JPanel();
-        jButtonCloseSearchInFilePanel = new javax.swing.JButton();
-        jTextFieldSearchInFile = new javax.swing.JTextField();
-        jButtonSearchInFile = new javax.swing.JButton();
-        jCheckBoxFindInFileUseCase = new javax.swing.JCheckBox();
-        jPanelForImageCarousel = new javax.swing.JPanel();
+        jScrollPane4ItemListComp = new javax.swing.JScrollPane();
+        jPanel4FindInDirResultComp = new javax.swing.JPanel();
+        jPanelItemsListComponent = new javax.swing.JPanel();
+        jPanelItem = new javax.swing.JPanel();
+        jLabelItemLine = new javax.swing.JLabel();
+        jLabelItemTextLeft = new javax.swing.JLabel();
+        jLabelItemTextFound = new javax.swing.JLabel();
+        jLabelItemTextRight = new javax.swing.JLabel();
+        jPanelHeader = new javax.swing.JPanel();
+        jLabelHeaderUrl = new javax.swing.JLabel();
+        jLabelHeaderTimes = new javax.swing.JLabel();
+        jLabelHeaderTimesTitle = new javax.swing.JLabel();
+        jLabelHeaderTimesValue = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jScrollPane1.setViewportView(jTextPaneTest);
+        jScrollPane4ItemListComp.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane4ItemListComp.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        jPanelSearchInFile.setPreferredSize(new java.awt.Dimension(0, 30));
-
-        jButtonCloseSearchInFilePanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cross.16x16.png"))); // NOI18N
-        jButtonCloseSearchInFilePanel.setContentAreaFilled(false);
-        jButtonCloseSearchInFilePanel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCloseSearchInFilePanelActionPerformed(evt);
+        jPanelItem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanelItem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanelItemMouseClicked(evt);
             }
         });
 
-        jButtonSearchInFile.setText("Find");
-        jButtonSearchInFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSearchInFileActionPerformed(evt);
-            }
-        });
+        jLabelItemLine.setText("line 10:");
 
-        jCheckBoxFindInFileUseCase.setText("Use case");
+        jLabelItemTextLeft.setText("...some text in search");
 
-        javax.swing.GroupLayout jPanelSearchInFileLayout = new javax.swing.GroupLayout(jPanelSearchInFile);
-        jPanelSearchInFile.setLayout(jPanelSearchInFileLayout);
-        jPanelSearchInFileLayout.setHorizontalGroup(
-            jPanelSearchInFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSearchInFileLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jTextFieldSearchInFile, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jLabelItemTextFound.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelItemTextFound.setText("found");
+
+        jLabelItemTextRight.setText("right part of found...");
+
+        javax.swing.GroupLayout jPanelItemLayout = new javax.swing.GroupLayout(jPanelItem);
+        jPanelItem.setLayout(jPanelItemLayout);
+        jPanelItemLayout.setHorizontalGroup(
+            jPanelItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelItemLayout.createSequentialGroup()
+                .addComponent(jLabelItemLine)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonSearchInFile)
-                .addGap(18, 18, 18)
-                .addComponent(jCheckBoxFindInFileUseCase)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
-                .addComponent(jButtonCloseSearchInFilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabelItemTextLeft)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelItemTextFound)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelItemTextRight)
+                .addGap(0, 132, Short.MAX_VALUE))
         );
-        jPanelSearchInFileLayout.setVerticalGroup(
-            jPanelSearchInFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButtonCloseSearchInFilePanel)
-            .addGroup(jPanelSearchInFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jTextFieldSearchInFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jButtonSearchInFile)
-                .addComponent(jCheckBoxFindInFileUseCase))
+        jPanelItemLayout.setVerticalGroup(
+            jPanelItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabelItemLine)
+                .addComponent(jLabelItemTextLeft)
+                .addComponent(jLabelItemTextFound)
+                .addComponent(jLabelItemTextRight))
         );
+
+        jPanelHeader.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanelHeader.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanelHeaderMouseClicked(evt);
+            }
+        });
+
+        jLabelHeaderUrl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bullet_toggle_plus.16x16.png"))); // NOI18N
+        jLabelHeaderUrl.setText("E:\\dev\\java\\MStorage\\MStorage\\src");
+
+        jLabelHeaderTimes.setText("3");
+
+        jLabelHeaderTimesTitle.setText("times:");
+
+        jLabelHeaderTimesValue.setText("3");
+
+        javax.swing.GroupLayout jPanelHeaderLayout = new javax.swing.GroupLayout(jPanelHeader);
+        jPanelHeader.setLayout(jPanelHeaderLayout);
+        jPanelHeaderLayout.setHorizontalGroup(
+            jPanelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelHeaderLayout.createSequentialGroup()
+                .addComponent(jLabelHeaderUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelHeaderTimesTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelHeaderTimesValue)
+                .addGap(35, 35, 35)
+                .addComponent(jLabelHeaderTimes, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanelHeaderLayout.setVerticalGroup(
+            jPanelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelHeaderLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelHeaderUrl)
+                    .addComponent(jLabelHeaderTimes)
+                    .addComponent(jLabelHeaderTimesTitle)
+                    .addComponent(jLabelHeaderTimesValue)))
+        );
+
+        javax.swing.GroupLayout jPanelItemsListComponentLayout = new javax.swing.GroupLayout(jPanelItemsListComponent);
+        jPanelItemsListComponent.setLayout(jPanelItemsListComponentLayout);
+        jPanelItemsListComponentLayout.setHorizontalGroup(
+            jPanelItemsListComponentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelItemsListComponentLayout.createSequentialGroup()
+                .addComponent(jPanelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanelItemsListComponentLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jPanelItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanelItemsListComponentLayout.setVerticalGroup(
+            jPanelItemsListComponentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelItemsListComponentLayout.createSequentialGroup()
+                .addComponent(jPanelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+        );
+
+        javax.swing.GroupLayout jPanel4FindInDirResultCompLayout = new javax.swing.GroupLayout(jPanel4FindInDirResultComp);
+        jPanel4FindInDirResultComp.setLayout(jPanel4FindInDirResultCompLayout);
+        jPanel4FindInDirResultCompLayout.setHorizontalGroup(
+            jPanel4FindInDirResultCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4FindInDirResultCompLayout.createSequentialGroup()
+                .addComponent(jPanelItemsListComponent, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 214, Short.MAX_VALUE))
+        );
+        jPanel4FindInDirResultCompLayout.setVerticalGroup(
+            jPanel4FindInDirResultCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4FindInDirResultCompLayout.createSequentialGroup()
+                .addComponent(jPanelItemsListComponent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 159, Short.MAX_VALUE))
+        );
+
+        jScrollPane4ItemListComp.setViewportView(jPanel4FindInDirResultComp);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-            .addComponent(jPanelSearchInFile, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+            .addComponent(jScrollPane4ItemListComp, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanelSearchInFile, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanelForImageCarouselLayout = new javax.swing.GroupLayout(jPanelForImageCarousel);
-        jPanelForImageCarousel.setLayout(jPanelForImageCarouselLayout);
-        jPanelForImageCarouselLayout.setHorizontalGroup(
-            jPanelForImageCarouselLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanelForImageCarouselLayout.setVerticalGroup(
-            jPanelForImageCarouselLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 148, Short.MAX_VALUE)
+                .addContainerGap(421, Short.MAX_VALUE)
+                .addComponent(jScrollPane4ItemListComp, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -126,92 +194,46 @@ public class TestForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelForImageCarousel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelForImageCarousel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonCloseSearchInFilePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseSearchInFilePanelActionPerformed
-        
-    }//GEN-LAST:event_jButtonCloseSearchInFilePanelActionPerformed
+    private void jPanelHeaderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelHeaderMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanelHeaderMouseClicked
 
-    private void jButtonSearchInFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchInFileActionPerformed
-        
-    }//GEN-LAST:event_jButtonSearchInFileActionPerformed
-
-	/**
-	 * @param args the command line arguments
-	 */
-	public static void main(String args[]) {
-		/* Set the Nimbus look and feel */
-		//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-		/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-		 */
-		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-				if ("Windows".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(TestForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(TestForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(TestForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(TestForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		}
-		//</editor-fold>
-
-		/* Create and display the form */
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				new TestForm().setVisible(true);
-			}
-		});
-	}
+    private void jPanelItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelItemMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanelItemMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCloseSearchInFilePanel;
-    private javax.swing.JButton jButtonSearchInFile;
-    private javax.swing.JCheckBox jCheckBoxFindInFileUseCase;
+    private javax.swing.JLabel jLabelHeaderTimes;
+    private javax.swing.JLabel jLabelHeaderTimesTitle;
+    private javax.swing.JLabel jLabelHeaderTimesValue;
+    private javax.swing.JLabel jLabelHeaderUrl;
+    private javax.swing.JLabel jLabelItemLine;
+    private javax.swing.JLabel jLabelItemTextFound;
+    private javax.swing.JLabel jLabelItemTextLeft;
+    private javax.swing.JLabel jLabelItemTextRight;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanelForImageCarousel;
-    private javax.swing.JPanel jPanelSearchInFile;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextFieldSearchInFile;
-    private javax.swing.JTextPane jTextPaneTest;
+    private javax.swing.JPanel jPanel4FindInDirResultComp;
+    private javax.swing.JPanel jPanelHeader;
+    private javax.swing.JPanel jPanelItem;
+    private javax.swing.JPanel jPanelItemsListComponent;
+    private javax.swing.JScrollPane jScrollPane4ItemListComp;
     // End of variables declaration//GEN-END:variables
 
 	public ImageCarousel ImageCarousel;
 
 	private void initMain() {
-		this.setPreferredSize(new java.awt.Dimension(500, 400));
 
-		java.io.File f = new java.io.File("C:\\work\\MStorage\\storage");
-		StorageCollection sc = new StorageCollection(f.getAbsolutePath().toString());
-		sc.scan();
-
-		File file = sc.FStorage.Files.get("Фима");
-
-		this.ImageCarousel = new ImageCarousel(file);
-
-		this.jPanelForImageCarousel.setLayout(new java.awt.BorderLayout());
-		this.jPanelForImageCarousel.add(this.ImageCarousel, java.awt.BorderLayout.NORTH);
 
 		this.pack();
 
