@@ -26,11 +26,17 @@ import mstorage.MainForm;
  * 
  * @author ilya.gulevskiy
  */
-public class MoveDialog extends javax.swing.JDialog {
+public abstract class TreeChooseDialog extends javax.swing.JDialog {
 	
 	protected MoveJTree tree;
 	
 	protected Folder FolderTo;
+	
+	protected String BigIcon = "";
+	protected String SmallIcon = "";
+	protected String Title = "";
+	protected String InviteText = "";
+	protected String ButtonOKText = "OK";
 
 	public Folder getFolderTo() {
 		return FolderTo;
@@ -39,12 +45,10 @@ public class MoveDialog extends javax.swing.JDialog {
 	/**
 	 * Creates new form MoveDialog
 	 */
-	public MoveDialog(java.awt.Frame parent, boolean modal) {
+	public TreeChooseDialog(java.awt.Frame parent, boolean modal) {
 		super(parent, modal);
 		initComponents();
-		
-		this.setIcon();
-		
+				
 		this.initMain();
 	}
 
@@ -58,7 +62,8 @@ public class MoveDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanelTop = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelInviteText = new javax.swing.JLabel();
+        jLabelIcon = new javax.swing.JLabel();
         jPanelMiddle = new javax.swing.JPanel();
         jScrollPaneMoveJTree = new javax.swing.JScrollPane();
         jPanelBottom = new javax.swing.JPanel();
@@ -66,26 +71,36 @@ public class MoveDialog extends javax.swing.JDialog {
         jButtonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Move");
         setModal(true);
         setName("MoveDialog"); // NOI18N
         setResizable(false);
 
-        jLabel1.setText("Please, select destination folder in MStorage tree:");
+        jLabelInviteText.setText("Please, select destination folder in MStorage tree:");
+
+        jLabelIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/document_move.32x32.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanelTopLayout = new javax.swing.GroupLayout(jPanelTop);
         jPanelTop.setLayout(jPanelTopLayout);
         jPanelTopLayout.setHorizontalGroup(
             jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTopLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTopLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
+                .addComponent(jLabelIcon)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelInviteText, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanelTopLayout.setVerticalGroup(
             jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTopLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelTopLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabelIcon))
+                    .addGroup(jPanelTopLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabelInviteText)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -101,8 +116,7 @@ public class MoveDialog extends javax.swing.JDialog {
         jPanelMiddleLayout.setVerticalGroup(
             jPanelMiddleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMiddleLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPaneMoveJTree, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                .addComponent(jScrollPaneMoveJTree, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -137,7 +151,7 @@ public class MoveDialog extends javax.swing.JDialog {
                 .addGroup(jPanelBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancel)
                     .addComponent(jButtonOK))
-                .addGap(0, 17, Short.MAX_VALUE))
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -151,27 +165,35 @@ public class MoveDialog extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelTop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelTop, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanelMiddle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelBottom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanelBottom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
-        TreePath path = this.tree.getSelectionPath();
-		Folder obj = (Folder) path.getLastPathComponent();
+        // Ask children whether all checkings is OK
+		if (!this.isOKActionPerformed(evt)) return;
 		
-		if (null == obj) {
-			javax.swing.JOptionPane.showMessageDialog(this, "You don't choose destination folder.");
-			return;
+		try {
+			TreePath path = this.tree.getSelectionPath();
+			Folder obj = (Folder) path.getLastPathComponent();
+
+			if (null == obj) {
+				javax.swing.JOptionPane.showMessageDialog(this, "You don't choose destination folder.");
+				return;
+			}
+
+			this.FolderTo = obj;
+			this.setVisible(false);
 		}
+		catch (Exception e) {}
 		
-		this.FolderTo = obj;
-		this.setVisible(false);
     }//GEN-LAST:event_jButtonOKActionPerformed
 
 	/**
@@ -188,18 +210,15 @@ public class MoveDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonOK;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelIcon;
+    private javax.swing.JLabel jLabelInviteText;
     private javax.swing.JPanel jPanelBottom;
     private javax.swing.JPanel jPanelMiddle;
     private javax.swing.JPanel jPanelTop;
     private javax.swing.JScrollPane jScrollPaneMoveJTree;
     // End of variables declaration//GEN-END:variables
 
-	private void setIcon() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/document_move.16x16.png")));
-	}
-
-	private void initMain() {
+	protected void initMain() {
 		Folder root = MainForm.getInstance().getTree().getTreeModel().getFolder();
 
 		this.tree = new MoveJTree(root);
@@ -210,6 +229,21 @@ public class MoveDialog extends javax.swing.JDialog {
 
 		this.jScrollPaneMoveJTree.setViewportView(tree);
 		
+		this.setTitle(this.Title);
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(this.SmallIcon)));
+		this.jLabelIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource(this.BigIcon)));
+		this.jLabelInviteText.setText( this.InviteText );
+		this.jButtonOK.setText( this.ButtonOKText );
+		
+	}
+	
+	/**
+	 * Method for childrens 
+	 * 
+	 * @param evt 
+	 */
+	protected boolean isOKActionPerformed(java.awt.event.ActionEvent evt){
+		return true;
 	}
 
 }

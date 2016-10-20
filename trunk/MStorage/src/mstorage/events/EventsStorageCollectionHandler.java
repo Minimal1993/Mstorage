@@ -13,19 +13,12 @@ package mstorage.events;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import mstorage.dialogs.password.PasswordDialog;
-import mstorage.dialogs.MoveDialog;
-import mstorage.storagecollection.StorageCollection;
-import mstorage.storagecollection.StorageItem;
-import mstorage.storagecollection.File;
-import mstorage.storagecollection.Folder;
-import mstorage.storagecollection.Image;
+import mstorage.storagecollection.*;
 import mstorage.*;
 import mstorage.models.TabsFabric;
 import mstorage.components.FileJTab;
 import mstorage.utils.Hash;
 import mstorage.models.MoveJTree;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.Exception;
@@ -39,9 +32,8 @@ import javax.swing.tree.TreePath;
 import mstorage.classes.AESEncrypter;
 import mstorage.classes.Settings;
 import mstorage.components.CryptComp;
-import mstorage.dialogs.password.PasswordChangeDialog;
-import mstorage.dialogs.password.PasswordCreateDialog;
-import mstorage.dialogs.password.PasswordResetDialog;
+import mstorage.dialogs.*;
+import mstorage.dialogs.password.*;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -125,12 +117,12 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 	public void eh_move_folder() {
 		Folder file = (Folder) this.StorageItem;
 
-		MoveDialog sd = new MoveDialog(MainForm.getInstance(), true);
+		MoveFolderDialog sd = new MoveFolderDialog(MainForm.getInstance(), true);
 		sd.pack();
 		sd.setLocationRelativeTo(MainForm.getInstance());
 		sd.setVisible(true);
 
-		// there is place when MoveDialog is living
+		// there is place when TreeChooseDialog is living
 		Folder folderTo = sd.getFolderTo();
 		sd.dispose();
 
@@ -248,12 +240,12 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 	public void eh_move_file() {
 		File file = (File) this.StorageItem;
 
-		MoveDialog sd = new MoveDialog(MainForm.getInstance(), true);
+		MoveFileDialog sd = new MoveFileDialog(MainForm.getInstance(), true);
 		sd.pack();
 		sd.setLocationRelativeTo(MainForm.getInstance());
 		sd.setVisible(true);
 
-		// there is place when MoveDialog is living
+		// there is place when TreeChooseDialog is living
 		Folder folderTo = sd.getFolderTo();
 		sd.dispose();
 
