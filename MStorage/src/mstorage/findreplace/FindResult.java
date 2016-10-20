@@ -35,5 +35,7 @@ public class FindResult {
 		return Collection;
 	}
 	
-	
+	public String toString(){
+        return this.FileName.toAbsolutePath().toString();
+    }
 }

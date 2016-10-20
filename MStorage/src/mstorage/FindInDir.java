@@ -14,10 +14,16 @@ package mstorage;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.JTree;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.filechooser.FileView;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeSelectionModel;
 import mstorage.classes.Settings;
 import mstorage.dialogs.BrowseFindInDirDialog;
 import mstorage.findreplace.FindInput;
@@ -29,10 +35,12 @@ import mstorage.storagecollection.Folder;
 /**
  * Window for search in directory. Singleton.
  */
-public class FindInDir extends javax.swing.JFrame {
+public class FindInDir extends javax.swing.JFrame 
+        implements TreeSelectionListener {
 	
 	protected static FindInDir FindInDir = null;
 	protected Folder Folder = null;
+    public JTree jTreeResults = null;
 	
 	// Singleton
 	public static FindInDir getInstance(){
@@ -78,7 +86,7 @@ public class FindInDir extends javax.swing.JFrame {
         jCheckBoxMatchCase = new javax.swing.JCheckBox();
         jButtonSearchInDir = new javax.swing.JButton();
         jButtonClose = new javax.swing.JButton();
-        jPanelResults = new javax.swing.JPanel();
+        jScrollPaneResults = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setName("JFrameFindInDir"); // NOI18N
@@ -165,30 +173,22 @@ public class FindInDir extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanelResultsLayout = new javax.swing.GroupLayout(jPanelResults);
-        jPanelResults.setLayout(jPanelResultsLayout);
-        jPanelResultsLayout.setHorizontalGroup(
-            jPanelResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanelResultsLayout.setVerticalGroup(
-            jPanelResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 305, Short.MAX_VALUE)
-        );
+        jScrollPaneResults.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPaneResults.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanelSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanelResults, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPaneResults)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanelResults, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPaneResults, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
         );
 
         pack();
@@ -230,20 +230,51 @@ public class FindInDir extends javax.swing.JFrame {
 
         if (0 == findResult.size()) return;
         
+        DefaultMutableTreeNode top = new DefaultMutableTreeNode("Search results");
+        
         for(FindResult res : findResult){
             ArrayList<FindResultItem> friCollection = res.getCollection();
             if (friCollection.isEmpty()) continue;
+            
+            DefaultMutableTreeNode category = new DefaultMutableTreeNode(res);
+            category.setUserObject(res);
+            top.add(category);
 
             for (FindResultItem fri : friCollection ) {
-                System.out.println(
-                    fri.getFileName().toAbsolutePath().toString() 
-                    + " line:" + Integer.toString(fri.getLineNumber())
-                );
+                DefaultMutableTreeNode book = new DefaultMutableTreeNode(fri);
+                book.setUserObject(fri);
+                category.add(book);
             }
         }
+        
+        this.jTreeResults = new JTree(top);
+        this.jTreeResults.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        this.jTreeResults.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        this.jTreeResults.addTreeSelectionListener(this);
+        jTreeResults.setRootVisible(false);
+        jScrollPaneResults.setViewportView(jTreeResults);
     
     }//GEN-LAST:event_jButtonSearchInDirActionPerformed
 
+    public void valueChanged(TreeSelectionEvent e) {
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) 
+            this.jTreeResults.getLastSelectedPathComponent();
+ 
+        if (node == null) return;
+ 
+//        Object nodeInfo = node.getUserObject();
+//        if (node.isLeaf()) {
+//            BookInfo book = (BookInfo)nodeInfo;
+//            displayURL(book.bookURL);
+//            if (DEBUG) {
+//                System.out.print(book.bookURL + ":  \n    ");
+//            }
+//        } else {
+//            displayURL(helpURL); 
+//        }
+
+    }
+    
     private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
 		this.setVisible(false);
 		this.dispose();
@@ -261,8 +292,8 @@ public class FindInDir extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBoxMatchCase;
     private javax.swing.JLabel jLabelFolder;
     private javax.swing.JLabel jLabelPattern;
-    private javax.swing.JPanel jPanelResults;
     private javax.swing.JPanel jPanelSettings;
+    private javax.swing.JScrollPane jScrollPaneResults;
     private javax.swing.JTextField jTextFieldFolder;
     private javax.swing.JTextField jTextFieldText;
     // End of variables declaration//GEN-END:variables
