@@ -164,7 +164,7 @@ public class TabsFabric {
             }
         });
 
-        PanelTemplate.jCheckBoxFindInFileUseCase.setText("Use case");
+        PanelTemplate.jCheckBoxFindInFileUseCase.setText("Match case");
         
         javax.swing.GroupLayout jPanelSearchInFileLayout = new javax.swing.GroupLayout(PanelTemplate.jPanelSearchInFile);
         PanelTemplate.jPanelSearchInFile.setLayout(jPanelSearchInFileLayout);
