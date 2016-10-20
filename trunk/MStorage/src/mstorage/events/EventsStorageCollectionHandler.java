@@ -11,6 +11,8 @@
  */
 package mstorage.events;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import mstorage.dialogs.password.PasswordDialog;
 import mstorage.dialogs.MoveDialog;
 import mstorage.storagecollection.StorageCollection;
@@ -167,7 +169,25 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 	}
 
 	public void eh_search_in_folder() {
-		MainForm.showError(this.StorageItem.getFileName());
+		if (!this.StorageItem.getType().equals("folder")) {
+			return;
+		}
+		
+		FindInDir fid = FindInDir.getInstance();
+		fid.init((Folder) this.StorageItem);
+		fid.pack();
+		fid.setLocationRelativeTo(MainForm.getInstance());
+		fid.setVisible(true);
+
+		fid.addWindowListener(new WindowAdapter() {
+			public void windowClosed(WindowEvent e) {
+				System.out.println("windowClosed");
+			}
+
+			public void windowClosing(WindowEvent e) {
+				System.out.println("windowClosing");
+			}
+		});
 	}
 
 	public void eh_open_file() {

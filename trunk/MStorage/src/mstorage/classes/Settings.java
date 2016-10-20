@@ -68,7 +68,7 @@ public class Settings {
 	 */
 	protected void initGeneral() {
 		// General settings
-		this.GeneralSettings.put("Version", "1.1.1");
+		this.GeneralSettings.put("Version", "1.1.2");
 		this.GeneralSettings.put("Author", "Gulevskiy Ilya");
 		this.GeneralSettings.put("Year", "2016");
 		this.GeneralSettings.put("Email", "mstorage.project@gmail.com");
