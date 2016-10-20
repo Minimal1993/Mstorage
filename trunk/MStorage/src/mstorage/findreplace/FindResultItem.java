@@ -67,5 +67,7 @@ public class FindResultItem {
 		return Replace;
 	}
 	
-	
+	public String toString(){
+        return "line" + Integer.toString(this.LineNumber) + "<b>" + this.Result + "</b>";
+    }
 }
