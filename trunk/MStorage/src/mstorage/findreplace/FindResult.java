@@ -36,6 +36,6 @@ public class FindResult {
 	}
 	
 	public String toString(){
-        return this.FileName.toAbsolutePath().toString();
+        return this.FileName.getFileName().toFile().getName();
     }
 }

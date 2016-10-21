@@ -170,6 +170,7 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 		fid.pack();
 		fid.setLocationRelativeTo(MainForm.getInstance());
 		fid.setVisible(true);
+		fid.setSelectionAndFocus();
 
 		fid.addWindowListener(new WindowAdapter() {
 			public void windowClosed(WindowEvent e) {
