@@ -38,6 +38,11 @@ public class FindReplace {
 	protected FindInput FindInput;
 	
 	/**
+	 * How much symbols have to has Pre and Pos text
+	 */
+	protected int PrePostStrilgLength = 20;
+	
+	/**
 	 * Precompile RegExp
 	 */
 	protected Pattern Pattern;
@@ -151,14 +156,23 @@ public class FindReplace {
                     globalCharCount += line.length() + 1;
                     continue;
                 } 
+				int start = m.start();
+				String found = m.group();
+				int preTextStart = 0;
+				if (this.PrePostStrilgLength < start) preTextStart = start - this.PrePostStrilgLength;
 				
 				FindResultItem fri = new FindResultItem(
 					findResult.getFileName(), 
 					linecount, 
-					m.start(), 
-					m.group(), 
+					start, 
+					found, 
 					this.FindInput.getReplace(),
-                    globalCharCount + m.start()
+                    globalCharCount + m.start(),
+					line.substring(preTextStart, start > 1 ? start - 1 : 0), // PreText
+					line.substring(
+						start + found.length() < line.length() ? start + found.length():line.length()-1, 
+						start + found.length() + this.PrePostStrilgLength
+					) // PostText
                 );
 		
 				findResult.getCollection().add(fri);

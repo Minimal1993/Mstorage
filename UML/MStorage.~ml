@@ -4893,10 +4893,10 @@ This is adapter for Properties.
 <XPD:OBJ name="OwnedViews[1]" type="UMLClassView" guid="6vl0s6iFHU6GxJ9eSAwOIQAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Left" type="integer">424</XPD:ATTR>
-<XPD:ATTR name="Top" type="integer">108</XPD:ATTR>
+<XPD:ATTR name="Left" type="integer">476</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">96</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">142</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">108</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">121</XPD:ATTR>
 <XPD:REF name="Model">XStAeRuDEkKFX3sM+e/AVgAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="N8c64pNO8UKa4AS+WeuGSwAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="EIVUjeYA/k+vgtmyS/giQAAA">
@@ -4924,7 +4924,7 @@ This is adapter for Properties.
 <XPD:OBJ name="OwnedViews[2]" type="UMLDependencyView" guid="IIyf6otnoECz6iSKL6P/PwAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">424,156;317,149</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">476,153;317,146</XPD:ATTR>
 <XPD:REF name="Model">URRBUucS20W7LuGmiVGaHQAA</XPD:REF>
 <XPD:REF name="Head">Ln6kvFm7Wkqpfq1NoIKwPQAA</XPD:REF>
 <XPD:REF name="Tail">6vl0s6iFHU6GxJ9eSAwOIQAA</XPD:REF>
@@ -5064,7 +5064,7 @@ This is adapter for Properties.
 <XPD:OBJ name="OwnedViews[7]" type="UMLDependencyView" guid="SAy38lmAbE2ab/51Fa0YkAAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">538,320;509,215</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">550,320;547,216</XPD:ATTR>
 <XPD:REF name="Model">O/x3vIQz5EmaD6UZCgaIkwAA</XPD:REF>
 <XPD:REF name="Head">6vl0s6iFHU6GxJ9eSAwOIQAA</XPD:REF>
 <XPD:REF name="Tail">EVYo3CY8x0CO8FMS4Ay5HwAA</XPD:REF>
@@ -5137,7 +5137,7 @@ This is adapter for Properties.
 <XPD:REF name="SupplierDependencies[0]">O/x3vIQz5EmaD6UZCgaIkwAA</XPD:REF>
 <XPD:ATTR name="#TypedParameters" type="integer">1</XPD:ATTR>
 <XPD:REF name="TypedParameters[0]">6gxITytpTEuoWEaUFxV1nAAA</XPD:REF>
-<XPD:ATTR name="#Attributes" type="integer">5</XPD:ATTR>
+<XPD:ATTR name="#Attributes" type="integer">6</XPD:ATTR>
 <XPD:OBJ name="Attributes[0]" type="UMLAttribute" guid="QemV9GPxC0iMWrjGgqYxqwAA">
 <XPD:ATTR name="Name" type="string">FileName</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">Path</XPD:ATTR>
@@ -5161,6 +5161,10 @@ This is adapter for Properties.
 <XPD:OBJ name="Attributes[4]" type="UMLAttribute" guid="jVCcmaQf5EWjT1EO+bt4JwAA">
 <XPD:ATTR name="Name" type="string">Replace</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">String</XPD:ATTR>
+<XPD:REF name="Owner">XStAeRuDEkKFX3sM+e/AVgAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Attributes[5]" type="UMLAttribute" guid="nBZ4iSpy6EqgrMzYlzUQhQAA">
+<XPD:ATTR name="Name" type="string">GlobalCharNumber</XPD:ATTR>
 <XPD:REF name="Owner">XStAeRuDEkKFX3sM+e/AVgAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>

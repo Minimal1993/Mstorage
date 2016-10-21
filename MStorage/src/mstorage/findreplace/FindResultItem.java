@@ -24,6 +24,10 @@ public class FindResultItem {
 	protected String Result;
 	protected String Replace;
     protected int GlobalCharNumber;
+	protected String PreText;
+	protected String PostText;
+	
+	public int MaxLengthItemText = 70;
 	
 	public FindResultItem(
             Path FileName, 
@@ -31,7 +35,9 @@ public class FindResultItem {
             int CharNumber, 
             String Result, 
             String Replace, 
-            int GlobalCharNumber
+            int GlobalCharNumber,
+			String PreText,
+			String PostText
         ){
         
 		this.FileName = FileName;
@@ -40,7 +46,17 @@ public class FindResultItem {
 		this.Result = Result;
 		this.Replace = Replace;
         this.GlobalCharNumber = GlobalCharNumber;
+		this.PreText = PreText;
+		this.PostText = PostText;
         
+	}
+	
+	public String getPreText() {
+		return PreText;
+	}
+
+	public String getPostText() {
+		return PostText;
 	}
 
     public int getGlobalCharNumber() {
@@ -68,6 +84,19 @@ public class FindResultItem {
 	}
 	
 	public String toString(){
-        return "line" + Integer.toString(this.LineNumber) + "<b>" + this.Result + "</b>";
+		String result = this.getResult();
+		if ( this.getPreText().length() + result.length() + this.getPostText().length() > this.MaxLengthItemText) {
+			int rest = this.MaxLengthItemText - (this.getPreText().length() + this.getPostText().length());
+			result = result.substring(0, rest) + "...";
+		}
+
+		String text = "<html><span style='color:#acacac'>" + Integer.toString(this.getLineNumber()) + ":</span>"
+			+ " ..." + this.getPreText() 
+			+ "<b>" + result + "</b> "
+			+ this.getPostText() + "..." 
+			+ "<span style='color:#acacac'>[col:" + Integer.toString(this.getCharNumber()) + "]</span>"
+			+ "</html>";
+
+		return text;
     }
 }

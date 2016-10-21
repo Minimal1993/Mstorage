@@ -1,43 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="46">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="48">
         <file>
             <url>src/mstorage/events/EventsStorageCollectionHandler.java</url>
-            <bookmark id="44">
+            <bookmark id="47">
                 <name/>
-                <line>168</line>
+                <line>162</line>
                 <key/>
             </bookmark>
-            <bookmark id="42">
+            <bookmark id="48">
                 <name/>
-                <line>388</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
-            <url>src/mstorage/MainForm.java</url>
-            <bookmark id="43">
-                <name/>
-                <line>629</line>
-                <key/>
-            </bookmark>
-            <bookmark id="45">
-                <name/>
-                <line>646</line>
-                <key/>
-            </bookmark>
-            <bookmark id="46">
-                <name/>
-                <line>1177</line>
+                <line>239</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group name="Java">
-            <file>file:/C:/work/MStorage/MStorage/src/mstorage/classes/Settings.java</file>
-            <file>file:/C:/work/MStorage/MStorage/src/mstorage/events/EventsStorageCollectionHandler.java</file>
-        </group>
         <group>
             <file>file:/E:/dev/java/MStorage/MStorage/src/mstorage/FindInDir.java</file>
             <file>file:/E:/dev/java/MStorage/MStorage/src/mstorage/MainForm.java</file>
@@ -45,6 +23,11 @@
             <file>file:/E:/dev/java/MStorage/MStorage/src/mstorage/events/EventsStorageCollectionHandler.java</file>
             <file>file:/E:/dev/java/MStorage/MStorage/src/mstorage/TestForm.java</file>
             <file>file:/E:/dev/java/MStorage/MStorage/src/mstorage/findreplace/FindResult.java</file>
+        </group>
+        <group name="Java">
+            <file>file:/C:/work/MStorage/MStorage/src/mstorage/MainForm.java</file>
+            <file>file:/C:/work/MStorage/MStorage/src/mstorage/events/EventsStorageCollectionHandler.java</file>
+            <file>file:/C:/work/MStorage/MStorage/src/mstorage/FindInDir.java</file>
         </group>
     </open-files>
 </project-private>

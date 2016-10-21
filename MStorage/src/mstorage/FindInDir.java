@@ -23,6 +23,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeSelectionModel;
 import mstorage.classes.Settings;
 import mstorage.dialogs.BrowseFindInDirDialog;
@@ -62,10 +63,13 @@ public class FindInDir extends javax.swing.JFrame
 	
 	public void init(Folder folder){
 		this.Folder = folder;
-		this.jTextFieldFolder.setText(this.Folder.getPath().toAbsolutePath().toString());
-		
-		
-		
+		this.jTextFieldFolder.setText(this.Folder.getPath().toAbsolutePath().toString());		
+	}
+	
+	public void setSelectionAndFocus(){
+		// Ask focus and select all text
+		this.jTextFieldText.requestFocus();
+		this.jTextFieldText.select(0,this.jTextFieldText.getText().length());
 	}
 
 	/**
@@ -173,7 +177,6 @@ public class FindInDir extends javax.swing.JFrame
                 .addContainerGap())
         );
 
-        jScrollPaneResults.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPaneResults.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -230,29 +233,47 @@ public class FindInDir extends javax.swing.JFrame
 
         if (0 == findResult.size()) return;
         
-        DefaultMutableTreeNode top = new DefaultMutableTreeNode("Search results");
+		int matches = 0;
+		for(FindResult res : findResult){
+			matches += res.getCollection().size();
+		}
+		
+		// Generate tree data
+		String rootString = "<html>Found " + matches + " matches of <b>" + findText + "</b> in " 
+			+ findResult.size() + " files.</html>";
+        DefaultMutableTreeNode top = new DefaultMutableTreeNode(rootString);
         
         for(FindResult res : findResult){
             ArrayList<FindResultItem> friCollection = res.getCollection();
             if (friCollection.isEmpty()) continue;
-            
-            DefaultMutableTreeNode category = new DefaultMutableTreeNode(res);
+
+            DefaultMutableTreeNode category = new DefaultMutableTreeNode();
             category.setUserObject(res);
             top.add(category);
 
             for (FindResultItem fri : friCollection ) {
-                DefaultMutableTreeNode book = new DefaultMutableTreeNode(fri);
+                DefaultMutableTreeNode book = new DefaultMutableTreeNode();
                 book.setUserObject(fri);
                 category.add(book);
             }
         }
         
+		// Build tree
         this.jTreeResults = new JTree(top);
+		
+		DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
+		renderer.setLeafIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bullet_arrow_right.16x16.png")));
+		renderer.setClosedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/page_white.16x16.png")));
+		renderer.setOpenIcon(new javax.swing.ImageIcon(getClass().getResource("/images/page.16x16.png")));
+		this.jTreeResults.setCellRenderer(renderer);
+		
         this.jTreeResults.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         this.jTreeResults.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         this.jTreeResults.addTreeSelectionListener(this);
-        jTreeResults.setRootVisible(false);
-        jScrollPaneResults.setViewportView(jTreeResults);
+        this.jTreeResults.setRootVisible(true);
+		this.jTreeResults.setShowsRootHandles(true);
+		this.jTreeResults.setToggleClickCount(2);
+        this.jScrollPaneResults.setViewportView(jTreeResults);
     
     }//GEN-LAST:event_jButtonSearchInDirActionPerformed
 
@@ -261,7 +282,11 @@ public class FindInDir extends javax.swing.JFrame
             this.jTreeResults.getLastSelectedPathComponent();
  
         if (node == null) return;
+		
+		System.out.println("valueChanged");
  
+//		if (node.isLeaf()) return;
+		
 //        Object nodeInfo = node.getUserObject();
 //        if (node.isLeaf()) {
 //            BookInfo book = (BookInfo)nodeInfo;
