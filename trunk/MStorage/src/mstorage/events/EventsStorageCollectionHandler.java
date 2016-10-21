@@ -174,11 +174,11 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 
 		fid.addWindowListener(new WindowAdapter() {
 			public void windowClosed(WindowEvent e) {
-				System.out.println("windowClosed");
+				
 			}
 
 			public void windowClosing(WindowEvent e) {
-				System.out.println("windowClosing");
+				
 			}
 		});
 	}
