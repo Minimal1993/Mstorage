@@ -160,6 +160,11 @@ public class FindReplace {
 				String found = m.group();
 				int preTextStart = 0;
 				if (this.PrePostStrilgLength < start) preTextStart = start - this.PrePostStrilgLength;
+								
+				int postTextEnd = start + found.length() + this.PrePostStrilgLength;
+				if (start + found.length() + this.PrePostStrilgLength > line.length() ) {
+					postTextEnd = line.length();
+				}
 				
 				FindResultItem fri = new FindResultItem(
 					findResult.getFileName(), 
@@ -170,8 +175,8 @@ public class FindReplace {
                     globalCharCount + m.start(),
 					line.substring(preTextStart, start > 1 ? start - 1 : 0), // PreText
 					line.substring(
-						start + found.length() < line.length() ? start + found.length():line.length()-1, 
-						start + found.length() + this.PrePostStrilgLength
+						start + found.length(), 
+						postTextEnd
 					) // PostText
                 );
 		

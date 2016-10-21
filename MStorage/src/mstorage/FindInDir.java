@@ -26,11 +26,14 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeSelectionModel;
 import mstorage.classes.Settings;
+import mstorage.components.FileJTab;
 import mstorage.dialogs.BrowseFindInDirDialog;
+import mstorage.events.EventsStorageCollectionHandler;
 import mstorage.findreplace.FindInput;
 import mstorage.findreplace.FindReplace;
 import mstorage.findreplace.FindResult;
 import mstorage.findreplace.FindResultItem;
+import mstorage.storagecollection.File;
 import mstorage.storagecollection.Folder;
 
 /**
@@ -90,6 +93,7 @@ public class FindInDir extends javax.swing.JFrame
         jCheckBoxMatchCase = new javax.swing.JCheckBox();
         jButtonSearchInDir = new javax.swing.JButton();
         jButtonClose = new javax.swing.JButton();
+        jButtonClear = new javax.swing.JButton();
         jScrollPaneResults = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -130,6 +134,13 @@ public class FindInDir extends javax.swing.JFrame
             }
         });
 
+        jButtonClear.setText("Clear");
+        jButtonClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelSettingsLayout = new javax.swing.GroupLayout(jPanelSettings);
         jPanelSettings.setLayout(jPanelSettingsLayout);
         jPanelSettingsLayout.setHorizontalGroup(
@@ -139,6 +150,8 @@ public class FindInDir extends javax.swing.JFrame
                 .addGroup(jPanelSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelSettingsLayout.createSequentialGroup()
                         .addComponent(jButtonClose)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonClear)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonSearchInDir))
                     .addGroup(jPanelSettingsLayout.createSequentialGroup()
@@ -173,7 +186,8 @@ public class FindInDir extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(jPanelSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSearchInDir)
-                    .addComponent(jButtonClose))
+                    .addComponent(jButtonClose)
+                    .addComponent(jButtonClear))
                 .addContainerGap())
         );
 
@@ -198,7 +212,7 @@ public class FindInDir extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        
+        this.deselectAllTabs();
     }//GEN-LAST:event_formWindowClosing
 
     private void jButtonBrowseFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBrowseFolderActionPerformed
@@ -219,8 +233,15 @@ public class FindInDir extends javax.swing.JFrame
     }//GEN-LAST:event_jButtonBrowseFolderActionPerformed
 
     private void jButtonSearchInDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchInDirActionPerformed
-        String findText = this.jTextFieldText.getText().trim();
+		this.deselectAllTabs();
+		
+		String findText = this.jTextFieldText.getText().trim();
         if (findText.isEmpty()) return;
+		
+		if(findText.length() < 3) {
+			MainForm.showError("Too short text for search");
+			return;
+		}
         
         FindInput fi = new FindInput(this.Folder.getPath(), findText);
 
@@ -230,8 +251,6 @@ public class FindInDir extends javax.swing.JFrame
         
         FindReplace fr = new FindReplace(fi);
         ArrayList<FindResult> findResult = fr.find();
-
-        if (0 == findResult.size()) return;
         
 		int matches = 0;
 		for(FindResult res : findResult){
@@ -242,21 +261,23 @@ public class FindInDir extends javax.swing.JFrame
 		String rootString = "<html>Found " + matches + " matches of <b>" + findText + "</b> in " 
 			+ findResult.size() + " files.</html>";
         DefaultMutableTreeNode top = new DefaultMutableTreeNode(rootString);
-        
-        for(FindResult res : findResult){
-            ArrayList<FindResultItem> friCollection = res.getCollection();
-            if (friCollection.isEmpty()) continue;
+		
+		if (0 != findResult.size()) {
+			for(FindResult res : findResult){
+				ArrayList<FindResultItem> friCollection = res.getCollection();
+				if (friCollection.isEmpty()) continue;
 
-            DefaultMutableTreeNode category = new DefaultMutableTreeNode();
-            category.setUserObject(res);
-            top.add(category);
+				DefaultMutableTreeNode category = new DefaultMutableTreeNode();
+				category.setUserObject(res);
+				top.add(category);
 
-            for (FindResultItem fri : friCollection ) {
-                DefaultMutableTreeNode book = new DefaultMutableTreeNode();
-                book.setUserObject(fri);
-                category.add(book);
-            }
-        }
+				for (FindResultItem fri : friCollection ) {
+					DefaultMutableTreeNode book = new DefaultMutableTreeNode();
+					book.setUserObject(fri);
+					category.add(book);
+				}
+			}
+		}
         
 		// Build tree
         this.jTreeResults = new JTree(top);
@@ -281,30 +302,60 @@ public class FindInDir extends javax.swing.JFrame
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) 
             this.jTreeResults.getLastSelectedPathComponent();
  
-        if (node == null) return;
+        if (node == null || !node.isLeaf()) return;
 		
-		System.out.println("valueChanged");
- 
-//		if (node.isLeaf()) return;
-		
-//        Object nodeInfo = node.getUserObject();
-//        if (node.isLeaf()) {
-//            BookInfo book = (BookInfo)nodeInfo;
-//            displayURL(book.bookURL);
-//            if (DEBUG) {
-//                System.out.print(book.bookURL + ":  \n    ");
-//            }
-//        } else {
-//            displayURL(helpURL); 
-//        }
+		FindResultItem findResultItem = (FindResultItem) node.getUserObject();
+		Folder rootFolder = (Folder) MainForm.getInstance().getTree().getTreeModel().getRoot();
+		File existsFile = null;
 
+		try{
+			existsFile = rootFolder.findFile(findResultItem.getFileName());
+		}
+		catch(Exception exc){}
+
+		if (null == existsFile) return;
+		
+		// Open file if it not opened yet, set active if opened already
+		EventsStorageCollectionHandler esch = new EventsStorageCollectionHandler(existsFile);
+		esch.call("open_file");
+ 
+		FileJTab tab = (FileJTab) MainForm.getInstance().getTabbedPaneMain().getSelectedComponent();
+		
+		Highlighter.HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(Color.pink);
+		int p0 = findResultItem.getGlobalCharNumber();
+		int p1 = p0 + findResultItem.getResult().length();
+
+		try {
+			tab.Highlighter.addHighlight(p0, p1, painter );
+		}
+		catch ( BadLocationException exc){}
+		
     }
     
     private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
+		this.deselectAllTabs();
 		this.setVisible(false);
 		this.dispose();
     }//GEN-LAST:event_jButtonCloseActionPerformed
 
+    private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
+		this.jTextFieldText.setText("");
+		this.jTreeResults = null; 
+		this.jScrollPaneResults.setViewportView(this.jTreeResults);
+		this.deselectAllTabs();
+    }//GEN-LAST:event_jButtonClearActionPerformed
+	
+	/**
+	 * Deselect tex in all opened tabs
+	 */
+	protected void deselectAllTabs(){
+		int count = MainForm.getInstance().getTabbedPaneMain().getTabCount();
+		for (int i = 0; i < count; i++) {
+			FileJTab tab = (FileJTab) MainForm.getInstance().getTabbedPaneMain().getComponent(i);
+			tab.Highlighter.removeAllHighlights();
+		}
+	}
+	
 	private void initMain(){
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/magnifier.24x24.png")));
 		this.setTitle("Search in folder");
@@ -312,6 +363,7 @@ public class FindInDir extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBrowseFolder;
+    private javax.swing.JButton jButtonClear;
     private javax.swing.JButton jButtonClose;
     private javax.swing.JButton jButtonSearchInDir;
     private javax.swing.JCheckBox jCheckBoxMatchCase;

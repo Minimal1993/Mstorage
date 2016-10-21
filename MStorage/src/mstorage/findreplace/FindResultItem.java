@@ -83,6 +83,11 @@ public class FindResultItem {
 		return Replace;
 	}
 	
+	/**
+	 * Output for FindInDir jTree
+	 * 
+	 * @return 
+	 */
 	public String toString(){
 		String result = this.getResult();
 		if ( this.getPreText().length() + result.length() + this.getPostText().length() > this.MaxLengthItemText) {
@@ -94,7 +99,7 @@ public class FindResultItem {
 			+ " ..." + this.getPreText() 
 			+ "<b>" + result + "</b> "
 			+ this.getPostText() + "..." 
-			+ "<span style='color:#acacac'>[col:" + Integer.toString(this.getCharNumber()) + "]</span>"
+			+ "&nbsp;<span style='color:#acacac'>[col:" + Integer.toString(this.getCharNumber()) + "]</span>"
 			+ "</html>";
 
 		return text;
