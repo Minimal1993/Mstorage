@@ -145,7 +145,7 @@ public class ImageItem extends javax.swing.JPanel {
 
 				item.PreviewJFrame = new PreviewJFrame(item, item.Image);
 				item.PreviewJFrame.pack();
-				item.PreviewJFrame.setLocationRelativeTo(item);
+				item.PreviewJFrame.setLocationRelativeTo(MainForm.getInstance());
 				item.PreviewJFrame.setVisible(true);
 
 				item.PreviewJFrame.addWindowListener(new WindowAdapter() {
