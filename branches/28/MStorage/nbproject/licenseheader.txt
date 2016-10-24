@@ -1,0 +1,15 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}MStorage - storage for notes.
+${licensePrefix}
+${licensePrefix}Permission is granted to copy, distribute and/or
+${licensePrefix}modify  this  document under  the  terms  of the
+${licensePrefix}GNU General Public License
+${licensePrefix}
+${licensePrefix}@author: ilya.gulevskiy
+${licensePrefix}@email: mstorage.project@gmail.com
+${licensePrefix}@date: 2016
+<#if licenseLast??>
+${licenseLast}
+</#if>
