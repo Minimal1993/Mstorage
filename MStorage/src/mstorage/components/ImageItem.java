@@ -140,13 +140,12 @@ public class ImageItem extends javax.swing.JPanel {
 
 				// Left mouse button, open preview window
 				// Permit to only one window and if Image is real
-				if (null != item.PreviewJFrame || null == item.Image) {
+				if (null == item.Image) {
 					return;
 				}
 
 				item.PreviewJFrame = new PreviewJFrame(item.Image);
 				item.PreviewJFrame.pack();
-				item.PreviewJFrame.setLocationRelativeTo(MainForm.getInstance());
 				item.PreviewJFrame.setVisible(true);
 
 				item.PreviewJFrame.addWindowListener(new WindowAdapter() {

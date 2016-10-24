@@ -108,7 +108,7 @@ public class PreviewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLayeredPaneContainerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLayeredPaneContainerMouseClicked
-        System.out.println("Go next");
+        this.goNextHandler(evt);
     }//GEN-LAST:event_jLayeredPaneContainerMouseClicked
 
 
@@ -168,26 +168,9 @@ public class PreviewJFrame extends javax.swing.JFrame {
 			jPanelLeft.setBackground(new java.awt.Color(204, 204, 204));
 			jPanelLeft.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 			jPanelLeft.setOpaque(false);
-			jPanelLeft.addMouseListener(new java.awt.event.MouseAdapter() {
+            java.awt.event.MouseAdapter maLeft = new java.awt.event.MouseAdapter(){
 				public void mouseClicked(java.awt.event.MouseEvent evt) {
-					System.out.println("Go prev");
-					
-					File file = (File)Image.getFather();
-					Image prev = null;
-					
-					Set<Map.Entry<String, Image>> imgSet = file.Images.entrySet();
-					for (Map.Entry<String, Image> img : imgSet) {
-						if(img.getValue().getFileName().equals( Image.getFileName()) ) {
-							break;
-						}
-						prev = img.getValue();
-					}
-					
-					if (null != prev) {
-						Image = prev;
-						initMain();
-					}
-					
+					goPrevHandler(evt);
 				}
 				public void mouseEntered(java.awt.event.MouseEvent evt) {
 					jLabelLeft.setIcon(new javax.swing.ImageIcon(getClass().getResource(jLabelLeftIcon)));
@@ -195,20 +178,11 @@ public class PreviewJFrame extends javax.swing.JFrame {
 				public void mouseExited(java.awt.event.MouseEvent evt) {
 					jLabelLeft.setIcon(new javax.swing.ImageIcon(getClass().getResource(jLabelTransIcon)));
 				}
-			});
+            };
+			jPanelLeft.addMouseListener(maLeft);
 
 			jLabelLeft.setIcon(new javax.swing.ImageIcon(getClass().getResource(this.jLabelTransIcon))); 
-			jLabelLeft.addMouseListener(new java.awt.event.MouseAdapter() {
-				public void mouseClicked(java.awt.event.MouseEvent evt) {
-					System.out.println("Go prev");
-				}
-				public void mouseEntered(java.awt.event.MouseEvent evt) {
-					jLabelLeft.setIcon(new javax.swing.ImageIcon(getClass().getResource(jLabelLeftIcon)));
-				}
-				public void mouseExited(java.awt.event.MouseEvent evt) {
-					jLabelLeft.setIcon(new javax.swing.ImageIcon(getClass().getResource(jLabelTransIcon)));
-				}
-			});
+			jLabelLeft.addMouseListener(maLeft);
 
 			javax.swing.GroupLayout jPanelLeftLayout = new javax.swing.GroupLayout(jPanelLeft);
 			jPanelLeft.setLayout(jPanelLeftLayout);
@@ -229,9 +203,9 @@ public class PreviewJFrame extends javax.swing.JFrame {
 			jPanelRight.setBackground(new java.awt.Color(204, 204, 204));
 			jPanelRight.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 			jPanelRight.setOpaque(false);
-			jPanelRight.addMouseListener(new java.awt.event.MouseAdapter() {
+            java.awt.event.MouseAdapter maRight = new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent evt) {
-					System.out.println("Go next");
+					goNextHandler(evt);
 				}
 				public void mouseEntered(java.awt.event.MouseEvent evt) {
 					jLabelRight.setIcon(new javax.swing.ImageIcon(getClass().getResource(jLabelRightIcon)));
@@ -239,22 +213,12 @@ public class PreviewJFrame extends javax.swing.JFrame {
 				public void mouseExited(java.awt.event.MouseEvent evt) {
 					jLabelRight.setIcon(new javax.swing.ImageIcon(getClass().getResource(jLabelTransIcon)));
 				}
-			});
+			};
+			jPanelRight.addMouseListener(maRight);
 
 			jLabelRight.setIcon(new javax.swing.ImageIcon(getClass().getResource(this.jLabelTransIcon))); 
 			jLabelRight.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-			jLabelRight.addMouseListener(new java.awt.event.MouseAdapter() {
-				public void mouseClicked(java.awt.event.MouseEvent evt) {
-					System.out.println("Go next");
-				}
-				public void mouseEntered(java.awt.event.MouseEvent evt) {
-					jLabelRight.setIcon(new javax.swing.ImageIcon(getClass().getResource(jLabelRightIcon)));
-				}
-				public void mouseExited(java.awt.event.MouseEvent evt) {
-					jLabelRight.setIcon(new javax.swing.ImageIcon(getClass().getResource(jLabelTransIcon)));
-				}
-
-			});
+			jLabelRight.addMouseListener(maRight);
 
 			javax.swing.GroupLayout jPanelRightLayout = new javax.swing.GroupLayout(jPanelRight);
 			jPanelRight.setLayout(jPanelRightLayout);
@@ -296,8 +260,53 @@ public class PreviewJFrame extends javax.swing.JFrame {
 		}
 	
 		pack();
-		
+		this.setLocationRelativeTo(MainForm.getInstance());
+        
 	}
+    
+    /**
+     * Go to previous picture
+     */
+    public void goPrevHandler(java.awt.event.MouseEvent evt){
+        File file = (File)this.Image.getFather();
+        Image prev = null;
+
+        Set<Map.Entry<String, Image>> imgSet = file.Images.entrySet();
+        for (Map.Entry<String, Image> img : imgSet) {
+            if(img.getValue().getFileName().equals( this.Image.getFileName()) ) {
+                break;
+            }
+            prev = img.getValue();
+        }
+
+        if (null != prev) {
+            this.Image = prev;
+            this.initMain();
+        }
+    }
 	
-	
+    /**
+     * Go to next picture
+     */
+    public void goNextHandler(java.awt.event.MouseEvent evt){
+        File file = (File)this.Image.getFather();
+        Image prev = null;
+        Image next = null;
+
+        Set<Map.Entry<String, Image>> imgSet = file.Images.entrySet();
+        for (Map.Entry<String, Image> img : imgSet) {
+            if(null != prev && prev.getFileName().equals( this.Image.getFileName()) ) {
+                next = img.getValue();
+                break;
+            }
+            
+            prev = img.getValue();
+        }
+
+        if (null != next) {
+            this.Image = next;
+            this.initMain();
+        }
+    }
+    
 }
