@@ -118,7 +118,7 @@ public class ImageItem extends javax.swing.JPanel {
 	protected MouseListener getMouseListener() {
 		return new MouseAdapter() {
 			public void mouseReleased(MouseEvent e) {
-				ImageItem item = (ImageItem) e.getSource();
+				final ImageItem item = (ImageItem) e.getSource();
 				int x = e.getX();
 				int y = e.getY();
 
@@ -144,7 +144,7 @@ public class ImageItem extends javax.swing.JPanel {
 					return;
 				}
 
-				item.PreviewJFrame = new PreviewJFrame(item, item.Image);
+				item.PreviewJFrame = new PreviewJFrame(item.Image);
 				item.PreviewJFrame.pack();
 				item.PreviewJFrame.setLocationRelativeTo(MainForm.getInstance());
 				item.PreviewJFrame.setVisible(true);
@@ -152,7 +152,7 @@ public class ImageItem extends javax.swing.JPanel {
 				item.PreviewJFrame.addWindowListener(new WindowAdapter() {
 					public void windowClosed(WindowEvent e) {
 						PreviewJFrame w = (PreviewJFrame) e.getWindow();
-						w.ImageItem.PreviewJFrame = null;
+						item.PreviewJFrame = null;
 					}
 
 					public void windowClosing(WindowEvent e) {

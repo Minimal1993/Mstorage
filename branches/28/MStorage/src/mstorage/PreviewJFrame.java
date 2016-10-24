@@ -15,10 +15,13 @@ import mstorage.storagecollection.Image;
 import java.awt.Toolkit;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
+import java.util.Map;
+import java.util.Set;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import mstorage.components.ImageItem;
+import mstorage.storagecollection.File;
 import net.coobird.thumbnailator.Thumbnails;
 
 /**
@@ -28,15 +31,14 @@ import net.coobird.thumbnailator.Thumbnails;
 public class PreviewJFrame extends javax.swing.JFrame {
 
 	protected Image Image;
-	public ImageItem ImageItem;
-	
-	private String jLabelTransIcon = "/images/transparent.17x32.png";
-    private JLabel imageContainer = new JLabel();
-	private JPanel jPanelLeft = new javax.swing.JPanel();
-	private JPanel jPanelRight = new javax.swing.JPanel();
-    private JLabel jLabelLeft = new javax.swing.JLabel();;
+		
+    private JLabel imageContainer;
+	private JPanel jPanelLeft;
+	private JPanel jPanelRight;
+    private JLabel jLabelLeft;
+	private JLabel jLabelRight;
 	private String jLabelLeftIcon = "/images/resultset_previous.17x32.png";
-    private JLabel jLabelRight = new javax.swing.JLabel();;
+    private String jLabelTransIcon = "/images/transparent.17x32.png";
 	private String jLabelRightIcon = "/images/resultset_next.17x32.png";
 	
 	/**
@@ -51,9 +53,8 @@ public class PreviewJFrame extends javax.swing.JFrame {
 	/**
 	 * Creates new form PreviewJFrame
 	 */
-	public PreviewJFrame(ImageItem ii, Image image) {
+	public PreviewJFrame(Image image) {
 		this.Image = image;
-		this.ImageItem = ii;
 		
 		initComponents();
 		
@@ -73,6 +74,13 @@ public class PreviewJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+
+        jLayeredPaneContainer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLayeredPaneContainer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLayeredPaneContainerMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jLayeredPaneContainerLayout = new javax.swing.GroupLayout(jLayeredPaneContainer);
         jLayeredPaneContainer.setLayout(jLayeredPaneContainerLayout);
@@ -99,15 +107,25 @@ public class PreviewJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jLayeredPaneContainerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLayeredPaneContainerMouseClicked
+        System.out.println("Go next");
+    }//GEN-LAST:event_jLayeredPaneContainerMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane jLayeredPaneContainer;
     // End of variables declaration//GEN-END:variables
 
 	private void initMain() {
+		this.jLayeredPaneContainer.removeAll();
+		this.imageContainer = new JLabel();
+		this.jPanelLeft = new javax.swing.JPanel();
+		this.jPanelRight = new javax.swing.JPanel();
+		this.jLabelLeft = new javax.swing.JLabel();;
+		this.jLabelRight = new javax.swing.JLabel();
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/picture.32x32.png")));
 		this.setTitle(this.Image.getOrigName());
-//		this.jLabelPicture.setText(this.Image.getOrigName());
 		
 		java.io.File picture;
 		try {
@@ -142,6 +160,7 @@ public class PreviewJFrame extends javax.swing.JFrame {
 			this.setPreferredSize(winSize);
 			
 			javax.swing.ImageIcon imageIcon = new javax.swing.ImageIcon(thumbnail);
+			this.imageContainer.setIcon(null);
 			this.imageContainer.setIcon(imageIcon);
 			this.jLayeredPaneContainer.add(this.imageContainer, new Integer(50));
 			
@@ -151,7 +170,24 @@ public class PreviewJFrame extends javax.swing.JFrame {
 			jPanelLeft.setOpaque(false);
 			jPanelLeft.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent evt) {
-					System.out.println("mouseClicked");
+					System.out.println("Go prev");
+					
+					File file = (File)Image.getFather();
+					Image prev = null;
+					
+					Set<Map.Entry<String, Image>> imgSet = file.Images.entrySet();
+					for (Map.Entry<String, Image> img : imgSet) {
+						if(img.getValue().getFileName().equals( Image.getFileName()) ) {
+							break;
+						}
+						prev = img.getValue();
+					}
+					
+					if (null != prev) {
+						Image = prev;
+						initMain();
+					}
+					
 				}
 				public void mouseEntered(java.awt.event.MouseEvent evt) {
 					jLabelLeft.setIcon(new javax.swing.ImageIcon(getClass().getResource(jLabelLeftIcon)));
@@ -164,7 +200,7 @@ public class PreviewJFrame extends javax.swing.JFrame {
 			jLabelLeft.setIcon(new javax.swing.ImageIcon(getClass().getResource(this.jLabelTransIcon))); 
 			jLabelLeft.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent evt) {
-					System.out.println("mouseClicked");
+					System.out.println("Go prev");
 				}
 				public void mouseEntered(java.awt.event.MouseEvent evt) {
 					jLabelLeft.setIcon(new javax.swing.ImageIcon(getClass().getResource(jLabelLeftIcon)));
@@ -185,9 +221,9 @@ public class PreviewJFrame extends javax.swing.JFrame {
 			jPanelLeftLayout.setVerticalGroup(
 				jPanelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(jPanelLeftLayout.createSequentialGroup()
-					.addGap(166, 166, 166)
+					.addGap((int)imageIcon.getIconHeight()/2 - 25)
 					.addComponent(jLabelLeft)
-					.addContainerGap(200, Short.MAX_VALUE))
+					.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 			);
 
 			jPanelRight.setBackground(new java.awt.Color(204, 204, 204));
@@ -195,10 +231,10 @@ public class PreviewJFrame extends javax.swing.JFrame {
 			jPanelRight.setOpaque(false);
 			jPanelRight.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent evt) {
-					System.out.println("mouseClicked");
+					System.out.println("Go next");
 				}
 				public void mouseEntered(java.awt.event.MouseEvent evt) {
-					jLabelRight.setIcon(new javax.swing.ImageIcon(getClass().getResource(jLabelLeftIcon)));
+					jLabelRight.setIcon(new javax.swing.ImageIcon(getClass().getResource(jLabelRightIcon)));
 				}
 				public void mouseExited(java.awt.event.MouseEvent evt) {
 					jLabelRight.setIcon(new javax.swing.ImageIcon(getClass().getResource(jLabelTransIcon)));
@@ -209,10 +245,10 @@ public class PreviewJFrame extends javax.swing.JFrame {
 			jLabelRight.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 			jLabelRight.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent evt) {
-					System.out.println("mouseClicked");
+					System.out.println("Go next");
 				}
 				public void mouseEntered(java.awt.event.MouseEvent evt) {
-					jLabelRight.setIcon(new javax.swing.ImageIcon(getClass().getResource(jLabelLeftIcon)));
+					jLabelRight.setIcon(new javax.swing.ImageIcon(getClass().getResource(jLabelRightIcon)));
 				}
 				public void mouseExited(java.awt.event.MouseEvent evt) {
 					jLabelRight.setIcon(new javax.swing.ImageIcon(getClass().getResource(jLabelTransIcon)));
@@ -229,7 +265,7 @@ public class PreviewJFrame extends javax.swing.JFrame {
 			jPanelRightLayout.setVerticalGroup(
 				jPanelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(jPanelRightLayout.createSequentialGroup()
-					.addGap(166, 166, 166)
+					.addGap((int)imageIcon.getIconHeight()/2 - 25)
 					.addComponent(jLabelRight)
 					.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 			);
@@ -253,17 +289,14 @@ public class PreviewJFrame extends javax.swing.JFrame {
 			);
 			// END: Next and Prev panels
 			
-			
-			this.imageContainer.setBounds( 0, 0,  
-									  imageIcon.getIconWidth(),
-									  imageIcon.getIconHeight() ); 
-//			this.leftButton.setBounds(0, (int)imageIcon.getIconHeight()/2,  30, 30 );
-			
+			this.imageContainer.setBounds( 0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight() ); 			
 
 		} catch (java.io.IOException e) {
 			return;
 		}
 	
+		pack();
+		
 	}
 	
 	
