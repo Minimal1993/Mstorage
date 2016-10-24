@@ -39,195 +39,179 @@ public class TestForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        jPanelLeft = new javax.swing.JPanel();
+        jLabelLeft = new javax.swing.JLabel();
+        jPanelRight = new javax.swing.JPanel();
+        jLabelRight = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane4ItemListComp = new javax.swing.JScrollPane();
-        jPanel4FindInDirResultComp = new javax.swing.JPanel();
-        jPanelItemsListComponent = new javax.swing.JPanel();
-        jPanelItem = new javax.swing.JPanel();
-        jLabelItemLine = new javax.swing.JLabel();
-        jLabelItemTextLeft = new javax.swing.JLabel();
-        jLabelItemTextFound = new javax.swing.JLabel();
-        jLabelItemTextRight = new javax.swing.JLabel();
-        jPanelHeader = new javax.swing.JPanel();
-        jLabelHeaderUrl = new javax.swing.JLabel();
-        jLabelHeaderTimes = new javax.swing.JLabel();
-        jLabelHeaderTimesTitle = new javax.swing.JLabel();
-        jLabelHeaderTimesValue = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jScrollPane4ItemListComp.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane4ItemListComp.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jLayeredPane1.setBackground(new java.awt.Color(204, 255, 204));
+        jLayeredPane1.setOpaque(true);
 
-        jPanelItem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanelItem.addMouseListener(new java.awt.event.MouseAdapter() {
+        jPanelLeft.setBackground(new java.awt.Color(204, 204, 204));
+        jPanelLeft.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanelLeft.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanelItemMouseClicked(evt);
+                jPanelLeftMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanelLeftMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanelLeftMouseExited(evt);
             }
         });
 
-        jLabelItemLine.setText("line 10:");
-
-        jLabelItemTextLeft.setText("...some text in search");
-
-        jLabelItemTextFound.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabelItemTextFound.setText("found");
-
-        jLabelItemTextRight.setText("right part of found...");
-
-        javax.swing.GroupLayout jPanelItemLayout = new javax.swing.GroupLayout(jPanelItem);
-        jPanelItem.setLayout(jPanelItemLayout);
-        jPanelItemLayout.setHorizontalGroup(
-            jPanelItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelItemLayout.createSequentialGroup()
-                .addComponent(jLabelItemLine)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelItemTextLeft)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelItemTextFound)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelItemTextRight)
-                .addGap(0, 132, Short.MAX_VALUE))
-        );
-        jPanelItemLayout.setVerticalGroup(
-            jPanelItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabelItemLine)
-                .addComponent(jLabelItemTextLeft)
-                .addComponent(jLabelItemTextFound)
-                .addComponent(jLabelItemTextRight))
-        );
-
-        jPanelHeader.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanelHeader.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelLeft.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/resultset_previous.17x32.png"))); // NOI18N
+        jLabelLeft.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanelHeaderMouseClicked(evt);
+                jLabelLeftMouseClicked(evt);
             }
         });
 
-        jLabelHeaderUrl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bullet_toggle_plus.16x16.png"))); // NOI18N
-        jLabelHeaderUrl.setText("E:\\dev\\java\\MStorage\\MStorage\\src");
-
-        jLabelHeaderTimes.setText("3");
-
-        jLabelHeaderTimesTitle.setText("times:");
-
-        jLabelHeaderTimesValue.setText("3");
-
-        javax.swing.GroupLayout jPanelHeaderLayout = new javax.swing.GroupLayout(jPanelHeader);
-        jPanelHeader.setLayout(jPanelHeaderLayout);
-        jPanelHeaderLayout.setHorizontalGroup(
-            jPanelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelHeaderLayout.createSequentialGroup()
-                .addComponent(jLabelHeaderUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelHeaderTimesTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelHeaderTimesValue)
-                .addGap(35, 35, 35)
-                .addComponent(jLabelHeaderTimes, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanelHeaderLayout.setVerticalGroup(
-            jPanelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelHeaderLayout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelLeftLayout = new javax.swing.GroupLayout(jPanelLeft);
+        jPanelLeft.setLayout(jPanelLeftLayout);
+        jPanelLeftLayout.setHorizontalGroup(
+            jPanelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLeftLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelHeaderUrl)
-                    .addComponent(jLabelHeaderTimes)
-                    .addComponent(jLabelHeaderTimesTitle)
-                    .addComponent(jLabelHeaderTimesValue)))
+                .addComponent(jLabelLeft))
         );
-
-        javax.swing.GroupLayout jPanelItemsListComponentLayout = new javax.swing.GroupLayout(jPanelItemsListComponent);
-        jPanelItemsListComponent.setLayout(jPanelItemsListComponentLayout);
-        jPanelItemsListComponentLayout.setHorizontalGroup(
-            jPanelItemsListComponentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelItemsListComponentLayout.createSequentialGroup()
-                .addComponent(jPanelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanelItemsListComponentLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jPanelItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jPanelLeftLayout.setVerticalGroup(
+            jPanelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLeftLayout.createSequentialGroup()
+                .addGap(166, 166, 166)
+                .addComponent(jLabelLeft)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanelItemsListComponentLayout.setVerticalGroup(
-            jPanelItemsListComponentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelItemsListComponentLayout.createSequentialGroup()
-                .addComponent(jPanelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanelItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
-        );
 
-        javax.swing.GroupLayout jPanel4FindInDirResultCompLayout = new javax.swing.GroupLayout(jPanel4FindInDirResultComp);
-        jPanel4FindInDirResultComp.setLayout(jPanel4FindInDirResultCompLayout);
-        jPanel4FindInDirResultCompLayout.setHorizontalGroup(
-            jPanel4FindInDirResultCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4FindInDirResultCompLayout.createSequentialGroup()
-                .addComponent(jPanelItemsListComponent, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 214, Short.MAX_VALUE))
-        );
-        jPanel4FindInDirResultCompLayout.setVerticalGroup(
-            jPanel4FindInDirResultCompLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4FindInDirResultCompLayout.createSequentialGroup()
-                .addComponent(jPanelItemsListComponent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 159, Short.MAX_VALUE))
-        );
+        jPanelRight.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanelRight.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanelRightMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanelRightMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanelRightMouseExited(evt);
+            }
+        });
 
-        jScrollPane4ItemListComp.setViewportView(jPanel4FindInDirResultComp);
+        jLabelRight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/resultset_next.17x32.png"))); // NOI18N
+        jLabelRight.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelRight.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelRightMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelRightLayout = new javax.swing.GroupLayout(jPanelRight);
+        jPanelRight.setLayout(jPanelRightLayout);
+        jPanelRightLayout.setHorizontalGroup(
+            jPanelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabelRight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanelRightLayout.setVerticalGroup(
+            jPanelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRightLayout.createSequentialGroup()
+                .addGap(166, 166, 166)
+                .addComponent(jLabelRight)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4ItemListComp, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(421, Short.MAX_VALUE)
-                .addComponent(jScrollPane4ItemListComp, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jLayeredPane1.setLayer(jPanelLeft, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jPanelRight, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addComponent(jPanelLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(154, 154, 154)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 279, Short.MAX_VALUE)
+                .addComponent(jPanelRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelRight, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addGap(106, 106, 106)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(192, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(jLayeredPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLayeredPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPanelHeaderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelHeaderMouseClicked
+    private void jPanelLeftMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelLeftMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPanelHeaderMouseClicked
+    }//GEN-LAST:event_jPanelLeftMouseEntered
 
-    private void jPanelItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelItemMouseClicked
+    private void jPanelLeftMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelLeftMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPanelItemMouseClicked
+    }//GEN-LAST:event_jPanelLeftMouseExited
+
+    private void jPanelRightMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelRightMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanelRightMouseEntered
+
+    private void jPanelRightMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelRightMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanelRightMouseExited
+
+    private void jPanelRightMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelRightMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanelRightMouseClicked
+
+    private void jLabelRightMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelRightMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelRightMouseClicked
+
+    private void jPanelLeftMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelLeftMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanelLeftMouseClicked
+
+    private void jLabelLeftMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLeftMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelLeftMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabelHeaderTimes;
-    private javax.swing.JLabel jLabelHeaderTimesTitle;
-    private javax.swing.JLabel jLabelHeaderTimesValue;
-    private javax.swing.JLabel jLabelHeaderUrl;
-    private javax.swing.JLabel jLabelItemLine;
-    private javax.swing.JLabel jLabelItemTextFound;
-    private javax.swing.JLabel jLabelItemTextLeft;
-    private javax.swing.JLabel jLabelItemTextRight;
+    private javax.swing.JLabel jLabelLeft;
+    private javax.swing.JLabel jLabelRight;
+    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel4FindInDirResultComp;
-    private javax.swing.JPanel jPanelHeader;
-    private javax.swing.JPanel jPanelItem;
-    private javax.swing.JPanel jPanelItemsListComponent;
-    private javax.swing.JScrollPane jScrollPane4ItemListComp;
+    private javax.swing.JPanel jPanelLeft;
+    private javax.swing.JPanel jPanelRight;
     // End of variables declaration//GEN-END:variables
 
 	public ImageCarousel ImageCarousel;
