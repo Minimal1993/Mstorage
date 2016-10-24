@@ -15,7 +15,13 @@ import mstorage.storagecollection.Image;
 import java.awt.Toolkit;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
+import java.util.Map;
+import java.util.Set;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import mstorage.components.ImageItem;
+import mstorage.storagecollection.File;
 import net.coobird.thumbnailator.Thumbnails;
 
 /**
@@ -25,7 +31,15 @@ import net.coobird.thumbnailator.Thumbnails;
 public class PreviewJFrame extends javax.swing.JFrame {
 
 	protected Image Image;
-	public ImageItem ImageItem;
+		
+    private JLabel imageContainer;
+	private JPanel jPanelLeft;
+	private JPanel jPanelRight;
+    private JLabel jLabelLeft;
+	private JLabel jLabelRight;
+	private String jLabelLeftIcon = "/images/resultset_previous.17x32.png";
+    private String jLabelTransIcon = "/images/transparent.17x32.png";
+	private String jLabelRightIcon = "/images/resultset_next.17x32.png";
 	
 	/**
 	 * Default size for preview window
@@ -39,9 +53,8 @@ public class PreviewJFrame extends javax.swing.JFrame {
 	/**
 	 * Creates new form PreviewJFrame
 	 */
-	public PreviewJFrame(ImageItem ii, Image image) {
+	public PreviewJFrame(Image image) {
 		this.Image = image;
-		this.ImageItem = ii;
 		
 		initComponents();
 		
@@ -57,54 +70,62 @@ public class PreviewJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabelPicture = new javax.swing.JLabel();
+        jLayeredPaneContainer = new javax.swing.JLayeredPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jLabelPicture.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelPicture.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabelPicture.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jLabelPicture.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jLayeredPaneContainer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLayeredPaneContainer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLayeredPaneContainerMouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelPicture, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+        javax.swing.GroupLayout jLayeredPaneContainerLayout = new javax.swing.GroupLayout(jLayeredPaneContainer);
+        jLayeredPaneContainer.setLayout(jLayeredPaneContainerLayout);
+        jLayeredPaneContainerLayout.setHorizontalGroup(
+            jLayeredPaneContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelPicture, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+        jLayeredPaneContainerLayout.setVerticalGroup(
+            jLayeredPaneContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLayeredPaneContainer)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jLayeredPaneContainer)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jLayeredPaneContainerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLayeredPaneContainerMouseClicked
+        this.goNextHandler(evt);
+    }//GEN-LAST:event_jLayeredPaneContainerMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabelPicture;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLayeredPane jLayeredPaneContainer;
     // End of variables declaration//GEN-END:variables
 
 	private void initMain() {
+		this.jLayeredPaneContainer.removeAll();
+		this.imageContainer = new JLabel();
+		this.jPanelLeft = new javax.swing.JPanel();
+		this.jPanelRight = new javax.swing.JPanel();
+		this.jLabelLeft = new javax.swing.JLabel();;
+		this.jLabelRight = new javax.swing.JLabel();
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/picture.32x32.png")));
 		this.setTitle(this.Image.getOrigName());
-//		this.jLabelPicture.setText(this.Image.getOrigName());
 		
 		java.io.File picture;
 		try {
@@ -138,11 +159,154 @@ public class PreviewJFrame extends javax.swing.JFrame {
 			Dimension winSize = new Dimension(thumbnail.getWidth() + 5, thumbnail.getHeight() + 25);
 			this.setPreferredSize(winSize);
 			
-			this.jLabelPicture.setIcon(new javax.swing.ImageIcon(thumbnail));
+			javax.swing.ImageIcon imageIcon = new javax.swing.ImageIcon(thumbnail);
+			this.imageContainer.setIcon(null);
+			this.imageContainer.setIcon(imageIcon);
+			this.jLayeredPaneContainer.add(this.imageContainer, new Integer(50));
+			
+			// BEGIN: Next and Prev panels
+			jPanelLeft.setBackground(new java.awt.Color(204, 204, 204));
+			jPanelLeft.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+			jPanelLeft.setOpaque(false);
+            java.awt.event.MouseAdapter maLeft = new java.awt.event.MouseAdapter(){
+				public void mouseClicked(java.awt.event.MouseEvent evt) {
+					goPrevHandler(evt);
+				}
+				public void mouseEntered(java.awt.event.MouseEvent evt) {
+					jLabelLeft.setIcon(new javax.swing.ImageIcon(getClass().getResource(jLabelLeftIcon)));
+				}
+				public void mouseExited(java.awt.event.MouseEvent evt) {
+					jLabelLeft.setIcon(new javax.swing.ImageIcon(getClass().getResource(jLabelTransIcon)));
+				}
+            };
+			jPanelLeft.addMouseListener(maLeft);
+
+			jLabelLeft.setIcon(new javax.swing.ImageIcon(getClass().getResource(this.jLabelTransIcon))); 
+			jLabelLeft.addMouseListener(maLeft);
+
+			javax.swing.GroupLayout jPanelLeftLayout = new javax.swing.GroupLayout(jPanelLeft);
+			jPanelLeft.setLayout(jPanelLeftLayout);
+			jPanelLeftLayout.setHorizontalGroup(
+				jPanelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLeftLayout.createSequentialGroup()
+					.addGap(0, 0, Short.MAX_VALUE)
+					.addComponent(jLabelLeft))
+			);
+			jPanelLeftLayout.setVerticalGroup(
+				jPanelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanelLeftLayout.createSequentialGroup()
+					.addGap((int)imageIcon.getIconHeight()/2 - 25)
+					.addComponent(jLabelLeft)
+					.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+			);
+
+			jPanelRight.setBackground(new java.awt.Color(204, 204, 204));
+			jPanelRight.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+			jPanelRight.setOpaque(false);
+            java.awt.event.MouseAdapter maRight = new java.awt.event.MouseAdapter() {
+				public void mouseClicked(java.awt.event.MouseEvent evt) {
+					goNextHandler(evt);
+				}
+				public void mouseEntered(java.awt.event.MouseEvent evt) {
+					jLabelRight.setIcon(new javax.swing.ImageIcon(getClass().getResource(jLabelRightIcon)));
+				}
+				public void mouseExited(java.awt.event.MouseEvent evt) {
+					jLabelRight.setIcon(new javax.swing.ImageIcon(getClass().getResource(jLabelTransIcon)));
+				}
+			};
+			jPanelRight.addMouseListener(maRight);
+
+			jLabelRight.setIcon(new javax.swing.ImageIcon(getClass().getResource(this.jLabelTransIcon))); 
+			jLabelRight.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+			jLabelRight.addMouseListener(maRight);
+
+			javax.swing.GroupLayout jPanelRightLayout = new javax.swing.GroupLayout(jPanelRight);
+			jPanelRight.setLayout(jPanelRightLayout);
+			jPanelRightLayout.setHorizontalGroup(
+				jPanelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(jLabelRight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+			);
+			jPanelRightLayout.setVerticalGroup(
+				jPanelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanelRightLayout.createSequentialGroup()
+					.addGap((int)imageIcon.getIconHeight()/2 - 25)
+					.addComponent(jLabelRight)
+					.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+			);
+
+			this.jLayeredPaneContainer.setLayer(jPanelLeft, new Integer(100));
+			this.jLayeredPaneContainer.setLayer(jPanelRight, new Integer(100));
+
+			javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(this.jLayeredPaneContainer);
+			this.jLayeredPaneContainer.setLayout(jLayeredPane1Layout);
+			jLayeredPane1Layout.setHorizontalGroup(
+				jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jLayeredPane1Layout.createSequentialGroup()
+					.addComponent(jPanelLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 450, Short.MAX_VALUE)
+					.addComponent(jPanelRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+			);
+			jLayeredPane1Layout.setVerticalGroup(
+				jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(jPanelLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(jPanelRight, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+			);
+			// END: Next and Prev panels
+			
+			this.imageContainer.setBounds( 0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight() ); 			
 
 		} catch (java.io.IOException e) {
 			return;
 		}
 	
+		pack();
+		this.setLocationRelativeTo(MainForm.getInstance());
+        
 	}
+    
+    /**
+     * Go to previous picture
+     */
+    public void goPrevHandler(java.awt.event.MouseEvent evt){
+        File file = (File)this.Image.getFather();
+        Image prev = null;
+
+        Set<Map.Entry<String, Image>> imgSet = file.Images.entrySet();
+        for (Map.Entry<String, Image> img : imgSet) {
+            if(img.getValue().getFileName().equals( this.Image.getFileName()) ) {
+                break;
+            }
+            prev = img.getValue();
+        }
+
+        if (null != prev) {
+            this.Image = prev;
+            this.initMain();
+        }
+    }
+	
+    /**
+     * Go to next picture
+     */
+    public void goNextHandler(java.awt.event.MouseEvent evt){
+        File file = (File)this.Image.getFather();
+        Image prev = null;
+        Image next = null;
+
+        Set<Map.Entry<String, Image>> imgSet = file.Images.entrySet();
+        for (Map.Entry<String, Image> img : imgSet) {
+            if(null != prev && prev.getFileName().equals( this.Image.getFileName()) ) {
+                next = img.getValue();
+                break;
+            }
+            
+            prev = img.getValue();
+        }
+
+        if (null != next) {
+            this.Image = next;
+            this.initMain();
+        }
+    }
+    
 }
