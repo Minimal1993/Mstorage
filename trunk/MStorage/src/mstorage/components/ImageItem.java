@@ -11,6 +11,7 @@
  */
 package mstorage.components;
 
+import java.awt.Cursor;
 import mstorage.storagecollection.Image;
 import net.coobird.thumbnailator.Thumbnails;
 import java.awt.event.WindowAdapter;
@@ -166,6 +167,16 @@ public class ImageItem extends javax.swing.JPanel {
 				if (e.isPopupTrigger()){
 					int r = 8;
 				}
+			}
+			
+			public void mouseEntered(MouseEvent e) {
+				ImageItem item = (ImageItem) e.getSource();
+				item.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			}
+			
+			public void mouseExited(MouseEvent e) {
+				ImageItem item = (ImageItem) e.getSource();
+				item.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 			}
 		};
 	}
