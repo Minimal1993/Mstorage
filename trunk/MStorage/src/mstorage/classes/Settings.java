@@ -15,7 +15,10 @@ import java.awt.Font;
 import java.io.*;
 import java.util.*;
 import java.nio.file.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import mstorage.MainForm;
+import mstorage.storagecollection.Image;
 import mstorage.utils.FileUtils;
 
 /**
@@ -69,7 +72,7 @@ public class Settings {
 	 */
 	protected void initGeneral() {
 		// General settings
-		this.GeneralSettings.put("Version", "1.1.2");
+		this.GeneralSettings.put("Version", "1.1.0");
 		this.GeneralSettings.put("Author", "Gulevskiy Ilya");
 		this.GeneralSettings.put("Year", "2016");
 		this.GeneralSettings.put("Email", "mstorage.project@gmail.com");
@@ -83,7 +86,7 @@ public class Settings {
         this.Properties.setProperty("MainWindowLocation", "0,0"); 
 		this.Properties.setProperty("CheckUpdatesURL", "https://sourceforge.net/projects/mstorage/files/"); 
 		this.Properties.setProperty("CheckUpdatesURLPattern", 
-			"https://sourceforge.net/projects/mstorage/files/MStorage\\\\.(.+)\\\\.zip/download"
+			"https://sourceforge.net/projects/mstorage/files/MStorage\\.(.+)\\.zip/download"
 		);
 		
 		// Selected files in last opened files
@@ -260,5 +263,56 @@ public class Settings {
 		ObjectInputStream objectIn = new ObjectInputStream(new ByteArrayInputStream(buf));
 		return objectIn.readObject();
 	}
+    
+    /**
+     * Choose from list newest version of app
+     * 
+     * @param list
+     * @return 
+     */
+    public static ArrayList<String> compareNewVersion(HashMap<String, String> list ){
+        if (list.isEmpty()) return null;
+        
+        // Add current version for compare
+        list.put("current", Settings.getInstance().getProperty("Version"));
+        
+        Pattern pattern = Pattern.compile("^([0-9]+)\\.([0-9]+)\\.([0-9]+)(\\..+)?$", 0);
+        String newestStr = "";
+        int newestInt = 0;
+        Set<Map.Entry<String, String>> listSet = list.entrySet();
+        for(Map.Entry<String, String> lst : listSet) {
+            Matcher m = pattern.matcher(lst.getValue());
+            if (!m.find() ) continue;
+            
+            try {
+                String g1 = m.group(1);
+                String g2 = String.format("%03d", Integer.decode(m.group(2)));
+                String g3 = String.format("%03d", Integer.decode(m.group(3)));
+                String g4 = m.group(4);
+                
+                if (null != g4) continue;
+                
+                String newStr = g1 + g2 + g3;
+                int newInt = Integer.decode(newStr);
+                
+                if (newestStr.isEmpty() || newestInt < newInt){
+                    newestStr = lst.getKey();
+                    newestInt = newInt;
+                }
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }            
+        }
+        
+        // Check if current version is older than newest
+        if (newestStr.isEmpty() || newestStr.equals("current")) return null;
+        
+        ArrayList<String> al = new ArrayList<>();
+        al.add(newestStr);
+        al.add(list.get(newestStr));
+        
+        return al;
+    }
 
 }
