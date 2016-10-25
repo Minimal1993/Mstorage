@@ -86,4 +86,35 @@ public class FileUtils {
 		}
 	}
 	
+	/**
+	 * Serialize Object to String
+	 * 
+	 * @param obj
+	 * @return
+	 * @throws IOException 
+	 */
+	public static String serializeObject(Object obj) throws IOException{
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ObjectOutputStream oout = new ObjectOutputStream(baos);
+		oout.writeObject(obj);
+		oout.close();
+		return baos.toString();
+	}
+	
+	/**
+	 * Deserialize String to Object
+	 * 
+	 * @param str
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException 
+	 */
+	public static Object deserializeObject(String str) throws IOException, ClassNotFoundException{
+		byte[] buf = str.getBytes();
+		if (null == buf ) return null;
+		
+		ObjectInputStream objectIn = new ObjectInputStream(new ByteArrayInputStream(buf));
+		return objectIn.readObject();
+	}
+	
 }

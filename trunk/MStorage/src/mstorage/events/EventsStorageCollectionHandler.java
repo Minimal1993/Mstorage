@@ -11,6 +11,7 @@
  */
 package mstorage.events;
 
+import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import mstorage.storagecollection.*;
@@ -199,6 +200,13 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 
 		FileJTab newtab = TabsFabric.getTab(file);
         if (null != newtab) {
+			Font prevFont = new Font(
+				Settings.getInstance().getProperty("EditorsFont_name"), 
+				Integer.decode(Settings.getInstance().getProperty("EditorsFont_style")),
+				Integer.decode(Settings.getInstance().getProperty("EditorsFont_size"))
+			);
+			newtab.TextAreaDocument.setFont(prevFont);
+			
             MainForm.getInstance().getTabbedPaneMain().addTab(newtab.File.getFileName(), newtab);
 
             // Set focus

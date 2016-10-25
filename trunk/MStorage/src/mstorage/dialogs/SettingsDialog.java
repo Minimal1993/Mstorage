@@ -11,12 +11,17 @@
  */
 package mstorage.dialogs;
 
+import java.awt.Font;
 import java.awt.Toolkit;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import mstorage.MainForm;
-
 import mstorage.classes.Settings;
+import mstorage.components.FileJTab;
+import mstorage.utils.FileUtils;
+import say.swing.JFontChooser;
 
 /**
  *
@@ -31,9 +36,7 @@ public class SettingsDialog extends javax.swing.JDialog {
 		super(parent, modal);
 		initComponents();
 	
-		this.setIcon();
-		
-		// 
+		this.initMain();
 	}
 
 	/**
@@ -61,6 +64,9 @@ public class SettingsDialog extends javax.swing.JDialog {
         jPanelAppearanceIn = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jComboBoxStyleOfStorageTree = new javax.swing.JComboBox<>();
+        jLayeredPaneEditorsFont = new javax.swing.JLayeredPane();
+        jLabelCurrentEditorsFont = new javax.swing.JLabel();
+        jButtonChangeEditorsFont = new javax.swing.JButton();
         jButtonOK = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -174,6 +180,39 @@ public class SettingsDialog extends javax.swing.JDialog {
             }
         });
 
+        jLayeredPaneEditorsFont.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Editor's font", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+
+        jLabelCurrentEditorsFont.setText("Current font");
+
+        jButtonChangeEditorsFont.setText("Change");
+        jButtonChangeEditorsFont.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonChangeEditorsFontActionPerformed(evt);
+            }
+        });
+
+        jLayeredPaneEditorsFont.setLayer(jLabelCurrentEditorsFont, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPaneEditorsFont.setLayer(jButtonChangeEditorsFont, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPaneEditorsFontLayout = new javax.swing.GroupLayout(jLayeredPaneEditorsFont);
+        jLayeredPaneEditorsFont.setLayout(jLayeredPaneEditorsFontLayout);
+        jLayeredPaneEditorsFontLayout.setHorizontalGroup(
+            jLayeredPaneEditorsFontLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPaneEditorsFontLayout.createSequentialGroup()
+                .addComponent(jLabelCurrentEditorsFont, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonChangeEditorsFont, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jLayeredPaneEditorsFontLayout.setVerticalGroup(
+            jLayeredPaneEditorsFontLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPaneEditorsFontLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jLayeredPaneEditorsFontLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelCurrentEditorsFont)
+                    .addComponent(jButtonChangeEditorsFont))
+                .addGap(4, 4, 4))
+        );
+
         javax.swing.GroupLayout jPanelAppearanceInLayout = new javax.swing.GroupLayout(jPanelAppearanceIn);
         jPanelAppearanceIn.setLayout(jPanelAppearanceInLayout);
         jPanelAppearanceInLayout.setHorizontalGroup(
@@ -182,6 +221,7 @@ public class SettingsDialog extends javax.swing.JDialog {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addComponent(jComboBoxStyleOfStorageTree, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLayeredPaneEditorsFont)
         );
         jPanelAppearanceInLayout.setVerticalGroup(
             jPanelAppearanceInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,7 +229,9 @@ public class SettingsDialog extends javax.swing.JDialog {
                 .addGroup(jPanelAppearanceInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel2)
                     .addComponent(jComboBoxStyleOfStorageTree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 194, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLayeredPaneEditorsFont, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 126, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelAppearanceLayout = new javax.swing.GroupLayout(jPanelAppearance);
@@ -307,6 +349,34 @@ public class SettingsDialog extends javax.swing.JDialog {
 		MainForm.getInstance().initTree();
     }//GEN-LAST:event_jComboBoxStyleOfStorageTreeActionPerformed
 
+    private void jButtonChangeEditorsFontActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChangeEditorsFontActionPerformed
+		JFontChooser fontChooser = new JFontChooser();
+		Font prevFont = new Font(
+			Settings.getInstance().getProperty("EditorsFont_name"), 
+			Integer.decode(Settings.getInstance().getProperty("EditorsFont_style")),
+			Integer.decode(Settings.getInstance().getProperty("EditorsFont_size"))
+		);	
+		if (null != prevFont) fontChooser.setSelectedFont(prevFont);
+		
+		int result = fontChooser.showDialog(this);
+		if (result == JFontChooser.OK_OPTION) {
+			Font font = fontChooser.getSelectedFont(); 
+			Settings.getInstance().setProperty("EditorsFont_name", font.getName());
+			Settings.getInstance().setProperty("EditorsFont_style", Integer.toString(font.getStyle()));
+			Settings.getInstance().setProperty("EditorsFont_size", Integer.toString(font.getSize()));
+
+			this.jLabelCurrentEditorsFont.setFont(font);
+			this.jLabelCurrentEditorsFont.setText(font.getName() + ", " + font.getSize());
+			
+			// Change font in all opened tabs
+			int count = MainForm.getInstance().getTabbedPaneMain().getTabCount();
+			for (int i = 0; i < count; i++) {
+				FileJTab tab = (FileJTab) MainForm.getInstance().getTabbedPaneMain().getComponent(i);
+				tab.TextAreaDocument.setFont(font);
+			}
+		}
+    }//GEN-LAST:event_jButtonChangeEditorsFontActionPerformed
+
 	/**
 	 * @param args the command line arguments
 	 */
@@ -352,12 +422,15 @@ public class SettingsDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane SettingsTabbedPane;
     private javax.swing.JButton jButtonBrowse;
+    private javax.swing.JButton jButtonChangeEditorsFont;
     private javax.swing.JButton jButtonOK;
     private javax.swing.JComboBox<String> jComboBoxStyleOfStorageTree;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelCurrentEditorsFont;
+    private javax.swing.JLayeredPane jLayeredPaneEditorsFont;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelAppearance;
     private javax.swing.JPanel jPanelAppearanceIn;
@@ -369,8 +442,20 @@ public class SettingsDialog extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldStorageDirectory;
     // End of variables declaration//GEN-END:variables
 
-	private void setIcon() {
+	private void initMain() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/cog.32x32.png")));
+		
+		// Set example of editor's font
+		Font prevFont = new Font(
+			Settings.getInstance().getProperty("EditorsFont_name"), 
+			Integer.decode(Settings.getInstance().getProperty("EditorsFont_style")),
+			Integer.decode(Settings.getInstance().getProperty("EditorsFont_size"))
+		);	
+		if (null != prevFont){
+			this.jLabelCurrentEditorsFont.setFont(prevFont);
+			this.jLabelCurrentEditorsFont.setText(prevFont.getName() + ", " + prevFont.getSize());
+		}
+		
 	}
 
 }

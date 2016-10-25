@@ -11,6 +11,15 @@
  */
 package mstorage.classes;
 
+import java.awt.Font;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.util.BitSet;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -19,6 +28,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.util.TreeMap;
+import mstorage.utils.FileUtils;
 
 /**
  *
@@ -109,6 +119,29 @@ public class SettingsTest {
 		// another value mustnt be set
 		this.Settings.setProperty("AppName", "Batman forever");
 		assertEquals("MStorage", this.Settings.getProperty("AppName"));
+	}
+	
+	/**
+	 * Test that serialized\deserialized object is the same as original
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException 
+	 */
+	@Test
+	public void testFontSerealization() throws IOException, ClassNotFoundException {
+		Font font = new java.awt.Font("Monospaced", 0, 12);		
+		String fontString = FileUtils.serializeObject(font);	
+		Settings.getInstance().setProperty("EditorsFont", fontString);
+		Font font2 = (Font)FileUtils.deserializeObject(Settings.getInstance().getProperty("EditorsFont"));
+		
+		assertEquals(font2, font);
+		
+		Font font3 = new java.awt.Font("Serif", 0, 12);		
+		String fontString2 = FileUtils.serializeObject(font3);
+		Settings.getInstance().setProperty("EditorsFont", fontString2);
+		Font font4 = (Font)FileUtils.deserializeObject(Settings.getInstance().getProperty("EditorsFont"));
+		
+		assertEquals(font3, font4);
 	}
 	
 }
