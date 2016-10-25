@@ -24,9 +24,9 @@
             <file>file:/C:/work/MStorage/MStorage/src/mstorage/PreviewJFrame.java</file>
         </group>
         <group>
-            <file>file:/E:/dev/java/MStorage/MStorage/src/mstorage/PreviewJFrame.java</file>
-            <file>file:/E:/dev/java/MStorage/MStorage/src/mstorage/components/ImageItem.java</file>
-            <file>file:/E:/dev/java/MStorage/MStorage/src/mstorage/events/EventsStorageCollectionHandler.java</file>
+            <file>file:/E:/dev/java/MStorage/MStorage/test/mstorage/classes/SettingsTest.java</file>
+            <file>file:/E:/dev/java/MStorage/MStorage/src/mstorage/utils/FileUtils.java</file>
+            <file>file:/E:/dev/java/MStorage/MStorage/src/mstorage/classes/Settings.java</file>
         </group>
     </open-files>
 </project-private>

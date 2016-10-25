@@ -19,6 +19,7 @@ import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -496,15 +497,21 @@ public class SettingsDialog extends javax.swing.JDialog {
 			}
 			
 			int flags = Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE;			
-			Pattern pattern = Pattern.compile(Settings.getInstance().getProperty("CheckUpdatesURLPattern"), flags);
+			Pattern pattern = Pattern.compile("https://sourceforge.net/projects/mstorage/files/MStorage\\.(.+)\\.zip/download", flags);
 			Matcher m = pattern.matcher(result);
 			
-			ArrayList<String> list = new ArrayList<>();
+			HashMap<String, String> list = new HashMap<>();
 			while(m.find()) {
-				list.add( m.group(1) );
+				list.put(m.group(0), m.group(1) );
 			}
 			
-			
+			ArrayList<String> newest = Settings.compareNewVersion(list);
+            if (null == newest){
+                System.out.println("No newest version");
+            }
+            else {
+                System.out.println(newest.get(0) + " - " + newest.get(1));
+            }
 			
 		}
 		catch(Exception e) {

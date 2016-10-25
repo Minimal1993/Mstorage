@@ -142,6 +142,7 @@ public class SettingsTest {
 		Font font4 = (Font)FileUtils.deserializeObject(Settings.getInstance().getProperty("EditorsFont"));
 		
 		assertEquals(font3, font4);
+        
 	}
 	
 }
