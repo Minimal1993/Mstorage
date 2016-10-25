@@ -81,6 +81,10 @@ public class Settings {
 		this.Properties.setProperty("ViewStorageTreePanel", "true");
 		this.Properties.setProperty("OpenedFiles", ""); // ; as delimiter
         this.Properties.setProperty("MainWindowLocation", "0,0"); 
+		this.Properties.setProperty("CheckUpdatesURL", "https://sourceforge.net/projects/mstorage/files/"); 
+		this.Properties.setProperty("CheckUpdatesURLPattern", 
+			"https://sourceforge.net/projects/mstorage/files/MStorage\\\\.(.+)\\\\.zip/download"
+		);
 		
 		// Selected files in last opened files
 		this.Properties.setProperty("OpenedFilesSelected", ""); 
@@ -100,6 +104,7 @@ public class Settings {
 		this.Properties.setProperty("EditorsFont_name", "Monospaced");
 		this.Properties.setProperty("EditorsFont_style", "0");
 		this.Properties.setProperty("EditorsFont_size", "12");
+		this.Properties.setProperty("HowOftenCheckUpdates", "7"); 
 		
 	}
 

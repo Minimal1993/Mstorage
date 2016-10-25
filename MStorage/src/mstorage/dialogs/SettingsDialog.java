@@ -14,9 +14,15 @@ package mstorage.dialogs;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.ObjectOutputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.ButtonGroup;
 import mstorage.MainForm;
 import mstorage.classes.Settings;
 import mstorage.components.FileJTab;
@@ -29,6 +35,8 @@ import say.swing.JFontChooser;
  */
 public class SettingsDialog extends javax.swing.JDialog {
 
+	ButtonGroup HowOftenCheckUpdatesGroup = new ButtonGroup();
+	
 	/**
 	 * Creates new form SettingsDialog
 	 */
@@ -67,6 +75,13 @@ public class SettingsDialog extends javax.swing.JDialog {
         jLayeredPaneEditorsFont = new javax.swing.JLayeredPane();
         jLabelCurrentEditorsFont = new javax.swing.JLabel();
         jButtonChangeEditorsFont = new javax.swing.JButton();
+        jPanelUpdates = new javax.swing.JPanel();
+        jLabelHowOften = new javax.swing.JLabel();
+        jRadioButtonHowOftenCheckUpdates1 = new javax.swing.JRadioButton();
+        jRadioButtonHowOftenCheckUpdates2 = new javax.swing.JRadioButton();
+        jRadioButtonHowOftenCheckUpdates3 = new javax.swing.JRadioButton();
+        jButtonCheckUpdatesNow = new javax.swing.JButton();
+        jLabelCheckUpdatesNowResult = new javax.swing.JLabel();
         jButtonOK = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -253,6 +268,85 @@ public class SettingsDialog extends javax.swing.JDialog {
 
         SettingsTabbedPane.addTab("Appearance", jPanelAppearance);
 
+        jLabelHowOften.setText("Choose how often you want check updates for app:");
+
+        jRadioButtonHowOftenCheckUpdates1.setSelected(true);
+        jRadioButtonHowOftenCheckUpdates1.setText("One time per week");
+        jRadioButtonHowOftenCheckUpdates1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonHowOftenCheckUpdates1ActionPerformed(evt);
+            }
+        });
+
+        jRadioButtonHowOftenCheckUpdates2.setText("One time per month");
+        jRadioButtonHowOftenCheckUpdates2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonHowOftenCheckUpdates2ActionPerformed(evt);
+            }
+        });
+
+        jRadioButtonHowOftenCheckUpdates3.setText("Never check updates");
+        jRadioButtonHowOftenCheckUpdates3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonHowOftenCheckUpdates3ActionPerformed(evt);
+            }
+        });
+
+        jButtonCheckUpdatesNow.setText("Check updates now");
+        jButtonCheckUpdatesNow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCheckUpdatesNowActionPerformed(evt);
+            }
+        });
+
+        jLabelCheckUpdatesNowResult.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+
+        javax.swing.GroupLayout jPanelUpdatesLayout = new javax.swing.GroupLayout(jPanelUpdates);
+        jPanelUpdates.setLayout(jPanelUpdatesLayout);
+        jPanelUpdatesLayout.setHorizontalGroup(
+            jPanelUpdatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelUpdatesLayout.createSequentialGroup()
+                .addGroup(jPanelUpdatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelUpdatesLayout.createSequentialGroup()
+                        .addGroup(jPanelUpdatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelUpdatesLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanelUpdatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioButtonHowOftenCheckUpdates1)
+                                    .addComponent(jRadioButtonHowOftenCheckUpdates2)
+                                    .addComponent(jRadioButtonHowOftenCheckUpdates3)))
+                            .addGroup(jPanelUpdatesLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabelHowOften))
+                            .addGroup(jPanelUpdatesLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jButtonCheckUpdatesNow)))
+                        .addGap(0, 85, Short.MAX_VALUE))
+                    .addGroup(jPanelUpdatesLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabelCheckUpdatesNowResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanelUpdatesLayout.setVerticalGroup(
+            jPanelUpdatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelUpdatesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelHowOften)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jRadioButtonHowOftenCheckUpdates1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jRadioButtonHowOftenCheckUpdates2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jRadioButtonHowOftenCheckUpdates3)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonCheckUpdatesNow)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelCheckUpdatesNowResult, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+
+        SettingsTabbedPane.addTab("Updates", jPanelUpdates);
+
         jButtonOK.setText("OK");
         jButtonOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -377,6 +471,49 @@ public class SettingsDialog extends javax.swing.JDialog {
 		}
     }//GEN-LAST:event_jButtonChangeEditorsFontActionPerformed
 
+    private void jRadioButtonHowOftenCheckUpdates1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonHowOftenCheckUpdates1ActionPerformed
+        Settings.getInstance().setProperty("HowOftenCheckUpdates", "7"); 
+    }//GEN-LAST:event_jRadioButtonHowOftenCheckUpdates1ActionPerformed
+
+    private void jRadioButtonHowOftenCheckUpdates2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonHowOftenCheckUpdates2ActionPerformed
+        Settings.getInstance().setProperty("HowOftenCheckUpdates", "30"); 
+    }//GEN-LAST:event_jRadioButtonHowOftenCheckUpdates2ActionPerformed
+
+    private void jRadioButtonHowOftenCheckUpdates3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonHowOftenCheckUpdates3ActionPerformed
+        Settings.getInstance().setProperty("HowOftenCheckUpdates", "0"); 
+    }//GEN-LAST:event_jRadioButtonHowOftenCheckUpdates3ActionPerformed
+
+    private void jButtonCheckUpdatesNowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckUpdatesNowActionPerformed
+		this.jLabelCheckUpdatesNowResult.setText("Please, wait...");
+		try {
+			URLConnection connection = new URL( Settings.getInstance().getProperty("CheckUpdatesURL") ).openConnection();
+			connection.setRequestProperty("Accept-Charset", "UTF-8");
+			InputStream response = connection.getInputStream();
+			
+			String result = "";
+			try (Scanner scanner = new Scanner(response)) {
+				result += scanner.useDelimiter("\\A").next();
+			}
+			
+			int flags = Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE;			
+			Pattern pattern = Pattern.compile(Settings.getInstance().getProperty("CheckUpdatesURLPattern"), flags);
+			Matcher m = pattern.matcher(result);
+			
+			ArrayList<String> list = new ArrayList<>();
+			while(m.find()) {
+				list.add( m.group(1) );
+			}
+			
+			
+			
+		}
+		catch(Exception e) {
+			MainForm.showError(e);
+		}
+		
+		
+    }//GEN-LAST:event_jButtonCheckUpdatesNowActionPerformed
+
 	/**
 	 * @param args the command line arguments
 	 */
@@ -423,19 +560,26 @@ public class SettingsDialog extends javax.swing.JDialog {
     private javax.swing.JTabbedPane SettingsTabbedPane;
     private javax.swing.JButton jButtonBrowse;
     private javax.swing.JButton jButtonChangeEditorsFont;
+    private javax.swing.JButton jButtonCheckUpdatesNow;
     private javax.swing.JButton jButtonOK;
     private javax.swing.JComboBox<String> jComboBoxStyleOfStorageTree;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelCheckUpdatesNowResult;
     private javax.swing.JLabel jLabelCurrentEditorsFont;
+    private javax.swing.JLabel jLabelHowOften;
     private javax.swing.JLayeredPane jLayeredPaneEditorsFont;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelAppearance;
     private javax.swing.JPanel jPanelAppearanceIn;
     private javax.swing.JPanel jPanelCommon;
     private javax.swing.JPanel jPanelCommonIn;
+    private javax.swing.JPanel jPanelUpdates;
+    private javax.swing.JRadioButton jRadioButtonHowOftenCheckUpdates1;
+    private javax.swing.JRadioButton jRadioButtonHowOftenCheckUpdates2;
+    private javax.swing.JRadioButton jRadioButtonHowOftenCheckUpdates3;
     private javax.swing.JTabbedPane jTabbedPaneAppearance;
     private javax.swing.JTextField jTextFieldCommand2ViewExplorer;
     private javax.swing.JTextField jTextFieldExcludeExtension;
@@ -455,6 +599,15 @@ public class SettingsDialog extends javax.swing.JDialog {
 			this.jLabelCurrentEditorsFont.setFont(prevFont);
 			this.jLabelCurrentEditorsFont.setText(prevFont.getName() + ", " + prevFont.getSize());
 		}
+		
+		// Check updates
+		this.HowOftenCheckUpdatesGroup.add(this.jRadioButtonHowOftenCheckUpdates1);
+		this.HowOftenCheckUpdatesGroup.add(this.jRadioButtonHowOftenCheckUpdates2);
+		this.HowOftenCheckUpdatesGroup.add(this.jRadioButtonHowOftenCheckUpdates3);
+
+		
+		
+		
 		
 	}
 
