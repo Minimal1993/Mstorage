@@ -11,11 +11,12 @@
  */
 package mstorage.classes;
 
+import java.awt.Font;
 import java.io.*;
 import java.util.*;
 import java.nio.file.*;
-import java.io.IOException;
 import mstorage.MainForm;
+import mstorage.utils.FileUtils;
 
 /**
  * This class is needed for saving settings of application. All settings will
@@ -96,6 +97,9 @@ public class Settings {
 		this.Properties.setProperty("Icons", "Delta");
 		this.Properties.setProperty("StorageDirectory", Settings.getDefaultValue());
         this.Properties.setProperty("Command2ViewExplorer", "explorer %s");
+		this.Properties.setProperty("EditorsFont_name", "Monospaced");
+		this.Properties.setProperty("EditorsFont_style", "0");
+		this.Properties.setProperty("EditorsFont_size", "12");
 		
 	}
 
@@ -218,6 +222,38 @@ public class Settings {
 		} catch (IOException e) {
 			MainForm.showError(e.getMessage());
 		}
+	}
+	
+	/**
+	 * Serialize Object to String
+	 * 
+	 * @param obj
+	 * @return
+	 * @throws IOException 
+	 */
+	public static String serializeObject(Object obj) throws IOException{
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ObjectOutputStream oout = new ObjectOutputStream(baos);
+		oout.writeObject(obj);
+		oout.close();
+		
+		return baos.toString();
+	}
+	
+	/**
+	 * Deserialize String to Object
+	 * 
+	 * @param str
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException 
+	 */
+	public static Object deserializeObject(String str) throws IOException, ClassNotFoundException{
+		byte[] buf = str.getBytes();
+		if (null == buf ) return null;
+		
+		ObjectInputStream objectIn = new ObjectInputStream(new ByteArrayInputStream(buf));
+		return objectIn.readObject();
 	}
 
 }

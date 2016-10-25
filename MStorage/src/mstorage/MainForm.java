@@ -1218,6 +1218,11 @@ public class MainForm extends javax.swing.JFrame {
 		// Open opened files in last session
 		if (!this.getSettings().getProperty("OpenedFiles").isEmpty()) {
 			String[] list = StringUtils.split(this.getSettings().getProperty("OpenedFiles"), ";");
+			Font prevFont = new Font(
+				Settings.getInstance().getProperty("EditorsFont_name"), 
+				Integer.decode(Settings.getInstance().getProperty("EditorsFont_style")),
+				Integer.decode(Settings.getInstance().getProperty("EditorsFont_size"))
+			);	
 
 			for (String url : list) {
 				Path path = Paths.get(url);
@@ -1236,6 +1241,7 @@ public class MainForm extends javax.swing.JFrame {
                 if (CryptComp.isCryptedFile(file.getPath())) continue;
                 
 				FileJTab newtab = TabsFabric.getTab(file);
+				if (null != prevFont) newtab.TextAreaDocument.setFont(prevFont);
 				MainForm.getInstance().getTabbedPaneMain().addTab(newtab.File.getFileName(), newtab);
 				
 				// If there is readonly flag
