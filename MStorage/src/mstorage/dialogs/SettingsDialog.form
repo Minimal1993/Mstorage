@@ -359,29 +359,29 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabelCheckUpdatesNowResult" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jRadioButtonHowOftenCheckUpdates1" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jRadioButtonHowOftenCheckUpdates2" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jRadioButtonHowOftenCheckUpdates3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jRadioButtonHowOftenCheckUpdates1" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                      <Component id="jLabelHowOften" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jButtonCheckUpdatesNow" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                              <Component id="jLabelHowOften" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="85" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabelCheckUpdatesNowResult" max="32767" attributes="0"/>
+                              <Component id="jButtonCheckUpdatesNow" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabelUpdatesVisitTo" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -400,7 +400,10 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jRadioButtonHowOftenCheckUpdates3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButtonCheckUpdatesNow" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jButtonCheckUpdatesNow" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelUpdatesVisitTo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabelCheckUpdatesNowResult" min="-2" pref="31" max="-2" attributes="0"/>
                       <EmptySpace pref="39" max="32767" attributes="0"/>
@@ -416,7 +419,6 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButtonHowOftenCheckUpdates1">
               <Properties>
-                <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="One time per week"/>
               </Properties>
               <Events>
@@ -452,7 +454,23 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="11" style="1"/>
                 </Property>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Default Cursor"/>
+                </Property>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabelUpdatesVisitTo">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;&lt;html&gt;or visit to &lt;a href=&apos;#&apos;&gt;&quot; + Settings.getInstance().getProperty(&quot;ProgectURL&quot;).replace(&quot;http://&quot;, &quot;&quot;) + &quot;&lt;/a&gt;&lt;/html&gt;&quot;" type="code"/>
+                </Property>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelUpdatesVisitToMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

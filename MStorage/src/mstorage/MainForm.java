@@ -20,20 +20,17 @@ import mstorage.components.FileJTab;
 import mstorage.events.EventsStorageCollectionHandler;
 import mstorage.dialogs.SettingsDialog;
 import mstorage.classes.Settings;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeListener;
-
 import javax.swing.JTabbedPane;
 import javax.swing.BorderFactory;
 import javax.swing.border.*;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.nio.file.Path;
@@ -47,11 +44,12 @@ import javax.swing.KeyStroke;
 import javax.swing.text.DefaultEditorKit;
 import mstorage.components.CryptComp;
 import mstorage.storagecollection.Folder;
-
-import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.*;
-
 import org.apache.commons.lang3.StringUtils;
+import hirondelle.date4j.DateTime;
+import java.net.URI;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 //import java.util.ArrayList;
 /**
@@ -104,6 +102,7 @@ public class MainForm extends javax.swing.JFrame {
 
 		// Custom settings
 		this.initMain();
+
 	}
 
 	/**
@@ -1290,8 +1289,67 @@ public class MainForm extends javax.swing.JFrame {
 		
 		this.pack();
 
+		// Check newest version
+		this.checkNewVersion();
+		
 		// Set mouse listener for popup menu in ScrollPane of storage collection
 //		this.ScrollPaneStorageTree.addMouseListener(mstorage.menus.PopupMenuScrollPaneStorageTree.initMouseListener());
+	}
+	
+	/**
+	 * Respond to repository and check whether new version of app is released
+	 */
+	protected void checkNewVersion(){
+		// Check update range
+		String howOftenCheckUpdates = this.getSettings().getProperty("HowOftenCheckUpdates");
+		if (howOftenCheckUpdates.equals("0")) return;
+		
+		final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		DateTime now = new DateTime( dateFormat.format( new Date() ) );
+		DateTime lastCheck = new DateTime( this.getSettings().getProperty("LastCheckUpdate") );
+		if ( lastCheck.plusDays( Integer.decode(howOftenCheckUpdates) ).gteq(now) ) return;
+		
+		System.out.println("begin");
+		
+		// Do URL-respond asynchronously
+		EventQueue.invokeLater( new Runnable() {
+			@Override 
+			public void run() {				
+				try {
+					Thread.sleep(5000);
+					
+					ArrayList<String> newest =  SettingsDialog.checkNewVersion();
+					
+					// If new version is avaliable
+					if (null != newest) {
+						int dialogResult = JOptionPane.showConfirmDialog(
+								MainForm.getInstance(),
+								"A new version " + Settings.getInstance().getProperty("AppName") + "." 
+								+ newest.get(1) + " is available.\nDo you want to download it?",
+								"Update",
+								JOptionPane.YES_NO_OPTION
+						);
+						if (dialogResult == JOptionPane.YES_OPTION && Desktop.isDesktopSupported()) {
+							Desktop desktop = Desktop.getDesktop();
+							try {
+								URI uri = new URI(newest.get(0));
+								desktop.browse(uri);
+							} catch (Exception e) {
+								MainForm.showError(e);
+							}
+						}
+					}
+					
+					// Set new date of last checking
+					Settings.getInstance().setProperty("LastCheckUpdate", dateFormat.format( new Date() )); 
+					
+				} catch (Exception e) {
+					System.out.println("Error occurred when was check a new version of app: " + e.getMessage());
+				}
+			}
+		}); // END EventQueue.invokeLater
+		
+		System.out.println("end");
 	}
 
 	/**

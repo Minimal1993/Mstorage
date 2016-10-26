@@ -19,7 +19,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.BitSet;
+import java.util.Date;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -29,6 +31,8 @@ import static org.junit.Assert.*;
 
 import java.util.TreeMap;
 import mstorage.utils.FileUtils;
+
+import hirondelle.date4j.DateTime;
 
 /**
  *
@@ -143,6 +147,25 @@ public class SettingsTest {
 		
 		assertEquals(font3, font4);
         
+	}
+	
+	@Test
+	public void tmpTest(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println("date: " + dateFormat.format( new Date() ) );
+		
+		String datePast = "2016-10-15";
+		
+		DateTime dateAndTime = new DateTime(datePast);
+		DateTime plus7 = dateAndTime.plusDays(7);
+		System.out.println("datePast + 7 days:: " + plus7.format("YYYY-MM-DD") );
+		
+		if (dateAndTime.lt(plus7))  {
+			System.out.println(plus7.format("YYYY-MM-DD") + " is greater than " +  dateAndTime.format("YYYY-MM-DD"));
+		}
+		
+		
+		
 	}
 	
 }

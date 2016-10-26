@@ -11,11 +11,20 @@
  */
 package mstorage.dialogs;
 
+import java.awt.Cursor;
+import java.awt.Desktop;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.ObjectOutputStream;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -24,6 +33,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.ButtonGroup;
+import javax.swing.Timer;
 import mstorage.MainForm;
 import mstorage.classes.Settings;
 import mstorage.components.FileJTab;
@@ -36,7 +46,8 @@ import say.swing.JFontChooser;
  */
 public class SettingsDialog extends javax.swing.JDialog {
 
-	ButtonGroup HowOftenCheckUpdatesGroup = new ButtonGroup();
+	protected ButtonGroup HowOftenCheckUpdatesGroup = new ButtonGroup();
+	public String CheckUpdatesDownloadURL = null;
 	
 	/**
 	 * Creates new form SettingsDialog
@@ -83,6 +94,7 @@ public class SettingsDialog extends javax.swing.JDialog {
         jRadioButtonHowOftenCheckUpdates3 = new javax.swing.JRadioButton();
         jButtonCheckUpdatesNow = new javax.swing.JButton();
         jLabelCheckUpdatesNowResult = new javax.swing.JLabel();
+        jLabelUpdatesVisitTo = new javax.swing.JLabel();
         jButtonOK = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -271,7 +283,6 @@ public class SettingsDialog extends javax.swing.JDialog {
 
         jLabelHowOften.setText("Choose how often you want check updates for app:");
 
-        jRadioButtonHowOftenCheckUpdates1.setSelected(true);
         jRadioButtonHowOftenCheckUpdates1.setText("One time per week");
         jRadioButtonHowOftenCheckUpdates1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -301,6 +312,15 @@ public class SettingsDialog extends javax.swing.JDialog {
         });
 
         jLabelCheckUpdatesNowResult.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelCheckUpdatesNowResult.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jLabelUpdatesVisitTo.setText("<html>or visit to <a href='#'>" + Settings.getInstance().getProperty("ProgectURL").replace("http://", "") + "</a></html>");
+        jLabelUpdatesVisitTo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelUpdatesVisitTo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelUpdatesVisitToMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelUpdatesLayout = new javax.swing.GroupLayout(jPanelUpdates);
         jPanelUpdates.setLayout(jPanelUpdatesLayout);
@@ -309,23 +329,24 @@ public class SettingsDialog extends javax.swing.JDialog {
             .addGroup(jPanelUpdatesLayout.createSequentialGroup()
                 .addGroup(jPanelUpdatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelUpdatesLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanelUpdatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelCheckUpdatesNowResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanelUpdatesLayout.createSequentialGroup()
-                                .addContainerGap()
                                 .addGroup(jPanelUpdatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButtonHowOftenCheckUpdates1)
                                     .addComponent(jRadioButtonHowOftenCheckUpdates2)
-                                    .addComponent(jRadioButtonHowOftenCheckUpdates3)))
-                            .addGroup(jPanelUpdatesLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabelHowOften))
-                            .addGroup(jPanelUpdatesLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jButtonCheckUpdatesNow)))
+                                    .addComponent(jRadioButtonHowOftenCheckUpdates3)
+                                    .addComponent(jRadioButtonHowOftenCheckUpdates1))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanelUpdatesLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabelHowOften)
                         .addGap(0, 85, Short.MAX_VALUE))
                     .addGroup(jPanelUpdatesLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabelCheckUpdatesNowResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButtonCheckUpdatesNow)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelUpdatesVisitTo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelUpdatesLayout.setVerticalGroup(
@@ -340,7 +361,9 @@ public class SettingsDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jRadioButtonHowOftenCheckUpdates3)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonCheckUpdatesNow)
+                .addGroup(jPanelUpdatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonCheckUpdatesNow)
+                    .addComponent(jLabelUpdatesVisitTo))
                 .addGap(18, 18, 18)
                 .addComponent(jLabelCheckUpdatesNowResult, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(39, Short.MAX_VALUE))
@@ -485,41 +508,81 @@ public class SettingsDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jRadioButtonHowOftenCheckUpdates3ActionPerformed
 
     private void jButtonCheckUpdatesNowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckUpdatesNowActionPerformed
-		this.jLabelCheckUpdatesNowResult.setText("Please, wait...");
-		try {
-			URLConnection connection = new URL( Settings.getInstance().getProperty("CheckUpdatesURL") ).openConnection();
-			connection.setRequestProperty("Accept-Charset", "UTF-8");
-			InputStream response = connection.getInputStream();
-			
-			String result = "";
-			try (Scanner scanner = new Scanner(response)) {
-				result += scanner.useDelimiter("\\A").next();
+		// Handler for click on successfull result to load new version of app
+		final MouseAdapter mouseAdapter = new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
+				if (!Desktop.isDesktopSupported() || null == CheckUpdatesDownloadURL) return;
+
+				Desktop desktop = Desktop.getDesktop();
+				try {
+					URI uri = new URI(CheckUpdatesDownloadURL);
+					desktop.browse(uri);
+				} catch (Exception e) {
+					MainForm.showError(e);
+				} 						 
 			}
-			
-			int flags = Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE;			
-			Pattern pattern = Pattern.compile("https://sourceforge.net/projects/mstorage/files/MStorage\\.(.+)\\.zip/download", flags);
-			Matcher m = pattern.matcher(result);
-			
-			HashMap<String, String> list = new HashMap<>();
-			while(m.find()) {
-				list.put(m.group(0), m.group(1) );
-			}
-			
-			ArrayList<String> newest = Settings.compareNewVersion(list);
-            if (null == newest){
-                System.out.println("No newest version");
-            }
-            else {
-                System.out.println(newest.get(0) + " - " + newest.get(1));
-            }
-			
-		}
-		catch(Exception e) {
-			MainForm.showError(e);
-		}
+		};
 		
+		this.CheckUpdatesDownloadURL = null;
+		this.jLabelCheckUpdatesNowResult.setText("Please, wait...");
+		this.jLabelCheckUpdatesNowResult.removeMouseListener(mouseAdapter);
+		this.jLabelCheckUpdatesNowResult.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		jLabelCheckUpdatesNowResult.setIcon(null);
+		
+		// Do URL-respond asynchronously
+		EventQueue.invokeLater( new Runnable() {
+			@Override 
+			public void run() {
+				ArrayList<String> newest = null;
+				
+				try {
+					newest =  SettingsDialog.checkNewVersion();
+					
+					jLabelCheckUpdatesNowResult.setIcon(
+						new javax.swing.ImageIcon(getClass().getResource("/images/information.24x24.png"))
+					);
+					
+					// If new version is not avaliable
+					if (null == newest) {
+						jLabelCheckUpdatesNowResult.setText("You have actual version");						
+					}
+					else {
+						jLabelCheckUpdatesNowResult.setText(
+							"<html>New version is avaliable: " 
+							+ Settings.getInstance().getProperty("AppName") + "." + newest.get(1) + "<br>"
+							+ "<a href='#'>Download</a></html>"
+						);
+						jLabelCheckUpdatesNowResult.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+						// Add only one listener
+						MouseListener[] ml = jLabelCheckUpdatesNowResult.getMouseListeners();
+						if (0 == ml.length) jLabelCheckUpdatesNowResult.addMouseListener(mouseAdapter);
+						
+						CheckUpdatesDownloadURL = newest.get(0);
+					}
+					
+				} catch (Exception e) {
+					jLabelCheckUpdatesNowResult.setIcon(
+						new javax.swing.ImageIcon(getClass().getResource("/images/exclamation.24x24.png"))
+					);
+					jLabelCheckUpdatesNowResult.setText("Error occurred: " + e.getMessage());
+				}
+			}
+		}); // END EventQueue.invokeLater
 		
     }//GEN-LAST:event_jButtonCheckUpdatesNowActionPerformed
+
+    private void jLabelUpdatesVisitToMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdatesVisitToMouseClicked
+		if (!Desktop.isDesktopSupported()) return;
+		
+		Desktop desktop = Desktop.getDesktop();
+		try {
+			URI uri = new URI(Settings.getInstance().getProperty("CheckUpdatesURL"));
+			desktop.browse(uri);
+		} catch (Exception e) {
+			MainForm.showError(e);
+		} 
+    }//GEN-LAST:event_jLabelUpdatesVisitToMouseClicked
 
 	/**
 	 * @param args the command line arguments
@@ -577,6 +640,7 @@ public class SettingsDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelCheckUpdatesNowResult;
     private javax.swing.JLabel jLabelCurrentEditorsFont;
     private javax.swing.JLabel jLabelHowOften;
+    private javax.swing.JLabel jLabelUpdatesVisitTo;
     private javax.swing.JLayeredPane jLayeredPaneEditorsFont;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelAppearance;
@@ -611,11 +675,43 @@ public class SettingsDialog extends javax.swing.JDialog {
 		this.HowOftenCheckUpdatesGroup.add(this.jRadioButtonHowOftenCheckUpdates1);
 		this.HowOftenCheckUpdatesGroup.add(this.jRadioButtonHowOftenCheckUpdates2);
 		this.HowOftenCheckUpdatesGroup.add(this.jRadioButtonHowOftenCheckUpdates3);
+		
+		String howOftenCheckUpdates = Settings.getInstance().getProperty("HowOftenCheckUpdates");
+		if (howOftenCheckUpdates.equals("30")) this.jRadioButtonHowOftenCheckUpdates2.setSelected(true);
+		else if (howOftenCheckUpdates.equals("7")) this.jRadioButtonHowOftenCheckUpdates1.setSelected(true);
+		else this.jRadioButtonHowOftenCheckUpdates3.setSelected(true);
+		
+		
+	}
+	
+	/**
+	 * Receive list of avaliable versions, compare them with current and return new if it exists
+	 * 
+	 * @return
+	 * @throws Exception 
+	 */	
+	public static ArrayList<String> checkNewVersion() throws Exception {
+		URLConnection connection = new URL( Settings.getInstance().getProperty("CheckUpdatesURL") ).openConnection();
+		connection.setRequestProperty("Accept-Charset", "UTF-8");
+		InputStream response = connection.getInputStream();
 
+		String result = "";
+		try (Scanner scanner = new Scanner(response)) {
+			result += scanner.useDelimiter("\\A").next();
+		}
+
+		int flags = Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE;			
+		Pattern pattern = Pattern.compile(Settings.getInstance().getProperty("CheckUpdatesURLPattern"), flags);
+		Matcher m = pattern.matcher(result);
+
+		HashMap<String, String> list = new HashMap<>();
+		while(m.find()) {
+			list.put(m.group(0), m.group(1) );
+		}
+
+		ArrayList<String> newest = Settings.compareNewVersion(list);
 		
-		
-		
-		
+		return newest;
 	}
 
 }
