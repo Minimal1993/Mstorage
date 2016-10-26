@@ -175,7 +175,8 @@ public class MainForm extends javax.swing.JFrame {
         jButtonDecryptFile = new javax.swing.JButton();
         jButtonCryptFile = new javax.swing.JButton();
         jButtonSearchInFile = new javax.swing.JToggleButton();
-        jPanel2 = new javax.swing.JPanel();
+        jPanelBottom = new javax.swing.JPanel();
+        jLabelBottomLeft = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         editMenu = new javax.swing.JMenu();
         jMenuItemSaveFile = new javax.swing.JMenuItem();
@@ -415,17 +416,23 @@ public class MainForm extends javax.swing.JFrame {
         });
         ToolBarMain.add(jButtonSearchInFile);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanelBottom.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        jLabelBottomLeft.setText(" ");
+
+        javax.swing.GroupLayout jPanelBottomLayout = new javax.swing.GroupLayout(jPanelBottom);
+        jPanelBottom.setLayout(jPanelBottomLayout);
+        jPanelBottomLayout.setHorizontalGroup(
+            jPanelBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelBottomLayout.createSequentialGroup()
+                .addComponent(jLabelBottomLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 11, Short.MAX_VALUE)
+        jPanelBottomLayout.setVerticalGroup(
+            jPanelBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelBottomLayout.createSequentialGroup()
+                .addComponent(jLabelBottomLeft)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         editMenu.setText("Main");
@@ -556,16 +563,16 @@ public class MainForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(SplitPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE)
             .addComponent(ToolBarMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelBottom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(ToolBarMain, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(SplitPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
+                .addComponent(SplitPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
                 .addGap(2, 2, 2)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanelBottom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -1098,6 +1105,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JToggleButton jButtonSearchInFile;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemViewMenuToolbar;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemViewStorageTreePanel;
+    private javax.swing.JLabel jLabelBottomLeft;
     private javax.swing.JMenu jMenuCloseActiveTab;
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemExit;
@@ -1107,7 +1115,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemSearchInRootFolder;
     private javax.swing.JMenuItem jMenuItemSettings;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanelBottom;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparatorFileMenu;
@@ -1309,14 +1317,14 @@ public class MainForm extends javax.swing.JFrame {
 		DateTime lastCheck = new DateTime( this.getSettings().getProperty("LastCheckUpdate") );
 		if ( lastCheck.plusDays( Integer.decode(howOftenCheckUpdates) ).gteq(now) ) return;
 		
-		System.out.println("begin");
+		this.jLabelBottomLeft.setText("Checking for updates");
 		
 		// Do URL-respond asynchronously
 		EventQueue.invokeLater( new Runnable() {
 			@Override 
 			public void run() {				
 				try {
-					Thread.sleep(5000);
+//					Thread.sleep(5000);
 					
 					ArrayList<String> newest =  SettingsDialog.checkNewVersion();
 					
@@ -1340,16 +1348,18 @@ public class MainForm extends javax.swing.JFrame {
 						}
 					}
 					
+					jLabelBottomLeft.setText("");
+					
 					// Set new date of last checking
-					Settings.getInstance().setProperty("LastCheckUpdate", dateFormat.format( new Date() )); 
+//					Settings.getInstance().setProperty("LastCheckUpdate", dateFormat.format( new Date() )); 
 					
 				} catch (Exception e) {
+					jLabelBottomLeft.setText("");
 					System.out.println("Error occurred when was check a new version of app: " + e.getMessage());
 				}
 			}
 		}); // END EventQueue.invokeLater
 		
-		System.out.println("end");
 	}
 
 	/**
