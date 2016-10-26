@@ -11,10 +11,12 @@
  */
 package mstorage.classes;
 
+import hirondelle.date4j.DateTime;
 import java.awt.Font;
 import java.io.*;
 import java.util.*;
 import java.nio.file.*;
+import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import mstorage.MainForm;
@@ -88,6 +90,11 @@ public class Settings {
 		this.Properties.setProperty("CheckUpdatesURLPattern", 
 			"https://sourceforge.net/projects/mstorage/files/MStorage\\.(.+)\\.zip/download"
 		);
+		this.Properties.setProperty("ProgectURL", "http://mstorage.sourceforge.net"); 
+		
+		// In first launch set last update as now
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		this.Properties.setProperty("LastCheckUpdate", dateFormat.format( new Date() )); 
 		
 		// Selected files in last opened files
 		this.Properties.setProperty("OpenedFilesSelected", ""); 
