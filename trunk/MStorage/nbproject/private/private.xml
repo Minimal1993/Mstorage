@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="48">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="49">
         <file>
             <url>src/mstorage/events/EventsStorageCollectionHandler.java</url>
             <bookmark id="47">
@@ -14,6 +14,14 @@
                 <key/>
             </bookmark>
         </file>
+        <file>
+            <url>src/mstorage/MainForm.java</url>
+            <bookmark id="49">
+                <name/>
+                <line>1309</line>
+                <key/>
+            </bookmark>
+        </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
@@ -23,8 +31,8 @@
         </group>
         <group name="Java">
             <file>file:/C:/work/MStorage/MStorage/src/mstorage/classes/Settings.java</file>
-            <file>file:/C:/work/MStorage/MStorage/src/mstorage/components/FileJTab.java</file>
-            <file>file:/C:/work/MStorage/MStorage/src/mstorage/models/TabsFabric.java</file>
+            <file>file:/C:/work/MStorage/MStorage/src/mstorage/MainForm.java</file>
+            <file>file:/C:/work/MStorage/MStorage/test/mstorage/classes/SettingsTest.java</file>
             <file>file:/C:/work/MStorage/MStorage/src/mstorage/dialogs/SettingsDialog.java</file>
         </group>
     </open-files>

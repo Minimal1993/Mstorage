@@ -50,6 +50,7 @@ import hirondelle.date4j.DateTime;
 import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.SwingWorker;
 
 //import java.util.ArrayList;
 /**
@@ -103,6 +104,8 @@ public class MainForm extends javax.swing.JFrame {
 		// Custom settings
 		this.initMain();
 
+//		this.jMenuItemSettingsActionPerformed(null);
+//		System.exit(0);
 	}
 
 	/**
@@ -418,8 +421,6 @@ public class MainForm extends javax.swing.JFrame {
 
         jPanelBottom.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabelBottomLeft.setText(" ");
-
         javax.swing.GroupLayout jPanelBottomLayout = new javax.swing.GroupLayout(jPanelBottom);
         jPanelBottom.setLayout(jPanelBottomLayout);
         jPanelBottomLayout.setHorizontalGroup(
@@ -570,7 +571,7 @@ public class MainForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(ToolBarMain, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(SplitPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
+                .addComponent(SplitPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
                 .addGap(2, 2, 2)
                 .addComponent(jPanelBottom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1317,15 +1318,15 @@ public class MainForm extends javax.swing.JFrame {
 		DateTime lastCheck = new DateTime( this.getSettings().getProperty("LastCheckUpdate") );
 		if ( lastCheck.plusDays( Integer.decode(howOftenCheckUpdates) ).gteq(now) ) return;
 		
-		this.jLabelBottomLeft.setText("Checking for updates");
-		
 		// Do URL-respond asynchronously
-		EventQueue.invokeLater( new Runnable() {
-			@Override 
-			public void run() {				
+		SwingWorker worker = new SwingWorker<Integer, Integer>() {
+			@Override
+			protected Integer doInBackground() throws Exception {
 				try {
-//					Thread.sleep(5000);
+					// Wait some times, for app not overloaded when start
+					Thread.sleep(10000);
 					
+					jLabelBottomLeft.setText("Checking for updates...");					
 					ArrayList<String> newest =  SettingsDialog.checkNewVersion();
 					
 					// If new version is avaliable
@@ -1348,17 +1349,19 @@ public class MainForm extends javax.swing.JFrame {
 						}
 					}
 					
-					jLabelBottomLeft.setText("");
-					
 					// Set new date of last checking
-//					Settings.getInstance().setProperty("LastCheckUpdate", dateFormat.format( new Date() )); 
+					Settings.getInstance().setProperty("LastCheckUpdate", dateFormat.format( new Date() )); 
 					
 				} catch (Exception e) {
-					jLabelBottomLeft.setText("");
 					System.out.println("Error occurred when was check a new version of app: " + e.getMessage());
 				}
+				
+				jLabelBottomLeft.setText("");
+				
+				return 42;
 			}
-		}); // END EventQueue.invokeLater
+		};
+		worker.execute();
 		
 	}
 

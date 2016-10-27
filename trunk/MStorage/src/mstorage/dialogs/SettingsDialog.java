@@ -33,6 +33,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.ButtonGroup;
+import javax.swing.SwingWorker;
 import javax.swing.Timer;
 import mstorage.MainForm;
 import mstorage.classes.Settings;
@@ -530,9 +531,9 @@ public class SettingsDialog extends javax.swing.JDialog {
 		jLabelCheckUpdatesNowResult.setIcon(null);
 		
 		// Do URL-respond asynchronously
-		EventQueue.invokeLater( new Runnable() {
-			@Override 
-			public void run() {
+		SwingWorker worker = new SwingWorker<Integer, Integer>() {
+			@Override
+			protected Integer doInBackground() throws Exception {
 				ArrayList<String> newest = null;
 				
 				try {
@@ -565,11 +566,15 @@ public class SettingsDialog extends javax.swing.JDialog {
 					jLabelCheckUpdatesNowResult.setIcon(
 						new javax.swing.ImageIcon(getClass().getResource("/images/exclamation.24x24.png"))
 					);
-					jLabelCheckUpdatesNowResult.setText("Error occurred: " + e.getMessage());
+					jLabelCheckUpdatesNowResult.setText("Error: " + e.getMessage());
 				}
+
+				return 42;
 			}
-		}); // END EventQueue.invokeLater
-		
+
+		};
+		worker.execute();
+
     }//GEN-LAST:event_jButtonCheckUpdatesNowActionPerformed
 
     private void jLabelUpdatesVisitToMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdatesVisitToMouseClicked
@@ -693,6 +698,7 @@ public class SettingsDialog extends javax.swing.JDialog {
 	public static ArrayList<String> checkNewVersion() throws Exception {
 		URLConnection connection = new URL( Settings.getInstance().getProperty("CheckUpdatesURL") ).openConnection();
 		connection.setRequestProperty("Accept-Charset", "UTF-8");
+		connection.setReadTimeout(10000);
 		InputStream response = connection.getInputStream();
 
 		String result = "";
