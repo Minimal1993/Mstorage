@@ -5,25 +5,33 @@
  * modify  this  document under  the  terms  of the
  * GNU General Public License
  * 
+ * @url: http://mstorage.sourceforge.net
  * @author: ilya.gulevskiy
- * @email: naveter@gmail.com
+ * @email: mstorage.project@gmail.com
  * @date: 2016
  */
- MStorage - storage for notes, it suggests opportunity to save and catalog notes, articles and tips in local drive by directories tree. If you like save you notes in simple text files but you are upset to walk through directories tree every time when you need to find something - this util will help you.
+ 
+MStorage - storage for notes, it suggests opportunity to save and catalog notes, articles and tips in local drive by directories tree. If you like save you notes in simple text files but you are upset to walk through directories tree every time when you need to find something - this app will help you.
 
 To install, download MStorage.*.zip, unpack and run "java -jar MStorage.jar". Read more in INSTALL.TXT.
-
-For testing and review purposes,archive contains test storage.
-
+For testing and review purposes, zip-archive contains test storage - see "storage" dir in archive. Select it as storage directory in Main -> Settings -> Common for acquaintance.
 Tested into Windows 7 and Ubuntu 14.
 
-Storage tree is copy of your local drive directory
-You can access to storage without MStorage by simple text reader
-You can add picture to your notes
-Crossplatform, can be launch in Win, UNIX and MacOS systems
-You can launch a couple apps, dividing settings by set a diffrent names of settings files
-	
-RELEASES
+Storage tree is copy of your local drive directory.
+You can access to storage without MStorage by simple text reader.
+You can add picture to your notes and encrypt a content.
+Crossplatform, can be launch in Win, UNIX and MacOS systems.
 
-MStorage.1.0.1 - current stable version
-MStorage.1.1.1.alpha - new alpha version
+
+WHATS NEW in v.1.1.2:
+
+- search in file;
+- search in directory;
+- readonly option for file;
+- choose font, style and size of font in editor;
+- carousel navigation in picture view window;
+- AES 128-bit decryption for files;
+- filter for files in tree;
+- check for update file in local drive;
+- auto and manual checking a new version of app;
+- view file in OS file explorer.
