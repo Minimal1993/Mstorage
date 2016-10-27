@@ -24,6 +24,7 @@ import java.awt.event.MouseListener;
 import mstorage.MainForm;
 import mstorage.PreviewJFrame;
 import mstorage.menus.PopupMenuImageItem;
+import mstorage.utils.Log;
 
 /**
  * Item of Image for inserting to ImageCarousel
@@ -109,6 +110,7 @@ public class ImageItem extends javax.swing.JPanel {
 			this.jLabelImage.setIcon(new javax.swing.ImageIcon(thumbnail));
 
 		} catch (java.io.IOException e) {
+			Log.info(e.getMessage());
 			return;
 		}
 

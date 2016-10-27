@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import mstorage.components.ImageItem;
 import mstorage.storagecollection.File;
+import mstorage.utils.Log;
 import net.coobird.thumbnailator.Thumbnails;
 
 /**
@@ -256,6 +257,7 @@ public class PreviewJFrame extends javax.swing.JFrame {
 			this.imageContainer.setBounds( 0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight() ); 			
 
 		} catch (java.io.IOException e) {
+			Log.info(e.getMessage());
 			return;
 		}
 	

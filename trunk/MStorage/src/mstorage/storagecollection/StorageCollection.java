@@ -18,6 +18,7 @@ import java.nio.file.*;
 import java.nio.file.attribute.*;
 import java.lang.Object.*;
 import mstorage.components.CryptComp;
+import mstorage.utils.Log;
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -36,7 +37,7 @@ public final class StorageCollection {
 				throw new Exception(dirname + " is not exists");
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			Log.info(e.getMessage());
 			System.exit(1);
 		}
 
@@ -103,6 +104,7 @@ public final class StorageCollection {
 			} // END for
 
 		} catch (IOException e) {
+			Log.info(e.getMessage());
 			e.printStackTrace();
 		}
 

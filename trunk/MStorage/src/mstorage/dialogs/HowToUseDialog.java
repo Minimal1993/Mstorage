@@ -29,6 +29,7 @@ import java.util.TreeMap;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import mstorage.classes.Enums;
 import mstorage.classes.Settings;
+import mstorage.utils.Log;
 
 
 /**
@@ -117,7 +118,7 @@ public class HowToUseDialog extends javax.swing.JDialog implements TreeSelection
 				this.jEditorPane2HTML.setText("File Not Found");
 			}
 		} catch (IOException e) {
-			System.err.println("Attempted to read a bad URL: " + url);
+			Log.info("Attempted to read a bad URL: " + url);
 		}
 	}
 

@@ -33,7 +33,7 @@ public class Hash {
                  }
                     return sb.toString();
             } catch (java.security.NoSuchAlgorithmException e) {
-                //error action
+                Log.info(e.getMessage());
             }
             return null;
     }
