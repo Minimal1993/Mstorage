@@ -35,6 +35,7 @@ import mstorage.findreplace.FindResult;
 import mstorage.findreplace.FindResultItem;
 import mstorage.storagecollection.File;
 import mstorage.storagecollection.Folder;
+import mstorage.utils.Log;
 
 /**
  * Window for search in directory. Singleton.
@@ -311,7 +312,9 @@ public class FindInDir extends javax.swing.JFrame
 		try{
 			existsFile = rootFolder.findFile(findResultItem.getFileName());
 		}
-		catch(Exception exc){}
+		catch(Exception exc){
+			Log.info(exc.getMessage());
+		}
 
 		if (null == existsFile) return;
 		
@@ -328,7 +331,9 @@ public class FindInDir extends javax.swing.JFrame
 		try {
 			tab.Highlighter.addHighlight(p0, p1, painter );
 		}
-		catch ( BadLocationException exc){}
+		catch ( BadLocationException exc){
+			Log.info(exc.getMessage());
+		}
 		
     }
     
