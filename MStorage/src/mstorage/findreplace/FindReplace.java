@@ -27,6 +27,7 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 import mstorage.components.CryptComp;
 import mstorage.storagecollection.StorageCollection;
+import mstorage.utils.Log;
 
 /**
  * Main class looking for pattern and replace if it necessary
@@ -189,9 +190,11 @@ public class FindReplace {
 
 		}
 		catch(FileNotFoundException e) {
+			Log.info(e.getMessage());
 			return null;
 		}
 		catch(IOException e) {
+			Log.info(e.getMessage());
 			return null;
 		}
 		
@@ -227,6 +230,7 @@ public class FindReplace {
 			return 1;
 		}
 		catch(IOException e){
+			Log.info(e.getMessage());
 			return 0;
 		}
 	}

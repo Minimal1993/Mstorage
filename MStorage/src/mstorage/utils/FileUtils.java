@@ -55,6 +55,7 @@ public class FileUtils {
 			}
 			return clone;
 		} catch (Exception e) {
+			Log.info(e.getMessage());
 			return null;
 		}
 	}
@@ -82,6 +83,7 @@ public class FileUtils {
 			}
 			return clone;
 		} catch (Exception e) {
+			Log.info(e.getMessage());
 			return null;
 		}
 	}

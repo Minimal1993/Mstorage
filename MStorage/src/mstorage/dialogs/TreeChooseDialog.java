@@ -19,6 +19,7 @@ import javax.swing.BorderFactory;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 import mstorage.MainForm;
+import mstorage.utils.Log;
 
 
 /**
@@ -192,7 +193,9 @@ public abstract class TreeChooseDialog extends javax.swing.JDialog {
 			this.FolderTo = obj;
 			this.setVisible(false);
 		}
-		catch (Exception e) {}
+		catch (Exception e) {
+			Log.info(e.getMessage());
+		}
 		
     }//GEN-LAST:event_jButtonOKActionPerformed
 

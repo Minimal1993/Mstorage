@@ -22,6 +22,7 @@ import java.util.regex.Pattern;
 import mstorage.MainForm;
 import mstorage.storagecollection.Image;
 import mstorage.utils.FileUtils;
+import mstorage.utils.Log;
 
 /**
  * This class is needed for saving settings of application. All settings will
@@ -240,7 +241,7 @@ public class Settings {
 			in.close();
 			// If not
 		} catch (FileNotFoundException e) {
-
+			Log.info(e.getMessage());
 		} catch (IOException e) {
 			MainForm.showError(e.getMessage());
 		}
@@ -315,7 +316,7 @@ public class Settings {
                 }
             }
             catch (Exception e) {
-                System.out.println(e.getMessage());
+                Log.info(e.getMessage());
             }            
         }
         

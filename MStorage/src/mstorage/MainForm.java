@@ -51,6 +51,7 @@ import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.SwingWorker;
+import mstorage.utils.Log;
 
 //import java.util.ArrayList;
 /**
@@ -128,6 +129,7 @@ public class MainForm extends javax.swing.JFrame {
 				return;
 			}
 		} catch (Exception e) {
+			Log.info(e.getMessage());
 			return;
 		}
 
@@ -1077,7 +1079,7 @@ public class MainForm extends javax.swing.JFrame {
 				mstorage.classes.Settings.setSettingsFileName(CommandLine.getOptionValue("settings"));
 			}
 		} catch (ParseException exp) {
-			System.out.println("Unexpected exception:" + exp.getMessage());
+			Log.info("Unexpected exception:" + exp.getMessage());
 		}
 
 	}
@@ -1239,6 +1241,7 @@ public class MainForm extends javax.swing.JFrame {
 					file = this.getTree().getTreeModel().getFolder().findFile(path);
 				}
 				catch(NullPointerException e) {
+					Log.info(e.getMessage());
 					continue;
 				}
 				if (null == file) {
@@ -1353,7 +1356,7 @@ public class MainForm extends javax.swing.JFrame {
 					Settings.getInstance().setProperty("LastCheckUpdate", dateFormat.format( new Date() )); 
 					
 				} catch (Exception e) {
-					System.out.println("Error occurred when was check a new version of app: " + e.getMessage());
+					Log.info("Error occurred when was check a new version of app: " + e.getMessage());
 				}
 				
 				jLabelBottomLeft.setText("");
@@ -1422,7 +1425,7 @@ public class MainForm extends javax.swing.JFrame {
 	 * Perform when Setting window is closed
 	 */
 	public void windowSettingClosed() {
-		System.out.println("windowSetting");
+		
 	}
 	
 	//==========================================================================
@@ -1444,7 +1447,7 @@ public class MainForm extends javax.swing.JFrame {
 			new javax.swing.ImageIcon(MainForm.getInstance().getClass().getResource("/images/exclamation.32x32.png"))
 		);
 		
-		System.out.println(text);
+		Log.info(text);
 	}
 
 }

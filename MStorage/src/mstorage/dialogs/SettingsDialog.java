@@ -405,7 +405,7 @@ public class SettingsDialog extends javax.swing.JDialog {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         MainForm.getInstance().windowSettingClosed();
-		System.out.println("formWindowClosed");
+		
     }//GEN-LAST:event_formWindowClosed
 
     private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
