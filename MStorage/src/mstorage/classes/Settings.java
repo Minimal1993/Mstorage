@@ -50,9 +50,11 @@ public class Settings {
 	protected Path StorageFile = null;
 	
 	protected static String SettingsFileName = "settings";
+	protected static String LogFileName = "settings.log";
 
 	public static void setSettingsFileName(String SettingsFileName) {
 		Settings.SettingsFileName = SettingsFileName;
+		Settings.LogFileName = SettingsFileName + ".log";
 	}
 
 	public Path getStorageFile() {
@@ -80,6 +82,11 @@ public class Settings {
 		this.GeneralSettings.put("Email", "mstorage.project@gmail.com");
 		this.GeneralSettings.put("AppName", "MStorage");
 		this.GeneralSettings.put("License", "GNU General Public License");
+		
+		String log = System.getProperty("user.home") + File.separator + "."
+				+ this.getProperty("AppName") 
+				+ File.separator + "." + Settings.LogFileName;
+		this.GeneralSettings.put("LogFileName", log); 
 		
 		// Default
 		this.Properties.setProperty("ViewMenuToolbar", "true");
@@ -240,7 +247,7 @@ public class Settings {
 	}
 	
 	/**
-	 * Serialize Object to String
+	 * Serialize Object to String. Work not correct for GUI
 	 * 
 	 * @param obj
 	 * @return

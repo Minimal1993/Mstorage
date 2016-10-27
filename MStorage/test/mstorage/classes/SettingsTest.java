@@ -33,6 +33,11 @@ import java.util.TreeMap;
 import mstorage.utils.FileUtils;
 
 import hirondelle.date4j.DateTime;
+import java.io.File;
+import java.io.PrintStream;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import mstorage.utils.Log;
 
 /**
  *
@@ -151,19 +156,31 @@ public class SettingsTest {
 	
 	@Test
 	public void tmpTest(){
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        System.out.println("date: " + dateFormat.format( new Date() ) );
+//		Logger logger = Logger.getLogger(SettingsTest.class.getName());
+//		try {
+//			FileHandler fileHandler = new FileHandler(Settings.getInstance().getProperty("LogFileName"), true);        
+//			logger.addHandler(fileHandler);
+//		}
+//		catch(Exception e){}
 		
-		String datePast = "2016-10-15";
-		
-		DateTime dateAndTime = new DateTime(datePast);
-		DateTime plus7 = dateAndTime.plusDays(7);
-		System.out.println("datePast + 7 days:: " + plus7.format("YYYY-MM-DD") );
-		
-		if (dateAndTime.lt(plus7))  {
-			System.out.println(plus7.format("YYYY-MM-DD") + " is greater than " +  dateAndTime.format("YYYY-MM-DD"));
-		}
-		
+		Log.info("Во-вторых, имеется широкий круг классов аппендеров");
+		Log.info("в том числе асинхронные аппендеры");
+//		try {
+//			System.setErr(new PrintStream(new File(Settings.getInstance().getProperty("LogFileName"))));
+//		}
+//		catch(Exception e){
+//		
+//		}
+//		
+//		// Выводим сообщения
+//		System.err.println("Сообщение 1");
+//		System.err.println("Сообщение 2");
+//		// Выводим сообщение об ошибке
+//		try {
+//			 throw new Exception("Сообщение об ошибке");
+//		} catch (Exception e) {
+//			 e.printStackTrace();
+//		}
 		
 		
 	}
