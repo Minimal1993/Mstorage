@@ -21,16 +21,17 @@ Storage tree is copy of your local drive directory.
 You can access to storage without MStorage by simple text reader.
 You can add picture to your notes and encrypt a content.
 Crossplatform, can be launch in Win, UNIX and MacOS systems.
-
+You can launch a many apps, dividing settings by set a diffrent names of settings files.
+You can ecrypt your files by AES 128-bit encryption.
 
 WHATS NEW in v.1.1.2:
 
 - search in file;
 - search in directory;
 - readonly option for file;
-- choose font, style and size of font in editor;
+- choose font, style and size of font in text editor;
 - carousel navigation in picture view window;
-- AES 128-bit decryption for files;
+- AES 128-bit encryption for files;
 - filter for files in tree;
 - check for update file in local drive;
 - auto and manual checking a new version of app;
