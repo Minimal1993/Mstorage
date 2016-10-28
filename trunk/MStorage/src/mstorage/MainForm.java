@@ -1192,6 +1192,14 @@ public class MainForm extends javax.swing.JFrame {
 			this.jButtonDecryptFile.setVisible(false);
             this.jButtonSearchInFile.setEnabled(true);
 		}
+		
+		// Check if Find in file active there
+		if(tab.jPanelSearchInFile.isVisible()){
+			this.jButtonSearchInFile.setSelected(true);
+		}
+		else {
+			this.jButtonSearchInFile.setSelected(false);
+		}
 
 	}
 

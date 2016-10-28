@@ -104,7 +104,7 @@ public class HowToUseDialog extends javax.swing.JDialog implements TreeSelection
 		String s = "/html/intro.html";
 		helpURL = getClass().getResource(s);
 		if (helpURL == null) {
-			System.err.println("Couldn't open help file: " + s);
+			Log.info("Couldn't open help file: " + s);
 		}
 
 		this.displayURL(helpURL);
@@ -130,8 +130,7 @@ public class HowToUseDialog extends javax.swing.JDialog implements TreeSelection
 			bookName = book;
 			bookURL = getClass().getResource("/html/" + filename);
 			if (bookURL == null) {
-				System.err.println("Couldn't find file: "
-						+ filename);
+				Log.info("Couldn't find file: " + filename);
 			}
 		}
 
@@ -144,9 +143,21 @@ public class HowToUseDialog extends javax.swing.JDialog implements TreeSelection
 		DefaultMutableTreeNode category = null;
 		DefaultMutableTreeNode book = null;
 
+		book = new DefaultMutableTreeNode(new BookInfo("Overview", "intro.html"));
+		top.add(book);
+		
 		book = new DefaultMutableTreeNode(new BookInfo("Getting start", "getting_start.html"));
 		top.add(book);
+		
+		book = new DefaultMutableTreeNode(new BookInfo("Encryption files", "encryption.html"));
+		top.add(book);
 
+		book = new DefaultMutableTreeNode(new BookInfo("Search, readonly and filter", "search.html"));
+		top.add(book);
+		
+		book = new DefaultMutableTreeNode(new BookInfo("Update control", "update.html"));
+		top.add(book);
+		
 		book = new DefaultMutableTreeNode(new BookInfo("Additional features", "additional_features.html"));
 		top.add(book);
 		
@@ -173,6 +184,7 @@ public class HowToUseDialog extends javax.swing.JDialog implements TreeSelection
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("How to use");
         setName("HowToUseDialog"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(1018, 800));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 doClose(evt);
@@ -191,14 +203,14 @@ public class HowToUseDialog extends javax.swing.JDialog implements TreeSelection
         jPanelTopLayout.setHorizontalGroup(
             jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTopLayout.createSequentialGroup()
-                .addComponent(jScrollPaneLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPaneLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPaneRight, javax.swing.GroupLayout.DEFAULT_SIZE, 816, Short.MAX_VALUE))
+                .addComponent(jScrollPaneRight, javax.swing.GroupLayout.DEFAULT_SIZE, 866, Short.MAX_VALUE))
         );
         jPanelTopLayout.setVerticalGroup(
             jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPaneLeft)
-            .addComponent(jScrollPaneRight, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+            .addComponent(jScrollPaneRight, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
         );
 
         jButtonClose.setText("Close");
