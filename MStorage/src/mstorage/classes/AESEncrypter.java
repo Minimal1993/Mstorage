@@ -19,8 +19,6 @@ import org.apache.commons.codec.binary.Base64;
 
 /**
  * Simple AES 128-bit encryption
- * http://stackoverflow.com/questions/15554296/simple-java-aes-encrypt-decrypt-example
- * 
  */
 public class AESEncrypter
 {

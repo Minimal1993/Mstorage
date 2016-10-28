@@ -24,8 +24,6 @@ import sun.misc.BASE64Encoder;
 
 /**
  * It offers Java AES 256-bit Encryption
- * http://stackoverflow.com/questions/992019/java-256-bit-aes-password-based-encryption
- * 
  */
 public class AESEncrypter2 {
 
