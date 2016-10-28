@@ -1,31 +1,43 @@
 <html  lang="en-US">
 <body>
 <h1>
-How to run many version of MStorage
+How to run many instances of MStorage
 </h1>
 
 <p>
-Sometimes you will need to have a couple or three storages on your hard drive and in the same time have many running application of MStorage.
-</p>
-<p>
-MStorage save some settings for your convenience. It save all yours settings in your home directory in .MStorage/settings. If all running version of MStorage will use it, there will be flotsam and jetsam of settings. 
-</p>
-<p>
-For each application you can set name of settings file. To end of your running command add option: 
-<br>
-<pre>
---settings=name_of_settings_file
-</pre>
-<br>
-Now all settings of this version of application will save in ~/.MStorage/name_of_settings_file.
+Sometimes you will need to have many storages on your hard drive with many running instances of MStorage.
 </p>
 
 <p>
-<img src="../images/mstorage.48x48.png">
+MStorage saves some settings for your convenience in future. It save all yours settings in your home directory in .MStorage/settings. If all running instances of MStorage will use the same settings, they will be confuse each other and no one will work right. 
 </p>
 
+<p>
+As cure, for each application you can set different name of settings file. You have to for the end of your launch app command add a option: 
+    <pre>
+    --settings=name_of_settings_file
+    </pre>
+</p>
 
+<p>
+    <h3>Example:</h3>
+    
+    For Windows:
+        
+    <pre>
+        javaw -jar "E:\dev\java\MStorage\release\MStorage.jar" --settings=name_of_settings_file
+    </pre>
+    
+    or for Linux:
+    
+    <pre>
+        java -jar "/usr/local/Mstorage/MStorage.jar" --settings=name_of_settings_file
+    </pre>
+</p>
 
+<p>
+After this, all settings of this instance of application will save in ~/.MStorage/name_of_settings_file.
+</p>
 
 </body>
 </html>
