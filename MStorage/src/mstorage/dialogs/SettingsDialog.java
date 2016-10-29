@@ -162,9 +162,9 @@ public class SettingsDialog extends javax.swing.JDialog {
                     .addGroup(jPanelCommonLayout.createSequentialGroup()
                         .addGroup(jPanelCommonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jTextFieldStorageDirectory, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonBrowse))
+                            .addComponent(jTextFieldStorageDirectory, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonBrowse, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel3)
                     .addComponent(jTextFieldExcludeExtension)
                     .addComponent(jLabel4)
@@ -199,7 +199,7 @@ public class SettingsDialog extends javax.swing.JDialog {
 
         SettingsTabbedPane.addTab("Common", jPanelCommon);
 
-        jLabel2.setText("Choose style of storage tree:");
+        jLabel2.setText("Style of storage tree:");
 
         jComboBoxStyleOfStorageTree.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Delta", "Vega" }));
         jComboBoxStyleOfStorageTree.setSelectedItem(Settings.getInstance().getProperty("Icons"));
@@ -228,9 +228,9 @@ public class SettingsDialog extends javax.swing.JDialog {
         jLayeredPaneEditorsFontLayout.setHorizontalGroup(
             jLayeredPaneEditorsFontLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPaneEditorsFontLayout.createSequentialGroup()
-                .addComponent(jLabelCurrentEditorsFont, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonChangeEditorsFont, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabelCurrentEditorsFont, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonChangeEditorsFont, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jLayeredPaneEditorsFontLayout.setVerticalGroup(
             jLayeredPaneEditorsFontLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,7 +248,7 @@ public class SettingsDialog extends javax.swing.JDialog {
             jPanelAppearanceInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAppearanceInLayout.createSequentialGroup()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jComboBoxStyleOfStorageTree, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jLayeredPaneEditorsFont)
         );
@@ -259,8 +259,8 @@ public class SettingsDialog extends javax.swing.JDialog {
                     .addComponent(jLabel2)
                     .addComponent(jComboBoxStyleOfStorageTree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLayeredPaneEditorsFont, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 126, Short.MAX_VALUE))
+                .addComponent(jLayeredPaneEditorsFont, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 93, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelAppearanceLayout = new javax.swing.GroupLayout(jPanelAppearance);
@@ -282,7 +282,7 @@ public class SettingsDialog extends javax.swing.JDialog {
 
         SettingsTabbedPane.addTab("Appearance", jPanelAppearance);
 
-        jLabelHowOften.setText("Choose how often you want check updates for app:");
+        jLabelHowOften.setText("How often check updates for app:");
 
         jRadioButtonHowOftenCheckUpdates1.setText("One time per week");
         jRadioButtonHowOftenCheckUpdates1.addActionListener(new java.awt.event.ActionListener() {
@@ -330,6 +330,15 @@ public class SettingsDialog extends javax.swing.JDialog {
             .addGroup(jPanelUpdatesLayout.createSequentialGroup()
                 .addGroup(jPanelUpdatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelUpdatesLayout.createSequentialGroup()
+                        .addGroup(jPanelUpdatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelUpdatesLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabelHowOften))
+                            .addGroup(jPanelUpdatesLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jButtonCheckUpdatesNow)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanelUpdatesLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanelUpdatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelCheckUpdatesNowResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -338,16 +347,8 @@ public class SettingsDialog extends javax.swing.JDialog {
                                     .addComponent(jRadioButtonHowOftenCheckUpdates2)
                                     .addComponent(jRadioButtonHowOftenCheckUpdates3)
                                     .addComponent(jRadioButtonHowOftenCheckUpdates1))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(jPanelUpdatesLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabelHowOften)
-                        .addGap(0, 85, Short.MAX_VALUE))
-                    .addGroup(jPanelUpdatesLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButtonCheckUpdatesNow)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelUpdatesVisitTo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jLabelUpdatesVisitTo, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanelUpdatesLayout.setVerticalGroup(
@@ -355,19 +356,19 @@ public class SettingsDialog extends javax.swing.JDialog {
             .addGroup(jPanelUpdatesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelHowOften)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButtonHowOftenCheckUpdates1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButtonHowOftenCheckUpdates2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButtonHowOftenCheckUpdates3)
-                .addGap(18, 18, 18)
-                .addGroup(jPanelUpdatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCheckUpdatesNow)
-                    .addComponent(jLabelUpdatesVisitTo))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonCheckUpdatesNow)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelCheckUpdatesNowResult, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelUpdatesVisitTo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         SettingsTabbedPane.addTab("Updates", jPanelUpdates);
