@@ -24,6 +24,7 @@ import mstorage.components.ImageItem;
 import mstorage.storagecollection.File;
 import mstorage.utils.Log;
 import net.coobird.thumbnailator.Thumbnails;
+import org.apache.commons.lang3.SystemUtils;
 
 /**
  *
@@ -156,8 +157,13 @@ public class PreviewJFrame extends javax.swing.JFrame {
 					.size((int)this.Dimension.getWidth(), (int)this.Dimension.getHeight())
 					.asBufferedImage();
 
-			// TODO: There increment to Dimension tested only in Win7
-			Dimension winSize = new Dimension(thumbnail.getWidth() + 5, thumbnail.getHeight() + 25);
+                        Dimension winSize = new Dimension(thumbnail.getWidth(), thumbnail.getHeight());
+                        
+                        // For Win set especial size
+                        if ( SystemUtils.IS_OS_WINDOWS ) {
+                            winSize = new Dimension(thumbnail.getWidth() + 5, thumbnail.getHeight() + 25);
+                        }
+                                                
 			this.setPreferredSize(winSize);
 			
 			javax.swing.ImageIcon imageIcon = new javax.swing.ImageIcon(thumbnail);
