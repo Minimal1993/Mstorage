@@ -262,7 +262,16 @@ public class PreviewJFrame extends javax.swing.JFrame {
 		}
 	
 		pack();
-		this.setLocationRelativeTo(MainForm.getInstance());
+            
+                // This is magic trick - Linux dont want resize window without this delay
+                try {
+                    Thread.sleep(50);
+                } catch(Exception e){
+                    Log.info(e.getMessage());
+                }
+                
+                this.setLocationRelativeTo(MainForm.getInstance());
+		
         
 	}
     
