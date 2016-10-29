@@ -44,20 +44,26 @@ public class About extends javax.swing.JDialog {
 		initComponents();
 		
 		Settings settings = Settings.getInstance();
-		
+        Font old_font = jLabelDescription.getFont();
+        Font font = new Font(old_font.getName(), old_font.getStyle(), 11);
+        
+        jLabelDescription.setFont(font);
         jLabelDescription.setText("<html>\n<b>" + settings.getProperty("AppName") 
 			+ "</b> - storage for notes, it suggests opportunity<br>to save and catalog notes, " 
 			+ "articles and tips in <br>local drive by directories tree.</html>");
 
+        jLabelCopyright.setFont(font);
         jLabelCopyright.setText("<html>\nPermission is granted to copy, distribute and/or<br>" 
 			+ "modify  this  document under  the  terms  of the<br>" 
 			+ settings.getProperty("License") + "</html>");
 
+        jLabelAuthor.setFont(font);
         jLabelAuthor.setText(settings.getProperty("Year") + " © " + settings.getProperty("Author") + ", " 
 			+ settings.getProperty("Email"));
 		
 		jLabelVersion.setText("v." + settings.getProperty("Version") );
 		
+        jLabelIcons.setFont(font);
 		jLabelIcons.setText("<html>Icons produced by Fatcow, <a href='http://www.fatcow.com'>fatcow.com</a></html>");
 		
 		// Close the dialog when Esc is pressed
