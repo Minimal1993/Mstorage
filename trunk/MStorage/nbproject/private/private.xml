@@ -21,11 +21,10 @@
             <file>file:/C:/work/MStorage/MStorage/src/html/search.html</file>
         </group>
         <group>
-            <file>file:/E:/dev/java/MStorage/MStorage/src/html/additional_features.html</file>
-            <file>file:/E:/dev/java/MStorage/MStorage/src/html/intro.html</file>
-            <file>file:/E:/dev/java/MStorage/MStorage/src/html/encryption.html</file>
-            <file>file:/E:/dev/java/MStorage/MStorage/src/html/many_app.html</file>
-            <file>file:/E:/dev/java/MStorage/MStorage/src/mstorage/dialogs/HowToUseDialog.java</file>
+            <file>file:/home/rem/MStorage/MStorage/src/mstorage/dialogs/HowToUseDialog.java</file>
+            <file>file:/home/rem/MStorage/MStorage/src/html/getting_start.html</file>
+            <file>file:/home/rem/MStorage/MStorage/src/html/encryption.html</file>
+            <file>file:/home/rem/MStorage/MStorage/src/html/search.html</file>
         </group>
     </open-files>
 </project-private>
