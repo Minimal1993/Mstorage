@@ -40,42 +40,40 @@ public class About extends javax.swing.JDialog {
 	 * Creates new form About
 	 */
 	public About(java.awt.Frame parent, boolean modal) {
-		super(parent, modal);
-		initComponents();
-		
-		Settings settings = Settings.getInstance();
-        Font old_font = jLabelDescription.getFont();
-        Font font = new Font(old_font.getName(), old_font.getStyle(), 11);
-        
-        jLabelDescription.setFont(font);
-        jLabelDescription.setText("<html>\n<b>" + settings.getProperty("AppName") 
-			+ "</b> - storage for notes, it suggests opportunity<br>to save and catalog notes, " 
-			+ "articles and tips in <br>local drive by directories tree.</html>");
+            super(parent, modal);
+            initComponents();
 
-        jLabelCopyright.setFont(font);
-        jLabelCopyright.setText("<html>\nPermission is granted to copy, distribute and/or<br>" 
-			+ "modify  this  document under  the  terms  of the<br>" 
-			+ settings.getProperty("License") + "</html>");
+            Settings settings = Settings.getInstance();
+            Font old_font = jLabelDescription.getFont();
+            Font font = new Font(old_font.getName(), 0, 11);
 
-        jLabelAuthor.setFont(font);
-        jLabelAuthor.setText(settings.getProperty("Year") + " © " + settings.getProperty("Author") + ", " 
-			+ settings.getProperty("Email"));
-		
-		jLabelVersion.setText("v." + settings.getProperty("Version") );
-		
-        jLabelIcons.setFont(font);
-		jLabelIcons.setText("<html>Icons produced by Fatcow, <a href='http://www.fatcow.com'>fatcow.com</a></html>");
-		
-		// Close the dialog when Esc is pressed
-		String cancelName = "cancel";
-		InputMap inputMap = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), cancelName);
-		ActionMap actionMap = getRootPane().getActionMap();
-		actionMap.put(cancelName, new AbstractAction() {
-			public void actionPerformed(ActionEvent e) {
-				doClose(RET_CANCEL);
-			}
-		});
+            jLabelDescription.setFont(font);
+            jLabelDescription.setText("<html>\n<b>" + settings.getProperty("AppName") 
+                            + "</b> - storage for notes, it suggests opportunity<br>to save and catalog notes, " 
+                            + "articles and tips in <br>local drive by directories tree.</html>");
+
+            jLabelCopyright.setFont(font);
+            jLabelCopyright.setText("<html>\nPermission is granted to copy, distribute and/or<br>" 
+                            + "modify  this  document under  the  terms  of the<br>" 
+                            + settings.getProperty("License") + "</html>");
+
+            jLabelAuthor.setFont(font);
+            jLabelAuthor.setText(settings.getProperty("Year") + " © " + settings.getProperty("Author") + ", " 
+                            + settings.getProperty("Email"));
+
+            jLabelVersion.setText("v." + settings.getProperty("Version") );
+
+
+            // Close the dialog when Esc is pressed
+            String cancelName = "cancel";
+            InputMap inputMap = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+            inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), cancelName);
+            ActionMap actionMap = getRootPane().getActionMap();
+            actionMap.put(cancelName, new AbstractAction() {
+                    public void actionPerformed(ActionEvent e) {
+                            doClose(RET_CANCEL);
+                    }
+            });
 	}
 
 	/**
@@ -98,9 +96,8 @@ public class About extends javax.swing.JDialog {
         jPanelRight = new javax.swing.JPanel();
         jLabelDescription = new javax.swing.JLabel();
         jLabelCopyright = new javax.swing.JLabel();
-        jLabelAuthor = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabelIcons = new javax.swing.JLabel();
+        jLabelAuthor = new javax.swing.JLabel();
         jPanelLeft = new javax.swing.JPanel();
         jLabelPicture = new javax.swing.JLabel();
         jLabelVersion = new javax.swing.JLabel();
@@ -125,17 +122,17 @@ public class About extends javax.swing.JDialog {
 
         jLabelAuthor.setText("© Gulevskiy Ilya, mstorage.project@gmail.com, 2016");
 
-        jLabelIcons.setText("Icons produced by Fatcow, fatcow.com");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelIcons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabelAuthor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelIcons, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 12, Short.MAX_VALUE)
+                .addComponent(jLabelAuthor))
         );
 
         javax.swing.GroupLayout jPanelRightLayout = new javax.swing.GroupLayout(jPanelRight);
@@ -148,9 +145,8 @@ public class About extends javax.swing.JDialog {
                     .addComponent(jLabelCopyright, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelRightLayout.createSequentialGroup()
                         .addComponent(jLabelDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 45, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelAuthor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelRightLayout.setVerticalGroup(
@@ -162,9 +158,7 @@ public class About extends javax.swing.JDialog {
                 .addComponent(jLabelCopyright, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelAuthor)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         jLabelPicture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mstorage.48x48.png"))); // NOI18N
@@ -246,7 +240,6 @@ public class About extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelAuthor;
     private javax.swing.JLabel jLabelCopyright;
     private javax.swing.JLabel jLabelDescription;
-    private javax.swing.JLabel jLabelIcons;
     private javax.swing.JLabel jLabelPicture;
     private javax.swing.JLabel jLabelVersion;
     private javax.swing.JPanel jPanel1;
