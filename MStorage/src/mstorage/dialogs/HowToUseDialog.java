@@ -167,6 +167,9 @@ public class HowToUseDialog extends javax.swing.JDialog implements TreeSelection
 		book = new DefaultMutableTreeNode(new BookInfo("Keys shortcuts", "shortcuts.html"));
 		top.add(book);
         
+		book = new DefaultMutableTreeNode(new BookInfo("Thanks to", "thanksto.html"));
+		top.add(book);
+        
 	}
 
 	/**
