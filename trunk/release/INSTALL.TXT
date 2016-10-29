@@ -1,0 +1,90 @@
+Install and run MStorage
+
+------------------------
+
+
+Extract MStorage.*.zip archive in folder you want. It contains:
+
+
+
+jre - files of Java Runtime Environment, needs for run 
+MStorage.exe
+lib - there is important libraries for correct work. 
+
+storage - there is a test storage, you can use it for education and review purposes.
+
+INSTALL.TXT - this file.
+
+README.TXT - general terms of this app.
+
+MStorage.jar - MStorage executable.
+
+MStorage.exe - MStorage executable for Windows.
+
+mstorage.ico - icon for Win.
+
+mstorage.png - icon of app.
+
+
+
+Pay attention: lib, jre, MStorage.jar and MStorage.exe must be placed exactly in the same folder!
+
+
+
+
+
+For Windows users
+
+-----------------
+
+
+
+Just double click on MStorage.exe .
+
+
+
+
+
+For Linux and MacOS users:
+
+--------------------------
+
+
+
+To run MStorage your OS must have installed Java mashine - JRE-7 minimum.
+
+Go to http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html 
+
+Select appropriate distribute for you OS and install it. 
+
+So, next step you run application. 
+Suppose, MStorage folder is /usr/local/Mstorage. Run:
+
+
+
+java -jar "/usr/local/Mstorage/MStorage.jar"
+
+
+
+
+
+FYI
+
+---
+
+
+
+Suppose, in Windows MStorage folder is C:\Program Files\MStorage. Run:
+
+
+
+javaw -jar "C:\Program Files\MStorage\MStorage.jar"
+
+
+
+For comfort you can create label on Desktop and change icon by "Change icon". 
+
+Get icon from root of this archive. 
+
+Now you could run MStorage from convinient icon from Desktop.
+
