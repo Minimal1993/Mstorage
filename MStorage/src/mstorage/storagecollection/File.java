@@ -86,7 +86,7 @@ public class File extends StorageItem {
 	}
 
 	public String getContent() throws IOException {
-		return new String(Files.readAllBytes(this.getPath()));
+		return new String(Files.readAllBytes(this.getPath()), StandardCharsets.UTF_8);
 	}
 
 	public void save(String text) throws IOException {
