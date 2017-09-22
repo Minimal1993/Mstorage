@@ -20,6 +20,9 @@
             <file>file:/C:/work/MStorage/MStorage/src/mstorage/dialogs/HowToUseDialog.java</file>
             <file>file:/C:/work/MStorage/MStorage/src/html/search.html</file>
         </group>
-        <group/>
+        <group>
+            <file>file:/E:/dev/java/MStorage/MStorage/src/mstorage/storagecollection/File.java</file>
+            <file>file:/E:/dev/java/MStorage/MStorage/src/mstorage/classes/Settings.java</file>
+        </group>
     </open-files>
 </project-private>
