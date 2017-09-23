@@ -212,6 +212,12 @@ public class Settings {
 		try {
 			FileInputStream in = new FileInputStream(this.StorageFile.toAbsolutePath().toString());
 			this.Properties.load(in);
+            
+            // For compatibility with old storages
+            // Settings exists, not first launch of app
+            if(this.getProperty("Encoding").equals(Settings.DefaultValue)) {
+                this.setProperty("Encoding", "System"); 
+            }
 
 			// If not, create it
 		} catch (FileNotFoundException e) {
@@ -225,10 +231,15 @@ public class Settings {
 			} catch (IOException ee) {
 				MainForm.showError(ee.getMessage());
 			}
-
+            
 		} catch (IOException e) {
 			MainForm.showError(e.getMessage());
 		}
+        
+        // Set default encoding for first launch of app
+        if(this.getProperty("Encoding").equals(Settings.DefaultValue)) {
+            this.setProperty("Encoding", "UTF-8"); 
+        }
 	}
 
 	/**

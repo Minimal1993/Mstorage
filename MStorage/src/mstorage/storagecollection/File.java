@@ -14,9 +14,11 @@ package mstorage.storagecollection;
 import mstorage.utils.FileUtils;
 
 import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.util.TreeMap;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,6 +27,7 @@ import java.util.Map;
 import java.util.Set;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import mstorage.classes.Settings;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -67,12 +70,8 @@ public class File extends StorageItem {
 			throw new IOException("Cant create a file with empty name");
 		}
 
-//		java.io.File newFile = new java.io.File(parent.path.toAbsolutePath().toString() + "/" + name);
-//		newFile.createNewFile();
-
-		Path newFile = Paths.get(parent.path.toAbsolutePath().toString() + "/" + name);
-		ArrayList<String> lines =  new ArrayList<>();
-		Files.write(newFile, lines, StandardCharsets.UTF_8);
+		java.io.File newFile = new java.io.File(parent.path.toAbsolutePath().toString() + "/" + name);
+		newFile.createNewFile();
 
 		File file = new File();
 		file.setFileName(name);
@@ -86,15 +85,31 @@ public class File extends StorageItem {
 	}
 
 	public String getContent() throws IOException {
-		return new String(Files.readAllBytes(this.getPath()), StandardCharsets.UTF_8);
+        if (Settings.getInstance().getProperty("Encoding").equals("UTF-8")) {
+            return new String(Files.readAllBytes(this.getPath()), StandardCharsets.UTF_8);
+        }
+        // For compatibility with old storages
+        else {
+            return new String(Files.readAllBytes(this.getPath()));
+        }
 	}
 
 	public void save(String text) throws IOException {
 		java.io.File iofile = new java.io.File(this.getPath().toAbsolutePath().toString());
-		FileWriter fw = new FileWriter(iofile.getAbsoluteFile());
-		BufferedWriter bw = new BufferedWriter(fw);
-		bw.write(text);
-		bw.close();
+        OutputStreamWriter osw;
+
+        if (Settings.getInstance().getProperty("Encoding").equals("UTF-8")) {
+            osw = new OutputStreamWriter(new FileOutputStream(iofile), StandardCharsets.UTF_8);
+        }
+        // For compatibility with old storages
+        else {
+            osw = new OutputStreamWriter(new FileOutputStream(iofile));
+        }
+        
+        try( BufferedWriter bw = new BufferedWriter(osw)) {
+            bw.write(text);
+        }
+        
 	}
 
 	public void addImage(Image image) throws IOException {
