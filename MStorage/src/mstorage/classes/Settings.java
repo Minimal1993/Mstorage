@@ -88,17 +88,19 @@ public class Settings {
 				+ this.getProperty("AppName") 
 				+ File.separator + "." + Settings.LogFileName;
 		this.GeneralSettings.put("LogFileName", log); 
+        
+		this.GeneralSettings.put("CheckUpdatesURL", "https://sourceforge.net/projects/mstorage/files/"); 
+		this.GeneralSettings.put("CheckUpdatesURLPattern", 
+			"https://sourceforge.net/projects/mstorage/files/MStorage\\.(.+)\\.zip/download"
+		);
+		this.GeneralSettings.put("ProgectURL", "http://mstorage.sourceforge.net");         
 		
+        
 		// Default
 		this.Properties.setProperty("ViewMenuToolbar", "true");
 		this.Properties.setProperty("ViewStorageTreePanel", "true");
 		this.Properties.setProperty("OpenedFiles", ""); // ; as delimiter
         this.Properties.setProperty("MainWindowLocation", "0,0"); 
-		this.Properties.setProperty("CheckUpdatesURL", "https://sourceforge.net/projects/mstorage/files/"); 
-		this.Properties.setProperty("CheckUpdatesURLPattern", 
-			"https://sourceforge.net/projects/mstorage/files/MStorage\\.(.+)\\.zip/download"
-		);
-		this.Properties.setProperty("ProgectURL", "http://mstorage.sourceforge.net"); 
 		
 		// In first launch set last update as now
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
