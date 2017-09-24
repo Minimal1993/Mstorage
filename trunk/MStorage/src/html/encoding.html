@@ -1,0 +1,57 @@
+<html lang="en-US">
+<body>
+<h1>Encoding problem</h1>
+
+<p>
+By fault of author, first versions of MStorage (&lt; 1.1.3) used system default encoding to create, update and read files. But different OS can use different default encodings. For example, in russian locale in Win7 default encoding is cp1251, but for Ubuntu16 it is UTF-8. That means, files created in Ubuntu not possible to read in Win7 and conversely. You will see something like this:
+</p>
+
+<p>
+<img src="../html/wrong_encoding.JPG">
+</p>
+
+<p>
+To solve the problem, you should always use UTF-8 encoding. For this reason was created new property in Settings "Files encoding": 
+</p>
+
+<p>
+<img src="../html/settings_encoding.JPG">
+</p>
+
+<p>
+When you set up files encoding as UTF-8 all operating systems will create, save and update files in your common storage as UTF-8.
+</p>
+
+<p>
+The problem appears when you will work with files, created in different encoding than UTF-8. 
+</p>
+
+<p>
+To cure this, you must convert all files in your storage to UTF-8 encoding. <br>
+<b>Firstly</b>, setup files encoding in Settings as UTF-8.<br> 
+<b>Secondly</b>, follow next steps:
+
+	<ul class="features">
+		<li>open file with wrong encoding in MStorage</li>
+		<li>open the same file in OS file system by any text editor</li>
+		<li>copy all text content from text editor to MStorage</li>
+		<li>save file in MStorage</li>
+	</ul>
+
+Do previous steps for all files with wrong encoding (not UTF-8) in your storage.    
+</p>
+
+<p>
+    If you don't need use MStorage in different OS you can continue you work as usual without any additional actions.<br> 
+    <b>But be aware</b>, as long you will work in default  system encoding, amount of files in your storage can become bigger. Imagine if you want convert 100 files in future?
+</p>
+
+<p style="color: #FF0000;">
+    <b>
+        It is highly recommend for storages created in versions MStorage &lt;1.1.3 convert all files to UTF-8.    </b>
+</p>
+
+<p>&nbsp;</p>
+
+</body>
+</html>
