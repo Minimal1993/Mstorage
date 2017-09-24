@@ -33,11 +33,14 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.Timer;
 import mstorage.MainForm;
 import mstorage.classes.Settings;
+import mstorage.components.CryptComp;
 import mstorage.components.FileJTab;
+import mstorage.events.EventsStorageCollectionHandler;
 import mstorage.utils.FileUtils;
 import say.swing.JFontChooser;
 
@@ -88,6 +91,8 @@ public class SettingsDialog extends javax.swing.JDialog {
         jLayeredPaneEditorsFont = new javax.swing.JLayeredPane();
         jLabelCurrentEditorsFont = new javax.swing.JLabel();
         jButtonChangeEditorsFont = new javax.swing.JButton();
+        jLabelEncoding = new javax.swing.JLabel();
+        jComboBoxEncoding = new javax.swing.JComboBox<>();
         jPanelUpdates = new javax.swing.JPanel();
         jLabelHowOften = new javax.swing.JLabel();
         jRadioButtonHowOftenCheckUpdates1 = new javax.swing.JRadioButton();
@@ -242,15 +247,29 @@ public class SettingsDialog extends javax.swing.JDialog {
                 .addGap(4, 4, 4))
         );
 
+        jLabelEncoding.setText("Files encoding:");
+
+        jComboBoxEncoding.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UTF-8", "System default" }));
+        jComboBoxEncoding.setSelectedItem(Settings.getInstance().getProperty("Encoding"));
+        jComboBoxEncoding.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxEncodingActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelAppearanceInLayout = new javax.swing.GroupLayout(jPanelAppearanceIn);
         jPanelAppearanceIn.setLayout(jPanelAppearanceInLayout);
         jPanelAppearanceInLayout.setHorizontalGroup(
             jPanelAppearanceInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAppearanceInLayout.createSequentialGroup()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                 .addComponent(jComboBoxStyleOfStorageTree, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jLayeredPaneEditorsFont)
+            .addGroup(jPanelAppearanceInLayout.createSequentialGroup()
+                .addComponent(jLabelEncoding)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jComboBoxEncoding, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanelAppearanceInLayout.setVerticalGroup(
             jPanelAppearanceInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,7 +279,11 @@ public class SettingsDialog extends javax.swing.JDialog {
                     .addComponent(jComboBoxStyleOfStorageTree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLayeredPaneEditorsFont, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 93, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelAppearanceInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelEncoding)
+                    .addComponent(jComboBoxEncoding, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 91, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelAppearanceLayout = new javax.swing.GroupLayout(jPanelAppearance);
@@ -590,6 +613,30 @@ public class SettingsDialog extends javax.swing.JDialog {
 		} 
     }//GEN-LAST:event_jLabelUpdatesVisitToMouseClicked
 
+    private void jComboBoxEncodingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEncodingActionPerformed
+		if(Settings.getInstance().getProperty("Encoding").equals( this.jComboBoxEncoding.getSelectedItem().toString() )){
+			return;
+		}
+        
+        int count = MainForm.getInstance().getTabbedPaneMain().getTabCount();
+        
+        // Check whether all tabs is closed
+        if (count > 0) {
+            JOptionPane.showMessageDialog(
+                MainForm.getInstance(), 
+                "To change files encoding, please close all opened tabs and repeat.",
+                "Message",
+                0,
+                new javax.swing.ImageIcon(MainForm.getInstance().getClass().getResource("/images/information.32x32.png"))
+            );
+            
+            return;
+        }        
+		
+		Settings.getInstance().setProperty("Encoding", this.jComboBoxEncoding.getSelectedItem().toString());
+        
+    }//GEN-LAST:event_jComboBoxEncodingActionPerformed
+
 	/**
 	 * @param args the command line arguments
 	 */
@@ -638,6 +685,7 @@ public class SettingsDialog extends javax.swing.JDialog {
     private javax.swing.JButton jButtonChangeEditorsFont;
     private javax.swing.JButton jButtonCheckUpdatesNow;
     private javax.swing.JButton jButtonOK;
+    private javax.swing.JComboBox<String> jComboBoxEncoding;
     private javax.swing.JComboBox<String> jComboBoxStyleOfStorageTree;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -645,6 +693,7 @@ public class SettingsDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelCheckUpdatesNowResult;
     private javax.swing.JLabel jLabelCurrentEditorsFont;
+    private javax.swing.JLabel jLabelEncoding;
     private javax.swing.JLabel jLabelHowOften;
     private javax.swing.JLabel jLabelUpdatesVisitTo;
     private javax.swing.JLayeredPane jLayeredPaneEditorsFont;

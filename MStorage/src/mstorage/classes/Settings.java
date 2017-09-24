@@ -216,7 +216,7 @@ public class Settings {
             // For compatibility with old storages
             // Settings exists, not first launch of app
             if(this.getProperty("Encoding").equals(Settings.DefaultValue)) {
-                this.setProperty("Encoding", "System"); 
+                this.setProperty("Encoding", "System default"); 
             }
 
 			// If not, create it
