@@ -70,6 +70,10 @@ public class FileJTab extends javax.swing.JPanel implements FocusListener {
 	public FileJTab(File file) {
 		this.File = file;
 	}
+    
+    public void setFile(File File) {
+        this.File = File;
+    }    
 
 	/**
 	 * Performs when text in textarea was changed, exactly key was released

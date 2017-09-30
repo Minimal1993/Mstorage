@@ -389,21 +389,33 @@ public class EventsStorageCollectionHandler extends MStorageEventsHandler {
 
 		if ((s != null) && (s.length() > 0)) {
 			try {
+                FileJTab tabForRename = null;
+                int tabForRenameInex = 0;
+                
+                int count = MainForm.getInstance().getTabbedPaneMain().getTabCount();
+                for (int i = 0; i < count; i++) {
+                    FileJTab tab = (FileJTab) MainForm.getInstance().getTabbedPaneMain().getComponent(i);
+                    if (!tab.File.getPath().toString().equals(file.getPath().toString())) {
+                        continue;
+                    }
+
+                    tabForRename = tab;
+                    tabForRenameInex = i;
+                }                
+                
 				file.rename(s);
+                
+                // Change tab title if file is opened
+                // and reassign to FileJTab because when rename Tree create a new instance of file
+                if (null != tabForRename) {
+                    MainForm.getInstance().getTabbedPaneMain().setTitleAt(tabForRenameInex, s);
+                    tabForRename.setFile(file);
+                }
+                
 			} catch (Exception e) {
 				MainForm.showError(e.getMessage());
 			}
             
-			// Change tab title if file is opened
-			int count = MainForm.getInstance().getTabbedPaneMain().getTabCount();
-			for (int i = 0; i < count; i++) {
-				FileJTab tab = (FileJTab) MainForm.getInstance().getTabbedPaneMain().getComponent(i);
-				if (!tab.File.getPath().equals(file.getPath())) {
-					continue;
-				}
-
-				MainForm.getInstance().getTabbedPaneMain().setTitleAt(i, s);
-			}
 		}
 	}
 
